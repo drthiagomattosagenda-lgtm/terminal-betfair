@@ -1,24 +1,16 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<nav class="navbar">
-    <div class="logo">
-        <span>FUT</span> TRADER
-    </div>
-    
-    <ul class="nav-links">
-        <li><a href="dashboard.html">Dashboard</a></li>
-        <li><a href="aovivo.html">Ao Vivo</a></li>
-        <li><a href="comunidade.html">Comunidade</a></li>
-        <li><a href="index.html" class="btn-sair">Sair</a></li>
-    </ul>
-</nav>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terminal Analítico - Exchange</title>
+    <title>Terminal Analítico - Fut Trader</title>
+    
+    <link rel="stylesheet" href="style.css">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+
     <script>
         tailwind.config = {
             theme: {
@@ -35,66 +27,53 @@
                             edge: '#10B981',
                             warn: '#F59E0B'
                         }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
-                        mono: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', 'monospace'],
                     }
                 }
             }
         }
     </script>
+    
     <style>
-        body { background-color: #0B0E14; color: #A0AEC0; }
-        ::-webkit-scrollbar { width: 8px; height: 8px; }
-        ::-webkit-scrollbar-track { background: #0B0E14; }
-        ::-webkit-scrollbar-thumb { background: #2A3241; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #4A5568; }
+        /* Ajustes finos para não conflitar com o Tailwind */
+        body { background-color: #0B0E14; color: #A0AEC0; margin: 0; }
+        .chart-container { position: relative; width: 100%; height: 300px; }
+        .tab-btn.active { border-bottom: 2px solid #3B82F6; color: #E2E8F0; }
+        .blinking-dot { animation: blink 2s infinite; }
+        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
         
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 100%;
-            height: 250px;
-            max-height: 300px;
-            margin: 0 auto;
-        }
-        @media (min-width: 768px) {
-            .chart-container { height: 300px; }
-        }
-        
-        .tab-btn.active {
-            border-bottom: 2px solid #3B82F6;
-            color: #E2E8F0;
-        }
-        .blinking-dot {
-            animation: blink 2s infinite;
-        }
-        @keyframes blink {
-            0% { opacity: 1; }
-            50% { opacity: 0.3; }
-            100% { opacity: 1; }
-        }
+        /* Forçando o estilo da Navbar que definimos no style.css */
+        .navbar { display: flex !important; } 
     </style>
 </head>
+
 <body class="antialiased min-h-screen flex flex-col font-sans">
 
-    <header class="bg-trading-panel border-b border-trading-border p-4 sticky top-0 z-50 shadow-md">
+    <nav class="navbar">
+        <div class="logo">
+            <span>FUT</span> TRADER
+        </div>
+        
+        <ul class="nav-links">
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="aovivo.html">Ao Vivo</a></li>
+            <li><a href="comunidade.html">Comunidade</a></li>
+            <li><a href="index.html" class="btn-sair">Sair</a></li>
+        </ul>
+    </nav>
+
+    <header class="bg-trading-panel border-b border-trading-border p-4 shadow-md">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
             <div class="flex items-center gap-3">
                 <div class="w-8 h-8 rounded bg-blue-600 text-white flex items-center justify-center font-bold text-xl">BX</div>
                 <div>
-                    <h1 class="text-trading-highlight font-bold text-lg leading-tight">Terminal de Oportunidades p/ Exchange</h1>
-                    <p class="text-xs text-trading-text">Agente Analista - Thiago Mattos • Relatório Matinal</p>
+                    <h1 class="text-trading-highlight font-bold text-lg leading-tight">Terminal de Oportunidades</h1>
+                    <p class="text-xs text-trading-text">Agente Analista - Thiago Mattos • Relatório em Tempo Real</p>
                 </div>
             </div>
             <div class="flex items-center gap-6 text-sm">
                 <div class="flex items-center gap-2">
                     <span class="w-2 h-2 rounded-full bg-trading-edge blinking-dot"></span>
                     <span class="font-mono text-trading-highlight" id="current-time"></span>
-                </div>
-                <div class="hidden sm:block px-3 py-1 rounded bg-trading-dark border border-trading-edge text-trading-edge font-medium text-xs">
-                    🛡️ Tripla Verificação: ATIVA
                 </div>
             </div>
         </div>
@@ -107,26 +86,11 @@
                 <h2 class="text-trading-highlight font-bold text-lg mb-2 flex items-center gap-2">
                     <span>🏆</span> Top Oportunidades
                 </h2>
-                <p class="text-xs mb-4 leading-relaxed">
-                    Este painel lista as partidas do dia filtradas pela nossa metodologia de Tripla Verificação. O ranking prioriza o tamanho do <em>edge</em> (vantagem), liquidez e confiabilidade da informação assimétrica. Clique em uma partida para carregar o dossiê completo.
+                <p class="text-xs mb-4 leading-relaxed text-trading-text">
+                    Partidas filtradas pela Tripla Verificação (Nettuno).
                 </p>
                 <div id="match-list-container" class="flex flex-col gap-3">
-                </div>
-            </section>
-
-            <section class="bg-trading-panel border border-trading-border rounded-lg p-5 shadow-sm">
-                <h2 class="text-trading-highlight font-bold text-lg mb-2 flex items-center gap-2">
-                    <span>⚠️</span> Observações do Dia
-                </h2>
-                <p class="text-xs mb-4 leading-relaxed">
-                    Registro de partidas monitoradas que foram sumariamente descartadas por falharem em nossos rigorosos filtros de risco e liquidez.
-                </p>
-                <ul class="space-y-3 text-sm">
-                    <li class="p-3 bg-trading-dark rounded border-l-2 border-trading-warn">
-                        <span class="font-bold text-trading-highlight block">Varredura e Filtragem</span>
-                        <span class="text-xs text-trading-text mt-1 block">Apenas as oportunidades que passam pela Tripla Verificação aparecem no seu painel.</span>
-                    </li>
-                </ul>
+                    </div>
             </section>
         </aside>
 
@@ -134,40 +98,30 @@
             <div class="bg-trading-panel border border-trading-border rounded-lg p-5 shadow-sm">
                 <div class="mb-4">
                     <h2 class="text-trading-highlight font-bold text-xl md:text-2xl" id="detail-title">Carregando dados...</h2>
-                    <p class="text-sm mt-1" id="detail-subtitle">Conectando ao terminal de análises...</p>
+                    <p class="text-sm mt-1 text-trading-text" id="detail-subtitle">Conectando à planilha...</p>
                 </div>
-                
-                <p class="text-xs mb-6 leading-relaxed border-b border-trading-border pb-4">
-                    Abaixo está a análise profunda da oportunidade selecionada, desconstruindo o <em>edge</em> estatístico encontrado no mercado. As visualizações comparam a odd atual da Betfair com a odd justa calculada pelo nosso <em>Ensemble</em> de modelos (Poisson + Elo + Fechamento), além de analisar a profundidade do livro de ofertas para garantir execução segura da stake sugerida.
-                </p>
 
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6" id="detail-stats">
-                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6" id="detail-stats"></div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div class="bg-trading-dark border border-trading-border rounded p-4">
-                        <h3 class="text-sm font-bold text-trading-highlight mb-3 text-center">Desvio de Preço (Edge)</h3>
-                        <div class="chart-container">
-                            <canvas id="oddsChart"></canvas>
-                        </div>
+                        <h3 class="text-sm font-bold text-trading-highlight mb-3 text-center">Edge Estatístico</h3>
+                        <div class="chart-container"><canvas id="oddsChart"></canvas></div>
                     </div>
                     <div class="bg-trading-dark border border-trading-border rounded p-4">
-                        <h3 class="text-sm font-bold text-trading-highlight mb-3 text-center">Profundidade do Mercado (£)</h3>
-                        <div class="chart-container">
-                            <canvas id="liquidityChart"></canvas>
-                        </div>
+                        <h3 class="text-sm font-bold text-trading-highlight mb-3 text-center">Liquidez (£)</h3>
+                        <div class="chart-container"><canvas id="liquidityChart"></canvas></div>
                     </div>
                 </div>
 
                 <div class="mt-4">
                     <div class="flex border-b border-trading-border overflow-x-auto" id="detail-tabs">
-                        <button class="tab-btn active px-4 py-2 text-sm font-medium whitespace-nowrap transition-colors" data-target="tab-info">📰 Informação Crítica</button>
-                        <button class="tab-btn px-4 py-2 text-sm font-medium whitespace-nowrap transition-colors" data-target="tab-context">🌦️ Fatores e Tática</button>
-                        <button class="tab-btn px-4 py-2 text-sm font-medium whitespace-nowrap transition-colors" data-target="tab-checklist">✅ Verificação</button>
-                        <button class="tab-btn px-4 py-2 text-sm font-medium whitespace-nowrap transition-colors" data-target="tab-strategy">📝 Estratégia</button>
+                        <button class="tab-btn active px-4 py-2 text-sm font-medium whitespace-nowrap" data-target="tab-info">Informação</button>
+                        <button class="tab-btn px-4 py-2 text-sm font-medium whitespace-nowrap" data-target="tab-context">Contexto</button>
+                        <button class="tab-btn px-4 py-2 text-sm font-medium whitespace-nowrap" data-target="tab-checklist">Checklist</button>
+                        <button class="tab-btn px-4 py-2 text-sm font-medium whitespace-nowrap" data-target="tab-strategy">Estratégia</button>
                     </div>
-
-                    <div class="p-4 bg-trading-dark rounded-b border border-t-0 border-trading-border min-h-[200px]">
+                    <div class="p-4 bg-trading-dark rounded-b border border-t-0 border-trading-border min-h-[150px]">
                         <div id="tab-info" class="tab-content block space-y-3"></div>
                         <div id="tab-context" class="tab-content hidden space-y-3"></div>
                         <div id="tab-checklist" class="tab-content hidden space-y-3"></div>
@@ -179,115 +133,71 @@
     </main>
 
     <script>
-        // MÁGICA 2: O CÓDIGO DO PAPAPARSE SUBSTITUINDO OS DADOS FIXOS
-        
-        // 🛑 COLE O SEU LINK DA PLANILHA (.CSV) ENTRE AS ASPAS ABAIXO!
+        // CONFIGURAÇÃO DO PAPAPARSE
         const linkDaPlanilha = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT3t-zH7WFbtB5yqmk-N1CDNVe8TnuXYKHRg7SdCOel9j6pg4vRwE5Adyjs256mlrDnvus5GXwdPFee/pub?gid=0&single=true&output=csv";
 
         let matchesData = [];
 
-        // Função que baixa e processa a planilha
         Papa.parse(linkDaPlanilha, {
             download: true,
             header: true,
             complete: function(results) {
-                // Filtra para ignorar linhas vazias
-                const linhasValidas = results.data.filter(r => r['Time A'] && r['Time A'].trim() !== "");
-                if (linhasValidas.length === 0) {
-                    document.getElementById('detail-title').innerText = "Nenhum jogo encontrado hoje.";
-                    document.getElementById('detail-subtitle').innerText = "Aguardando próxima varredura.";
-                    return;
-                }
+                const linhasValidas = results.data.filter(r => r['Time A']);
+                if (linhasValidas.length === 0) return;
                 
-                // Pega a data mais recente que estiver na planilha
                 const ultimaData = linhasValidas[linhasValidas.length - 1]['Data'];
-                
-                // Pega todos os jogos daquela data (Máximo de 6)
                 const jogosDeHoje = linhasValidas.filter(r => r['Data'] === ultimaData).slice(-6);
 
-                // Transforma os dados da planilha no formato que a Dashboard precisa
-                matchesData = jogosDeHoje.map((row, index) => {
-                    return {
-                        id: index + 1,
-                        teamA: row['Time A'],
-                        teamB: row['Time B'],
-                        time: row['Horario'],
-                        league: row['Campeonato'],
-                        currentOdd: parseFloat(row['Odd Atual'].replace(',', '.')),
-                        fairOdd: parseFloat(row['Odd Justa'].replace(',', '.')),
-                        edge: row['Edge'],
-                        recommendation: row['Recomendacao'],
-                        recType: (row['Tipo Rec'] || "back").toLowerCase(),
-                        confidence: row['Confianca'],
-                        liquidity: {
-                            vol24h: row['Vol24h'],
-                            spread: parseInt(row['Spread'] || "1"),
-                            maxStake: row['Max Stake'],
-                            depthData: (row['Ticks Depth'] || "0,0,0,0,0").split(',').map(Number)
-                        },
-                        info: (row['Info'] || "").split('<br>').map(texto => ({ source: "Varredura NETTUNO", text: texto })),
-                        context: (row['Contexto'] || "").split('<br>'),
-                        checklist: (row['Checklist'] || "").split('<br>'),
-                        strategy: (row['Estrategia'] || "").split('<br>')
-                    };
-                });
+                matchesData = jogosDeHoje.map((row, index) => ({
+                    id: index + 1,
+                    teamA: row['Time A'],
+                    teamB: row['Time B'],
+                    time: row['Horario'],
+                    league: row['Campeonato'],
+                    currentOdd: parseFloat(row['Odd Atual']?.replace(',', '.') || 0),
+                    fairOdd: parseFloat(row['Odd Justa']?.replace(',', '.') || 0),
+                    edge: row['Edge'],
+                    recommendation: row['Recomendacao'],
+                    recType: (row['Tipo Rec'] || "back").toLowerCase(),
+                    confidence: row['Confianca'],
+                    liquidity: {
+                        vol24h: row['Vol24h'],
+                        maxStake: row['Max Stake'],
+                        depthData: (row['Ticks Depth'] || "10,20,30,40,50").split(',').map(Number)
+                    },
+                    info: [{ source: "SISTEMA NETTUNO", text: row['Info'] || "Análise concluída." }],
+                    context: [row['Contexto'] || "Sem observações adicionais."],
+                    checklist: (row['Checklist'] || "Verificação de liquidez concluída").split('<br>'),
+                    strategy: [row['Estrategia'] || "Seguir gestão de banca."]
+                }));
 
-                // Manda o site desenhar a lista de jogos e os gráficos!
                 renderMatchList();
-                if(matchesData.length > 0) {
-                    selectMatch(matchesData[0].id);
-                }
+                if(matchesData.length > 0) selectMatch(matchesData[0].id);
             }
         });
 
-
-        // =========================================================================
-        // DAQUI PARA BAIXO É A LÓGICA DE DESENHAR NA TELA (NÃO PRECISA MEXER EM NADA)
-        // =========================================================================
-        
+        // Lógica de Interface
         let oddsChartInstance = null;
         let liquidityChartInstance = null;
 
         function updateClock() {
-            const now = new Date();
-            const timeString = now.toLocaleTimeString('pt-BR', { hour12: false });
-            const dateString = now.toLocaleDateString('pt-BR');
-            document.getElementById('current-time').innerText = `${dateString} | ${timeString} BRT`;
+            document.getElementById('current-time').innerText = new Date().toLocaleTimeString('pt-BR');
         }
 
         function renderMatchList() {
             const container = document.getElementById('match-list-container');
-            container.innerHTML = '';
-
-            matchesData.forEach((match, index) => {
-                const isTop1 = index === 0;
-                const borderClass = isTop1 ? 'border-trading-edge' : 'border-trading-border hover:border-trading-text';
-                const recClass = match.recType === 'back' ? 'text-trading-back bg-blue-900/20' : 'text-trading-lay bg-red-900/20';
-
-                const html = `
-                    <div class="match-item p-3 bg-trading-dark border ${borderClass} rounded cursor-pointer transition-all hover:-translate-y-0.5" data-id="${match.id}">
-                        <div class="flex justify-between items-start mb-2">
-                            <span class="font-bold text-trading-highlight text-sm">#${index + 1} ${match.teamA} v ${match.teamB}</span>
-                            <span class="text-xs font-mono text-trading-text">${match.time}</span>
-                        </div>
-                        <div class="flex justify-between items-center text-xs">
-                            <span class="px-2 py-1 rounded font-mono font-bold ${recClass}">${match.recommendation}</span>
-                            <div class="text-right">
-                                <span class="text-trading-text block">Edge: <strong class="text-trading-edge">${match.edge}</strong></span>
-                            </div>
-                        </div>
+            container.innerHTML = matchesData.map(match => `
+                <div class="match-item p-3 bg-trading-dark border border-trading-border rounded cursor-pointer hover:border-trading-highlight transition-all" onclick="selectMatch(${match.id})">
+                    <div class="flex justify-between text-sm mb-1">
+                        <span class="font-bold text-trading-highlight">${match.teamA} v ${match.teamB}</span>
+                        <span class="text-xs">${match.time}</span>
                     </div>
-                `;
-                container.insertAdjacentHTML('beforeend', html);
-            });
-
-            document.querySelectorAll('.match-item').forEach(item => {
-                item.addEventListener('click', () => {
-                    document.querySelectorAll('.match-item').forEach(i => i.classList.remove('ring-1', 'ring-trading-highlight'));
-                    item.classList.add('ring-1', 'ring-trading-highlight');
-                    selectMatch(parseInt(item.getAttribute('data-id')));
-                });
-            });
+                    <div class="flex justify-between items-center text-xs">
+                        <span class="${match.recType === 'back' ? 'text-blue-400' : 'text-red-400'} font-bold">${match.recommendation}</span>
+                        <span class="text-trading-edge">Edge: ${match.edge}</span>
+                    </div>
+                </div>
+            `).join('');
         }
 
         function selectMatch(id) {
@@ -295,26 +205,24 @@
             if (!match) return;
 
             document.getElementById('detail-title').innerText = `${match.teamA} vs ${match.teamB}`;
-            document.getElementById('detail-subtitle').innerHTML = `⚽ ${match.league} | ⏰ ${match.time} | 🛡️ Confiança: <strong class="${match.confidence === 'Alta' ? 'text-trading-edge' : 'text-trading-warn'}">${match.confidence}</strong>`;
+            document.getElementById('detail-subtitle').innerText = `⚽ ${match.league} | ⏰ ${match.time} | Confiança: ${match.confidence}`;
 
-            const recColorClass = match.recType === 'back' ? 'text-trading-back' : 'text-trading-lay';
-            
             document.getElementById('detail-stats').innerHTML = `
                 <div class="bg-trading-dark p-3 rounded border border-trading-border text-center">
-                    <span class="block text-xs text-trading-text mb-1 uppercase tracking-wide">Odd Atual</span>
-                    <span class="block text-xl font-mono text-trading-highlight font-bold">${match.currentOdd.toFixed(2)}</span>
+                    <span class="block text-xs text-trading-text uppercase">Odd Betfair</span>
+                    <span class="block text-xl font-bold text-trading-highlight">${match.currentOdd.toFixed(2)}</span>
                 </div>
                 <div class="bg-trading-dark p-3 rounded border border-trading-border text-center">
-                    <span class="block text-xs text-trading-text mb-1 uppercase tracking-wide">Odd Justa</span>
-                    <span class="block text-xl font-mono text-trading-highlight font-bold">${match.fairOdd.toFixed(2)}</span>
+                    <span class="block text-xs text-trading-text uppercase">Odd Justa</span>
+                    <span class="block text-xl font-bold text-trading-highlight">${match.fairOdd.toFixed(2)}</span>
                 </div>
                 <div class="bg-trading-dark p-3 rounded border border-trading-border text-center">
-                    <span class="block text-xs text-trading-text mb-1 uppercase tracking-wide">Edge</span>
-                    <span class="block text-xl font-mono text-trading-edge font-bold">${match.edge}</span>
+                    <span class="block text-xs text-trading-text uppercase">Edge</span>
+                    <span class="block text-xl font-bold text-trading-edge">${match.edge}</span>
                 </div>
-                <div class="bg-trading-dark p-3 rounded border border-trading-border text-center flex flex-col justify-center">
-                    <span class="block text-xs text-trading-text mb-1 uppercase tracking-wide">Ação</span>
-                    <span class="block text-sm font-bold ${recColorClass}">${match.recommendation}</span>
+                <div class="bg-trading-dark p-3 rounded border border-trading-border text-center">
+                    <span class="block text-xs text-trading-text uppercase">Ação</span>
+                    <span class="block text-sm font-bold ${match.recType === 'back' ? 'text-blue-400' : 'text-red-400'}">${match.recommendation}</span>
                 </div>
             `;
 
@@ -323,136 +231,62 @@
         }
 
         function renderTabs(match) {
-            const tabInfo = document.getElementById('tab-info');
-            tabInfo.innerHTML = match.info.map(i => `
-                <div class="border-l-2 border-trading-text pl-3 py-1">
-                    <span class="text-trading-highlight text-xs font-bold block mb-1">${i.source}</span>
-                    <p class="text-sm text-trading-text">${i.text}</p>
-                </div>
-            `).join('');
-
-            const tabContext = document.getElementById('tab-context');
-            tabContext.innerHTML = `<ul class="list-disc pl-5 text-sm space-y-2 text-trading-text">` + 
-                match.context.map(c => `<li>${c}</li>`).join('') + `</ul>`;
-
-            const tabChecklist = document.getElementById('tab-checklist');
-            tabChecklist.innerHTML = `<ul class="space-y-2 text-sm text-trading-highlight">` + 
-                match.checklist.map(c => `<li class="flex items-start gap-2"><span class="text-trading-edge font-bold">✓</span> ${c}</li>`).join('') + `</ul>`;
-                
-            const tabStrategy = document.getElementById('tab-strategy');
-            tabStrategy.innerHTML = `<div class="bg-trading-panel p-4 rounded border border-trading-border font-mono text-sm space-y-3">` + 
-                match.strategy.map(s => `<p class="flex items-start gap-2"><span class="text-blue-400">></span> <span class="text-trading-text">${s}</span></p>`).join('') + `</div>`;
+            document.getElementById('tab-info').innerHTML = match.info.map(i => `<p class="text-sm text-trading-text">${i.text}</p>`).join('');
+            document.getElementById('tab-context').innerHTML = match.context.map(c => `<p class="text-sm text-trading-text">${c}</p>`).join('');
+            document.getElementById('tab-checklist').innerHTML = match.checklist.map(c => `<p class="text-sm text-trading-highlight">✓ ${c}</p>`).join('');
+            document.getElementById('tab-strategy').innerHTML = match.strategy.map(s => `<p class="text-sm font-mono text-blue-300">> ${s}</p>`).join('');
         }
 
         function renderCharts(match) {
-            Chart.defaults.color = '#A0AEC0';
-            Chart.defaults.font.family = "'JetBrains Mono', monospace";
+            const chartConfig = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: { y: { grid: { color: '#2A3241' } }, x: { grid: { display: false } } }
+            };
 
             if (oddsChartInstance) oddsChartInstance.destroy();
-            const ctxOdds = document.getElementById('oddsChart').getContext('2d');
-            oddsChartInstance = new Chart(ctxOdds, {
+            oddsChartInstance = new Chart(document.getElementById('oddsChart'), {
                 type: 'bar',
                 data: {
-                    labels: ['Odd Atual', 'Odd Justa (Real)'],
+                    labels: ['Atual', 'Justa'],
                     datasets: [{
-                        label: 'Cotação',
                         data: [match.currentOdd, match.fairOdd],
-                        backgroundColor: [
-                            match.recType === 'back' ? 'rgba(33, 133, 208, 0.7)' : 'rgba(232, 93, 117, 0.7)',
-                            'rgba(16, 185, 129, 0.7)' 
-                        ],
-                        borderColor: [
-                            match.recType === 'back' ? '#2185D0' : '#E85D75',
-                            '#10B981'
-                        ],
-                        borderWidth: 1,
-                        borderRadius: 4
+                        backgroundColor: ['#2185D0', '#10B981']
                     }]
                 },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { 
-                        legend: { display: false },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) { return 'Odd: ' + context.parsed.y.toFixed(2); }
-                            }
-                        }
-                    },
-                    scales: {
-                        y: { 
-                            beginAtZero: false,
-                            min: Math.floor(Math.min(match.currentOdd, match.fairOdd) * 0.8),
-                            grid: { color: '#2A3241' }
-                        },
-                        x: { grid: { display: false } }
-                    }
-                }
+                options: chartConfig
             });
 
             if (liquidityChartInstance) liquidityChartInstance.destroy();
-            const ctxLiq = document.getElementById('liquidityChart').getContext('2d');
-            liquidityChartInstance = new Chart(ctxLiq, {
+            liquidityChartInstance = new Chart(document.getElementById('liquidityChart'), {
                 type: 'line',
                 data: {
-                    labels: ['Tick 1', 'Tick 2', 'Tick 3', 'Tick 4', 'Tick 5'],
+                    labels: ['T1', 'T2', 'T3', 'T4', 'T5'],
                     datasets: [{
-                        label: 'Volume Disponível (£)',
                         data: match.liquidity.depthData,
                         borderColor: '#3B82F6',
-                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
-                        borderWidth: 2,
-                        fill: true,
                         tension: 0.3,
-                        pointBackgroundColor: '#151A22',
-                        pointBorderColor: '#3B82F6',
+                        fill: true,
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)'
                     }]
                 },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { 
-                        legend: { display: false },
-                        title: {
-                            display: true,
-                            text: `Vol 24h: ${match.liquidity.vol24h} | Stake Max: ${match.liquidity.maxStake}`,
-                            color: '#A0AEC0',
-                            font: { size: 10 }
-                        }
-                    },
-                    scales: {
-                        y: { 
-                            beginAtZero: true,
-                            grid: { color: '#2A3241' }
-                        },
-                        x: { grid: { color: '#2A3241' } }
-                    }
-                }
+                options: chartConfig
             });
         }
 
+        // Troca de Abas
         document.querySelectorAll('.tab-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
                 e.target.classList.add('active');
-                
-                document.querySelectorAll('.tab-content').forEach(c => {
-                    c.classList.add('hidden');
-                    c.classList.remove('block');
-                });
-                
-                const targetId = e.target.getAttribute('data-target');
-                const targetEl = document.getElementById(targetId);
-                targetEl.classList.remove('hidden');
-                targetEl.classList.add('block');
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+                document.getElementById(e.target.getAttribute('data-target')).classList.remove('hidden');
             });
         });
 
-        // Atualiza a hora
         updateClock();
         setInterval(updateClock, 1000);
-
     </script>
 </body>
 </html>

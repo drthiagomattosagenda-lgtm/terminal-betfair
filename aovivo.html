@@ -39,22 +39,13 @@
         .minute-slot { height: 100%; position: relative; z-index: 2; }
         .bar-home { background-color: #10B981; width: 100%; position: absolute; bottom: 50%; left: 0; border-radius: 1px 1px 0 0; }
         .bar-away { background-color: #EF4444; width: 100%; position: absolute; top: 50%; left: 0; border-radius: 0 0 1px 1px; }
-        
         .marker { position: absolute; left: 50%; transform: translateX(-50%); border-radius: 50%; z-index: 10; }
         .marker-alvo { width: 6px; height: 6px; background-color: #FFF; box-shadow: 0 0 5px #FFF; }
         .marker-lado { width: 3px; height: 3px; background-color: #FFB100; }
         .home-marker { bottom: 10px; } 
         .away-marker { top: 10px; }
-
-        .card-high-pressure {
-            border: 2px solid #7C3AED !important;
-            box-shadow: 0 0 25px rgba(124, 58, 237, 0.4);
-            background: linear-gradient(to bottom, #151A22, #1a0b2e) !important;
-        }
-
-        /* Estilo Botão Ativo */
+        .card-high-pressure { border: 2px solid #7C3AED !important; box-shadow: 0 0 25px rgba(124, 58, 237, 0.4); background: linear-gradient(to bottom, #151A22, #1a0b2e) !important; }
         .filter-btn.active { background-color: #FFB100 !important; color: black !important; border-color: #FFB100 !important; }
-
         .navbar { display: flex !important; }
     </style>
 </head>
@@ -80,7 +71,7 @@
                 <button onclick="setFilter('pressao')" class="filter-btn bg-trading-dark px-4 py-1.5 rounded text-xs font-bold uppercase border border-trading-border transition text-trading-pressure">Alta Pressão</button>
             </div>
             <div class="relative">
-                <input type="text" id="gameSearch" onkeyup="searchGames()" placeholder="🔎 Buscar jogo..." class="bg-trading-dark border border-trading-border rounded-full py-1.5 px-10 text-xs focus:outline-none focus:border-trading-highlight w-64 text-white">
+                <input type="text" id="gameSearch" oninput="handleSearch(this.value)" placeholder="🔎 Buscar jogo..." class="bg-trading-dark border border-trading-border rounded-full py-1.5 px-10 text-xs focus:outline-none focus:border-trading-highlight w-64 text-white">
             </div>
         </div>
     </div>
@@ -89,30 +80,47 @@
         <div id="live-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
 
         <div class="flex justify-center items-center gap-6 mt-12 mb-10">
-            <button class="bg-trading-panel border border-trading-border px-6 py-2 rounded text-sm font-bold hover:bg-trading-dark transition">Anterior</button>
-            <span class="text-xs font-mono text-trading-text">Exibindo Jogos Filtrados</span>
-            <button class="bg-trading-panel border border-trading-border px-6 py-2 rounded text-sm font-bold hover:bg-trading-dark transition">Próxima</button>
+            <button onclick="prevPage()" id="prevBtn" class="bg-trading-panel border border-trading-border px-6 py-2 rounded text-sm font-bold hover:bg-trading-dark disabled:opacity-30">Anterior</button>
+            <span class="text-xs font-mono text-trading-text">Página <strong id="pageDisplay" class="text-white">1</strong> de <span id="totalDisplay">1</span></span>
+            <button onclick="nextPage()" id="nextBtn" class="bg-trading-panel border border-trading-border px-6 py-2 rounded text-sm font-bold hover:bg-trading-dark disabled:opacity-30">Próxima</button>
         </div>
     </main>
 
     <script>
-        // Dados expandidos para testar os filtros
-        let games = [
-            { id: 1, home: "PAL", away: "FLA", score: "1 - 0", time: 43, possession: 55, shots6m: 4, shotsConc9m: 0 },
-            { id: 2, home: "CITY", away: "LIV", score: "2 - 2", time: 78, possession: 48, shots6m: 1, shotsConc9m: 2 },
-            { id: 3, home: "REA", away: "BAR", score: "0 - 0", time: 15, possession: 60, shots6m: 0, shotsConc9m: 0 },
-            { id: 4, home: "BAY", away: "DOR", score: "3 - 1", time: 62, possession: 58, shots6m: 5, shotsConc9m: 0 }, // Alta Pressão
-            { id: 5, home: "INT", away: "MIL", score: "0 - 0", time: 30, possession: 52, shots6m: 3, shotsConc9m: 0 }, // Alta Pressão
+        // Simulação de 50 jogos para testar paginação real
+        const baseGames = [
+            { id: 1, home: "PALMEIRAS", away: "FLAMENGO", score: "1 - 0", time: 43, possession: 55, shots6m: 4, shotsConc9m: 0 },
+            { id: 2, home: "CORINTHIANS", away: "SANTOS", score: "0 - 0", time: 15, possession: 50, shots6m: 0, shotsConc9m: 0 },
+            { id: 3, home: "SAO PAULO", away: "GREMIO", score: "2 - 1", time: 78, possession: 48, shots6m: 1, shotsConc9m: 2 },
+            { id: 4, home: "REAL MADRID", away: "BARCELONA", score: "0 - 0", time: 30, possession: 52, shots6m: 5, shotsConc9m: 0 },
+            { id: 5, home: "MAN CITY", away: "ARSENAL", score: "3 - 0", time: 88, possession: 65, shots6m: 2, shotsConc9m: 0 }
         ];
+        
+        // Gerador de volume (simulando os 200 jogos do sábado)
+        let allGames = [];
+        for(let i=0; i<50; i++) {
+            let base = baseGames[i % baseGames.length];
+            allGames.push({...base, id: i + 1, home: base.home + " " + (i+1)});
+        }
 
-        let favorites = [];
+        // ESTADO GLOBAL
+        let favorites = JSON.parse(localStorage.getItem('futTraderFavs')) || [];
         let currentFilter = 'todos';
+        let searchQuery = '';
+        let currentPage = 1;
+        const gamesPerPage = 9;
 
         function setFilter(filter) {
             currentFilter = filter;
-            // Atualiza botões
+            currentPage = 1;
             document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
             event.currentTarget.classList.add('active');
+            renderGrid();
+        }
+
+        function handleSearch(val) {
+            searchQuery = val.toUpperCase();
+            currentPage = 1;
             renderGrid();
         }
 
@@ -122,11 +130,11 @@
             } else {
                 favorites.push(id);
             }
+            localStorage.setItem('futTraderFavs', JSON.stringify(favorites));
             renderGrid();
         }
 
         function isAltaPressao(game) {
-            // REGRA: 3 chutes últimos 6min + Posse > 51% + 0 chutes tomados últimos 9min
             return game.shots6m >= 3 && game.possession > 51 && game.shotsConc9m === 0;
         }
 
@@ -134,21 +142,45 @@
             const grid = document.getElementById('live-grid');
             grid.innerHTML = '';
 
-            // Aplicar Filtros
-            let filteredGames = games.filter(game => {
-                if (currentFilter === 'favoritos') return favorites.includes(game.id);
-                if (currentFilter === '1t') return game.time <= 45;
-                if (currentFilter === '2t') return game.time > 45;
-                if (currentFilter === 'pressao') return isAltaPressao(game);
-                return true; // todos
+            // 1. FILTRAGEM
+            let filtered = allGames.filter(game => {
+                const matchesSearch = game.home.includes(searchQuery) || game.away.includes(searchQuery);
+                let matchesCategory = true;
+                if (currentFilter === 'favoritos') matchesCategory = favorites.includes(game.id);
+                else if (currentFilter === '1t') matchesCategory = game.time <= 45;
+                else if (currentFilter === '2t') matchesCategory = game.time > 45;
+                else if (currentFilter === 'pressao') matchesCategory = isAltaPressao(game);
+                
+                return matchesSearch && matchesCategory;
             });
 
-            filteredGames.forEach((game, index) => {
-                const highPressure = isAltaPressao(game);
+            // 2. ORDENAÇÃO (Favoritos sempre no topo)
+            filtered.sort((a, b) => {
+                const aFav = favorites.includes(a.id) ? 1 : 0;
+                const bFav = favorites.includes(b.id) ? 1 : 0;
+                return bFav - aFav;
+            });
+
+            // 3. PAGINAÇÃO REAL
+            const totalPages = Math.ceil(filtered.length / gamesPerPage) || 1;
+            if (currentPage > totalPages) currentPage = totalPages;
+            
+            const start = (currentPage - 1) * gamesPerPage;
+            const paginated = filtered.slice(start, start + gamesPerPage);
+
+            // 4. ATUALIZAR INTERFACE PAGINAÇÃO
+            document.getElementById('pageDisplay').innerText = currentPage;
+            document.getElementById('totalDisplay').innerText = totalPages;
+            document.getElementById('prevBtn').disabled = currentPage === 1;
+            document.getElementById('nextBtn').disabled = currentPage === totalPages;
+
+            // 5. RENDERIZAR CARDS
+            paginated.forEach((game) => {
+                const highP = isAltaPressao(game);
                 const isFav = favorites.includes(game.id);
                 
                 grid.innerHTML += `
-                    <div class="bg-trading-panel border border-trading-border rounded-xl p-4 transition-all ${highPressure ? 'card-high-pressure' : ''}">
+                    <div class="bg-trading-panel border border-trading-border rounded-xl p-4 transition-all ${highP ? 'card-high-pressure' : ''}">
                         <div class="flex justify-between items-center mb-4">
                             <div class="text-sm font-bold flex items-center gap-2">
                                 <span class="text-trading-highlight">${game.home}</span> 
@@ -156,14 +188,9 @@
                                 <span>${game.away}</span>
                                 <span class="text-[10px] text-trading-edge font-mono ml-2">${game.time}'</span>
                             </div>
-                            <i onclick="toggleFavorite(${game.id})" class="${isFav ? 'fas fa-star text-yellow-500' : 'far fa-star'} text-sm cursor-pointer transition"></i>
+                            <i onclick="toggleFavorite(${game.id})" class="${isFav ? 'fas fa-star text-yellow-500' : 'far fa-star'} text-sm cursor-pointer transition hover:scale-125"></i>
                         </div>
-
-                        <div class="chart-90-min">
-                            <div class="center-line"></div>
-                            ${generate90Bars(game.time)}
-                        </div>
-
+                        <div class="chart-90-min"><div class="center-line"></div>${generate90Bars(game.time)}</div>
                         <div class="mt-4">
                             <div class="flex justify-between text-[9px] font-bold mb-1 uppercase tracking-tighter">
                                 <span>Posse: ${game.possession}%</span>
@@ -174,17 +201,14 @@
                                 <div class="bg-trading-away" style="width: ${100 - game.possession}%"></div>
                             </div>
                         </div>
-
                         <button onclick="document.getElementById('stats-${game.id}').classList.toggle('hidden')" class="w-full mt-4 py-1.5 bg-trading-dark border border-trading-border rounded text-[9px] font-bold tracking-widest uppercase hover:bg-trading-border transition">
                             <i class="fas fa-bolt mr-2 text-trading-highlight"></i> Detalhes da Partida
                         </button>
-
                         <div id="stats-${game.id}" class="hidden mt-4 pt-4 border-t border-trading-border space-y-3">
                             ${renderStatRow("1.25", "xG", "0.85")}
                             ${renderStatRow("88", "Ataques", "92")}
-                            ${renderStatRow(game.shots6m, "Atq. Perigosos (6m)", "0", highPressure)}
+                            ${renderStatRow(game.shots6m, "Atq. Perigosos (6m)", "0", highP)}
                             ${renderStatRow("4", "Chute no Alvo", "3")}
-                            ${renderStatRow("7", "Chute ao lado", "5")}
                         </div>
                     </div>
                 `;
@@ -205,21 +229,19 @@
             for(let m = 1; m <= 90; m++) {
                 if(m <= currentMinute) {
                     const intensity = Math.floor(Math.random() * 50) + 1;
-                    const heightPercent = (intensity / 50) * 100;
+                    const h = (intensity / 50) * 100;
                     const isHome = Math.random() > 0.4;
-                    let markerHtml = '';
-                    const eventChance = Math.random();
-                    const markerPosClass = isHome ? 'home-marker' : 'away-marker';
-                    if (eventChance > 0.95) markerHtml = `<div class="marker marker-alvo ${markerPosClass}"></div>`;
-                    else if (eventChance > 0.88) markerHtml = `<div class="marker marker-lado ${markerPosClass}"></div>`;
-
-                    html += `<div class="minute-slot">${markerHtml}<div class="${isHome ? 'bar-home' : 'bar-away'}" style="height: ${heightPercent}%"></div></div>`;
-                } else {
-                    html += `<div class="minute-slot"></div>`;
-                }
+                    let mHtml = ''; const ec = Math.random();
+                    if (ec > 0.95) mHtml = `<div class="marker marker-alvo ${isHome ? 'home-marker' : 'away-marker'}"></div>`;
+                    else if (ec > 0.88) mHtml = `<div class="marker marker-lado ${isHome ? 'home-marker' : 'away-marker'}"></div>`;
+                    html += `<div class="minute-slot">${mHtml}<div class="${isHome ? 'bar-home' : 'bar-away'}" style="height: ${h}%"></div></div>`;
+                } else { html += `<div class="minute-slot"></div>`; }
             }
             return html;
         }
+
+        function nextPage() { currentPage++; renderGrid(); window.scrollTo(0,0); }
+        function prevPage() { currentPage--; renderGrid(); window.scrollTo(0,0); }
 
         renderGrid();
     </script>

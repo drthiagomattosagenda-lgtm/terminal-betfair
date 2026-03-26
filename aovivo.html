@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terminal Live - Fut Trader</title>
+    <title>Live Pro - Fut Trader</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -37,13 +37,15 @@
             display: grid;
             grid-template-columns: repeat(90, 1fr);
             gap: 1px;
-            background: rgba(0,0,0,0.4);
-            padding: 5px;
+            background: rgba(0,0,0,0.5);
+            padding: 0 5px; /* Padding apenas lateral para não achatar as barras */
             border-radius: 4px;
             position: relative;
+            overflow: hidden; /* CRUCIAL: impede que as barras vazem para fora do card */
+            border: 1px solid #2A3241;
         }
 
-        /* LINHA HORIZONTAL CENTRAL (PONTO ZERO) */
+        /* LINHA HORIZONTAL CENTRAL */
         .center-line {
             position: absolute;
             left: 0;
@@ -62,27 +64,29 @@
             z-index: 2;
         }
 
-        /* BARRA HOME (VERDE) - APENAS PARA CIMA */
+        /* BARRA HOME (VERDE) - FIXADA NA LINHA E SOBE */
         .bar-home {
             background-color: #10B981;
             width: 100%;
             position: absolute;
-            bottom: 50%; /* Começa exatamente na linha central */
+            bottom: 50%; /* Parte de baixo da barra fica na metade do container */
             left: 0;
             border-radius: 1px 1px 0 0;
+            transition: height 0.3s ease;
         }
 
-        /* BARRA AWAY (VERMELHA) - APENAS PARA BAIXO */
+        /* BARRA AWAY (VERMELHA) - FIXADA NA LINHA E DESCE */
         .bar-away {
             background-color: #EF4444;
             width: 100%;
             position: absolute;
-            top: 50%; /* Começa exatamente na linha central */
+            top: 50%; /* Parte de cima da barra fica na metade do container */
             left: 0;
             border-radius: 0 0 1px 1px;
+            transition: height 0.3s ease;
         }
 
-        /* ÍCONES DE EVENTOS */
+        /* ÍCONES DE EVENTOS - DENTRO DO CAMPO VISUAL */
         .event-dot {
             position: absolute;
             width: 4px;
@@ -92,12 +96,12 @@
             transform: translateX(-50%);
             z-index: 10;
         }
-        .dot-corner { background: #FFB100; top: 2px; }
-        .dot-shot { background: #FFF; bottom: 2px; }
+        .dot-corner { background: #FFB100; top: 10%; }
+        .dot-shot { background: #FFF; bottom: 10%; }
 
         .card-high-pressure {
             border: 2px solid #7C3AED !important;
-            box-shadow: 0 0 25px rgba(124, 58, 237, 0.5);
+            box-shadow: 0 0 25px rgba(124, 58, 237, 0.4);
             background: linear-gradient(to bottom, #151A22, #1a0b2e) !important;
         }
 
@@ -121,9 +125,9 @@
             <div class="flex gap-2">
                 <button class="bg-trading-highlight text-black px-4 py-1.5 rounded text-xs font-bold uppercase">Todos</button>
                 <button class="bg-trading-dark px-4 py-1.5 rounded text-xs font-bold border border-trading-border hover:border-trading-highlight"><i class="fas fa-star text-yellow-500 mr-1"></i> Favoritos</button>
-                <button class="filter-btn bg-trading-dark px-4 py-1.5 rounded text-xs font-bold border border-trading-border">1º Tempo</button>
-                <button class="filter-btn bg-trading-dark px-4 py-1.5 rounded text-xs font-bold border border-trading-border">2º Tempo</button>
-                <button class="filter-btn bg-trading-dark px-4 py-1.5 rounded text-xs font-bold border border-trading-border text-trading-pressure">Alta Pressão</button>
+                <button class="bg-trading-dark px-4 py-1.5 rounded text-xs font-bold border border-trading-border">1º Tempo</button>
+                <button class="bg-trading-dark px-4 py-1.5 rounded text-xs font-bold border border-trading-border">2º Tempo</button>
+                <button class="bg-trading-dark px-4 py-1.5 rounded text-xs font-bold border border-trading-border text-trading-pressure font-black">Alta Pressão</button>
             </div>
             <div class="relative">
                 <input type="text" placeholder="🔎 Buscar jogo..." class="bg-trading-dark border border-trading-border rounded-full py-1.5 px-10 text-xs focus:outline-none focus:border-trading-highlight w-64">
@@ -179,21 +183,20 @@
                                 <span>POSSE: ${game.possession}%</span>
                                 <span>${100 - game.possession}%</span>
                             </div>
-                            <div class="h-1 w-full bg-gray-950 rounded-full flex overflow-hidden">
+                            <div class="h-1.5 w-full bg-gray-950 rounded-full flex overflow-hidden">
                                 <div class="bg-trading-home" style="width: ${game.possession}%"></div>
                                 <div class="bg-trading-away" style="width: ${100 - game.possession}%"></div>
                             </div>
                         </div>
 
                         <button onclick="document.getElementById('stats-${i}').classList.toggle('hidden')" class="w-full mt-4 py-1.5 bg-trading-dark border border-trading-border rounded text-[9px] font-bold tracking-widest uppercase hover:bg-trading-border transition">
-                            <i class="fas fa-expand-alt mr-2 text-trading-highlight"></i> Detalhes da Partida
+                            <i class="fas fa-bolt mr-2 text-trading-highlight"></i> DETALHES DA PARTIDA
                         </button>
 
                         <div id="stats-${i}" class="hidden mt-4 pt-4 border-t border-trading-border text-[11px] font-mono space-y-2">
                             <div class="flex justify-between"><span>xG Esperado</span> <span class="text-white">0.85 — 1.20</span></div>
                             <div class="flex justify-between"><span>Ataques Perigosos</span> <span class="text-trading-highlight">45 — 42</span></div>
                             <div class="flex justify-between"><span>Chutes no Alvo</span> <span class="text-trading-home">4 — 3</span></div>
-                            <div class="flex justify-between"><span>Escanteios</span> <span class="text-trading-highlight">5 — 2</span></div>
                         </div>
                     </div>
                 `;
@@ -205,14 +208,12 @@
             for(let m = 1; m <= 90; m++) {
                 if(m <= currentMinute) {
                     const intensity = Math.floor(Math.random() * 50) + 1;
-                    const heightPercent = (intensity / 50) * 100; // Porcentagem da metade
+                    const heightPercent = (intensity / 50) * 100; // Máximo 100% da metade do container
                     const isHome = Math.random() > 0.4;
 
                     let event = '';
-                    if(m % 15 === 0) event = '<div class="event-dot dot-corner"></div>';
-                    if(m % 22 === 0) event = '<div class="event-dot dot-shot"></div>';
+                    if(m % 20 === 0) event = '<div class="event-dot dot-corner"></div>';
 
-                    // Aqui está a trava: bar-home usa 'bottom: 50%' e bar-away usa 'top: 50%'
                     html += `
                         <div class="minute-slot">
                             ${event}

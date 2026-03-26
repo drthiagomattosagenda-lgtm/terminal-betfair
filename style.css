@@ -1,57 +1,68 @@
+/* --- RESET E BASES --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #1a1a1a; /* Escuro como terminais de trade */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #0f171c; /* Fundo escuro padrão */
     color: white;
+    line-height: 1.6;
+}
+
+/* --- TELA DE LOGIN (index.html) --- */
+/* Esta classe vamos usar apenas na div principal do login */
+.login-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    margin: 0;
+    width: 100%;
 }
+
 .login-container {
     text-align: center;
-    background: #333;
+    background: #1b262c;
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-}
-h1 { color: #ffb100; } /* Amarelo Betfair */
-/* Barra de Navegação Principal */
-.navbar {
-    background-color: #1b262c;
-    padding: 15px 40px; /* Espaço interno */
-    display: flex; /* Ativa o modo flexível */
-    justify-content: space-between; /* Manda o logo pra esquerda e links pra direita */
-    align-items: center; /* Centraliza verticalmente */
-    border-bottom: 2px solid #ffb100;
-    position: sticky; /* Faz o menu ficar fixo no topo ao rolar */
-    top: 0;
-    z-index: 1000;
+    width: 100%;
+    max-width: 400px;
 }
 
-/* Estilo do Logo (Esquerda) */
+h1 { color: #ffb100; margin-bottom: 10px; }
+
+/* --- BARRA DE NAVEGAÇÃO (Dashboard, Ao Vivo, Comunidade) --- */
+.navbar {
+    background-color: #1b262c;
+    padding: 0 40px;
+    height: 70px; /* Altura fixa para o menu */
+    display: flex;
+    justify-content: space-between; /* LOGO NA ESQUERDA | LINKS NA DIREITA */
+    align-items: center;
+    border-bottom: 2px solid #ffb100;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 100%; /* Garante que ocupa a largura toda */
+}
+
 .logo {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: bold;
     color: white;
-    letter-spacing: 1px;
 }
 
 .logo span {
     color: #ffb100;
 }
 
-/* Estilo dos Links (Direita) */
 .nav-links {
-    list-style: none; /* Tira as bolinhas da lista */
-    display: flex; /* Deixa os links um ao lado do outro */
-    margin: 0;
-    padding: 0;
-    gap: 30px; /* Espaço entre cada botão */
-}
-
-.nav-links li {
-    position: relative;
+    list-style: none;
+    display: flex;
+    gap: 25px;
 }
 
 .nav-links a {
@@ -66,7 +77,11 @@ h1 { color: #ffb100; } /* Amarelo Betfair */
     color: #ffb100;
 }
 
-/* Ajuste para o link de Sair ficar vermelho */
 .btn-sair {
     color: #ff4444 !important;
+}
+
+/* --- AJUSTE DE CONTEÚDO --- */
+.content-section {
+    padding: 20px;
 }

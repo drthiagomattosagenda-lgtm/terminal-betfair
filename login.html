@@ -8,12 +8,38 @@
 </head>
 <body>
     <div class="login-container">
-        <h1>Bem-vindo ao Terminal Betfair</h1>
-        <p>Sua automação de odds profissional.</p>
+        <img src="https://www.betfair.com/ads/creative/betfair-logo-en.png" alt="Betfair" style="width: 150px; margin-bottom: 20px;">
+        <h1>Terminal Betfair</h1>
+        <p>Acesse para gerenciar suas automações.</p>
         
         <div id="buttonDiv"></div> 
     </div>
 
     <script src="https://accounts.google.com/gsi/client" async defer></script>
+    
+    <script>
+      // Função que o Google chama depois que o usuário faz login
+      function handleCredentialResponse(response) {
+         console.log("Login realizado com sucesso! Token JWT: " + response.credential);
+         alert("Login realizado! Agora você pode estruturar seu painel.");
+         // No futuro, aqui você redireciona para a página interna do seu site
+         // window.location.href = "dashboard.html"; 
+      }
+
+      window.onload = function () {
+        google.accounts.id.initialize({
+          client_id: "55444728820-elc9cufjb3l5mk4fvtlp1bho6ribua05.apps.googleusercontent.com", // COLE SEU ID AQUI
+          callback: handleCredentialResponse
+        });
+        
+        // Renderiza o botão oficial do Google
+        google.accounts.id.renderButton(
+          document.getElementById("buttonDiv"),
+          { theme: "outline", size: "large", text: "signin_with", shape: "pill" }  
+        );
+        
+        google.accounts.id.prompt(); // Abre a janelinha flutuante de login automático
+      }
+    </script>
 </body>
 </html>

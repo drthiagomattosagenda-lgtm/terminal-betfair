@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live Pro - Fut Trader</title>
+    <title>Terminal Live - Fut Trader</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -31,21 +31,20 @@
     <style>
         body { background-color: #0B0E14; color: #E2E8F0; margin: 0; }
         
-        /* CONTAINER DO GRÁFICO - 90 COLUNAS FIXAS */
+        /* BLOQUEIO DE VAZAMENTO DO GRÁFICO */
         .chart-90-min {
             height: 140px;
             display: grid;
             grid-template-columns: repeat(90, 1fr);
             gap: 1px;
             background: rgba(0,0,0,0.5);
-            padding: 0 5px; /* Padding apenas lateral para não achatar as barras */
+            padding: 0 5px;
             border-radius: 4px;
             position: relative;
-            overflow: hidden; /* CRUCIAL: impede que as barras vazem para fora do card */
+            overflow: hidden; /* Garante que nada saia da caixa */
             border: 1px solid #2A3241;
         }
 
-        /* LINHA HORIZONTAL CENTRAL */
         .center-line {
             position: absolute;
             left: 0;
@@ -57,48 +56,27 @@
             pointer-events: none;
         }
 
-        /* SLOT DE CADA MINUTO */
-        .minute-slot {
-            height: 100%;
-            position: relative;
-            z-index: 2;
-        }
+        .minute-slot { height: 100%; position: relative; z-index: 2; }
 
-        /* BARRA HOME (VERDE) - FIXADA NA LINHA E SOBE */
         .bar-home {
             background-color: #10B981;
             width: 100%;
             position: absolute;
-            bottom: 50%; /* Parte de baixo da barra fica na metade do container */
+            bottom: 50%; /* Ancorado no meio, sobe */
             left: 0;
             border-radius: 1px 1px 0 0;
-            transition: height 0.3s ease;
         }
 
-        /* BARRA AWAY (VERMELHA) - FIXADA NA LINHA E DESCE */
         .bar-away {
             background-color: #EF4444;
             width: 100%;
             position: absolute;
-            top: 50%; /* Parte de cima da barra fica na metade do container */
+            top: 50%; /* Ancorado no meio, desce */
             left: 0;
             border-radius: 0 0 1px 1px;
-            transition: height 0.3s ease;
         }
 
-        /* ÍCONES DE EVENTOS - DENTRO DO CAMPO VISUAL */
-        .event-dot {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            border-radius: 50%;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 10;
-        }
-        .dot-corner { background: #FFB100; top: 10%; }
-        .dot-shot { background: #FFF; bottom: 10%; }
-
+        /* Estilo para Alta Pressão */
         .card-high-pressure {
             border: 2px solid #7C3AED !important;
             box-shadow: 0 0 25px rgba(124, 58, 237, 0.4);
@@ -179,8 +157,8 @@
                         </div>
 
                         <div class="mt-4">
-                            <div class="flex justify-between text-[9px] font-bold mb-1">
-                                <span>POSSE: ${game.possession}%</span>
+                            <div class="flex justify-between text-[9px] font-bold mb-1 uppercase tracking-tighter">
+                                <span>Posse: ${game.possession}%</span>
                                 <span>${100 - game.possession}%</span>
                             </div>
                             <div class="h-1.5 w-full bg-gray-950 rounded-full flex overflow-hidden">
@@ -190,17 +168,31 @@
                         </div>
 
                         <button onclick="document.getElementById('stats-${i}').classList.toggle('hidden')" class="w-full mt-4 py-1.5 bg-trading-dark border border-trading-border rounded text-[9px] font-bold tracking-widest uppercase hover:bg-trading-border transition">
-                            <i class="fas fa-bolt mr-2 text-trading-highlight"></i> DETALHES DA PARTIDA
+                            <i class="fas fa-bolt mr-2 text-trading-highlight"></i> Detalhes da Partida
                         </button>
 
-                        <div id="stats-${i}" class="hidden mt-4 pt-4 border-t border-trading-border text-[11px] font-mono space-y-2">
-                            <div class="flex justify-between"><span>xG Esperado</span> <span class="text-white">0.85 — 1.20</span></div>
-                            <div class="flex justify-between"><span>Ataques Perigosos</span> <span class="text-trading-highlight">45 — 42</span></div>
-                            <div class="flex justify-between"><span>Chutes no Alvo</span> <span class="text-trading-home">4 — 3</span></div>
+                        <div id="stats-${i}" class="hidden mt-4 pt-4 border-t border-trading-border space-y-3">
+                            ${renderStatRow("1.25", "xG", "0.85")}
+                            ${renderStatRow("88", "Ataques", "92")}
+                            ${renderStatRow("45", "Ataques Perigosos", "42", true)}
+                            ${renderStatRow("4", "Chute no Alvo", "3")}
+                            ${renderStatRow("7", "Chute ao lado", "5")}
                         </div>
                     </div>
                 `;
             }
+        }
+
+        // Função para criar a linha de estatística espelhada
+        function renderStatRow(homeVal, label, awayVal, highlight = false) {
+            const textColor = highlight ? 'text-trading-highlight' : 'text-trading-text';
+            return `
+                <div class="grid grid-cols-3 items-center text-[11px] font-mono">
+                    <span class="text-right text-white font-bold">${homeVal}</span>
+                    <span class="text-center ${textColor} text-[9px] uppercase font-bold tracking-tighter">${label}</span>
+                    <span class="text-left text-white font-bold">${awayVal}</span>
+                </div>
+            `;
         }
 
         function generate90Bars(currentMinute) {
@@ -208,15 +200,11 @@
             for(let m = 1; m <= 90; m++) {
                 if(m <= currentMinute) {
                     const intensity = Math.floor(Math.random() * 50) + 1;
-                    const heightPercent = (intensity / 50) * 100; // Máximo 100% da metade do container
+                    const heightPercent = (intensity / 50) * 100;
                     const isHome = Math.random() > 0.4;
-
-                    let event = '';
-                    if(m % 20 === 0) event = '<div class="event-dot dot-corner"></div>';
 
                     html += `
                         <div class="minute-slot">
-                            ${event}
                             <div class="${isHome ? 'bar-home' : 'bar-away'}" style="height: ${heightPercent}%"></div>
                         </div>
                     `;

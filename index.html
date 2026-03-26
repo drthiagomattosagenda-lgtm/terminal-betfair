@@ -6,6 +6,7 @@
     <title>Terminal Analítico - Betfair Exchange</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -66,15 +67,6 @@
 </head>
 <body class="antialiased min-h-screen flex flex-col font-sans">
 
-    <!-- Chosen Palette: Professional Trading Terminal Dark (Dark blue/grey backgrounds, distinct BACK/LAY colors, high contrast text) -->
-    <!-- Application Structure Plan: Master-Detail Dashboard. Left column serves as the 'Master' list (Top 5 ranked matches) and system status/discarded alerts. Right column is the 'Detail' view, dynamically updating to show deep analysis, charts, and strategy for the selected match. This structure allows the user to quickly scan the top opportunities and drill down into the 'Triple Verification' evidence without losing context or opening new pages. -->
-    <!-- Visualization & Content Choices: 
-         - Match List: Interactive List -> Allows quick selection. Justification: Fast navigation between top picks. HTML/Tailwind.
-         - Edge Comparison: Bar Chart (Chart.js) -> Visualizes the 'Edge' (Current Odd vs Fair Odd). Justification: Instantly shows the value gap the trader is exploiting.
-         - Liquidity Depth: Line/Area Chart (Chart.js) -> Shows order book depth. Justification: Proves the market can absorb the recommended stake.
-         - Triple Verification: Tabbed Text Content -> Separates Info, Context, and Checklist. Justification: Prevents information overload while providing rigorous proof for the trade. -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
-
     <header class="bg-trading-panel border-b border-trading-border p-4 sticky top-0 z-50 shadow-md">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
             <div class="flex items-center gap-3">
@@ -119,12 +111,8 @@
                 </p>
                 <ul class="space-y-3 text-sm">
                     <li class="p-3 bg-trading-dark rounded border-l-2 border-trading-warn">
-                        <span class="font-bold text-trading-highlight block">Juventus vs AC Milan</span>
-                        <span class="text-xs text-trading-text mt-1 block">Falhou na verificação de liquidez. Volume abaixo de £50k para o horário. Risco de <em>slippage</em> alto.</span>
-                    </li>
-                    <li class="p-3 bg-trading-dark rounded border-l-2 border-trading-warn">
-                        <span class="font-bold text-trading-highlight block">Man. City vs Liverpool</span>
-                        <span class="text-xs text-trading-text mt-1 block">Boato de lesão de Haaland não corroborado. Apenas 1 fonte (confiabilidade 0.60). Tripla verificação falhou.</span>
+                        <span class="font-bold text-trading-highlight block">Varredura e Filtragem</span>
+                        <span class="text-xs text-trading-text mt-1 block">Apenas as oportunidades que passam pela Tripla Verificação aparecem no seu painel.</span>
                     </li>
                 </ul>
             </section>
@@ -133,8 +121,8 @@
         <section class="lg:col-span-8 flex flex-col gap-6">
             <div class="bg-trading-panel border border-trading-border rounded-lg p-5 shadow-sm">
                 <div class="mb-4">
-                    <h2 class="text-trading-highlight font-bold text-xl md:text-2xl" id="detail-title">Selecione uma partida</h2>
-                    <p class="text-sm mt-1" id="detail-subtitle">Aguardando seleção...</p>
+                    <h2 class="text-trading-highlight font-bold text-xl md:text-2xl" id="detail-title">Carregando dados...</h2>
+                    <p class="text-sm mt-1" id="detail-subtitle">Conectando ao terminal de análises...</p>
                 </div>
                 
                 <p class="text-xs mb-6 leading-relaxed border-b border-trading-border pb-4">
@@ -179,122 +167,72 @@
     </main>
 
     <script>
-        const matchesData = [
-            {
-                id: 1,
-                teamA: "Real Madrid",
-                teamB: "Barcelona",
-                time: "16:00 BRT",
-                league: "La Liga",
-                currentOdd: 2.10,
-                fairOdd: 2.38,
-                edge: "+13.3%",
-                recommendation: "LAY Real Madrid",
-                recType: "lay",
-                confidence: "Alta",
-                liquidity: {
-                    vol24h: "£ 1.250.400",
-                    spread: 1,
-                    maxStake: "£ 2.500",
-                    depthData: [1500, 3200, 4800, 5100, 8000]
-                },
-                info: [
-                    { source: "FabrizioRomano (0.98)", text: "Vinícius Jr sentiu lesão no último treino tático a portas fechadas. Não joga." },
-                    { source: "Marca Insider (0.85)", text: "Corrobora ausência de Vini Jr. Ancelotti testará formação mais conservadora." }
-                ],
-                context: [
-                    "Clima: 22°C, Céu limpo. Condições perfeitas.",
-                    "Árbitro: Gil Manzano - Histórico de alta média de cartões no clássico, o que pode quebrar o ritmo do Real.",
-                    "Tática: Sem sua principal válvula de escape, Real Madrid perde profundidade. Odd atual (2.10) precifica equipe titular."
-                ],
-                checklist: [
-                    "Notícias verificadas (2 fontes independentes >0.85)",
-                    "Odd moveu apenas 15% do esperado (Mercado ainda em negação/desaviso)",
-                    "Liquidez excelente, spread de 1 tick. Stake segura aprovada.",
-                    "Plano de trade in-play estabelecido."
-                ],
-                strategy: [
-                    "Entrada: LAY Real Madrid a 2.10 ou inferior pré-jogo.",
-                    "Se odd subir acima de 2.25 antes do início (vazamento oficial da escalação), fechar 50% da posição garantindo Freebet.",
-                    "In-play: Manter posição se o Barcelona dominar a posse nos primeiros 15 min. Stop-loss se o Real marcar 1x0."
-                ]
-            },
-            {
-                id: 2,
-                teamA: "Arsenal",
-                teamB: "B. Munique",
-                time: "17:00 BRT",
-                league: "Champions League",
-                currentOdd: 2.45,
-                fairOdd: 2.20,
-                edge: "+11.3%",
-                recommendation: "BACK Arsenal",
-                recType: "back",
-                confidence: "Alta",
-                liquidity: {
-                    vol24h: "£ 850.000",
-                    spread: 2,
-                    maxStake: "£ 1.200",
-                    depthData: [800, 1500, 2200, 3100, 4500]
-                },
-                info: [
-                    { source: "David_Ornstein (0.97)", text: "Arsenal com time completo recuperado. Bayern viaja sem Neuer e Sané (febre de última hora)." },
-                    { source: "BILD (0.90)", text: "Confirma surto viral no vestiário do Bayern." }
-                ],
-                context: [
-                    "Clima: 12°C, Chuva leve. Gramado rápido favorece o toque de bola do Arsenal.",
-                    "Análise Cruzada: Bayern sofreu gols nos últimos 5 jogos fora de casa; defesa improvisada agravará o problema."
-                ],
-                checklist: [
-                    "Desfalques do adversário confirmados por fontes primárias inglesa e alemã.",
-                    "Mercado moveu apenas 3 ticks. Ajuste justo exige pelo menos 8 ticks.",
-                    "Liquidez robusta para stakes padrão."
-                ],
-                strategy: [
-                    "Entrada: BACK Arsenal pré-jogo a 2.45.",
-                    "Alvo: Saída parcial em 2.25.",
-                    "Stop in-play: Fechar posição se Bayern abrir o placar ou se o Arsenal não finalizar a gol nos primeiros 20 min."
-                ]
-            },
-            {
-                id: 3,
-                teamA: "Flamengo",
-                teamB: "Palmeiras",
-                time: "21:30 BRT",
-                league: "Série A",
-                currentOdd: 1.85,
-                fairOdd: 1.68,
-                edge: "+10.1%",
-                recommendation: "BACK Under 2.5 Gols",
-                recType: "back",
-                confidence: "Média",
-                liquidity: {
-                    vol24h: "£ 320.000",
-                    spread: 2,
-                    maxStake: "£ 800",
-                    depthData: [500, 900, 1800, 2500, 3200]
-                },
-                info: [
-                    { source: "VenêCasagrande (0.90)", text: "Flamengo vai poupar 4 titulares visando a Libertadores." },
-                    { source: "GE.com (0.90)", text: "Palmeiras treinou com 3 zagueiros, indicando postura reativa no Maracanã." }
-                ],
-                context: [
-                    "Clima: 33°C, Umidade 85%. Desgaste altíssimo esperado no 2º tempo, reduzindo intensidade.",
-                    "Tática: Jogo truncado no meio-campo. Histórico recente aponta 4 dos últimos 5 H2H abaixo de 2.5 gols."
-                ],
-                checklist: [
-                    "Fontes locais confiáveis confirmam rotação e postura tática.",
-                    "Clima extremo validado.",
-                    "Mercado de Under 2.5 com liquidez aceitável para o mercado sul-americano."
-                ],
-                strategy: [
-                    "Entrada: BACK Under 2.5 a 1.85.",
-                    "Manter posição in-play lucrando com a passagem do tempo (Time Decay) até os 60 minutos.",
-                    "Stop: Sair se sair um gol no 1º tempo."
-                ]
-            }
-        ];
+        // MÁGICA 2: O CÓDIGO DO PAPAPARSE SUBSTITUINDO OS DADOS FIXOS
+        
+        // 🛑 COLE O SEU LINK DA PLANILHA (.CSV) ENTRE AS ASPAS ABAIXO!
+        const linkDaPlanilha = "COLE_O_SEU_LINK_DO_PASSO_ANTERIOR_AQUI";
 
+        let matchesData = [];
+
+        // Função que baixa e processa a planilha
+        Papa.parse(linkDaPlanilha, {
+            download: true,
+            header: true,
+            complete: function(results) {
+                // Filtra para ignorar linhas vazias
+                const linhasValidas = results.data.filter(r => r['Time A'] && r['Time A'].trim() !== "");
+                if (linhasValidas.length === 0) {
+                    document.getElementById('detail-title').innerText = "Nenhum jogo encontrado hoje.";
+                    document.getElementById('detail-subtitle').innerText = "Aguardando próxima varredura do NETTUNO.";
+                    return;
+                }
+                
+                // Pega a data mais recente que estiver na planilha
+                const ultimaData = linhasValidas[linhasValidas.length - 1]['Data'];
+                
+                // Pega todos os jogos daquela data (Máximo de 6)
+                const jogosDeHoje = linhasValidas.filter(r => r['Data'] === ultimaData).slice(-6);
+
+                // Transforma os dados da planilha no formato que a Dashboard precisa
+                matchesData = jogosDeHoje.map((row, index) => {
+                    return {
+                        id: index + 1,
+                        teamA: row['Time A'],
+                        teamB: row['Time B'],
+                        time: row['Horario'],
+                        league: row['Campeonato'],
+                        currentOdd: parseFloat(row['Odd Atual'].replace(',', '.')),
+                        fairOdd: parseFloat(row['Odd Justa'].replace(',', '.')),
+                        edge: row['Edge'],
+                        recommendation: row['Recomendacao'],
+                        recType: (row['Tipo Rec'] || "back").toLowerCase(),
+                        confidence: row['Confianca'],
+                        liquidity: {
+                            vol24h: row['Vol24h'],
+                            spread: parseInt(row['Spread'] || "1"),
+                            maxStake: row['Max Stake'],
+                            depthData: (row['Ticks Depth'] || "0,0,0,0,0").split(',').map(Number)
+                        },
+                        info: (row['Info'] || "").split('<br>').map(texto => ({ source: "Varredura NETTUNO", text: texto })),
+                        context: (row['Contexto'] || "").split('<br>'),
+                        checklist: (row['Checklist'] || "").split('<br>'),
+                        strategy: (row['Estrategia'] || "").split('<br>')
+                    };
+                });
+
+                // Manda o site desenhar a lista de jogos e os gráficos!
+                renderMatchList();
+                if(matchesData.length > 0) {
+                    selectMatch(matchesData[0].id);
+                }
+            }
+        });
+
+
+        // =========================================================================
+        // DAQUI PARA BAIXO É A LÓGICA DE DESENHAR NA TELA (NÃO PRECISA MEXER EM NADA)
+        // =========================================================================
+        
         let oddsChartInstance = null;
         let liquidityChartInstance = null;
 
@@ -499,10 +437,9 @@
             });
         });
 
+        // Atualiza a hora
         updateClock();
         setInterval(updateClock, 1000);
-        renderMatchList();
-        selectMatch(matchesData[0].id);
 
     </script>
 </body>

@@ -170,7 +170,7 @@
         // MÁGICA 2: O CÓDIGO DO PAPAPARSE SUBSTITUINDO OS DADOS FIXOS
         
         // 🛑 COLE O SEU LINK DA PLANILHA (.CSV) ENTRE AS ASPAS ABAIXO!
-        const linkDaPlanilha = "COLE_O_SEU_LINK_DO_PASSO_ANTERIOR_AQUI";
+        const linkDaPlanilha = "https://docs.google.com/spreadsheets/d/1PBHmeyru9bW6oMASj8Nffa3wtC0UZtqjGAhmXDXrmSo/edit?usp=sharing";
 
         let matchesData = [];
 
@@ -183,7 +183,7 @@
                 const linhasValidas = results.data.filter(r => r['Time A'] && r['Time A'].trim() !== "");
                 if (linhasValidas.length === 0) {
                     document.getElementById('detail-title').innerText = "Nenhum jogo encontrado hoje.";
-                    document.getElementById('detail-subtitle').innerText = "Aguardando próxima varredura do NETTUNO.";
+                    document.getElementById('detail-subtitle').innerText = "Aguardando próxima varredura.";
                     return;
                 }
                 

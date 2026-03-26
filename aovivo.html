@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live Pro - Fut Trader</title>
+    <title>Live Multi-Apostas - Fut Trader Pro</title>
     <link rel="stylesheet" href="style.css">
+    
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <script>
@@ -22,6 +24,10 @@
                             highlight: '#FFB100', // Amarelo Betfair
                             pressure: '#7C3AED'  // Roxo para Alta Pressão
                         }
+                    },
+                    fontFamily: {
+                        sans: ['Segoe UI', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
                     }
                 }
             }
@@ -29,24 +35,38 @@
     </script>
 
     <style>
-        body { background-color: #0B0E14; color: #E2E8F0; }
+        body { background-color: #0B0E14; color: #E2E8F0; margin: 0; padding: 0; }
         
-        /* Gráfico de Pressão Customizado (Alta Performance) */
-        .momentum-container {
-            display: flex;
-            align-items: center;
+        /* Gráfico de Momentum Customizado (Alta Performance) */
+        .momentum-chart-container {
+            display: grid;
+            grid-template-rows: 1fr 1px 1fr;
             height: 100px;
             gap: 2px;
-            border-bottom: 1px solid #2A3241;
+            overflow: hidden;
             position: relative;
         }
+        .momentum-row-top, .momentum-row-bottom {
+            display: flex;
+            align-items: flex-end; /* home bars grow from centerline up */
+            gap: 2px;
+        }
+        .momentum-row-bottom {
+            align-items: flex-start; /* away bars grow from centerline down */
+        }
+        
         .momentum-bar {
             flex: 1;
             min-width: 4px;
             border-radius: 1px;
             position: relative;
         }
-        .marker {
+        .momentum-centerline {
+            background-color: #2A3241;
+        }
+        
+        /* Marcadores no gráfico */
+        .chart-marker {
             position: absolute;
             font-size: 8px;
             width: 10px;
@@ -60,16 +80,56 @@
             background: linear-gradient(180deg, #151A22 0%, #2e1065 100%) !important;
         }
 
+        /* Menu de filtragem fixo */
+        .filter-navbar {
+            display: flex !important; /* Força o estilo flex */
+            top: 70px; /* Alinhado abaixo do menu principal */
+            z-index: 1000;
+        }
+
         .filter-btn.active {
             background-color: #FFB100 !important;
             color: #000 !important;
         }
+        
+        /* Estilos específicos para a página independente */
+        main {
+            padding: 20px;
+            max-width: 7xl;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        /* Menu principal padronizado */
+        .navbar {
+            display: flex;
+            height: 70px;
+            padding: 0 40px;
+            background-color: #1b262c;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #ffb100;
+            position: sticky;
+            top: 0;
+            z-index: 1001;
+            width: 100%;
+        }
+        
+        .logo { font-size: 22px; font-weight: bold; color: white; }
+        .logo span { color: #ffb100; }
+        
+        .nav-links { display: flex; list-style: none; gap: 25px; margin: 0; padding: 0; }
+        .nav-links a { color: white; text-decoration: none; font-weight: 500; font-size: 15px; }
+        .nav-links a:hover { color: #ffb100; }
     </style>
 </head>
 <body class="antialiased font-sans">
 
     <nav class="navbar">
-        <div class="logo"><span>FUT</span> TRADER</div>
+        <div class="logo">
+            <span>FUT</span> TRADER
+        </div>
+        
         <ul class="nav-links">
             <li><a href="dashboard.html">Dashboard</a></li>
             <li><a href="aovivo.html">Ao Vivo</a></li>
@@ -78,8 +138,8 @@
         </ul>
     </nav>
 
-    <div class="bg-trading-panel border-b border-trading-border p-3 sticky top-[70px] z-40">
-        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
+    <div class="bg-trading-panel border-b border-trading-border p-3 sticky filter-navbar shadow-md">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4 width-100">
             <div class="flex gap-2">
                 <button class="filter-btn active bg-trading-dark px-4 py-1.5 rounded text-xs font-bold border border-trading-border transition">Todos</button>
                 <button class="filter-btn bg-trading-dark px-4 py-1.5 rounded text-xs font-bold border border-trading-border transition"><i class="fas fa-star text-yellow-500 mr-1"></i> Favoritos</button>
@@ -95,7 +155,7 @@
         </div>
     </div>
 
-    <main class="max-w-7xl mx-auto p-6">
+    <main class="content-section">
         <div id="live-games-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             </div>
 
@@ -111,83 +171,102 @@
     </main>
 
     <script>
-        // Simulação de Dados da API
+        // Lista de 9 jogos simulados com dados diversos
         const gamesData = [
-            {
-                id: 1, home: "Palmeiras", away: "Flamengo", homeScore: 1, awayScore: 0, 
-                possession: 55, highPressure: true,
-                momentum: [10, 15, -5, 20, 45, 50, 40, -10, 5, 30] // Exemplo: bars 1-50
-            },
-            // Repetir para 9 jogos...
+            { id: 1, home: "Palmeiras", away: "Flamengo", homeScore: 1, awayScore: 0, time: "43'", possession: 55, highPressure: true, 
+              momentum: [10, 15, -5, 20, 45, 50, 40, -10, 5, 30] }, // home: positive bars up to 50
+            { id: 2, home: "Man. City", away: "Liverpool", homeScore: 2, awayScore: 2, time: "78'", possession: 45, highPressure: false, 
+              momentum: [5, 10, -15, -20, 10, 5, 15, -30, -40, -20] }, // away: negative bars up to 50
+            { id: 3, home: "Bayern", away: "Dortmund", homeScore: 0, awayScore: 1, time: "22'", possession: 30, highPressure: true,
+              momentum: [20, 25, -10, -5, -30, -50, -40, -10, -5, -30] }, // away: negative bars up to 50
+            { id: 4, home: "Inter", away: "Milan", homeScore: 0, awayScore: 0, time: "10'", possession: 50, highPressure: false,
+              momentum: [5, 5, -5, -5, 5, 5, -5, -5, 5, 5] }, // balanced
+            { id: 5, home: "PSG", away: "Marseille", homeScore: 3, awayScore: 1, time: "88'", possession: 70, highPressure: true,
+              momentum: [30, 40, 50, 45, 30, 10, -10, -5, 5, 15] }, // home: positive bars up to 50
+            { id: 6, home: "Porto", away: "Benfica", homeScore: 1, awayScore: 1, time: "55'", possession: 55, highPressure: false,
+              momentum: [10, 10, -10, -10, 10, 10, -10, -10, 10, 10] }, // balanced
+            { id: 7, home: "Flamengo", away: "Palmeiras", homeScore: 2, awayScore: 0, time: "90'", possession: 65, highPressure: true,
+              momentum: [20, 30, 40, 50, 40, 30, 20, 10, 5, 5] }, // home: positive bars up to 50
+            { id: 8, home: "Arsenal", away: "Chelsea", homeScore: 1, awayScore: 2, time: "15'", possession: 40, highPressure: false,
+              momentum: [-10, -20, -30, -40, -50, -40, -30, -20, -10, -5] }, // away: negative bars up to 50
+            { id: 9, home: "Ajax", away: "PSV", homeScore: 0, awayScore: 0, time: "32'", possession: 50, highPressure: true,
+              momentum: [-10, -20, -30, -40, -50, -40, -30, -20, -10, -5] }, // away: negative bars up to 50
         ];
 
+        const grid = document.getElementById('live-games-grid');
+
+        // Função para criar cada card de jogo
         function renderGames() {
-            const grid = document.getElementById('live-games-grid');
             grid.innerHTML = '';
-
-            for (let i = 0; i < 9; i++) {
-                const game = gamesData[0]; // Usando o mesmo exemplo para preencher a grade
-                const pressureClass = game.highPressure ? 'card-high-pressure' : '';
-                
-                grid.innerHTML += `
-                    <div class="bg-trading-panel border border-trading-border rounded-xl p-4 transition-all ${pressureClass}">
-                        <div class="flex justify-between items-center mb-3">
-                            <div class="flex items-center gap-2 text-sm font-bold">
-                                <span class="text-trading-highlight">PAL</span>
-                                <span>${game.homeScore} - ${game.awayScore}</span>
-                                <span class="text-white">FLA</span>
-                            </div>
-                            <button class="text-trading-text hover:text-yellow-500 transition">
-                                <i class="far fa-star"></i>
-                            </button>
+            gamesData.forEach((game, index) => {
+                const card = document.createElement('div');
+                card.className = `bg-trading-panel border border-trading-border rounded-xl p-4 transition-all hover:border-trading-highlight hover:shadow-lg ${game.highPressure ? 'card-high-pressure' : ''}`;
+                card.innerHTML = `
+                    <div class="flex justify-between items-center mb-3">
+                        <div class="flex items-center gap-2 text-sm font-bold">
+                            <span class="text-trading-highlight">PAL</span>
+                            <span>${game.homeScore} - ${game.awayScore}</span>
+                            <span class="text-white">FLA</span>
+                            <span class="text-trading-edge font-mono ml-2">${game.time}</span>
                         </div>
-
-                        <div class="momentum-container">
-                            <div class="absolute w-full h-[1px] bg-trading-border top-1/2"></div>
-                            ${generateMomentumBars(game.momentum)}
-                        </div>
-
-                        <div class="mt-4">
-                            <div class="flex justify-between text-[10px] uppercase font-bold mb-1">
-                                <span>Posse: ${game.possession}%</span>
-                                <span>${100 - game.possession}%</span>
-                            </div>
-                            <div class="h-1.5 w-full bg-trading-dark rounded-full overflow-hidden flex">
-                                <div class="bg-trading-home h-full" style="width: ${game.possession}%"></div>
-                                <div class="bg-trading-away h-full" style="width: ${100 - game.possession}%"></div>
-                            </div>
-                        </div>
-
-                        <button onclick="toggleStats(${i})" class="w-full mt-4 py-1 bg-trading-dark border border-trading-border rounded text-[10px] font-bold uppercase tracking-widest hover:bg-trading-border transition">
-                            <i class="fas fa-chevron-down mr-2"></i> Dados ao Vivo
+                        <button class="text-trading-text hover:text-yellow-500 transition">
+                            <i class="far fa-star"></i>
                         </button>
+                    </div>
 
-                        <div id="stats-${i}" class="hidden mt-4 pt-4 border-t border-trading-border">
-                            <div class="grid grid-cols-1 gap-2 text-[11px] font-mono">
-                                <div class="flex justify-between"><span>xG</span> <span>0.85 --- 1.20</span></div>
-                                <div class="flex justify-between"><span>Ataques</span> <span>88 --- 92</span></div>
-                                <div class="flex justify-between text-trading-highlight"><span>Atq. Perigosos</span> <span>45 --- 42</span></div>
-                                <div class="flex justify-between"><span>Chutes Alvo</span> <span>4 --- 3</span></div>
-                                <div class="flex justify-between"><span>Escanteios</span> <span>5 --- 2</span></div>
-                            </div>
+                    <div class="momentum-chart-container">
+                        <div class="momentum-row-top">
+                            ${generateMomentumBars(game.momentum.filter(val => val >= 0), true)}
+                        </div>
+                        <div class="momentum-centerline"></div>
+                        <div class="momentum-row-bottom">
+                            ${generateMomentumBars(game.momentum.filter(val => val < 0), false)}
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+                        <div class="flex justify-between text-[10px] uppercase font-bold mb-1">
+                            <span>Posse: ${game.possession}%</span>
+                            <span>${100 - game.possession}%</span>
+                        </div>
+                        <div class="h-1.5 w-full bg-trading-dark rounded-full overflow-hidden flex">
+                            <div class="bg-trading-home h-full" style="width: ${game.possession}%"></div>
+                            <div class="bg-trading-away h-full" style="width: ${100 - game.possession}%"></div>
+                        </div>
+                    </div>
+
+                    <button onclick="toggleStats(${index})" class="w-full mt-4 py-1 bg-trading-dark border border-trading-border rounded text-[10px] font-bold uppercase tracking-widest hover:bg-trading-border transition">
+                        <i class="fas fa-chevron-down mr-2"></i> Dados ao Vivo
+                    </button>
+
+                    <div id="stats-${index}" class="hidden mt-4 pt-4 border-t border-trading-border">
+                        <div class="grid grid-cols-1 gap-2 text-[11px] font-mono">
+                            <div class="flex justify-between"><span>xG</span> <span>0.85 --- 1.20</span></div>
+                            <div class="flex justify-between"><span>Ataques</span> <span>88 --- 92</span></div>
+                            <div class="flex justify-between text-trading-highlight"><span>Atq. Perigosos</span> <span>45 --- 42</span></div>
+                            <div class="flex justify-between"><span>Chutes Alvo</span> <span>4 --- 3</span></div>
+                            <div class="flex justify-between"><span>Escanteios</span> <span>5 --- 2</span></div>
                         </div>
                     </div>
                 `;
-            }
+                grid.appendChild(card);
+            });
         }
 
-        function generateMomentumBars(data) {
+        // Função para criar as barras do gráfico (1 bar per minute, scale 1-50)
+        function generateMomentumBars(data, isTop) {
             return data.map(val => {
-                const height = Math.abs(val) * 2; // Escala
-                const isHome = val > 0;
-                const style = isHome 
-                    ? `height: ${height}%; margin-bottom: 50%; background-color: #10B981;` 
-                    : `height: ${height}%; margin-top: 50%; background-color: #EF4444;`;
+                const height = Math.abs(val) * 2; // Scale: 50 -> 100%
+                const style = isTop 
+                    ? `height: ${height}%; align-self: flex-end;` 
+                    : `height: ${height}%; align-self: flex-start;`;
+                const bgColor = isTop ? 'bg-trading-home' : 'bg-trading-away';
                 
-                return `<div class="momentum-bar" style="${style}"></div>`;
+                return `<div class="momentum-bar ${bgColor}" style="${style}"></div>`;
             }).join('');
         }
 
+        // Função para ocultar/exibir os dados
         function toggleStats(id) {
             const el = document.getElementById(`stats-${id}`);
             el.classList.toggle('hidden');

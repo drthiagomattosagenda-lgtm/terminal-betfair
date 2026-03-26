@@ -3,160 +3,197 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live Multi-Apostas - Fut Trader</title>
-    
+    <title>Live Pro - Fut Trader</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        trading: {
+                            dark: '#0B0E14',
+                            panel: '#151A22',
+                            border: '#2A3241',
+                            home: '#10B981', // Verde
+                            away: '#EF4444', // Vermelho
+                            highlight: '#FFB100', // Amarelo Betfair
+                            pressure: '#7C3AED'  // Roxo para Alta Pressão
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 
     <style>
-        /* Ajustes específicos para a página de jogos ao vivo */
-        body { 
-            background-color: #0f171c; 
-            color: white; 
-            margin: 0; 
-            padding: 0; /* Tiramos o padding do body para a navbar encostar no topo */
-        }
+        body { background-color: #0B0E14; color: #E2E8F0; }
         
-        .container-vivo {
-            padding: 20px;
+        /* Gráfico de Pressão Customizado (Alta Performance) */
+        .momentum-container {
+            display: flex;
+            align-items: center;
+            height: 100px;
+            gap: 2px;
+            border-bottom: 1px solid #2A3241;
+            position: relative;
+        }
+        .momentum-bar {
+            flex: 1;
+            min-width: 4px;
+            border-radius: 1px;
+            position: relative;
+        }
+        .marker {
+            position: absolute;
+            font-size: 8px;
+            width: 10px;
+            text-align: center;
         }
 
-        /* Grade de 9 Jogos (3 colunas) */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr); /* 3 colunas iguais */
-            gap: 15px;
-            margin-top: 10px;
+        /* Destaque de Alta Pressão */
+        .card-high-pressure {
+            border: 2px solid #7C3AED !important;
+            box-shadow: 0 0 15px rgba(124, 58, 237, 0.3);
+            background: linear-gradient(180deg, #151A22 0%, #2e1065 100%) !important;
         }
 
-        /* Card de cada Jogo */
-        .game-card {
-            background: #1b262c;
-            border-radius: 10px;
-            padding: 15px;
-            border: 1px solid #2c3e50;
-            transition: transform 0.2s;
-        }
-        
-        .game-card:hover {
-            transform: translateY(-5px);
-            border-color: #ffb100;
-        }
-
-        .game-header { 
-            text-align: center; 
-            font-size: 14px; 
-            margin-bottom: 10px; 
-            border-bottom: 1px solid #333; 
-            padding-bottom: 8px; 
-        }
-
-        .score { color: #ffb100; font-weight: bold; font-size: 18px; }
-
-        /* Espaço do Gráfico */
-        .chart-box { height: 150px; margin: 10px 0; }
-
-        /* Barras de Estatísticas Simples */
-        .mini-stat-row { display: flex; justify-content: space-between; font-size: 11px; margin-top: 5px; color: #A0AEC0; }
-        .bar-bg { background: #333; height: 6px; border-radius: 3px; margin: 4px 0; display: flex; overflow: hidden; }
-        .home-bar { background: #00bcd4; height: 100%; }
-        .away-bar { background: #ffb100; height: 100%; }
-
-        /* Responsividade para Celular (fica 1 coluna só) */
-        @media (max-width: 768px) {
-            .grid-container { grid-template-columns: 1fr; }
-            .navbar { padding: 0 15px; }
+        .filter-btn.active {
+            background-color: #FFB100 !important;
+            color: #000 !important;
         }
     </style>
 </head>
-<body>
+<body class="antialiased font-sans">
 
     <nav class="navbar">
-        <div class="logo">
-            <span>FUT</span> TRADER
-        </div>
-        
+        <div class="logo"><span>FUT</span> TRADER</div>
         <ul class="nav-links">
             <li><a href="dashboard.html">Dashboard</a></li>
             <li><a href="aovivo.html">Ao Vivo</a></li>
             <li><a href="comunidade.html">Comunidade</a></li>
-            <li><a href="index.html" class="btn-sair">Sair</a></li>
+            <li><a href="index.html" class="text-red-500">Sair</a></li>
         </ul>
     </nav>
 
-    <div class="container-vivo">
-        <h2 style="margin-bottom: 15px; color: #ffb100; font-size: 20px;">● Monitoramento em Tempo Real (9 Jogos)</h2>
-        
-        <div class="grid-container" id="jogos-grid">
+    <div class="bg-trading-panel border-b border-trading-border p-3 sticky top-[70px] z-40">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
+            <div class="flex gap-2">
+                <button class="filter-btn active bg-trading-dark px-4 py-1.5 rounded text-xs font-bold border border-trading-border transition">Todos</button>
+                <button class="filter-btn bg-trading-dark px-4 py-1.5 rounded text-xs font-bold border border-trading-border transition"><i class="fas fa-star text-yellow-500 mr-1"></i> Favoritos</button>
+                <button class="filter-btn bg-trading-dark px-4 py-1.5 rounded text-xs font-bold border border-trading-border transition">1º Tempo</button>
+                <button class="filter-btn bg-trading-dark px-4 py-1.5 rounded text-xs font-bold border border-trading-border transition">2º Tempo</button>
+                <button class="filter-btn bg-trading-dark px-4 py-1.5 rounded text-xs font-bold border border-trading-border transition text-trading-pressure">Alta Pressão</button>
             </div>
+            
+            <div class="relative">
+                <input type="text" placeholder="🔎 Buscar jogo..." class="bg-trading-dark border border-trading-border rounded-full py-1.5 px-10 text-xs focus:outline-none focus:border-trading-highlight w-64">
+                <i class="fas fa-search absolute left-4 top-2.5 text-trading-text opacity-50"></i>
+            </div>
+        </div>
     </div>
 
+    <main class="max-w-7xl mx-auto p-6">
+        <div id="live-games-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            </div>
+
+        <div class="flex justify-center items-center gap-8 mt-12 mb-10">
+            <button class="bg-trading-panel border border-trading-border px-6 py-2 rounded font-bold hover:bg-trading-dark transition">
+                <i class="fas fa-chevron-left mr-2"></i> Anterior
+            </button>
+            <span class="text-sm font-mono">Página <strong class="text-trading-highlight">1</strong> de 22</span>
+            <button class="bg-trading-panel border border-trading-border px-6 py-2 rounded font-bold hover:bg-trading-dark transition">
+                Próxima <i class="fas fa-chevron-right ml-2"></i>
+            </button>
+        </div>
+    </main>
+
     <script>
-        // Lista de 9 jogos simulados
-        const jogos = [
-            { id: 1, home: "Real Madrid", away: "Barcelona", score: "1 - 0", pHome: 60 },
-            { id: 2, home: "Man. City", away: "Liverpool", score: "2 - 2", pHome: 45 },
-            { id: 3, home: "Bayern", away: "Dortmund", score: "0 - 1", pHome: 30 },
-            { id: 4, home: "Inter", away: "Milan", score: "0 - 0", pHome: 50 },
-            { id: 5, home: "PSG", away: "Marseille", score: "3 - 1", pHome: 70 },
-            { id: 6, home: "Porto", away: "Benfica", score: "1 - 1", pHome: 55 },
-            { id: 7, home: "Flamengo", away: "Palmeiras", score: "2 - 0", pHome: 65 },
-            { id: 8, home: "Arsenal", away: "Chelsea", score: "1 - 2", pHome: 40 },
-            { id: 9, home: "Ajax", away: "PSV", score: "0 - 0", pHome: 50 }
+        // Simulação de Dados da API
+        const gamesData = [
+            {
+                id: 1, home: "Palmeiras", away: "Flamengo", homeScore: 1, awayScore: 0, 
+                possession: 55, highPressure: true,
+                momentum: [10, 15, -5, 20, 45, 50, 40, -10, 5, 30] // Exemplo: bars 1-50
+            },
+            // Repetir para 9 jogos...
         ];
 
-        const grid = document.getElementById('jogos-grid');
+        function renderGames() {
+            const grid = document.getElementById('live-games-grid');
+            grid.innerHTML = '';
 
-        // Gerar os cards via JavaScript
-        jogos.forEach(jogo => {
-            const card = document.createElement('div');
-            card.className = 'game-card';
-            card.innerHTML = `
-                <div class="game-header">
-                    <div>${jogo.home} <span class="score">${jogo.score}</span> ${jogo.away}</div>
-                </div>
-                <div class="chart-box">
-                    <canvas id="chart-${jogo.id}"></canvas>
-                </div>
-                <div class="mini-stat-row"><span>Pressão (Ataques Perigosos)</span></div>
-                <div class="bar-bg">
-                    <div class="home-bar" style="width: ${jogo.pHome}%"></div>
-                    <div class="away-bar" style="width: ${100 - jogo.pHome}%"></div>
-                </div>
-            `;
-            grid.appendChild(card);
+            for (let i = 0; i < 9; i++) {
+                const game = gamesData[0]; // Usando o mesmo exemplo para preencher a grade
+                const pressureClass = game.highPressure ? 'card-high-pressure' : '';
+                
+                grid.innerHTML += `
+                    <div class="bg-trading-panel border border-trading-border rounded-xl p-4 transition-all ${pressureClass}">
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="flex items-center gap-2 text-sm font-bold">
+                                <span class="text-trading-highlight">PAL</span>
+                                <span>${game.homeScore} - ${game.awayScore}</span>
+                                <span class="text-white">FLA</span>
+                            </div>
+                            <button class="text-trading-text hover:text-yellow-500 transition">
+                                <i class="far fa-star"></i>
+                            </button>
+                        </div>
 
-            // Iniciar o gráfico para cada jogo
-            const ctx = document.getElementById(`chart-${jogo.id}`).getContext('2d');
-            new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-                    datasets: [{
-                        label: 'Pressão',
-                        data: Array.from({length: 10}, () => Math.floor(Math.random() * 40) - 20),
-                        borderColor: jogo.pHome > 50 ? '#00bcd4' : '#ffb100',
-                        fill: true,
-                        backgroundColor: 'rgba(255, 177, 0, 0.05)',
-                        tension: 0.4,
-                        pointRadius: 0
-                    }]
-                },
-                options: { 
-                    responsive: true, 
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
-                    scales: { 
-                        x: { display: false }, 
-                        y: { 
-                            grid: { color: '#2c3e50' },
-                            ticks: { display: false }
-                        } 
-                    }
-                }
-            });
-        });
+                        <div class="momentum-container">
+                            <div class="absolute w-full h-[1px] bg-trading-border top-1/2"></div>
+                            ${generateMomentumBars(game.momentum)}
+                        </div>
+
+                        <div class="mt-4">
+                            <div class="flex justify-between text-[10px] uppercase font-bold mb-1">
+                                <span>Posse: ${game.possession}%</span>
+                                <span>${100 - game.possession}%</span>
+                            </div>
+                            <div class="h-1.5 w-full bg-trading-dark rounded-full overflow-hidden flex">
+                                <div class="bg-trading-home h-full" style="width: ${game.possession}%"></div>
+                                <div class="bg-trading-away h-full" style="width: ${100 - game.possession}%"></div>
+                            </div>
+                        </div>
+
+                        <button onclick="toggleStats(${i})" class="w-full mt-4 py-1 bg-trading-dark border border-trading-border rounded text-[10px] font-bold uppercase tracking-widest hover:bg-trading-border transition">
+                            <i class="fas fa-chevron-down mr-2"></i> Dados ao Vivo
+                        </button>
+
+                        <div id="stats-${i}" class="hidden mt-4 pt-4 border-t border-trading-border">
+                            <div class="grid grid-cols-1 gap-2 text-[11px] font-mono">
+                                <div class="flex justify-between"><span>xG</span> <span>0.85 --- 1.20</span></div>
+                                <div class="flex justify-between"><span>Ataques</span> <span>88 --- 92</span></div>
+                                <div class="flex justify-between text-trading-highlight"><span>Atq. Perigosos</span> <span>45 --- 42</span></div>
+                                <div class="flex justify-between"><span>Chutes Alvo</span> <span>4 --- 3</span></div>
+                                <div class="flex justify-between"><span>Escanteios</span> <span>5 --- 2</span></div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function generateMomentumBars(data) {
+            return data.map(val => {
+                const height = Math.abs(val) * 2; // Escala
+                const isHome = val > 0;
+                const style = isHome 
+                    ? `height: ${height}%; margin-bottom: 50%; background-color: #10B981;` 
+                    : `height: ${height}%; margin-top: 50%; background-color: #EF4444;`;
+                
+                return `<div class="momentum-bar" style="${style}"></div>`;
+            }).join('');
+        }
+
+        function toggleStats(id) {
+            const el = document.getElementById(`stats-${id}`);
+            el.classList.toggle('hidden');
+        }
+
+        renderGames();
     </script>
 </body>
 </html>

@@ -30,79 +30,20 @@
 
     <style>
         body { background-color: #0B0E14; color: #E2E8F0; margin: 0; }
-        
         .chart-90-min {
-            height: 140px;
-            display: grid;
-            grid-template-columns: repeat(90, 1fr);
-            gap: 1px;
-            background: rgba(0,0,0,0.5);
-            padding: 0 5px;
-            border-radius: 4px;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid #2A3241;
+            height: 140px; display: grid; grid-template-columns: repeat(90, 1fr);
+            gap: 1px; background: rgba(0,0,0,0.5); padding: 0 5px;
+            border-radius: 4px; position: relative; overflow: hidden; border: 1px solid #2A3241;
         }
-
-        .center-line {
-            position: absolute;
-            left: 0;
-            right: 0;
-            top: 50%;
-            height: 1px;
-            background: rgba(255,255,255,0.2);
-            z-index: 5;
-            pointer-events: none;
-        }
-
+        .center-line { position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: rgba(255,255,255,0.2); z-index: 5; pointer-events: none; }
         .minute-slot { height: 100%; position: relative; z-index: 2; }
-
-        .bar-home {
-            background-color: #10B981;
-            width: 100%;
-            position: absolute;
-            bottom: 50%;
-            left: 0;
-            border-radius: 1px 1px 0 0;
-        }
-
-        .bar-away {
-            background-color: #EF4444;
-            width: 100%;
-            position: absolute;
-            top: 50%;
-            left: 0;
-            border-radius: 0 0 1px 1px;
-        }
-
-        /* --- NOVOS MARCADORES DE CHUTE --- */
-        .marker {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            border-radius: 50%;
-            z-index: 10;
-        }
-
-        /* Chute no Alvo (Símbolo Maior) */
-        .marker-alvo {
-            width: 6px;
-            height: 6px;
-            background-color: #FFF;
-            box-shadow: 0 0 5px #FFF;
-        }
-
-        /* Chute ao Lado (Símbolo Menor) */
-        .marker-lado {
-            width: 3px;
-            height: 3px;
-            background-color: #FFB100;
-        }
-
-        /* Posicionamento Mandante (Acima da Barra Verde) */
-        .home-marker { bottom: 10px; } 
+        .bar-home { background-color: #10B981; width: 100%; position: absolute; bottom: 50%; left: 0; border-radius: 1px 1px 0 0; }
+        .bar-away { background-color: #EF4444; width: 100%; position: absolute; top: 50%; left: 0; border-radius: 0 0 1px 1px; }
         
-        /* Posicionamento Visitante (Abaixo da Barra Vermelha) */
+        .marker { position: absolute; left: 50%; transform: translateX(-50%); border-radius: 50%; z-index: 10; }
+        .marker-alvo { width: 6px; height: 6px; background-color: #FFF; box-shadow: 0 0 5px #FFF; }
+        .marker-lado { width: 3px; height: 3px; background-color: #FFB100; }
+        .home-marker { bottom: 10px; } 
         .away-marker { top: 10px; }
 
         .card-high-pressure {
@@ -110,6 +51,9 @@
             box-shadow: 0 0 25px rgba(124, 58, 237, 0.4);
             background: linear-gradient(to bottom, #151A22, #1a0b2e) !important;
         }
+
+        /* Estilo Botão Ativo */
+        .filter-btn.active { background-color: #FFB100 !important; color: black !important; border-color: #FFB100 !important; }
 
         .navbar { display: flex !important; }
     </style>
@@ -128,16 +72,15 @@
 
     <div class="bg-trading-panel border-b border-trading-border p-3 sticky top-[70px] z-40">
         <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
-            <div class="flex gap-2">
-                <button class="bg-trading-highlight text-black px-4 py-1.5 rounded text-xs font-bold uppercase">Todos</button>
-                <button class="bg-trading-dark px-4 py-1.5 rounded text-xs font-bold border border-trading-border"><i class="fas fa-star text-yellow-500 mr-1"></i> Favoritos</button>
-                <button class="bg-trading-dark px-4 py-1.5 rounded text-xs font-bold border border-trading-border">1º Tempo</button>
-                <button class="bg-trading-dark px-4 py-1.5 rounded text-xs font-bold border border-trading-border">2º Tempo</button>
-                <button class="bg-trading-dark px-4 py-1.5 rounded text-xs font-bold border border-trading-border text-trading-pressure font-black">Alta Pressão</button>
+            <div class="flex gap-2" id="filter-group">
+                <button onclick="setFilter('todos')" class="filter-btn active bg-trading-dark px-4 py-1.5 rounded text-xs font-bold uppercase border border-trading-border transition">Todos</button>
+                <button onclick="setFilter('favoritos')" class="filter-btn bg-trading-dark px-4 py-1.5 rounded text-xs font-bold uppercase border border-trading-border transition"><i class="fas fa-star text-yellow-500 mr-1"></i> Favoritos</button>
+                <button onclick="setFilter('1t')" class="filter-btn bg-trading-dark px-4 py-1.5 rounded text-xs font-bold uppercase border border-trading-border transition">1º Tempo</button>
+                <button onclick="setFilter('2t')" class="filter-btn bg-trading-dark px-4 py-1.5 rounded text-xs font-bold uppercase border border-trading-border transition">2º Tempo</button>
+                <button onclick="setFilter('pressao')" class="filter-btn bg-trading-dark px-4 py-1.5 rounded text-xs font-bold uppercase border border-trading-border transition text-trading-pressure">Alta Pressão</button>
             </div>
             <div class="relative">
-                <input type="text" placeholder="🔎 Buscar jogo..." class="bg-trading-dark border border-trading-border rounded-full py-1.5 px-10 text-xs focus:outline-none focus:border-trading-highlight w-64">
-                <i class="fas fa-search absolute left-4 top-2.5 text-trading-text opacity-50"></i>
+                <input type="text" id="gameSearch" onkeyup="searchGames()" placeholder="🔎 Buscar jogo..." class="bg-trading-dark border border-trading-border rounded-full py-1.5 px-10 text-xs focus:outline-none focus:border-trading-highlight w-64 text-white">
             </div>
         </div>
     </div>
@@ -147,28 +90,65 @@
 
         <div class="flex justify-center items-center gap-6 mt-12 mb-10">
             <button class="bg-trading-panel border border-trading-border px-6 py-2 rounded text-sm font-bold hover:bg-trading-dark transition">Anterior</button>
-            <span class="text-xs font-mono text-trading-text">Página <strong class="text-white">1</strong> de 22</span>
+            <span class="text-xs font-mono text-trading-text">Exibindo Jogos Filtrados</span>
             <button class="bg-trading-panel border border-trading-border px-6 py-2 rounded text-sm font-bold hover:bg-trading-dark transition">Próxima</button>
         </div>
     </main>
 
     <script>
-        const games = [
-            { id: 1, home: "PAL", away: "FLA", score: "1 - 0", time: 43, possession: 55, pressure: 45 },
-            { id: 2, home: "CITY", away: "LIV", score: "2 - 2", time: 78, possession: 48, pressure: 20 },
-            { id: 3, home: "REA", away: "BAR", score: "0 - 0", time: 15, possession: 60, pressure: 10 }
+        // Dados expandidos para testar os filtros
+        let games = [
+            { id: 1, home: "PAL", away: "FLA", score: "1 - 0", time: 43, possession: 55, shots6m: 4, shotsConc9m: 0 },
+            { id: 2, home: "CITY", away: "LIV", score: "2 - 2", time: 78, possession: 48, shots6m: 1, shotsConc9m: 2 },
+            { id: 3, home: "REA", away: "BAR", score: "0 - 0", time: 15, possession: 60, shots6m: 0, shotsConc9m: 0 },
+            { id: 4, home: "BAY", away: "DOR", score: "3 - 1", time: 62, possession: 58, shots6m: 5, shotsConc9m: 0 }, // Alta Pressão
+            { id: 5, home: "INT", away: "MIL", score: "0 - 0", time: 30, possession: 52, shots6m: 3, shotsConc9m: 0 }, // Alta Pressão
         ];
+
+        let favorites = [];
+        let currentFilter = 'todos';
+
+        function setFilter(filter) {
+            currentFilter = filter;
+            // Atualiza botões
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            renderGrid();
+        }
+
+        function toggleFavorite(id) {
+            if (favorites.includes(id)) {
+                favorites = favorites.filter(favId => favId !== id);
+            } else {
+                favorites.push(id);
+            }
+            renderGrid();
+        }
+
+        function isAltaPressao(game) {
+            // REGRA: 3 chutes últimos 6min + Posse > 51% + 0 chutes tomados últimos 9min
+            return game.shots6m >= 3 && game.possession > 51 && game.shotsConc9m === 0;
+        }
 
         function renderGrid() {
             const grid = document.getElementById('live-grid');
             grid.innerHTML = '';
 
-            for(let i=0; i<9; i++) {
-                const game = games[i % 3];
-                const isHighPressure = game.pressure > 40;
+            // Aplicar Filtros
+            let filteredGames = games.filter(game => {
+                if (currentFilter === 'favoritos') return favorites.includes(game.id);
+                if (currentFilter === '1t') return game.time <= 45;
+                if (currentFilter === '2t') return game.time > 45;
+                if (currentFilter === 'pressao') return isAltaPressao(game);
+                return true; // todos
+            });
+
+            filteredGames.forEach((game, index) => {
+                const highPressure = isAltaPressao(game);
+                const isFav = favorites.includes(game.id);
                 
                 grid.innerHTML += `
-                    <div class="bg-trading-panel border border-trading-border rounded-xl p-4 transition-all ${isHighPressure ? 'card-high-pressure' : ''}">
+                    <div class="bg-trading-panel border border-trading-border rounded-xl p-4 transition-all ${highPressure ? 'card-high-pressure' : ''}">
                         <div class="flex justify-between items-center mb-4">
                             <div class="text-sm font-bold flex items-center gap-2">
                                 <span class="text-trading-highlight">${game.home}</span> 
@@ -176,7 +156,7 @@
                                 <span>${game.away}</span>
                                 <span class="text-[10px] text-trading-edge font-mono ml-2">${game.time}'</span>
                             </div>
-                            <i class="far fa-star text-sm cursor-pointer hover:text-yellow-500"></i>
+                            <i onclick="toggleFavorite(${game.id})" class="${isFav ? 'fas fa-star text-yellow-500' : 'far fa-star'} text-sm cursor-pointer transition"></i>
                         </div>
 
                         <div class="chart-90-min">
@@ -195,31 +175,29 @@
                             </div>
                         </div>
 
-                        <button onclick="document.getElementById('stats-${i}').classList.toggle('hidden')" class="w-full mt-4 py-1.5 bg-trading-dark border border-trading-border rounded text-[9px] font-bold tracking-widest uppercase hover:bg-trading-border transition">
+                        <button onclick="document.getElementById('stats-${game.id}').classList.toggle('hidden')" class="w-full mt-4 py-1.5 bg-trading-dark border border-trading-border rounded text-[9px] font-bold tracking-widest uppercase hover:bg-trading-border transition">
                             <i class="fas fa-bolt mr-2 text-trading-highlight"></i> Detalhes da Partida
                         </button>
 
-                        <div id="stats-${i}" class="hidden mt-4 pt-4 border-t border-trading-border space-y-3">
+                        <div id="stats-${game.id}" class="hidden mt-4 pt-4 border-t border-trading-border space-y-3">
                             ${renderStatRow("1.25", "xG", "0.85")}
                             ${renderStatRow("88", "Ataques", "92")}
-                            ${renderStatRow("45", "Ataques Perigosos", "42", true)}
+                            ${renderStatRow(game.shots6m, "Atq. Perigosos (6m)", "0", highPressure)}
                             ${renderStatRow("4", "Chute no Alvo", "3")}
                             ${renderStatRow("7", "Chute ao lado", "5")}
                         </div>
                     </div>
                 `;
-            }
+            });
         }
 
         function renderStatRow(homeVal, label, awayVal, highlight = false) {
             const textColor = highlight ? 'text-trading-highlight' : 'text-trading-text';
-            return `
-                <div class="grid grid-cols-3 items-center text-[11px] font-mono">
-                    <span class="text-right text-white font-bold">${homeVal}</span>
-                    <span class="text-center ${textColor} text-[9px] uppercase font-bold tracking-tighter">${label}</span>
-                    <span class="text-left text-white font-bold">${awayVal}</span>
-                </div>
-            `;
+            return `<div class="grid grid-cols-3 items-center text-[11px] font-mono">
+                <span class="text-right text-white font-bold">${homeVal}</span>
+                <span class="text-center ${textColor} text-[9px] uppercase font-bold tracking-tighter">${label}</span>
+                <span class="text-left text-white font-bold">${awayVal}</span>
+            </div>`;
         }
 
         function generate90Bars(currentMinute) {
@@ -229,26 +207,13 @@
                     const intensity = Math.floor(Math.random() * 50) + 1;
                     const heightPercent = (intensity / 50) * 100;
                     const isHome = Math.random() > 0.4;
-
-                    // Lógica para os marcadores solicitados
                     let markerHtml = '';
                     const eventChance = Math.random();
                     const markerPosClass = isHome ? 'home-marker' : 'away-marker';
+                    if (eventChance > 0.95) markerHtml = `<div class="marker marker-alvo ${markerPosClass}"></div>`;
+                    else if (eventChance > 0.88) markerHtml = `<div class="marker marker-lado ${markerPosClass}"></div>`;
 
-                    if (eventChance > 0.95) {
-                        // Chute no Alvo (Símbolo Maior)
-                        markerHtml = `<div class="marker marker-alvo ${markerPosClass}"></div>`;
-                    } else if (eventChance > 0.88) {
-                        // Chute ao Lado (Símbolo Menor)
-                        markerHtml = `<div class="marker marker-lado ${markerPosClass}"></div>`;
-                    }
-
-                    html += `
-                        <div class="minute-slot">
-                            ${markerHtml}
-                            <div class="${isHome ? 'bar-home' : 'bar-away'}" style="height: ${heightPercent}%"></div>
-                        </div>
-                    `;
+                    html += `<div class="minute-slot">${markerHtml}<div class="${isHome ? 'bar-home' : 'bar-away'}" style="height: ${heightPercent}%"></div></div>`;
                 } else {
                     html += `<div class="minute-slot"></div>`;
                 }

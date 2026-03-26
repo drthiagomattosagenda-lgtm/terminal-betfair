@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terminal Live - Fut Trader</title>
+    <title>Terminal Live - Fut Trader Pro</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -31,7 +31,6 @@
     <style>
         body { background-color: #0B0E14; color: #E2E8F0; margin: 0; }
         
-        /* BLOQUEIO DE VAZAMENTO DO GRÁFICO */
         .chart-90-min {
             height: 140px;
             display: grid;
@@ -41,7 +40,7 @@
             padding: 0 5px;
             border-radius: 4px;
             position: relative;
-            overflow: hidden; /* Garante que nada saia da caixa */
+            overflow: hidden;
             border: 1px solid #2A3241;
         }
 
@@ -62,7 +61,7 @@
             background-color: #10B981;
             width: 100%;
             position: absolute;
-            bottom: 50%; /* Ancorado no meio, sobe */
+            bottom: 50%;
             left: 0;
             border-radius: 1px 1px 0 0;
         }
@@ -71,12 +70,41 @@
             background-color: #EF4444;
             width: 100%;
             position: absolute;
-            top: 50%; /* Ancorado no meio, desce */
+            top: 50%;
             left: 0;
             border-radius: 0 0 1px 1px;
         }
 
-        /* Estilo para Alta Pressão */
+        /* --- NOVOS MARCADORES DE CHUTE --- */
+        .marker {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 50%;
+            z-index: 10;
+        }
+
+        /* Chute no Alvo (Símbolo Maior) */
+        .marker-alvo {
+            width: 6px;
+            height: 6px;
+            background-color: #FFF;
+            box-shadow: 0 0 5px #FFF;
+        }
+
+        /* Chute ao Lado (Símbolo Menor) */
+        .marker-lado {
+            width: 3px;
+            height: 3px;
+            background-color: #FFB100;
+        }
+
+        /* Posicionamento Mandante (Acima da Barra Verde) */
+        .home-marker { bottom: 10px; } 
+        
+        /* Posicionamento Visitante (Abaixo da Barra Vermelha) */
+        .away-marker { top: 10px; }
+
         .card-high-pressure {
             border: 2px solid #7C3AED !important;
             box-shadow: 0 0 25px rgba(124, 58, 237, 0.4);
@@ -102,7 +130,7 @@
         <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
             <div class="flex gap-2">
                 <button class="bg-trading-highlight text-black px-4 py-1.5 rounded text-xs font-bold uppercase">Todos</button>
-                <button class="bg-trading-dark px-4 py-1.5 rounded text-xs font-bold border border-trading-border hover:border-trading-highlight"><i class="fas fa-star text-yellow-500 mr-1"></i> Favoritos</button>
+                <button class="bg-trading-dark px-4 py-1.5 rounded text-xs font-bold border border-trading-border"><i class="fas fa-star text-yellow-500 mr-1"></i> Favoritos</button>
                 <button class="bg-trading-dark px-4 py-1.5 rounded text-xs font-bold border border-trading-border">1º Tempo</button>
                 <button class="bg-trading-dark px-4 py-1.5 rounded text-xs font-bold border border-trading-border">2º Tempo</button>
                 <button class="bg-trading-dark px-4 py-1.5 rounded text-xs font-bold border border-trading-border text-trading-pressure font-black">Alta Pressão</button>
@@ -183,7 +211,6 @@
             }
         }
 
-        // Função para criar a linha de estatística espelhada
         function renderStatRow(homeVal, label, awayVal, highlight = false) {
             const textColor = highlight ? 'text-trading-highlight' : 'text-trading-text';
             return `
@@ -203,8 +230,22 @@
                     const heightPercent = (intensity / 50) * 100;
                     const isHome = Math.random() > 0.4;
 
+                    // Lógica para os marcadores solicitados
+                    let markerHtml = '';
+                    const eventChance = Math.random();
+                    const markerPosClass = isHome ? 'home-marker' : 'away-marker';
+
+                    if (eventChance > 0.95) {
+                        // Chute no Alvo (Símbolo Maior)
+                        markerHtml = `<div class="marker marker-alvo ${markerPosClass}"></div>`;
+                    } else if (eventChance > 0.88) {
+                        // Chute ao Lado (Símbolo Menor)
+                        markerHtml = `<div class="marker marker-lado ${markerPosClass}"></div>`;
+                    }
+
                     html += `
                         <div class="minute-slot">
+                            ${markerHtml}
                             <div class="${isHome ? 'bar-home' : 'bar-away'}" style="height: ${heightPercent}%"></div>
                         </div>
                     `;

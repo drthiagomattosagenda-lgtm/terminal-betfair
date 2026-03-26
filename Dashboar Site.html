@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminal Analítico - Betfair Exchange</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        trading: {
+                            dark: '#0B0E14',
+                            panel: '#151A22',
+                            border: '#2A3241',
+                            text: '#A0AEC0',
+                            highlight: '#E2E8F0',
+                            back: '#2185D0',
+                            lay: '#E85D75',
+                            edge: '#10B981',
+                            warn: '#F59E0B'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #0B0E14; color: #A0AEC0; }
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #0B0E14; }
+        ::-webkit-scrollbar-thumb { background: #2A3241; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #4A5568; }
+        
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+            height: 250px;
+            max-height: 300px;
+            margin: 0 auto;
+        }
+        @media (min-width: 768px) {
+            .chart-container { height: 300px; }
+        }
+        
+        .tab-btn.active {
+            border-bottom: 2px solid #3B82F6;
+            color: #E2E8F0;
+        }
+        .blinking-dot {
+            animation: blink 2s infinite;
+        }
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col font-sans">
+
+    <!-- Chosen Palette: Professional Trading Terminal Dark (Dark blue/grey backgrounds, distinct BACK/LAY colors, high contrast text) -->
+    <!-- Application Structure Plan: Master-Detail Dashboard. Left column serves as the 'Master' list (Top 5 ranked matches) and system status/discarded alerts. Right column is the 'Detail' view, dynamically updating to show deep analysis, charts, and strategy for the selected match. This structure allows the user to quickly scan the top opportunities and drill down into the 'Triple Verification' evidence without losing context or opening new pages. -->
+    <!-- Visualization & Content Choices: 
+         - Match List: Interactive List -> Allows quick selection. Justification: Fast navigation between top picks. HTML/Tailwind.
+         - Edge Comparison: Bar Chart (Chart.js) -> Visualizes the 'Edge' (Current Odd vs Fair Odd). Justification: Instantly shows the value gap the trader is exploiting.
+         - Liquidity Depth: Line/Area Chart (Chart.js) -> Shows order book depth. Justification: Proves the market can absorb the recommended stake.
+         - Triple Verification: Tabbed Text Content -> Separates Info, Context, and Checklist. Justification: Prevents information overload while providing rigorous proof for the trade. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <header class="bg-trading-panel border-b border-trading-border p-4 sticky top-0 z-50 shadow-md">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded bg-blue-600 text-white flex items-center justify-center font-bold text-xl">BX</div>
+                <div>
+                    <h1 class="text-trading-highlight font-bold text-lg leading-tight">Terminal de Oportunidades Betfair</h1>
+                    <p class="text-xs text-trading-text">Agente Analista Sênior • Relatório Matinal</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-6 text-sm">
+                <div class="flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-trading-edge blinking-dot"></span>
+                    <span class="font-mono text-trading-highlight" id="current-time"></span>
+                </div>
+                <div class="hidden sm:block px-3 py-1 rounded bg-trading-dark border border-trading-edge text-trading-edge font-medium text-xs">
+                    🛡️ Tripla Verificação: ATIVA
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow p-4 md:p-6 max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <aside class="lg:col-span-4 flex flex-col gap-6">
+            <section class="bg-trading-panel border border-trading-border rounded-lg p-5 shadow-sm">
+                <h2 class="text-trading-highlight font-bold text-lg mb-2 flex items-center gap-2">
+                    <span>🏆</span> Top Oportunidades
+                </h2>
+                <p class="text-xs mb-4 leading-relaxed">
+                    Este painel lista as partidas do dia filtradas pela nossa metodologia de Tripla Verificação. O ranking prioriza o tamanho do <em>edge</em> (vantagem), liquidez e confiabilidade da informação assimétrica. Clique em uma partida para carregar o dossiê completo.
+                </p>
+                <div id="match-list-container" class="flex flex-col gap-3">
+                </div>
+            </section>
+
+            <section class="bg-trading-panel border border-trading-border rounded-lg p-5 shadow-sm">
+                <h2 class="text-trading-highlight font-bold text-lg mb-2 flex items-center gap-2">
+                    <span>⚠️</span> Observações do Dia
+                </h2>
+                <p class="text-xs mb-4 leading-relaxed">
+                    Registro de partidas monitoradas que foram sumariamente descartadas por falharem em nossos rigorosos filtros de risco e liquidez.
+                </p>
+                <ul class="space-y-3 text-sm">
+                    <li class="p-3 bg-trading-dark rounded border-l-2 border-trading-warn">
+                        <span class="font-bold text-trading-highlight block">Juventus vs AC Milan</span>
+                        <span class="text-xs text-trading-text mt-1 block">Falhou na verificação de liquidez. Volume abaixo de £50k para o horário. Risco de <em>slippage</em> alto.</span>
+                    </li>
+                    <li class="p-3 bg-trading-dark rounded border-l-2 border-trading-warn">
+                        <span class="font-bold text-trading-highlight block">Man. City vs Liverpool</span>
+                        <span class="text-xs text-trading-text mt-1 block">Boato de lesão de Haaland não corroborado. Apenas 1 fonte (confiabilidade 0.60). Tripla verificação falhou.</span>
+                    </li>
+                </ul>
+            </section>
+        </aside>
+
+        <section class="lg:col-span-8 flex flex-col gap-6">
+            <div class="bg-trading-panel border border-trading-border rounded-lg p-5 shadow-sm">
+                <div class="mb-4">
+                    <h2 class="text-trading-highlight font-bold text-xl md:text-2xl" id="detail-title">Selecione uma partida</h2>
+                    <p class="text-sm mt-1" id="detail-subtitle">Aguardando seleção...</p>
+                </div>
+                
+                <p class="text-xs mb-6 leading-relaxed border-b border-trading-border pb-4">
+                    Abaixo está a análise profunda da oportunidade selecionada, desconstruindo o <em>edge</em> estatístico encontrado no mercado. As visualizações comparam a odd atual da Betfair com a odd justa calculada pelo nosso <em>Ensemble</em> de modelos (Poisson + Elo + Fechamento), além de analisar a profundidade do livro de ofertas para garantir execução segura da stake sugerida.
+                </p>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6" id="detail-stats">
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div class="bg-trading-dark border border-trading-border rounded p-4">
+                        <h3 class="text-sm font-bold text-trading-highlight mb-3 text-center">Desvio de Preço (Edge)</h3>
+                        <div class="chart-container">
+                            <canvas id="oddsChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="bg-trading-dark border border-trading-border rounded p-4">
+                        <h3 class="text-sm font-bold text-trading-highlight mb-3 text-center">Profundidade do Mercado (£)</h3>
+                        <div class="chart-container">
+                            <canvas id="liquidityChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <div class="flex border-b border-trading-border overflow-x-auto" id="detail-tabs">
+                        <button class="tab-btn active px-4 py-2 text-sm font-medium whitespace-nowrap transition-colors" data-target="tab-info">📰 Informação Crítica</button>
+                        <button class="tab-btn px-4 py-2 text-sm font-medium whitespace-nowrap transition-colors" data-target="tab-context">🌦️ Fatores e Tática</button>
+                        <button class="tab-btn px-4 py-2 text-sm font-medium whitespace-nowrap transition-colors" data-target="tab-checklist">✅ Verificação</button>
+                        <button class="tab-btn px-4 py-2 text-sm font-medium whitespace-nowrap transition-colors" data-target="tab-strategy">📝 Estratégia</button>
+                    </div>
+
+                    <div class="p-4 bg-trading-dark rounded-b border border-t-0 border-trading-border min-h-[200px]">
+                        <div id="tab-info" class="tab-content block space-y-3"></div>
+                        <div id="tab-context" class="tab-content hidden space-y-3"></div>
+                        <div id="tab-checklist" class="tab-content hidden space-y-3"></div>
+                        <div id="tab-strategy" class="tab-content hidden space-y-3"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const matchesData = [
+            {
+                id: 1,
+                teamA: "Real Madrid",
+                teamB: "Barcelona",
+                time: "16:00 BRT",
+                league: "La Liga",
+                currentOdd: 2.10,
+                fairOdd: 2.38,
+                edge: "+13.3%",
+                recommendation: "LAY Real Madrid",
+                recType: "lay",
+                confidence: "Alta",
+                liquidity: {
+                    vol24h: "£ 1.250.400",
+                    spread: 1,
+                    maxStake: "£ 2.500",
+                    depthData: [1500, 3200, 4800, 5100, 8000]
+                },
+                info: [
+                    { source: "FabrizioRomano (0.98)", text: "Vinícius Jr sentiu lesão no último treino tático a portas fechadas. Não joga." },
+                    { source: "Marca Insider (0.85)", text: "Corrobora ausência de Vini Jr. Ancelotti testará formação mais conservadora." }
+                ],
+                context: [
+                    "Clima: 22°C, Céu limpo. Condições perfeitas.",
+                    "Árbitro: Gil Manzano - Histórico de alta média de cartões no clássico, o que pode quebrar o ritmo do Real.",
+                    "Tática: Sem sua principal válvula de escape, Real Madrid perde profundidade. Odd atual (2.10) precifica equipe titular."
+                ],
+                checklist: [
+                    "Notícias verificadas (2 fontes independentes >0.85)",
+                    "Odd moveu apenas 15% do esperado (Mercado ainda em negação/desaviso)",
+                    "Liquidez excelente, spread de 1 tick. Stake segura aprovada.",
+                    "Plano de trade in-play estabelecido."
+                ],
+                strategy: [
+                    "Entrada: LAY Real Madrid a 2.10 ou inferior pré-jogo.",
+                    "Se odd subir acima de 2.25 antes do início (vazamento oficial da escalação), fechar 50% da posição garantindo Freebet.",
+                    "In-play: Manter posição se o Barcelona dominar a posse nos primeiros 15 min. Stop-loss se o Real marcar 1x0."
+                ]
+            },
+            {
+                id: 2,
+                teamA: "Arsenal",
+                teamB: "B. Munique",
+                time: "17:00 BRT",
+                league: "Champions League",
+                currentOdd: 2.45,
+                fairOdd: 2.20,
+                edge: "+11.3%",
+                recommendation: "BACK Arsenal",
+                recType: "back",
+                confidence: "Alta",
+                liquidity: {
+                    vol24h: "£ 850.000",
+                    spread: 2,
+                    maxStake: "£ 1.200",
+                    depthData: [800, 1500, 2200, 3100, 4500]
+                },
+                info: [
+                    { source: "David_Ornstein (0.97)", text: "Arsenal com time completo recuperado. Bayern viaja sem Neuer e Sané (febre de última hora)." },
+                    { source: "BILD (0.90)", text: "Confirma surto viral no vestiário do Bayern." }
+                ],
+                context: [
+                    "Clima: 12°C, Chuva leve. Gramado rápido favorece o toque de bola do Arsenal.",
+                    "Análise Cruzada: Bayern sofreu gols nos últimos 5 jogos fora de casa; defesa improvisada agravará o problema."
+                ],
+                checklist: [
+                    "Desfalques do adversário confirmados por fontes primárias inglesa e alemã.",
+                    "Mercado moveu apenas 3 ticks. Ajuste justo exige pelo menos 8 ticks.",
+                    "Liquidez robusta para stakes padrão."
+                ],
+                strategy: [
+                    "Entrada: BACK Arsenal pré-jogo a 2.45.",
+                    "Alvo: Saída parcial em 2.25.",
+                    "Stop in-play: Fechar posição se Bayern abrir o placar ou se o Arsenal não finalizar a gol nos primeiros 20 min."
+                ]
+            },
+            {
+                id: 3,
+                teamA: "Flamengo",
+                teamB: "Palmeiras",
+                time: "21:30 BRT",
+                league: "Série A",
+                currentOdd: 1.85,
+                fairOdd: 1.68,
+                edge: "+10.1%",
+                recommendation: "BACK Under 2.5 Gols",
+                recType: "back",
+                confidence: "Média",
+                liquidity: {
+                    vol24h: "£ 320.000",
+                    spread: 2,
+                    maxStake: "£ 800",
+                    depthData: [500, 900, 1800, 2500, 3200]
+                },
+                info: [
+                    { source: "VenêCasagrande (0.90)", text: "Flamengo vai poupar 4 titulares visando a Libertadores." },
+                    { source: "GE.com (0.90)", text: "Palmeiras treinou com 3 zagueiros, indicando postura reativa no Maracanã." }
+                ],
+                context: [
+                    "Clima: 33°C, Umidade 85%. Desgaste altíssimo esperado no 2º tempo, reduzindo intensidade.",
+                    "Tática: Jogo truncado no meio-campo. Histórico recente aponta 4 dos últimos 5 H2H abaixo de 2.5 gols."
+                ],
+                checklist: [
+                    "Fontes locais confiáveis confirmam rotação e postura tática.",
+                    "Clima extremo validado.",
+                    "Mercado de Under 2.5 com liquidez aceitável para o mercado sul-americano."
+                ],
+                strategy: [
+                    "Entrada: BACK Under 2.5 a 1.85.",
+                    "Manter posição in-play lucrando com a passagem do tempo (Time Decay) até os 60 minutos.",
+                    "Stop: Sair se sair um gol no 1º tempo."
+                ]
+            }
+        ];
+
+        let oddsChartInstance = null;
+        let liquidityChartInstance = null;
+
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('pt-BR', { hour12: false });
+            const dateString = now.toLocaleDateString('pt-BR');
+            document.getElementById('current-time').innerText = `${dateString} | ${timeString} BRT`;
+        }
+
+        function renderMatchList() {
+            const container = document.getElementById('match-list-container');
+            container.innerHTML = '';
+
+            matchesData.forEach((match, index) => {
+                const isTop1 = index === 0;
+                const borderClass = isTop1 ? 'border-trading-edge' : 'border-trading-border hover:border-trading-text';
+                const recClass = match.recType === 'back' ? 'text-trading-back bg-blue-900/20' : 'text-trading-lay bg-red-900/20';
+
+                const html = `
+                    <div class="match-item p-3 bg-trading-dark border ${borderClass} rounded cursor-pointer transition-all hover:-translate-y-0.5" data-id="${match.id}">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="font-bold text-trading-highlight text-sm">#${index + 1} ${match.teamA} v ${match.teamB}</span>
+                            <span class="text-xs font-mono text-trading-text">${match.time}</span>
+                        </div>
+                        <div class="flex justify-between items-center text-xs">
+                            <span class="px-2 py-1 rounded font-mono font-bold ${recClass}">${match.recommendation}</span>
+                            <div class="text-right">
+                                <span class="text-trading-text block">Edge: <strong class="text-trading-edge">${match.edge}</strong></span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', html);
+            });
+
+            document.querySelectorAll('.match-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    document.querySelectorAll('.match-item').forEach(i => i.classList.remove('ring-1', 'ring-trading-highlight'));
+                    item.classList.add('ring-1', 'ring-trading-highlight');
+                    selectMatch(parseInt(item.getAttribute('data-id')));
+                });
+            });
+        }
+
+        function selectMatch(id) {
+            const match = matchesData.find(m => m.id === id);
+            if (!match) return;
+
+            document.getElementById('detail-title').innerText = `${match.teamA} vs ${match.teamB}`;
+            document.getElementById('detail-subtitle').innerHTML = `⚽ ${match.league} | ⏰ ${match.time} | 🛡️ Confiança: <strong class="${match.confidence === 'Alta' ? 'text-trading-edge' : 'text-trading-warn'}">${match.confidence}</strong>`;
+
+            const recColorClass = match.recType === 'back' ? 'text-trading-back' : 'text-trading-lay';
+            
+            document.getElementById('detail-stats').innerHTML = `
+                <div class="bg-trading-dark p-3 rounded border border-trading-border text-center">
+                    <span class="block text-xs text-trading-text mb-1 uppercase tracking-wide">Odd Atual</span>
+                    <span class="block text-xl font-mono text-trading-highlight font-bold">${match.currentOdd.toFixed(2)}</span>
+                </div>
+                <div class="bg-trading-dark p-3 rounded border border-trading-border text-center">
+                    <span class="block text-xs text-trading-text mb-1 uppercase tracking-wide">Odd Justa</span>
+                    <span class="block text-xl font-mono text-trading-highlight font-bold">${match.fairOdd.toFixed(2)}</span>
+                </div>
+                <div class="bg-trading-dark p-3 rounded border border-trading-border text-center">
+                    <span class="block text-xs text-trading-text mb-1 uppercase tracking-wide">Edge</span>
+                    <span class="block text-xl font-mono text-trading-edge font-bold">${match.edge}</span>
+                </div>
+                <div class="bg-trading-dark p-3 rounded border border-trading-border text-center flex flex-col justify-center">
+                    <span class="block text-xs text-trading-text mb-1 uppercase tracking-wide">Ação</span>
+                    <span class="block text-sm font-bold ${recColorClass}">${match.recommendation}</span>
+                </div>
+            `;
+
+            renderTabs(match);
+            renderCharts(match);
+        }
+
+        function renderTabs(match) {
+            const tabInfo = document.getElementById('tab-info');
+            tabInfo.innerHTML = match.info.map(i => `
+                <div class="border-l-2 border-trading-text pl-3 py-1">
+                    <span class="text-trading-highlight text-xs font-bold block mb-1">${i.source}</span>
+                    <p class="text-sm text-trading-text">${i.text}</p>
+                </div>
+            `).join('');
+
+            const tabContext = document.getElementById('tab-context');
+            tabContext.innerHTML = `<ul class="list-disc pl-5 text-sm space-y-2 text-trading-text">` + 
+                match.context.map(c => `<li>${c}</li>`).join('') + `</ul>`;
+
+            const tabChecklist = document.getElementById('tab-checklist');
+            tabChecklist.innerHTML = `<ul class="space-y-2 text-sm text-trading-highlight">` + 
+                match.checklist.map(c => `<li class="flex items-start gap-2"><span class="text-trading-edge font-bold">✓</span> ${c}</li>`).join('') + `</ul>`;
+                
+            const tabStrategy = document.getElementById('tab-strategy');
+            tabStrategy.innerHTML = `<div class="bg-trading-panel p-4 rounded border border-trading-border font-mono text-sm space-y-3">` + 
+                match.strategy.map(s => `<p class="flex items-start gap-2"><span class="text-blue-400">></span> <span class="text-trading-text">${s}</span></p>`).join('') + `</div>`;
+        }
+
+        function renderCharts(match) {
+            Chart.defaults.color = '#A0AEC0';
+            Chart.defaults.font.family = "'JetBrains Mono', monospace";
+
+            if (oddsChartInstance) oddsChartInstance.destroy();
+            const ctxOdds = document.getElementById('oddsChart').getContext('2d');
+            oddsChartInstance = new Chart(ctxOdds, {
+                type: 'bar',
+                data: {
+                    labels: ['Odd Atual', 'Odd Justa (Real)'],
+                    datasets: [{
+                        label: 'Cotação',
+                        data: [match.currentOdd, match.fairOdd],
+                        backgroundColor: [
+                            match.recType === 'back' ? 'rgba(33, 133, 208, 0.7)' : 'rgba(232, 93, 117, 0.7)',
+                            'rgba(16, 185, 129, 0.7)' 
+                        ],
+                        borderColor: [
+                            match.recType === 'back' ? '#2185D0' : '#E85D75',
+                            '#10B981'
+                        ],
+                        borderWidth: 1,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { 
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) { return 'Odd: ' + context.parsed.y.toFixed(2); }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: { 
+                            beginAtZero: false,
+                            min: Math.floor(Math.min(match.currentOdd, match.fairOdd) * 0.8),
+                            grid: { color: '#2A3241' }
+                        },
+                        x: { grid: { display: false } }
+                    }
+                }
+            });
+
+            if (liquidityChartInstance) liquidityChartInstance.destroy();
+            const ctxLiq = document.getElementById('liquidityChart').getContext('2d');
+            liquidityChartInstance = new Chart(ctxLiq, {
+                type: 'line',
+                data: {
+                    labels: ['Tick 1', 'Tick 2', 'Tick 3', 'Tick 4', 'Tick 5'],
+                    datasets: [{
+                        label: 'Volume Disponível (£)',
+                        data: match.liquidity.depthData,
+                        borderColor: '#3B82F6',
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        borderWidth: 2,
+                        fill: true,
+                        tension: 0.3,
+                        pointBackgroundColor: '#151A22',
+                        pointBorderColor: '#3B82F6',
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { 
+                        legend: { display: false },
+                        title: {
+                            display: true,
+                            text: `Vol 24h: ${match.liquidity.vol24h} | Stake Max: ${match.liquidity.maxStake}`,
+                            color: '#A0AEC0',
+                            font: { size: 10 }
+                        }
+                    },
+                    scales: {
+                        y: { 
+                            beginAtZero: true,
+                            grid: { color: '#2A3241' }
+                        },
+                        x: { grid: { color: '#2A3241' } }
+                    }
+                }
+            });
+        }
+
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+                
+                document.querySelectorAll('.tab-content').forEach(c => {
+                    c.classList.add('hidden');
+                    c.classList.remove('block');
+                });
+                
+                const targetId = e.target.getAttribute('data-target');
+                const targetEl = document.getElementById(targetId);
+                targetEl.classList.remove('hidden');
+                targetEl.classList.add('block');
+            });
+        });
+
+        updateClock();
+        setInterval(updateClock, 1000);
+        renderMatchList();
+        selectMatch(matchesData[0].id);
+
+    </script>
+</body>
+</html>

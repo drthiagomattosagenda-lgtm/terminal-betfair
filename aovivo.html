@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Multi-Apostas - Fut Trader</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { background-color: #0f171c; color: white; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 10px; }
+        
+        /* Menu Superior */
+        nav { background: #1b262c; padding: 15px; margin-bottom: 20px; border-radius: 8px; display: flex; gap: 20px; }
+        nav a { color: #ffb100; text-decoration: none; font-weight: bold; }
+
+        /* Grade de 9 Jogos (3 colunas) */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 colunas iguais */
+            gap: 15px; /* Espaço entre os jogos */
+        }
+
+        /* Card de cada Jogo */
+        .game-card {
+            background: #1b262c;
+            border-radius: 10px;
+            padding: 10px;
+            border: 1px solid #2c3e50;
+        }
+
+        .game-header { text-align: center; font-size: 14px; margin-bottom: 10px; border-bottom: 1px solid #333; padding-bottom: 5px; }
+        .score { color: #ffb100; font-weight: bold; font-size: 18px; }
+
+        /* Espaço do Gráfico */
+        .chart-box { height: 150px; margin: 10px 0; }
+
+        /* Barras de Estatísticas Simples */
+        .mini-stat-row { display: flex; justify-content: space-between; font-size: 11px; margin-top: 5px; }
+        .bar-bg { background: #333; height: 6px; border-radius: 3px; margin: 4px 0; display: flex; overflow: hidden; }
+        .home-bar { background: #00bcd4; height: 100%; }
+        .away-bar { background: #ffb100; height: 100%; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html">Sair</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="aovivo.html" style="color: white;">● Ao Vivo</a>
+    </nav>
+
+    <div class="grid-container" id="jogos-grid">
+        </div>
+
+    <script>
+        // Lista fictícia de 9 jogos para preencher a tela
+        const jogos = [
+            { id: 1, home: "Real Madrid", away: "Barcelona", score: "1 - 0", pHome: 60 },
+            { id: 2, home: "Man. City", away: "Liverpool", score: "2 - 2", pHome: 45 },
+            { id: 3, home: "Bayern", away: "Dortmund", score: "0 - 1", pHome: 30 },
+            { id: 4, home: "Inter", away: "Milan", score: "0 - 0", pHome: 50 },
+            { id: 5, home: "PSG", away: "Marseille", score: "3 - 1", pHome: 70 },
+            { id: 6, home: "Porto", away: "Benfica", score: "1 - 1", pHome: 55 },
+            { id: 7, home: "Flamengo", away: "Palmeiras", score: "2 - 0", pHome: 65 },
+            { id: 8, home: "Arsenal", away: "Chelsea", score: "1 - 2", pHome: 40 },
+            { id: 9, home: "Ajax", away: "PSV", score: "0 - 0", pHome: 50 }
+        ];
+
+        const grid = document.getElementById('jogos-grid');
+
+        // Função para criar cada "Card" de jogo
+        jogos.forEach(jogo => {
+            const card = document.createElement('div');
+            card.className = 'game-card';
+            card.innerHTML = `
+                <div class="game-header">
+                    <div>${jogo.home} <span class="score">${jogo.score}</span> ${jogo.away}</div>
+                </div>
+                <div class="chart-box">
+                    <canvas id="chart-${jogo.id}"></canvas>
+                </div>
+                <div class="mini-stat-row"><span>Ataques Perigosos</span></div>
+                <div class="bar-bg">
+                    <div class="home-bar" style="width: ${jogo.pHome}%"></div>
+                    <div class="away-bar" style="width: ${100 - jogo.pHome}%"></div>
+                </div>
+            `;
+            grid.appendChild(card);
+
+            // Criar o gráfico para cada jogo
+            const ctx = document.getElementById(`chart-${jogo.id}`).getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                    datasets: [{
+                        label: 'Pressão',
+                        data: Array.from({length: 10}, () => Math.floor(Math.random() * 40) - 20), // Dados aleatórios
+                        borderColor: jogo.pHome > 50 ? '#00bcd4' : '#ffb100',
+                        fill: true,
+                        backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                        tension: 0.4
+                    }]
+                },
+                options: { 
+                    responsive: true, 
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: { x: { display: false }, y: { display: false } }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live Pro - Fut Trader</title>
+    <title>Terminal Live - Fut Trader</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -31,61 +31,76 @@
     <style>
         body { background-color: #0B0E14; color: #E2E8F0; margin: 0; }
         
-        /* Container do Gráfico de Pressão */
-        .momentum-wrapper {
-            height: 120px;
-            display: flex;
-            align-items: center; /* Centraliza a linha do meio */
+        /* CONTAINER DO GRÁFICO - ESPAÇO FIXO PARA 90 MINUTOS */
+        .chart-90-min {
+            height: 140px;
+            display: grid;
+            grid-template-columns: repeat(90, 1fr); /* 90 colunas fixas */
             gap: 1px;
-            background: rgba(0,0,0,0.2);
-            padding: 5px;
+            background: rgba(0,0,0,0.3);
+            padding: 10px 5px;
             border-radius: 4px;
             position: relative;
-            overflow: hidden;
-            border-bottom: 1px solid #2A3241;
+            align-items: center;
         }
 
-        /* Linha central do tempo */
-        .timeline-zero {
+        /* LINHA HORIZONTAL CENTRAL (O PONTO ZERO) */
+        .center-line {
             position: absolute;
             left: 0;
             right: 0;
             top: 50%;
             height: 1px;
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.15);
             z-index: 1;
         }
 
-        /* Cada minuto do jogo é uma coluna */
-        .minute-col {
-            flex: 1;
+        /* COLUNA DE CADA MINUTO */
+        .minute-slot {
+            height: 100%;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            height: 100%;
             position: relative;
             z-index: 2;
         }
 
-        /* Barras de Pressão */
-        .bar-up {
+        /* BARRA PARA CIMA (HOME) */
+        .bar-home {
             background-color: #10B981;
             width: 100%;
-            align-self: flex-end; /* Nasce no meio e sobe */
-            margin-bottom: 50%; /* Começa na linha central */
+            align-self: flex-end;
+            margin-bottom: 50%; /* Nasce na linha e sobe */
             border-radius: 1px 1px 0 0;
+            min-height: 1px;
         }
-        .bar-down {
+
+        /* BARRA PARA BAIXO (AWAY) */
+        .bar-away {
             background-color: #EF4444;
             width: 100%;
-            align-self: flex-start; /* Nasce no meio e desce */
-            margin-top: 50%; /* Começa na linha central */
+            align-self: flex-start;
+            margin-top: 50%; /* Nasce na linha e desce */
             border-radius: 0 0 1px 1px;
+            min-height: 1px;
         }
+
+        /* ÍCONES DE EVENTOS (ESCANTETIO, CHUTE) */
+        .event-dot {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .dot-corner { background: #FFB100; top: -8px; }
+        .dot-shot { background: #FFF; top: -14px; }
 
         .card-high-pressure {
             border: 2px solid #7C3AED !important;
-            box-shadow: 0 0 20px rgba(124, 58, 237, 0.4);
+            box-shadow: 0 0 25px rgba(124, 58, 237, 0.5);
+            background: linear-gradient(to bottom, #151A22, #1a0b2e) !important;
         }
 
         .navbar { display: flex !important; }
@@ -106,103 +121,117 @@
     <div class="bg-trading-panel border-b border-trading-border p-3 sticky top-[70px] z-40">
         <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
             <div class="flex gap-2">
-                <button class="bg-trading-highlight text-black px-4 py-1.5 rounded text-xs font-bold">Todos</button>
-                <button class="bg-trading-dark px-4 py-1.5 rounded text-xs font-bold border border-trading-border"><i class="fas fa-star text-yellow-500 mr-1"></i> Favoritos</button>
+                <button class="bg-trading-highlight text-black px-4 py-1.5 rounded text-xs font-bold uppercase">Todos</button>
+                <button class="bg-trading-dark px-4 py-1.5 rounded text-xs font-bold border border-trading-border hover:border-trading-highlight"><i class="fas fa-star text-yellow-500 mr-1"></i> Favoritos</button>
                 <button class="bg-trading-dark px-4 py-1.5 rounded text-xs font-bold border border-trading-border">1º Tempo</button>
                 <button class="bg-trading-dark px-4 py-1.5 rounded text-xs font-bold border border-trading-border">2º Tempo</button>
                 <button class="bg-trading-dark px-4 py-1.5 rounded text-xs font-bold border border-trading-border text-trading-pressure">Alta Pressão</button>
             </div>
             <div class="relative">
-                <input type="text" placeholder="🔎 Buscar jogo..." class="bg-trading-dark border border-trading-border rounded-full py-1.5 px-10 text-xs focus:outline-none w-64">
+                <input type="text" placeholder="🔎 Buscar jogo..." class="bg-trading-dark border border-trading-border rounded-full py-1.5 px-10 text-xs focus:outline-none focus:border-trading-highlight w-64">
             </div>
         </div>
     </div>
 
-    <main class="max-w-7xl mx-auto p-6">
+    <main class="max-w-[1400px] mx-auto p-6">
         <div id="live-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
 
         <div class="flex justify-center items-center gap-6 mt-12 mb-10">
-            <button class="bg-trading-panel border border-trading-border px-4 py-2 rounded text-sm hover:bg-trading-dark">Anterior</button>
-            <span class="text-xs font-mono">Página 1 de 20</span>
-            <button class="bg-trading-panel border border-trading-border px-4 py-2 rounded text-sm hover:bg-trading-dark">Próxima</button>
+            <button class="bg-trading-panel border border-trading-border px-6 py-2 rounded text-sm font-bold hover:bg-trading-dark transition">Anterior</button>
+            <span class="text-xs font-mono text-trading-text">Página <strong class="text-white">1</strong> de 22</span>
+            <button class="bg-trading-panel border border-trading-border px-6 py-2 rounded text-sm font-bold hover:bg-trading-dark transition">Próxima</button>
         </div>
     </main>
 
     <script>
-        // Simulação de Dados Reais
+        // Dados Exemplo (Minutos diferentes para testar a escala fixa)
         const games = [
-            { id: 1, home: "PAL", away: "FLA", score: "1 - 0", time: 43, possession: 55, highP: true },
-            { id: 2, home: "CITY", away: "LIV", score: "2 - 2", time: 78, possession: 48, highP: false },
-            { id: 3, home: "REA", away: "BAR", score: "0 - 0", time: 15, possession: 60, highP: false }
+            { id: 1, home: "PAL", away: "FLA", score: "1 - 0", time: 43, possession: 55, pressure: 45 },
+            { id: 2, home: "CITY", away: "LIV", score: "2 - 2", time: 78, possession: 48, pressure: 20 },
+            { id: 3, home: "REA", away: "BAR", score: "0 - 0", time: 15, possession: 60, pressure: 10 },
+            { id: 4, home: "INT", away: "MIL", score: "1 - 1", time: 90, possession: 50, pressure: 30 }
         ];
 
         function renderGrid() {
             const grid = document.getElementById('live-grid');
             grid.innerHTML = '';
 
-            // Geramos 9 cards para exemplo
             for(let i=0; i<9; i++) {
-                const game = games[i % 3];
-                const pressureClass = game.highP ? 'card-high-pressure' : '';
+                const game = games[i % 4];
+                const isHighPressure = game.pressure > 40;
                 
                 grid.innerHTML += `
-                    <div class="bg-trading-panel border border-trading-border rounded-xl p-4 ${pressureClass}">
-                        <div class="flex justify-between items-center mb-3">
-                            <div class="text-sm font-bold">
-                                <span class="text-trading-highlight">${game.home}</span> ${game.score} <span>${game.away}</span>
-                                <span class="text-xs text-trading-text ml-2 font-mono">${game.time}'</span>
+                    <div class="bg-trading-panel border border-trading-border rounded-xl p-4 transition-all ${isHighPressure ? 'card-high-pressure' : ''}">
+                        <div class="flex justify-between items-center mb-4">
+                            <div class="text-sm font-bold flex items-center gap-2">
+                                <span class="text-trading-highlight">${game.home}</span> 
+                                <span class="bg-trading-dark px-2 rounded">${game.score}</span> 
+                                <span>${game.away}</span>
+                                <span class="text-[10px] text-trading-edge font-mono ml-2">${game.time}'</span>
                             </div>
-                            <i class="far fa-star text-xs cursor-pointer hover:text-yellow-500"></i>
+                            <div class="flex gap-3 items-center">
+                                <i class="far fa-star text-sm cursor-pointer hover:text-yellow-500"></i>
+                            </div>
                         </div>
 
-                        <div class="momentum-wrapper">
-                            <div class="timeline-zero"></div>
-                            ${generateBars(game.time)}
+                        <div class="chart-90-min">
+                            <div class="center-line"></div>
+                            ${generate90Bars(game.time)}
                         </div>
 
                         <div class="mt-4">
-                            <div class="flex justify-between text-[9px] font-bold mb-1">
+                            <div class="flex justify-between text-[9px] font-bold mb-1 tracking-tighter">
                                 <span>POSSE: ${game.possession}%</span>
                                 <span>${100 - game.possession}%</span>
                             </div>
-                            <div class="h-1 w-full bg-gray-800 rounded-full flex overflow-hidden">
+                            <div class="h-1 w-full bg-gray-950 rounded-full flex overflow-hidden">
                                 <div class="bg-trading-home" style="width: ${game.possession}%"></div>
                                 <div class="bg-trading-away" style="width: ${100 - game.possession}%"></div>
                             </div>
                         </div>
 
-                        <button onclick="document.getElementById('stats-${i}').classList.toggle('hidden')" class="w-full mt-4 py-1 bg-trading-dark border border-trading-border rounded text-[9px] font-bold tracking-widest uppercase">
-                            <i class="fas fa-chevron-down mr-1"></i> Dados ao Vivo
+                        <button onclick="document.getElementById('stats-${i}').classList.toggle('hidden')" class="w-full mt-4 py-1.5 bg-trading-dark border border-trading-border rounded text-[9px] font-bold tracking-widest uppercase hover:bg-trading-border transition">
+                            <i class="fas fa-expand-alt mr-2 text-trading-highlight"></i> Detalhes da Partida
                         </button>
 
-                        <div id="stats-${i}" class="hidden mt-3 pt-3 border-t border-trading-border text-[10px] space-y-1 font-mono">
-                            <div class="flex justify-between"><span>Ataques Perigosos</span> <span>45 --- 42</span></div>
-                            <div class="flex justify-between"><span>Chutes no Alvo</span> <span>4 --- 3</span></div>
-                            <div class="flex justify-between"><span>Escanteios</span> <span>5 --- 2</span></div>
+                        <div id="stats-${i}" class="hidden mt-4 pt-4 border-t border-trading-border text-[11px] font-mono space-y-2">
+                            <div class="flex justify-between"><span>xG Esperado</span> <span class="text-white">0.85 — 1.20</span></div>
+                            <div class="flex justify-between"><span>Ataques Perigosos</span> <span class="text-trading-highlight">45 — 42</span></div>
+                            <div class="flex justify-between"><span>Chutes no Alvo</span> <span class="text-trading-home">4 — 3</span></div>
+                            <div class="flex justify-between"><span>Escanteios</span> <span class="text-trading-highlight">5 — 2</span></div>
                         </div>
                     </div>
                 `;
             }
         }
 
-        // Função que cria exatamente UMA BARRA por MINUTO
-        function generateBars(minutes) {
-            let barsHtml = '';
-            for(let m = 1; m <= minutes; m++) {
-                // Simula intensidade de 1 a 50
-                const intensity = Math.floor(Math.random() * 50) + 1;
-                const height = (intensity / 50) * 100; // Porcentagem da metade do gráfico
-                
-                // Simula quem está com a pressão (Home ou Away)
-                const isHome = Math.random() > 0.4; 
+        // FUNÇÃO QUE GERA EXATAMENTE 90 SLOTS
+        function generate90Bars(currentMinute) {
+            let html = '';
+            for(let m = 1; m <= 90; m++) {
+                if(m <= currentMinute) {
+                    // Minutos passados: Gera barra baseada na pressão (escala 1-50)
+                    const intensity = Math.floor(Math.random() * 50) + 1;
+                    const heightPercent = (intensity / 50) * 100;
+                    const isHome = Math.random() > 0.4; // Simulação de quem ataca
 
-                if(isHome) {
-                    barsHtml += `<div class="minute-col"><div class="bar-up" style="height: ${height}%"></div></div>`;
+                    // Simula um evento aleatório (Escanteio ou Chute)
+                    let event = '';
+                    if(m % 15 === 0) event = '<div class="event-dot dot-corner"></div>';
+                    if(m % 22 === 0) event = '<div class="event-dot dot-shot"></div>';
+
+                    html += `
+                        <div class="minute-slot">
+                            ${event}
+                            <div class="${isHome ? 'bar-home' : 'bar-away'}" style="height: ${heightPercent}%"></div>
+                        </div>
+                    `;
                 } else {
-                    barsHtml += `<div class="minute-col"><div class="bar-down" style="height: ${height}%"></div></div>`;
+                    // Minutos futuros: Apenas o slot vazio para manter a proporção
+                    html += `<div class="minute-slot"></div>`;
                 }
             }
-            return barsHtml;
+            return html;
         }
 
         renderGrid();

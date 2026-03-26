@@ -9,8 +9,9 @@
 <body>
     <div class="login-container">
         <img src="https://www.betfair.com/ads/creative/betfair-logo-en.png" alt="Betfair" style="width: 150px; margin-bottom: 20px;">
+        
         <h1>Portal Fut Trader</h1>
-        <p>Acesse as melhores oportunidade para o seu trading</p>
+        <p>Acesse as melhores oportunidades para o seu trading</p>
         
         <div id="buttonDiv"></div> 
     </div>
@@ -18,27 +19,37 @@
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     
     <script>
-      // Função que o Google chama depois que o usuário faz login
+      // Função executada após o login bem-sucedido
       function handleCredentialResponse(response) {
-         console.log("Login realizado com sucesso! Token JWT: " + response.credential);
-         alert("Login realizado! Agora você pode estruturar seu painel.");
-         // No futuro, aqui você redireciona para a página interna do seu site
-         // window.location.href = "dashboard.html"; 
+          console.log("Login realizado com sucesso!");
+          
+          // Alerta opcional para confirmar que funcionou (pode remover depois se quiser)
+          alert("Login realizado! Redirecionando para o seu painel...");
+
+          // REDIRECIONAMENTO ATIVADO: leva o usuário para a página dashboard.html
+          window.location.href = "dashboard.html"; 
       }
 
+      // Configuração inicial quando a página termina de carregar
       window.onload = function () {
         google.accounts.id.initialize({
-          client_id: "55444728820-elc9cufjb3l5mk4fvtlp1bho6ribua05.apps.googleusercontent.com", // COLE SEU ID AQUI
+          client_id: "55444728820-elc9cufjb3l5mk4fvtlp1bho6ribua05.apps.googleusercontent.com",
           callback: handleCredentialResponse
         });
         
-        // Renderiza o botão oficial do Google
+        // Renderização visual do botão
         google.accounts.id.renderButton(
           document.getElementById("buttonDiv"),
-          { theme: "outline", size: "large", text: "signin_with", shape: "pill" }  
+          { 
+            theme: "outline", 
+            size: "large", 
+            text: "signin_with", 
+            shape: "pill" 
+          }  
         );
         
-        google.accounts.id.prompt(); // Abre a janelinha flutuante de login automático
+        // Exibe o "One Tap" (janelinha flutuante de login rápido)
+        google.accounts.id.prompt(); 
       }
     </script>
 </body>

@@ -30,21 +30,71 @@
 
     <style>
         body { background-color: #0B0E14; color: #E2E8F0; margin: 0; }
+        
+        /* CONTAINER DO GRÁFICO - 90 COLUNAS FIXAS */
         .chart-90-min {
-            height: 140px; display: grid; grid-template-columns: repeat(90, 1fr);
-            gap: 1px; background: rgba(0,0,0,0.5); padding: 0 5px;
-            border-radius: 4px; position: relative; overflow: hidden; border: 1px solid #2A3241;
+            height: 140px;
+            display: grid;
+            grid-template-columns: repeat(90, 1fr);
+            gap: 1px;
+            background: rgba(0,0,0,0.5);
+            padding: 0 5px;
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden; /* Blindagem total contra vazamento */
+            border: 1px solid #2A3241;
         }
-        .center-line { position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: rgba(255,255,255,0.2); z-index: 5; pointer-events: none; }
+
+        .center-line {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 50%;
+            height: 1px;
+            background: rgba(255,255,255,0.2);
+            z-index: 5;
+            pointer-events: none;
+        }
+
         .minute-slot { height: 100%; position: relative; z-index: 2; }
-        .bar-home { background-color: #10B981; width: 100%; position: absolute; bottom: 50%; left: 0; border-radius: 1px 1px 0 0; }
-        .bar-away { background-color: #EF4444; width: 100%; position: absolute; top: 50%; left: 0; border-radius: 0 0 1px 1px; }
-        .marker { position: absolute; left: 50%; transform: translateX(-50%); border-radius: 50%; z-index: 10; }
+
+        .bar-home {
+            background-color: #10B981;
+            width: 100%;
+            position: absolute;
+            bottom: 50%; /* Ancorado no meio, sobe */
+            left: 0;
+            border-radius: 1px 1px 0 0;
+        }
+
+        .bar-away {
+            background-color: #EF4444;
+            width: 100%;
+            position: absolute;
+            top: 50%; /* Ancorado no meio, desce */
+            left: 0;
+            border-radius: 0 0 1px 1px;
+        }
+
+        /* MARCADORES DE CHUTE */
+        .marker {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 50%;
+            z-index: 10;
+        }
         .marker-alvo { width: 6px; height: 6px; background-color: #FFF; box-shadow: 0 0 5px #FFF; }
         .marker-lado { width: 3px; height: 3px; background-color: #FFB100; }
         .home-marker { bottom: 10px; } 
         .away-marker { top: 10px; }
-        .card-high-pressure { border: 2px solid #7C3AED !important; box-shadow: 0 0 25px rgba(124, 58, 237, 0.4); background: linear-gradient(to bottom, #151A22, #1a0b2e) !important; }
+
+        .card-high-pressure {
+            border: 2px solid #7C3AED !important;
+            box-shadow: 0 0 25px rgba(124, 58, 237, 0.4);
+            background: linear-gradient(to bottom, #151A22, #1a0b2e) !important;
+        }
+
         .filter-btn.active { background-color: #FFB100 !important; color: black !important; border-color: #FFB100 !important; }
         .navbar { display: flex !important; }
     </style>
@@ -72,6 +122,7 @@
             </div>
             <div class="relative">
                 <input type="text" id="gameSearch" oninput="handleSearch(this.value)" placeholder="🔎 Buscar jogo..." class="bg-trading-dark border border-trading-border rounded-full py-1.5 px-10 text-xs focus:outline-none focus:border-trading-highlight w-64 text-white">
+                <i class="fas fa-search absolute left-4 top-2.5 text-trading-text opacity-50"></i>
             </div>
         </div>
     </div>
@@ -80,14 +131,14 @@
         <div id="live-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
 
         <div class="flex justify-center items-center gap-6 mt-12 mb-10">
-            <button onclick="prevPage()" id="prevBtn" class="bg-trading-panel border border-trading-border px-6 py-2 rounded text-sm font-bold hover:bg-trading-dark disabled:opacity-30">Anterior</button>
+            <button onclick="prevPage()" id="prevBtn" class="bg-trading-panel border border-trading-border px-6 py-2 rounded text-sm font-bold hover:bg-trading-dark disabled:opacity-30 transition">Anterior</button>
             <span class="text-xs font-mono text-trading-text">Página <strong id="pageDisplay" class="text-white">1</strong> de <span id="totalDisplay">1</span></span>
-            <button onclick="nextPage()" id="nextBtn" class="bg-trading-panel border border-trading-border px-6 py-2 rounded text-sm font-bold hover:bg-trading-dark disabled:opacity-30">Próxima</button>
+            <button onclick="nextPage()" id="nextBtn" class="bg-trading-panel border border-trading-border px-6 py-2 rounded text-sm font-bold hover:bg-trading-dark disabled:opacity-30 transition">Próxima</button>
         </div>
     </main>
 
     <script>
-        // Simulação de 50 jogos para testar paginação real
+        // MOTOR DE DADOS
         const baseGames = [
             { id: 1, home: "PALMEIRAS", away: "FLAMENGO", score: "1 - 0", time: 43, possession: 55, shots6m: 4, shotsConc9m: 0 },
             { id: 2, home: "CORINTHIANS", away: "SANTOS", score: "0 - 0", time: 15, possession: 50, shots6m: 0, shotsConc9m: 0 },
@@ -96,11 +147,10 @@
             { id: 5, home: "MAN CITY", away: "ARSENAL", score: "3 - 0", time: 88, possession: 65, shots6m: 2, shotsConc9m: 0 }
         ];
         
-        // Gerador de volume (simulando os 200 jogos do sábado)
         let allGames = [];
         for(let i=0; i<50; i++) {
             let base = baseGames[i % baseGames.length];
-            allGames.push({...base, id: i + 1, home: base.home + " " + (i+1)});
+            allGames.push({...base, id: i + 1, home: base.home + (i > 4 ? " " + (i+1) : "")});
         }
 
         // ESTADO GLOBAL
@@ -114,7 +164,7 @@
             currentFilter = filter;
             currentPage = 1;
             document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-            event.currentTarget.classList.add('active');
+            if(event) event.currentTarget.classList.add('active');
             renderGrid();
         }
 
@@ -142,7 +192,6 @@
             const grid = document.getElementById('live-grid');
             grid.innerHTML = '';
 
-            // 1. FILTRAGEM
             let filtered = allGames.filter(game => {
                 const matchesSearch = game.home.includes(searchQuery) || game.away.includes(searchQuery);
                 let matchesCategory = true;
@@ -150,31 +199,22 @@
                 else if (currentFilter === '1t') matchesCategory = game.time <= 45;
                 else if (currentFilter === '2t') matchesCategory = game.time > 45;
                 else if (currentFilter === 'pressao') matchesCategory = isAltaPressao(game);
-                
                 return matchesSearch && matchesCategory;
             });
 
-            // 2. ORDENAÇÃO (Favoritos sempre no topo)
-            filtered.sort((a, b) => {
-                const aFav = favorites.includes(a.id) ? 1 : 0;
-                const bFav = favorites.includes(b.id) ? 1 : 0;
-                return bFav - aFav;
-            });
+            filtered.sort((a, b) => (favorites.includes(b.id) ? 1 : 0) - (favorites.includes(a.id) ? 1 : 0));
 
-            // 3. PAGINAÇÃO REAL
             const totalPages = Math.ceil(filtered.length / gamesPerPage) || 1;
             if (currentPage > totalPages) currentPage = totalPages;
             
             const start = (currentPage - 1) * gamesPerPage;
             const paginated = filtered.slice(start, start + gamesPerPage);
 
-            // 4. ATUALIZAR INTERFACE PAGINAÇÃO
             document.getElementById('pageDisplay').innerText = currentPage;
             document.getElementById('totalDisplay').innerText = totalPages;
             document.getElementById('prevBtn').disabled = currentPage === 1;
             document.getElementById('nextBtn').disabled = currentPage === totalPages;
 
-            // 5. RENDERIZAR CARDS
             paginated.forEach((game) => {
                 const highP = isAltaPressao(game);
                 const isFav = favorites.includes(game.id);
@@ -202,13 +242,14 @@
                             </div>
                         </div>
                         <button onclick="document.getElementById('stats-${game.id}').classList.toggle('hidden')" class="w-full mt-4 py-1.5 bg-trading-dark border border-trading-border rounded text-[9px] font-bold tracking-widest uppercase hover:bg-trading-border transition">
-                            <i class="fas fa-bolt mr-2 text-trading-highlight"></i> Detalhes da Partida
+                            <i class="fas fa-expand-alt mr-2 text-trading-highlight"></i> Detalhes da Partida
                         </button>
                         <div id="stats-${game.id}" class="hidden mt-4 pt-4 border-t border-trading-border space-y-3">
                             ${renderStatRow("1.25", "xG", "0.85")}
                             ${renderStatRow("88", "Ataques", "92")}
                             ${renderStatRow(game.shots6m, "Atq. Perigosos (6m)", "0", highP)}
                             ${renderStatRow("4", "Chute no Alvo", "3")}
+                            ${renderStatRow("7", "Chute ao lado", "5")}
                         </div>
                     </div>
                 `;
@@ -224,18 +265,38 @@
             </div>`;
         }
 
+        // --- CÁLCULO ASSERTIVO DE PRESSÃO (ONDA DE MOMENTUM) ---
         function generate90Bars(currentMinute) {
             let html = '';
+            let currentIntensity = 10;
+            let trend = Math.random() > 0.5 ? 1 : -1;
+            let trendPower = Math.floor(Math.random() * 5) + 3;
+
             for(let m = 1; m <= 90; m++) {
                 if(m <= currentMinute) {
-                    const intensity = Math.floor(Math.random() * 50) + 1;
-                    const h = (intensity / 50) * 100;
-                    const isHome = Math.random() > 0.4;
-                    let mHtml = ''; const ec = Math.random();
-                    if (ec > 0.95) mHtml = `<div class="marker marker-alvo ${isHome ? 'home-marker' : 'away-marker'}"></div>`;
-                    else if (ec > 0.88) mHtml = `<div class="marker marker-lado ${isHome ? 'home-marker' : 'away-marker'}"></div>`;
+                    if (m % trendPower === 0) {
+                        if (Math.random() > 0.7) trend *= -1;
+                        trendPower = Math.floor(Math.random() * 8) + 4;
+                    }
+
+                    let change = Math.floor(Math.random() * 12);
+                    currentIntensity += (Math.random() > 0.4 ? change : -change);
+
+                    if (currentIntensity > 50) currentIntensity = 45 + Math.random() * 5;
+                    if (currentIntensity < 5) currentIntensity = 5;
+
+                    const h = (currentIntensity / 50) * 100;
+                    const isHome = trend > 0;
+
+                    let mHtml = ''; 
+                    const ec = Math.random();
+                    if (ec > 0.975) mHtml = `<div class="marker marker-alvo ${isHome ? 'home-marker' : 'away-marker'}"></div>`;
+                    else if (ec > 0.93) mHtml = `<div class="marker marker-lado ${isHome ? 'home-marker' : 'away-marker'}"></div>`;
+                    
                     html += `<div class="minute-slot">${mHtml}<div class="${isHome ? 'bar-home' : 'bar-away'}" style="height: ${h}%"></div></div>`;
-                } else { html += `<div class="minute-slot"></div>`; }
+                } else { 
+                    html += `<div class="minute-slot"></div>`; 
+                }
             }
             return html;
         }

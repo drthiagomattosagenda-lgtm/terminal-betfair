@@ -31,7 +31,6 @@
     <style>
         body { background-color: #0B0E14; color: #E2E8F0; margin: 0; }
         
-        /* CONTAINER DO GRÁFICO COM ZONAS */
         .chart-90-min {
             height: 140px;
             display: grid;
@@ -45,21 +44,18 @@
             border: 1px solid #2A3241;
         }
 
-        /* LINHAS DE ZONA (REFERÊNCIA VISUAL) */
         .center-line {
             position: absolute; left: 0; right: 0; top: 50%; height: 1px;
             background: rgba(255,255,255,0.4); z-index: 5; pointer-events: none;
         }
 
-        /* Linhas de Pressão (Cima e Baixo) */
+        /* LINHAS DE ZONA (SENSIBILIDADE VISUAL) */
         .zone-line {
             position: absolute; left: 0; right: 0; height: 1px;
             border-top: 1px dashed rgba(255,255,255,0.08); z-index: 1; pointer-events: none;
         }
-        
-        /* Divisão 20 (Baixa) e 40 (Média) em relação ao 50 (Topo) */
-        .z-up-40 { top: 10%; } /* (50 - 40) / 50 da metade */
-        .z-up-20 { top: 30%; } /* (50 - 20) / 50 da metade */
+        .z-up-40 { top: 10%; } 
+        .z-up-20 { top: 30%; } 
         .z-down-20 { top: 70%; }
         .z-down-40 { top: 90%; }
 
@@ -68,16 +64,15 @@
         .bar-home {
             background-color: #10B981;
             width: 100%; position: absolute; bottom: 50%; left: 0;
-            border-radius: 1px 1px 0 0; transition: height 0.3s ease;
+            border-radius: 1px 1px 0 0; transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .bar-away {
             background-color: #EF4444;
             width: 100%; position: absolute; top: 50%; left: 0;
-            border-radius: 0 0 1px 1px; transition: height 0.3s ease;
+            border-radius: 0 0 1px 1px; transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* MARCADORES */
         .marker { position: absolute; left: 50%; transform: translateX(-50%); border-radius: 50%; z-index: 10; }
         .marker-alvo { width: 6px; height: 6px; background-color: #FFF; box-shadow: 0 0 5px #FFF; }
         .marker-lado { width: 3px; height: 3px; background-color: #FFB100; }
@@ -90,7 +85,6 @@
             background: linear-gradient(to bottom, #151A22, #1a0b2e) !important;
         }
 
-        .filter-btn.active { background-color: #FFB100 !important; color: black !important; border-color: #FFB100 !important; }
         .navbar { display: flex !important; }
     </style>
 </head>
@@ -100,7 +94,7 @@
         <div class="logo"><span>FUT</span> TRADER</div>
         <ul class="nav-links">
             <li><a href="dashboard.html">Dashboard</a></li>
-            <li><a href="aovivo.html">Ao Vivo</a></li>
+            <li><a href="aovive.html">Ao Vivo</a></li>
             <li><a href="comunidade.html">Comunidade</a></li>
             <li><a href="index.html" class="text-red-500">Sair</a></li>
         </ul>
@@ -227,7 +221,6 @@
                             <div class="zone-line z-up-20"></div>
                             <div class="zone-line z-down-20"></div>
                             <div class="zone-line z-down-40"></div>
-
                             ${generate90Bars(game.time)}
                         </div>
                         <div class="mt-4">
@@ -264,32 +257,38 @@
             </div>`;
         }
 
+        // --- CÁLCULO DE SENSIBILIDADE REFINADO ---
         function generate90Bars(currentMinute) {
             let html = '';
-            let currentIntensity = 10;
+            let intensity = 8; // Começa estável
             let trend = Math.random() > 0.5 ? 1 : -1;
-            let trendPower = Math.floor(Math.random() * 5) + 3;
+            let momentumLife = Math.floor(Math.random() * 6) + 5; 
 
             for(let m = 1; m <= 90; m++) {
                 if(m <= currentMinute) {
-                    if (m % trendPower === 0) {
-                        if (Math.random() > 0.7) trend *= -1;
-                        trendPower = Math.floor(Math.random() * 8) + 4;
+                    if (m % momentumLife === 0) {
+                        if (Math.random() > 0.6) trend *= -1;
+                        momentumLife = Math.floor(Math.random() * 10) + 5;
                     }
 
-                    let change = Math.floor(Math.random() * 12);
-                    currentIntensity += (Math.random() > 0.4 ? change : -change);
+                    // Sensibilidade reduzida: passos menores (max 6 em vez de 12)
+                    let change = (Math.random() * 6);
+                    intensity += (Math.random() > 0.45 ? change : -change);
 
-                    if (currentIntensity > 50) currentIntensity = 48; // Trava suave no topo
-                    if (currentIntensity < 3) currentIntensity = 3;
+                    // Amortecimento de topo: quanto mais perto de 50, mais difícil subir
+                    if (intensity > 40) intensity -= (Math.random() * 3);
+                    
+                    // Travas de segurança
+                    if (intensity > 49) intensity = 48 + Math.random();
+                    if (intensity < 2) intensity = 2;
 
-                    const h = (currentIntensity / 50) * 100;
+                    const h = (intensity / 50) * 100;
                     const isHome = trend > 0;
 
                     let mHtml = ''; 
                     const ec = Math.random();
-                    if (ec > 0.975) mHtml = `<div class="marker marker-alvo ${isHome ? 'home-marker' : 'away-marker'}"></div>`;
-                    else if (ec > 0.93) mHtml = `<div class="marker marker-lado ${isHome ? 'home-marker' : 'away-marker'}"></div>`;
+                    if (ec > 0.985) mHtml = `<div class="marker marker-alvo ${isHome ? 'home-marker' : 'away-marker'}"></div>`;
+                    else if (ec > 0.94) mHtml = `<div class="marker marker-lado ${isHome ? 'home-marker' : 'away-marker'}"></div>`;
                     
                     html += `<div class="minute-slot">${mHtml}<div class="${isHome ? 'bar-home' : 'bar-away'}" style="height: ${h}%"></div></div>`;
                 } else { 

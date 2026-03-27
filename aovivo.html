@@ -31,6 +31,7 @@
     <style>
         body { background-color: #0B0E14; color: #E2E8F0; margin: 0; }
         
+        /* CONTAINER DO GRÁFICO - 90 COLUNAS FIXAS */
         .chart-90-min {
             height: 140px;
             display: grid;
@@ -44,16 +45,18 @@
             border: 1px solid #2A3241;
         }
 
+        /* LINHA HORIZONTAL CENTRAL (PONTO ZERO) */
         .center-line {
             position: absolute; left: 0; right: 0; top: 50%; height: 1px;
             background: rgba(255,255,255,0.4); z-index: 5; pointer-events: none;
         }
 
-        /* LINHAS DE ZONA (SENSIBILIDADE VISUAL) */
+        /* LINHAS DE ZONA (REFERÊNCIA DE SENSIBILIDADE) */
         .zone-line {
             position: absolute; left: 0; right: 0; height: 1px;
             border-top: 1px dashed rgba(255,255,255,0.08); z-index: 1; pointer-events: none;
         }
+        /* Posicionamento das zonas Baixa (20) e Média (40) */
         .z-up-40 { top: 10%; } 
         .z-up-20 { top: 30%; } 
         .z-down-20 { top: 70%; }
@@ -61,6 +64,7 @@
 
         .minute-slot { height: 100%; position: relative; z-index: 2; }
 
+        /* BARRAS COM TRANSIÇÃO SUAVE */
         .bar-home {
             background-color: #10B981;
             width: 100%; position: absolute; bottom: 50%; left: 0;
@@ -73,18 +77,21 @@
             border-radius: 0 0 1px 1px; transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
+        /* MARCADORES DE EVENTOS */
         .marker { position: absolute; left: 50%; transform: translateX(-50%); border-radius: 50%; z-index: 10; }
         .marker-alvo { width: 6px; height: 6px; background-color: #FFF; box-shadow: 0 0 5px #FFF; }
         .marker-lado { width: 3px; height: 3px; background-color: #FFB100; }
         .home-marker { bottom: 8px; } 
         .away-marker { top: 8px; }
 
+        /* DESTAQUE ALTA PRESSÃO */
         .card-high-pressure {
             border: 2px solid #7C3AED !important;
             box-shadow: 0 0 25px rgba(124, 58, 237, 0.4);
             background: linear-gradient(to bottom, #151A22, #1a0b2e) !important;
         }
 
+        .filter-btn.active { background-color: #FFB100 !important; color: black !important; border-color: #FFB100 !important; }
         .navbar { display: flex !important; }
     </style>
 </head>
@@ -94,7 +101,7 @@
         <div class="logo"><span>FUT</span> TRADER</div>
         <ul class="nav-links">
             <li><a href="dashboard.html">Dashboard</a></li>
-            <li><a href="aovive.html">Ao Vivo</a></li>
+            <li><a href="aovivo.html">Ao Vivo</a></li>
             <li><a href="comunidade.html">Comunidade</a></li>
             <li><a href="index.html" class="text-red-500">Sair</a></li>
         </ul>
@@ -111,6 +118,7 @@
             </div>
             <div class="relative">
                 <input type="text" id="gameSearch" oninput="handleSearch(this.value)" placeholder="🔎 Buscar jogo..." class="bg-trading-dark border border-trading-border rounded-full py-1.5 px-10 text-xs focus:outline-none focus:border-trading-highlight w-64 text-white">
+                <i class="fas fa-search absolute left-4 top-2.5 text-trading-text opacity-50"></i>
             </div>
         </div>
     </div>
@@ -126,6 +134,7 @@
     </main>
 
     <script>
+        // MOTOR DE DADOS (Simulação)
         const baseGames = [
             { id: 1, home: "PALMEIRAS", away: "FLAMENGO", score: "1 - 0", time: 43, possession: 55, shots6m: 4, shotsConc9m: 0 },
             { id: 2, home: "CORINTHIANS", away: "SANTOS", score: "0 - 0", time: 15, possession: 50, shots6m: 0, shotsConc9m: 0 },
@@ -140,6 +149,7 @@
             allGames.push({...base, id: i + 1, home: base.home + (i > 4 ? " " + (i+1) : "")});
         }
 
+        // ESTADO GLOBAL
         let favorites = JSON.parse(localStorage.getItem('futTraderFavs')) || [];
         let currentFilter = 'todos';
         let searchQuery = '';
@@ -192,6 +202,7 @@
 
             const totalPages = Math.ceil(filtered.length / gamesPerPage) || 1;
             if (currentPage > totalPages) currentPage = totalPages;
+            
             const start = (currentPage - 1) * gamesPerPage;
             const paginated = filtered.slice(start, start + gamesPerPage);
 
@@ -215,6 +226,7 @@
                             </div>
                             <i onclick="toggleFavorite(${game.id})" class="${isFav ? 'fas fa-star text-yellow-500' : 'far fa-star'} text-sm cursor-pointer transition hover:scale-125"></i>
                         </div>
+
                         <div class="chart-90-min">
                             <div class="center-line"></div>
                             <div class="zone-line z-up-40"></div>
@@ -223,6 +235,7 @@
                             <div class="zone-line z-down-40"></div>
                             ${generate90Bars(game.time)}
                         </div>
+
                         <div class="mt-4">
                             <div class="flex justify-between text-[9px] font-bold mb-1 uppercase tracking-tighter">
                                 <span>Posse: ${game.possession}%</span>
@@ -233,9 +246,11 @@
                                 <div class="bg-trading-away" style="width: ${100 - game.possession}%"></div>
                             </div>
                         </div>
+
                         <button onclick="document.getElementById('stats-${game.id}').classList.toggle('hidden')" class="w-full mt-4 py-1.5 bg-trading-dark border border-trading-border rounded text-[9px] font-bold tracking-widest uppercase hover:bg-trading-border transition">
                             <i class="fas fa-expand-alt mr-2 text-trading-highlight"></i> Detalhes da Partida
                         </button>
+
                         <div id="stats-${game.id}" class="hidden mt-4 pt-4 border-t border-trading-border space-y-3">
                             ${renderStatRow("1.25", "xG", "0.85")}
                             ${renderStatRow("88", "Ataques", "92")}
@@ -257,10 +272,10 @@
             </div>`;
         }
 
-        // --- CÁLCULO DE SENSIBILIDADE REFINADO ---
+        // --- CÁLCULO DE SENSIBILIDADE CALIBRADO (MOMENTUM) ---
         function generate90Bars(currentMinute) {
             let html = '';
-            let intensity = 8; // Começa estável
+            let intensity = 8; 
             let trend = Math.random() > 0.5 ? 1 : -1;
             let momentumLife = Math.floor(Math.random() * 6) + 5; 
 
@@ -271,14 +286,10 @@
                         momentumLife = Math.floor(Math.random() * 10) + 5;
                     }
 
-                    // Sensibilidade reduzida: passos menores (max 6 em vez de 12)
                     let change = (Math.random() * 6);
                     intensity += (Math.random() > 0.45 ? change : -change);
 
-                    // Amortecimento de topo: quanto mais perto de 50, mais difícil subir
                     if (intensity > 40) intensity -= (Math.random() * 3);
-                    
-                    // Travas de segurança
                     if (intensity > 49) intensity = 48 + Math.random();
                     if (intensity < 2) intensity = 2;
 

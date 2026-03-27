@@ -77,12 +77,28 @@
             border-radius: 0 0 1px 1px; transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* MARCADORES DE EVENTOS */
-        .marker { position: absolute; left: 50%; transform: translateX(-50%); border-radius: 50%; z-index: 10; }
-        .marker-alvo { width: 6px; height: 6px; background-color: #FFF; box-shadow: 0 0 5px #FFF; }
-        .marker-lado { width: 3px; height: 3px; background-color: #FFB100; }
-        .home-marker { bottom: 8px; } 
-        .away-marker { top: 8px; }
+        /* --- MARCADORES DE EVENTOS ATUALIZADOS --- */
+        .marker { 
+            position: absolute; 
+            left: 50%; 
+            transform: translateX(-50%); 
+            z-index: 10; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, sans-serif; /* Garante renderização consistente dos emojis */
+        }
+
+        /* Estilização para o emoji de Gol ⚽️ (Maior para destaque) */
+        .marker-gol { font-size: 11px; } 
+
+        /* Estilização para os símbolos de chute (Círculos Coloridos) */
+        .marker-alvo { font-size: 7px; }  /* Chute no alvo -> 🔴 */
+        .marker-lado { font-size: 5px; }  /* Chute ao lado -> 🔵 (Menor conforme solicitado) */
+
+        /* Posicionamento Mandante (Cima) e Visitante (Baixo) */
+        .home-marker { bottom: 10px; } 
+        .away-marker { top: 10px; }
 
         /* DESTAQUE ALTA PRESSÃO */
         .card-high-pressure {
@@ -298,8 +314,22 @@
 
                     let mHtml = ''; 
                     const ec = Math.random();
-                    if (ec > 0.985) mHtml = `<div class="marker marker-alvo ${isHome ? 'home-marker' : 'away-marker'}"></div>`;
-                    else if (ec > 0.94) mHtml = `<div class="marker marker-lado ${isHome ? 'home-marker' : 'away-marker'}"></div>`;
+                    
+                    // Lógica para os marcadores solicitados (cirúrgico)
+                    const markerPosClass = isHome ? 'home-marker' : 'away-marker';
+
+                    // Gol -> ⚽️ (v. low chance na simulação)
+                    if (ec > 0.995) {
+                        mHtml = `<div class="marker marker-gol ${markerPosClass}">⚽️</div>`;
+                    }
+                    // Chute no alvo -> 🔴 (Chance média)
+                    else if (ec > 0.980) {
+                        mHtml = `<div class="marker marker-alvo ${markerPosClass}">🔴</div>`;
+                    }
+                    // chute ao lado -> 🔵 (Chance alta)
+                    else if (ec > 0.930) {
+                        mHtml = `<div class="marker marker-lado ${markerPosClass}">🔵</div>`;
+                    }
                     
                     html += `<div class="minute-slot">${mHtml}<div class="${isHome ? 'bar-home' : 'bar-away'}" style="height: ${h}%"></div></div>`;
                 } else { 

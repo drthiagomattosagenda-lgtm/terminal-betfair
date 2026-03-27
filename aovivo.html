@@ -31,63 +31,58 @@
     <style>
         body { background-color: #0B0E14; color: #E2E8F0; margin: 0; }
         
-        /* CONTAINER DO GRÁFICO - 90 COLUNAS FIXAS */
+        /* CONTAINER DO GRÁFICO COM ZONAS */
         .chart-90-min {
             height: 140px;
             display: grid;
             grid-template-columns: repeat(90, 1fr);
             gap: 1px;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.6);
             padding: 0 5px;
             border-radius: 4px;
             position: relative;
-            overflow: hidden; /* Blindagem total contra vazamento */
+            overflow: hidden;
             border: 1px solid #2A3241;
         }
 
+        /* LINHAS DE ZONA (REFERÊNCIA VISUAL) */
         .center-line {
-            position: absolute;
-            left: 0;
-            right: 0;
-            top: 50%;
-            height: 1px;
-            background: rgba(255,255,255,0.2);
-            z-index: 5;
-            pointer-events: none;
+            position: absolute; left: 0; right: 0; top: 50%; height: 1px;
+            background: rgba(255,255,255,0.4); z-index: 5; pointer-events: none;
         }
+
+        /* Linhas de Pressão (Cima e Baixo) */
+        .zone-line {
+            position: absolute; left: 0; right: 0; height: 1px;
+            border-top: 1px dashed rgba(255,255,255,0.08); z-index: 1; pointer-events: none;
+        }
+        
+        /* Divisão 20 (Baixa) e 40 (Média) em relação ao 50 (Topo) */
+        .z-up-40 { top: 10%; } /* (50 - 40) / 50 da metade */
+        .z-up-20 { top: 30%; } /* (50 - 20) / 50 da metade */
+        .z-down-20 { top: 70%; }
+        .z-down-40 { top: 90%; }
 
         .minute-slot { height: 100%; position: relative; z-index: 2; }
 
         .bar-home {
             background-color: #10B981;
-            width: 100%;
-            position: absolute;
-            bottom: 50%; /* Ancorado no meio, sobe */
-            left: 0;
-            border-radius: 1px 1px 0 0;
+            width: 100%; position: absolute; bottom: 50%; left: 0;
+            border-radius: 1px 1px 0 0; transition: height 0.3s ease;
         }
 
         .bar-away {
             background-color: #EF4444;
-            width: 100%;
-            position: absolute;
-            top: 50%; /* Ancorado no meio, desce */
-            left: 0;
-            border-radius: 0 0 1px 1px;
+            width: 100%; position: absolute; top: 50%; left: 0;
+            border-radius: 0 0 1px 1px; transition: height 0.3s ease;
         }
 
-        /* MARCADORES DE CHUTE */
-        .marker {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            border-radius: 50%;
-            z-index: 10;
-        }
+        /* MARCADORES */
+        .marker { position: absolute; left: 50%; transform: translateX(-50%); border-radius: 50%; z-index: 10; }
         .marker-alvo { width: 6px; height: 6px; background-color: #FFF; box-shadow: 0 0 5px #FFF; }
         .marker-lado { width: 3px; height: 3px; background-color: #FFB100; }
-        .home-marker { bottom: 10px; } 
-        .away-marker { top: 10px; }
+        .home-marker { bottom: 8px; } 
+        .away-marker { top: 8px; }
 
         .card-high-pressure {
             border: 2px solid #7C3AED !important;
@@ -118,11 +113,10 @@
                 <button onclick="setFilter('favoritos')" class="filter-btn bg-trading-dark px-4 py-1.5 rounded text-xs font-bold uppercase border border-trading-border transition"><i class="fas fa-star text-yellow-500 mr-1"></i> Favoritos</button>
                 <button onclick="setFilter('1t')" class="filter-btn bg-trading-dark px-4 py-1.5 rounded text-xs font-bold uppercase border border-trading-border transition">1º Tempo</button>
                 <button onclick="setFilter('2t')" class="filter-btn bg-trading-dark px-4 py-1.5 rounded text-xs font-bold uppercase border border-trading-border transition">2º Tempo</button>
-                <button onclick="setFilter('pressao')" class="filter-btn bg-trading-dark px-4 py-1.5 rounded text-xs font-bold uppercase border border-trading-border transition text-trading-pressure">Alta Pressão</button>
+                <button onclick="setFilter('pressao')" class="filter-btn bg-trading-dark px-4 py-1.5 rounded text-xs font-bold uppercase border border-trading-border transition text-trading-pressure font-black">Alta Pressão</button>
             </div>
             <div class="relative">
                 <input type="text" id="gameSearch" oninput="handleSearch(this.value)" placeholder="🔎 Buscar jogo..." class="bg-trading-dark border border-trading-border rounded-full py-1.5 px-10 text-xs focus:outline-none focus:border-trading-highlight w-64 text-white">
-                <i class="fas fa-search absolute left-4 top-2.5 text-trading-text opacity-50"></i>
             </div>
         </div>
     </div>
@@ -138,7 +132,6 @@
     </main>
 
     <script>
-        // MOTOR DE DADOS
         const baseGames = [
             { id: 1, home: "PALMEIRAS", away: "FLAMENGO", score: "1 - 0", time: 43, possession: 55, shots6m: 4, shotsConc9m: 0 },
             { id: 2, home: "CORINTHIANS", away: "SANTOS", score: "0 - 0", time: 15, possession: 50, shots6m: 0, shotsConc9m: 0 },
@@ -153,7 +146,6 @@
             allGames.push({...base, id: i + 1, home: base.home + (i > 4 ? " " + (i+1) : "")});
         }
 
-        // ESTADO GLOBAL
         let favorites = JSON.parse(localStorage.getItem('futTraderFavs')) || [];
         let currentFilter = 'todos';
         let searchQuery = '';
@@ -206,7 +198,6 @@
 
             const totalPages = Math.ceil(filtered.length / gamesPerPage) || 1;
             if (currentPage > totalPages) currentPage = totalPages;
-            
             const start = (currentPage - 1) * gamesPerPage;
             const paginated = filtered.slice(start, start + gamesPerPage);
 
@@ -230,7 +221,15 @@
                             </div>
                             <i onclick="toggleFavorite(${game.id})" class="${isFav ? 'fas fa-star text-yellow-500' : 'far fa-star'} text-sm cursor-pointer transition hover:scale-125"></i>
                         </div>
-                        <div class="chart-90-min"><div class="center-line"></div>${generate90Bars(game.time)}</div>
+                        <div class="chart-90-min">
+                            <div class="center-line"></div>
+                            <div class="zone-line z-up-40"></div>
+                            <div class="zone-line z-up-20"></div>
+                            <div class="zone-line z-down-20"></div>
+                            <div class="zone-line z-down-40"></div>
+
+                            ${generate90Bars(game.time)}
+                        </div>
                         <div class="mt-4">
                             <div class="flex justify-between text-[9px] font-bold mb-1 uppercase tracking-tighter">
                                 <span>Posse: ${game.possession}%</span>
@@ -265,7 +264,6 @@
             </div>`;
         }
 
-        // --- CÁLCULO ASSERTIVO DE PRESSÃO (ONDA DE MOMENTUM) ---
         function generate90Bars(currentMinute) {
             let html = '';
             let currentIntensity = 10;
@@ -282,8 +280,8 @@
                     let change = Math.floor(Math.random() * 12);
                     currentIntensity += (Math.random() > 0.4 ? change : -change);
 
-                    if (currentIntensity > 50) currentIntensity = 45 + Math.random() * 5;
-                    if (currentIntensity < 5) currentIntensity = 5;
+                    if (currentIntensity > 50) currentIntensity = 48; // Trava suave no topo
+                    if (currentIntensity < 3) currentIntensity = 3;
 
                     const h = (currentIntensity / 50) * 100;
                     const isHome = trend > 0;

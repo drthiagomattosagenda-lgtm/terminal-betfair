@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Início - Agenda Fut Trader</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        trading: {
+                            dark: '#0B0E14',
+                            panel: '#151A22',
+                            border: '#2A3241',
+                            highlight: '#FFB100',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #0B0E14; color: #E2E8F0; margin: 0; }
+        .game-row {
+            transition: all 0.2s ease;
+            border-left: 4px solid transparent;
+        }
+        .game-row:hover {
+            background-color: #1a222d;
+            border-left: 4px solid #FFB100;
+        }
+        .fav-active { color: #FFB100 !important; }
+        
+        /* Navbar padrão mantida */
+        .navbar { display: flex !important; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <nav class="navbar">
+        <div class="logo"><span>FUT</span> TRADER</div>
+        <ul class="nav-links">
+            <li><a href="inicio.html">Início</a></li>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="aovivo.html">Ao Vivo</a></li>
+            <li><a href="comunidade.html">Comunidade</a></li>
+            <li><a href="index.html" class="text-red-500">Sair</a></li>
+        </ul>
+    </nav>
+
+    <header class="max-w-7xl mx-auto p-6 mt-4">
+        <div class="flex justify-between items-center">
+            <div>
+                <h1 class="text-2xl font-bold text-white">Agenda do Dia</h1>
+                <p class="text-gray-400 text-sm">Organize suas entradas e favoritos para hoje.</p>
+            </div>
+            <div class="bg-trading-panel border border-trading-border px-4 py-2 rounded-lg">
+                <span id="date-display" class="text-trading-highlight font-mono font-bold"></span>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto p-6">
+        <div class="mb-6 relative">
+            <input type="text" id="agendaSearch" oninput="renderAgenda()" placeholder="🔎 Filtrar time ou campeonato..." 
+            class="w-full bg-trading-panel border border-trading-border rounded-xl py-3 px-12 text-sm focus:outline-none focus:border-trading-highlight text-white">
+        </div>
+
+        <div id="agenda-list" class="space-y-2">
+            </div>
+    </main>
+
+    <script>
+        // Dados Simulados da Agenda (Futuramente virão da sua API/Sheets)
+        const dailyGames = [
+            { id: 101, time: "09:00", home: "Botafogo", away: "Flamengo", league: "Brasileirão Série A", stadium: "Engenhão", odds: "2.10 | 3.40 | 3.10" },
+            { id: 102, time: "11:00", home: "Palmeiras", away: "Cuiabá", league: "Brasileirão Série A", stadium: "Allianz Parque", odds: "1.45 | 4.20 | 8.00" },
+            { id: 103, time: "12:30", home: "Liverpool", away: "Arsenal", league: "Premier League", stadium: "Anfield", odds: "2.50 | 3.50 | 2.60" },
+            { id: 104, time: "15:00", home: "Real Madrid", away: "Barcelona", league: "La Liga", stadium: "Bernabéu", odds: "2.05 | 3.70 | 3.20" },
+            { id: 105, time: "16:45", home: "Inter de Milão", away: "Milan", league: "Série A Tim", stadium: "San Siro", odds: "2.15 | 3.30 | 3.40" },
+            { id: 106, time: "19:00", home: "Fortaleza", away: "Ceará", league: "Copa do Nordeste", stadium: "Castelão", odds: "2.20 | 3.10 | 3.20" },
+        ];
+
+        // Sincronização com o Ao Vivo (mesma chave do localStorage)
+        let favorites = JSON.parse(localStorage.getItem('futTraderFavs')) || [];
+
+        function toggleFavorite(id) {
+            if (favorites.includes(id)) {
+                favorites = favorites.filter(favId => favId !== id);
+            } else {
+                favorites.push(id);
+            }
+            localStorage.setItem('futTraderFavs', JSON.stringify(favorites));
+            renderAgenda();
+        }
+
+        function renderAgenda() {
+            const list = document.getElementById('agenda-list');
+            const search = document.getElementById('agendaSearch').value.toUpperCase();
+            list.innerHTML = '';
+
+            // Filtragem
+            let filtered = dailyGames.filter(g => 
+                g.home.toUpperCase().includes(search) || 
+                g.away.toUpperCase().includes(search) || 
+                g.league.toUpperCase().includes(search)
+            );
+
+            // Ordenação: Favoritos no topo, depois por horário
+            filtered.sort((a, b) => {
+                const aFav = favorites.includes(a.id) ? 1 : 0;
+                const bFav = favorites.includes(b.id) ? 1 : 0;
+                if (aFav !== bFav) return bFav - aFav;
+                return a.time.localeCompare(b.time);
+            });
+
+            filtered.forEach(game => {
+                const isFav = favorites.includes(game.id);
+                list.innerHTML += `
+                    <div class="bg-trading-panel border border-trading-border rounded-lg overflow-hidden mb-2">
+                        <div class="game-row p-4 flex items-center justify-between">
+                            <div class="flex items-center gap-6">
+                                <span class="font-mono text-trading-highlight font-bold">${game.time}</span>
+                                <div class="text-sm">
+                                    <span class="font-bold text-white">${game.home} x ${game.away}</span>
+                                    <span class="mx-2 text-gray-600">|</span>
+                                    <span class="text-gray-400 text-xs">Campeonato: ${game.league}</span>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center gap-4">
+                                <button onclick="toggleDetails(${game.id})" class="text-gray-400 hover:text-white transition">
+                                    <i class="fas fa-plus-circle text-lg"></i>
+                                </button>
+                                <button onclick="toggleFavorite(${game.id})" class="transition hover:scale-120">
+                                    <i class="fa-star ${isFav ? 'fas text-yellow-500' : 'far text-gray-500'} text-lg"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div id="details-${game.id}" class="hidden bg-[#0d131a] p-4 border-t border-trading-border">
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs">
+                                <div>
+                                    <p class="text-gray-500 uppercase font-bold mb-1">Estádio</p>
+                                    <p class="text-white">${game.stadium}</p>
+                                </div>
+                                <div>
+                                    <p class="text-gray-500 uppercase font-bold mb-1">Probabilidades (1x2)</p>
+                                    <p class="text-trading-highlight">${game.odds}</p>
+                                </div>
+                                <div>
+                                    <p class="text-gray-500 uppercase font-bold mb-1">Status</p>
+                                    <p class="text-green-500">Pré-jogo</p>
+                                </div>
+                                <div class="flex items-end">
+                                    <a href="aovivo.html" class="text-blue-400 hover:underline">Ir para Análise Ao Vivo →</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function toggleDetails(id) {
+            const el = document.getElementById(`details-${id}`);
+            el.classList.toggle('hidden');
+        }
+
+        // Exibir data de hoje
+        const d = new Date();
+        document.getElementById('date-display').innerText = d.toLocaleDateString('pt-br', { day: '2-digit', month: 'long', year: 'numeric' });
+
+        renderAgenda();
+    </script>
+</body>
+</html>

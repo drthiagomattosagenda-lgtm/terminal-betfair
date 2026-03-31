@@ -81,17 +81,28 @@
         let gamesData = [];
         let favorites = JSON.parse(localStorage.getItem('futTraderFavs')) || [];
 
-        // FUNÇÃO CIRÚRGICA: Trata o horário e finalização
+        // FUNÇÃO CIRÚRGICA ATUALIZADA: Traduções robustas e exatas
         function tratarStatus(status) {
             if (!status) return "--:--";
-            const finalizacoes = ["FT", "Final", "Ended", "Fim"];
-            if (finalizacoes.some(f => status.includes(f))) return "FIM";
+            
+            const s = status.toUpperCase();
+            
+            // Traduções Mapeadas
+            if (s.includes("SCHEDULED")) return "Em Breve";
+            if (s.includes("CANCELED") || s.includes("CANCELLED")) return "Cancelado";
+            if (s.includes("POSTPONED")) return "Adiado";
+            if (s.includes("FT-PENS") || s.includes("PEN")) return "FT-Penal";
+            
+            // Lógica de FIM
+            const finalizacoes = ["FT", "FINAL", "ENDED", "FIM", "FULL TIME"];
+            if (finalizacoes.some(f => s === f || s.includes(f))) return "FIM";
+            
+            // Mantém horário limpo se for o caso
             return status.replace("AM", "").replace("PM", "").trim();
         }
 
         async function conectarAoMotor() {
             try {
-                // Tenta buscar do Render (Seu Backend)
                 const response = await fetch('https://motor-ferrari.onrender.com/jogos');
                 const result = await response.json();
 
@@ -140,13 +151,12 @@
                         
                         // Lógica Mata-Mata
                         const copas = ["Copa", "Cup", "Champions", "Libertadores", "Trophy", "Mata-Mata", "Playoffs", "FA Cup"];
-                        const ehMataMata = copas.some(c => league.name.includes(c));
+                        const ehMataMata = copas.some(c => league.name.toUpperCase().includes(c.toUpperCase()));
                         
-                        // Formatação do Tempo
+                        // Formatação do Tempo e Cor dinâmica baseada no novo status
                         const statusFormatado = tratarStatus(game.time);
-                        const statusColor = statusFormatado === 'FIM' ? 'text-red-500' : 'text-trading-highlight';
+                        const statusColor = ['FIM', 'Cancelado', 'Adiado', 'FT-Penal'].includes(statusFormatado) ? 'text-red-500' : 'text-trading-highlight';
                         
-                        // ARQUITETURA SÊNIOR MANTIDA
                         html += `
                             <div class="game-item">
                                 <div class="p-5 flex items-center justify-between cursor-pointer hover:bg-white/[0.02] transition" onclick="toggleDetails('${game.id}')">
@@ -240,15 +250,10 @@
             document.getElementById('game-count').innerText = totalCount;
         }
 
-        // GERENCIAMENTO DE ESTADO SÊNIOR (Apenas esconde/mostra, sem destruir HTML)
         function switchTab(id, aba) {
             const container = document.getElementById(`details-${id}`);
-            
-            // Esconde todos os conteúdos desta partida e reseta botões
             container.querySelectorAll(`.tab-content-${id}`).forEach(c => c.classList.add('hidden'));
             container.querySelectorAll(`.tab-btn`).forEach(b => b.classList.remove('active'));
-            
-            // Mostra a aba clicada
             document.getElementById(`content-${aba}-${id}`).classList.remove('hidden');
             document.getElementById(`tab-${aba}-${id}`).classList.add('active');
         }
@@ -261,7 +266,7 @@
             
             if (isOpening) {
                 switchTab(id, 'resumo');
-                buscarDetalhesSeguros(id); // Chama a API sem quebrar a tela
+                buscarDetalhesSeguros(id);
             }
         }
 
@@ -276,21 +281,17 @@
             renderAgenda();
         }
 
-        // BUSCA DE DADOS COM INJEÇÃO SEGURA (Não usa innerHTML em blocos grandes)
         async function buscarDetalhesSeguros(id) {
             try {
-                // Rotação Segura: Bypass direto via ESPN para evitar gargalo do Render
                 const resp = await fetch(`https://site.api.espn.com/apis/site/v2/sports/soccer/summary?event=${id}`);
                 if (!resp.ok) throw new Error("API Indisponível");
                 const data = await resp.json();
 
-                // Injetando textos via ID sem quebrar a UI
-                document.getElementById(`status-${id}`).innerText = data.header?.competitions[0]?.status?.type?.detail || 'Ao Vivo';
+                let statusTraduzido = tratarStatus(data.header?.competitions[0]?.status?.type?.detail || 'Ao Vivo');
+                document.getElementById(`status-${id}`).innerText = statusTraduzido;
                 
-                // Se o dado não existir, a UI se mantém com o valor "N/A" ou "-"
                 document.getElementById(`h2h-msg-${id}`).innerText = "Dados históricos protegidos. Acesse a área PRO.";
 
-                // Como a API da ESPN gratuita não manda a "Forma" em array, colocamos um visualizador estático de carregamento para não ficar vazio
                 document.getElementById(`form-home-${id}`).innerHTML = `<div class="form-dot bg-gray-700 opacity-50">?</div><div class="form-dot bg-gray-700 opacity-50">?</div>`;
                 document.getElementById(`form-away-${id}`).innerHTML = `<div class="form-dot bg-gray-700 opacity-50">?</div><div class="form-dot bg-gray-700 opacity-50">?</div>`;
 

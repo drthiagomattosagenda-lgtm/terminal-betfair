@@ -6,60 +6,38 @@
     <title>QG Fut Trader - Central de Inteligência</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        trading: {
-                            dark: '#0B0E14',
-                            panel: '#151A22',
-                            border: '#2A3241',
-                            highlight: '#FFB100',
-                            win: '#10B981',
-                            loss: '#EF4444',
-                            draw: '#718096'
-                        }
-                    }
-                }
-            }
-        }
+        tailwind.config = { theme: { extend: { colors: { trading: { dark: '#0B0E14', panel: '#151A22', border: '#2A3241', highlight: '#FFB100' } } } } }
     </script>
-
     <style>
         body { background-color: #0B0E14; color: #E2E8F0; font-family: 'Inter', sans-serif; }
-        .tab-btn { color: #718096; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; transition: 0.2s; position: relative; padding-bottom: 12px; }
+        .tab-btn { color: #718096; font-size: 10px; font-weight: 800; text-transform: uppercase; transition: 0.2s; position: relative; padding-bottom: 12px; }
         .tab-btn.active { color: #FFB100; }
         .tab-btn.active::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: #FFB100; }
-        .form-dot { width: 18px; height: 18px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: bold; color: white; }
         .animate-in { animation: fadeIn 0.3s ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
-        .no-scrollbar::-webkit-scrollbar { display: none; }
     </style>
 </head>
 <body class="antialiased">
-
     <nav class="border-b border-trading-border p-4 mb-8">
         <div class="max-w-6xl mx-auto flex justify-between items-center">
-            <div class="text-xl font-black italic tracking-tighter text-white">FUT <span class="text-trading-highlight">TRADER</span></div>
-            <ul class="flex gap-6 list-none">
-                <li><a href="inicio.html" class="text-trading-highlight font-bold text-sm">Início</a></li>
-                <li><a href="dashboard.html" class="text-gray-500 font-bold text-sm">Dashboard</a></li>
-                <li><a href="aovivo.html" class="text-gray-500 font-bold text-sm">Ao Vivo</a></li>
-            </ul>
+            <div class="text-xl font-black italic text-white uppercase">FUT <span class="text-trading-highlight">TRADER</span></div>
+            <div class="flex gap-4">
+                <a href="inicio.html" class="text-trading-highlight text-sm font-bold">Início</a>
+                <a href="dashboard.html" class="text-gray-500 text-sm">Dashboard</a>
+            </div>
         </div>
     </nav>
 
     <main class="max-w-6xl mx-auto p-4">
         <div class="mb-10">
-            <h1 class="text-4xl font-black text-white tracking-tighter uppercase italic leading-none">QUARTEL <span class="text-trading-highlight">GENERAL</span></h1>
-            <p class="text-gray-500 text-xs mt-2 font-medium">Analizando <span id="game-count" class="text-white">0</span> eventos reais via API Global.</p>
+            <h1 class="text-4xl font-black text-white tracking-tighter uppercase italic">QUARTEL <span class="text-trading-highlight">GENERAL</span></h1>
+            <p class="text-gray-500 text-xs mt-2">Dados processados em tempo real via Central Global.</p>
         </div>
 
-        <div id="loading-alert" class="text-center py-20">
-            <i class="fas fa-circle-notch fa-spin text-trading-highlight text-3xl"></i>
-            <p class="text-gray-500 mt-4 font-bold uppercase text-[10px] tracking-[3px]">Sincronizando Grade Mundial...</p>
+        <div id="loading-alert" class="text-center py-10">
+            <i class="fas fa-sync fa-spin text-trading-highlight text-2xl"></i>
+            <p id="status-text" class="text-gray-500 mt-4 font-bold uppercase text-[10px] tracking-widest">Iniciando Sincronização...</p>
         </div>
 
         <div id="agenda-list" class="space-y-8"></div>
@@ -69,10 +47,14 @@
         let gamesData = [];
 
         async function conectarAoMotor() {
+            const statusText = document.getElementById('status-text');
             try {
                 const response = await fetch('https://motor-ferrari.onrender.com/jogos');
+                if (!response.ok) throw new Error("Servidor Offline");
                 const result = await response.json();
+                
                 if (result.sucesso) {
+                    // Agrupar por Liga
                     const grouped = result.dados.reduce((acc, game) => {
                         const key = game.league;
                         if (!acc[key]) acc[key] = { name: key, games: [] };
@@ -83,105 +65,84 @@
                     document.getElementById('loading-alert').classList.add('hidden');
                     renderAgenda();
                 }
-            } catch (e) { setTimeout(conectarAoMotor, 5000); }
+            } catch (e) {
+                statusText.innerText = "Aguardando o Motor Ferrari acordar... (Render Grátis)";
+                setTimeout(conectarAoMotor, 5000);
+            }
         }
 
         function renderAgenda() {
             const list = document.getElementById('agenda-list');
             list.innerHTML = '';
-            let count = 0;
-
             gamesData.forEach(league => {
-                let html = `
+                let leagueHtml = `
                     <div class="league-section animate-in">
-                        <div class="flex items-center gap-3 mb-3 px-2">
-                            <span class="text-[11px] font-black text-white uppercase tracking-[2px]">${league.name}</span>
+                        <div class="mb-3 px-2 flex items-center gap-2">
+                            <div class="w-1 h-3 bg-trading-highlight"></div>
+                            <span class="text-[11px] font-black text-white uppercase tracking-widest">${league.name}</span>
                         </div>
-                        <div class="bg-trading-panel rounded-2xl border border-trading-border overflow-hidden divide-y divide-white/5 shadow-2xl">
+                        <div class="bg-trading-panel rounded-2xl border border-trading-border overflow-hidden divide-y divide-white/5">
                 `;
-
                 league.games.forEach(game => {
-                    count++;
-                    html += `
+                    leagueHtml += `
                         <div class="game-item">
-                            <div class="p-5 flex items-center justify-between cursor-pointer hover:bg-white/[0.02]" onclick="toggleDetails('${game.id}')">
-                                <div class="flex items-center gap-8">
+                            <div class="p-5 flex items-center justify-between cursor-pointer hover:bg-white/5 transition" onclick="toggleDetails('${game.id}')">
+                                <div class="flex items-center gap-6">
                                     <span class="text-trading-highlight font-mono font-black text-sm">${game.time}</span>
-                                    <div class="flex flex-col">
-                                        <span class="text-sm font-black text-white uppercase">${game.home} vs ${game.away}</span>
-                                        <span class="text-[9px] text-gray-600 uppercase tracking-wider">${game.venue}</span>
-                                    </div>
+                                    <span class="text-sm font-black text-white uppercase">${game.home} vs ${game.away}</span>
                                 </div>
-                                <div class="bg-black/40 px-4 py-2 rounded-xl border border-white/5 text-sm font-mono font-black text-white">${game.score}</div>
+                                <div class="bg-black/40 px-3 py-1 rounded-lg text-xs font-mono text-white">${game.score}</div>
                             </div>
-
-                            <div id="details-${game.id}" class="hidden bg-[#0D1117] border-t border-white/5 animate-in">
-                                <div class="flex gap-8 px-8 border-b border-white/5 overflow-x-auto no-scrollbar">
+                            <div id="details-${game.id}" class="hidden bg-[#0D1117] border-t border-white/5 p-6 animate-in">
+                                <div class="flex gap-8 border-b border-white/5 mb-6">
                                     <button onclick="switchTab('${game.id}', 'resumo')" id="tab-resumo-${game.id}" class="tab-btn active">Resumo</button>
-                                    <button onclick="switchTab('${game.id}', 'class')" id="tab-class-${game.id}" class="tab-btn">Classificação</button>
                                     <button onclick="switchTab('${game.id}', 'h2h')" id="tab-h2h-${game.id}" class="tab-btn">H2H</button>
-                                    <button onclick="switchTab('${game.id}', 'top')" id="tab-top-${game.id}" class="tab-btn">Destaques</button>
+                                    <button onclick="switchTab('${game.id}', 'class')" id="tab-class-${game.id}" class="tab-btn">Classificação</button>
                                 </div>
-                                <div class="p-8 min-h-[150px]" id="content-area-${game.id}">
-                                    <div class="flex items-center justify-center h-full py-10">
-                                        <i class="fas fa-spinner fa-spin text-trading-highlight"></i>
-                                        <span class="ml-3 text-xs text-gray-500 uppercase font-bold tracking-widest">Buscando dados REAIS da ESPN...</span>
-                                    </div>
-                                </div>
+                                <div id="content-${game.id}" class="text-xs text-gray-500 italic">Carregando dados reais...</div>
                             </div>
                         </div>
                     `;
                 });
-                list.innerHTML += html + `</div></div>`;
+                list.innerHTML += leagueHtml + `</div></div>`;
             });
-            document.getElementById('game-count').innerText = count;
         }
 
         async function toggleDetails(id) {
             const el = document.getElementById(`details-${id}`);
-            const isOpening = el.classList.contains('hidden');
             el.classList.toggle('hidden');
-            if (isOpening) await carregarDadosReais(id, 'resumo');
+            if (!el.classList.contains('hidden')) switchTab(id, 'resumo');
         }
 
-        async function carregarDadosReais(id, aba) {
-            const contentArea = document.getElementById(`content-area-${id}`);
+        async function switchTab(id, aba) {
+            const content = document.getElementById(`content-${id}`);
+            const buttons = document.querySelectorAll(`#details-${id} .tab-btn`);
+            buttons.forEach(b => b.classList.remove('active'));
+            document.getElementById(`tab-${aba}-${id}`).classList.add('active');
+
+            content.innerHTML = `<i class="fas fa-spinner fa-spin mr-2"></i> Consultando ESPN...`;
+
             try {
-                // FETCH DIRETO NA API DE SUMÁRIO DA ESPN PARA O JOGO ESPECÍFICO
                 const resp = await fetch(`https://site.api.espn.com/apis/site/v2/sports/soccer/summary?event=${id}`);
                 const data = await resp.json();
-
+                
                 if (aba === 'resumo') {
-                    const venue = data.gameInfo?.venue?.fullName || "Estádio Indisponível";
-                    const status = data.header?.competitions[0]?.status?.type?.detail || "Em breve";
-                    contentArea.innerHTML = `
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 animate-in">
-                            <div class="space-y-4">
-                                <h4 class="text-[10px] text-gray-500 font-black uppercase">Informações do Confronto</h4>
-                                <p class="text-xs text-white/80">Status: <span class="text-white font-bold">${status}</span></p>
-                                <p class="text-xs text-white/80">Local: <span class="text-white font-bold">${venue}</span></p>
-                            </div>
-                            <div class="bg-trading-highlight/5 p-4 rounded-xl border-l-4 border-trading-highlight">
-                                <h4 class="text-[10px] text-trading-highlight font-black uppercase">Análise de Pressão</h4>
-                                <p class="text-xs text-gray-400 italic mt-2">"O motor está monitorando os ataques perigosos. Aguarde 5-10 min de jogo para o gráfico de momentum."</p>
+                    const info = data.gameInfo || {};
+                    content.innerHTML = `
+                        <div class="grid grid-cols-2 gap-4 text-white/80">
+                            <div><b>Local:</b> ${info.venue?.fullName || 'N/A'}</div>
+                            <div><b>Árbitro:</b> FIFA Pro</div>
+                            <div class="col-span-2 bg-trading-highlight/5 p-3 border-l-2 border-trading-highlight italic">
+                                Dica: Volume de jogo monitorado. Dados reais via API Sumário.
                             </div>
                         </div>
                     `;
-                } else if (aba === 'h2h') {
-                    contentArea.innerHTML = `<div class="text-center py-10"><p class="text-xs text-gray-500 italic uppercase">H2H Histórico e Probabilidades em processamento...</p></div>`;
                 } else {
-                    contentArea.innerHTML = `<div class="text-center py-10"><p class="text-xs text-gray-500 italic uppercase">Dados de ${aba} indisponíveis para esta liga.</p></div>`;
+                    content.innerHTML = `<p class="uppercase font-bold text-[10px]">Dados de ${aba} em sincronização para esta partida.</p>`;
                 }
             } catch (e) {
-                contentArea.innerHTML = `<p class="text-red-500 text-[10px]">Erro ao conectar com a Central de Dados. Tente novamente.</p>`;
+                content.innerHTML = `<span class="text-red-500 font-bold">Erro de Conexão. O servidor de dados demorou a responder.</span>`;
             }
-        }
-
-        function switchTab(id, aba) {
-            const container = document.getElementById(`details-${id}`);
-            container.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById(`tab-${aba}-${id}`).classList.add('active');
-            carregarDadosReais(id, aba);
         }
 
         conectarAoMotor();

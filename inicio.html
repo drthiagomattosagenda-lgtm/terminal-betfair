@@ -32,29 +32,18 @@
     <style>
         body { background-color: #0B0E14; color: #E2E8F0; font-family: 'Inter', sans-serif; }
         .navbar { display: flex !important; justify-content: space-between; align-items: center; }
-        
-        /* Sistema de Abas Estilo SofaScore Elite */
         .tab-btn { position: relative; transition: 0.2s; color: #718096; white-space: nowrap; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
         .tab-btn.active { color: #FFB100; }
         .tab-btn.active::after { content: ''; position: absolute; bottom: -12px; left: 0; width: 100%; height: 2px; background: #FFB100; }
-        
         .game-card { border-left: 4px solid transparent; transition: 0.3s; }
         .game-card:hover { border-left-color: #FFB100; background: #1a222d; }
-        
         .form-dot { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; color: white; }
         .league-header { background: #151A22; border-left: 4px solid #2A3241; }
-        
-        /* Gráfico de Performance (SofaScore Ouro) */
         .performance-bar { width: 6px; border-radius: 2px; transition: height 0.3s ease; }
-        
         .sub-tab.active { background: #FFB100 !important; color: #000 !important; border-color: #FFB100 !important; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
-        
-        /* Idiomas */
-        .lang-btn { filter: grayscale(100%); transition: 0.3s; cursor: pointer; font-size: 1.2rem; }
+        .lang-btn { filter: grayscale(100%); transition: 0.3s; cursor: pointer; font-size: 1.3rem; }
         .lang-btn.active { filter: grayscale(0%); transform: scale(1.2); }
-
-        /* Animação */
         .animate-in { animation: fadeIn 0.3s ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
     </style>
@@ -65,8 +54,8 @@
         <div class="logo"><span>FUT</span> TRADER</div>
 
         <div class="hidden md:flex items-center gap-4 bg-trading-dark/50 px-6 py-2 rounded-full border border-trading-border">
-            <span class="text-[9px] font-black text-gray-500 uppercase tracking-widest" data-i18n="lang_label">Language:</span>
-            <div class="flex gap-3">
+            <span class="text-[9px] font-black text-gray-500 uppercase tracking-widest" data-i18n="lang_label">Idioma:</span>
+            <div class="flex gap-4">
                 <span onclick="setLanguage('pt')" id="lang-pt" class="lang-btn active">🇧🇷</span>
                 <span onclick="setLanguage('es')" id="lang-es" class="lang-btn">🇪🇸</span>
                 <span onclick="setLanguage('en')" id="lang-en" class="lang-btn">🇬🇧</span>
@@ -93,28 +82,27 @@
                 class="w-full md:w-80 bg-trading-panel border border-trading-border rounded-xl py-3 px-12 text-xs focus:outline-none focus:border-trading-highlight text-white shadow-2xl">
             </div>
         </div>
-
         <div id="agenda-list" class="space-y-8"></div>
     </main>
 
     <script>
         const i18n = {
             pt: {
-                lang_label: "Language:", m_inicio: "Início", m_dash: "Dashboard", m_live: "Ao Vivo", m_comu: "Comunidade", m_sair: "Sair",
+                lang_label: "Idioma:", m_inicio: "Início", m_dash: "Dashboard", m_live: "Ao Vivo", m_comu: "Comunidade", m_sair: "Sair",
                 t_quartel: "QUARTEL", t_general: "GENERAL", s_robusta: "Análise robusta para", s_partidas: "partidas hoje.",
-                search_p: "🔎 Time, Liga, Juiz ou Craque...", start: "Start", mata_mata: "Mata-Mata",
-                tab_resumo: "Resumo", tab_info: "Classificação", tab_info_cup: "Chaveamento", tab_h2h: "H2H / Sequências", tab_top: "Destaques",
-                l_juiz: "Logística e Juiz", l_ref: "Árbitro", l_local: "Local", l_agg: "Agregado", l_mom: "Momentum (C/F)", l_dica: "Dica do Mestre",
+                search_p: "🔎 Time, Liga, Juiz ou Craque...", start: "Start", cup_badge: "Mata-Mata",
+                t_resumo: "Resumo", t_class: "Classificação", t_chave: "Chaveamento", t_h2h: "H2H / Sequências", t_top: "Destaques",
+                l_juiz: "Logística e Juiz", l_ref: "Árbitro", l_loc: "Local", l_agg: "Agregado", l_mom: "Momentum (C/F)", l_dica: "Dica do Mestre",
                 f_geral: "Geral", f_casa: "Casa", f_fora: "Fora", h_team: "Equipe", h_pts: "PTS",
                 perf_t: "Gráfico de Performance (Posição)", perf_s: "Tendência de classificação sazonal",
                 seq_c: "Sequências Cruciais", h2h_5: "Confrontos Diretos (Últimos 5)"
             },
             es: {
-                lang_label: "Language:", m_inicio: "Inicio", m_dash: "Dashboard", m_live: "En Vivo", m_comu: "Comunidad", m_sair: "Salir",
+                lang_label: "Idioma:", m_inicio: "Inicio", m_dash: "Dashboard", m_live: "En Vivo", m_comu: "Comunidad", m_sair: "Salir",
                 t_quartel: "CUARTEL", t_general: "GENERAL", s_robusta: "Análisis robusto para", s_partidas: "partidos hoy.",
-                search_p: "🔎 Equipo, Liga, Árbitro...", start: "Inicio", mata_mata: "Eliminatorias",
-                tab_resumo: "Resumen", tab_info: "Clasificación", tab_info_cup: "Cuadro", tab_h2h: "H2H / Rachas", tab_top: "Destacados",
-                l_juiz: "Logística y Árbitro", l_ref: "Árbitro", l_local: "Sede", l_agg: "Global", l_mom: "Momentum (C/F)", l_dica: "Consejo del Maestro",
+                search_p: "🔎 Equipo, Liga, Árbitro...", start: "Inicio", cup_badge: "Eliminatorias",
+                t_resumo: "Resumen", t_class: "Clasificación", t_chave: "Cuadro", t_h2h: "H2H / Rachas", t_top: "Destacados",
+                l_juiz: "Logística y Árbitro", l_ref: "Árbitro", l_loc: "Sede", l_agg: "Global", l_mom: "Momentum (C/F)", l_dica: "Consejo del Maestro",
                 f_geral: "Todo", f_casa: "Casa", f_fora: "Fuera", h_team: "Equipo", h_pts: "PTS",
                 perf_t: "Gráfico de Rendimiento (Posición)", perf_s: "Tendencia de clasificación estacional",
                 seq_c: "Rachas Cruciales", h2h_5: "Enfrentamientos Directos (Últimos 5)"
@@ -122,8 +110,8 @@
             en: {
                 lang_label: "Language:", m_inicio: "Home", m_dash: "Dashboard", m_live: "Live", m_comu: "Community", m_sair: "Logout",
                 t_quartel: "HEAD", t_general: "QUARTERS", s_robusta: "Robust analysis for", s_partidas: "matches today.",
-                search_p: "🔎 Team, League, Referee...", start: "Start", mata_mata: "Playoffs",
-                tab_resumo: "Summary", tab_info: "Standings", tab_info_cup: "Bracket", tab_h2h: "H2H / Streaks", tab_top: "Top Players",
+                search_p: "🔎 Team, League, Referee...", start: "Start", cup_badge: "Playoffs",
+                t_resumo: "Summary", t_class: "Standings", t_chave: "Bracket", t_h2h: "H2H / Streaks", t_top: "Top Players",
                 l_juiz: "Logistics & Referee", l_ref: "Referee", l_local: "Venue", l_agg: "Aggregate", l_mom: "Momentum (H/A)", l_dica: "Pro Tip",
                 f_geral: "Overall", f_casa: "Home", f_fora: "Away", h_team: "Team", h_pts: "PTS",
                 perf_t: "Performance Graph (Position)", perf_s: "Seasonal ranking trend",
@@ -137,22 +125,23 @@
             {
                 league: "Champions League - Playoffs", country: "Europa",
                 games: [{
-                    id: 777, time: "16:00", home: "Real Madrid", away: "Manchester City", 
-                    stadium: "Santiago Bernabéu", referee: "François Letexier (FRA)",
+                    id: 777, time: "16:00", home: "Real Madrid", away: "Manchester City", stadium: "Santiago Bernabéu", referee: "François Letexier (FRA)",
                     isCup: true, stage: "Quartas de Final - Volta", aggregate: "3 - 3",
                     odds: { home: 2.80, draw: 3.50, away: 2.45 },
                     form: { home: ['V','V','V','E','V'], away: ['V','V','E','V','V'] },
                     h2h: { homeWins: 4, draws: 4, awayWins: 4, last5: ["3-3","1-1","4-3","1-2","1-0"] },
                     streaks: [{ team: "Real Madrid", text: "Sem perder há 14 jogos", type: "pos" }, { team: "Man City", text: "10 partidas sem perder", type: "pos" }, { team: "Confronto", text: "Ambas Marcam em 4/5 jogos", type: "pos" }],
-                    topPlayers: { home: [{n: "Vinícius Jr", r: "8.2", g: 6}, {n: "Bellingham", r: "7.9", g: 4}], away: [{n: "Haaland", r: "8.5", g: 8}, {n: "De Bruyne", r: "8.0", g: 2}] },
+                    topPlayers: { 
+                        home: [{n: "Vinícius Jr", r: "8.2", g: 6}, {n: "Bellingham", r: "7.9", g: 4}], 
+                        away: [{n: "Haaland", r: "8.5", g: 8}, {n: "De Bruyne", r: "8.0", g: 2}] 
+                    },
                     tip: "Duelo de gigantes. Real em casa na Champions é perigoso, mas o City controla o ritmo. Valor no Over 1.0 HT se houver pressão inicial."
                 }]
             },
             {
                 league: "La Liga", country: "Espanha",
                 games: [{
-                    id: 888, time: "16:00", home: "Cádiz", away: "Real Valladolid",
-                    stadium: "Estadio Nuevo Mirandilla", referee: "Isidro Díaz de Mera Escuderos",
+                    id: 888, time: "16:00", home: "Cádiz", away: "Real Valladolid", stadium: "Estadio Nuevo Mirandilla", referee: "Isidro Díaz de Mera Escuderos",
                     isCup: false, round: "35ª Rodada",
                     odds: { home: 2.15, draw: 3.20, away: 3.60 },
                     form: { home: ['D','V','D','E','V'], away: ['V','D','V','D','D'] },
@@ -164,7 +153,10 @@
                         away: [ {p: 12, t: "Cádiz", pts: 10}, {p: 18, t: "Valladolid", pts: 15} ]
                     },
                     perfGraph: [12, 14, 13, 16, 16, 17, 16], 
-                    topPlayers: { home: [{n: "Ledesma", r: "7.5", g: 0}, {n: "Bongonda", r: "7.1", g: 4}], away: [{n: "Masip", r: "7.2", g: 0}, {n: "Larin", r: "7.0", g: 8}] },
+                    topPlayers: { 
+                        home: [{n: "Ledesma", r: "7.5", g: 0}, {n: "Bongonda", r: "7.1", g: 4}], 
+                        away: [{n: "Masip", r: "7.2", g: 0}, {n: "Larin", r: "7.0", g: 8}] 
+                    },
                     tip: "Briga direta pelo rebaixamento. Cádiz é forte defensivamente em casa. O mercado de Under 2.5 gols é a diretriz aqui."
                 }]
             }
@@ -214,7 +206,7 @@
                                     <div>
                                         <div class="flex items-center gap-3 mb-1">
                                             <h3 class="text-lg font-black text-white uppercase tracking-tight">${game.home} <span class="text-gray-700 font-light px-1">vs</span> ${game.away}</h3>
-                                            ${game.isCup ? `<span class="bg-red-600 text-white text-[8px] px-2 py-0.5 rounded font-black uppercase">${t.mata_mata}</span>` : ''}
+                                            ${game.isCup ? `<span class="bg-red-600 text-white text-[8px] px-2 py-0.5 rounded font-black uppercase">${t.cup_badge}</span>` : ''}
                                         </div>
                                         <p class="text-[10px] text-gray-500 font-bold uppercase tracking-widest"><i class="fas fa-map-marker-alt mr-1 text-trading-highlight"></i> ${game.stadium}</p>
                                     </div>
@@ -228,13 +220,15 @@
                                     <i onclick="event.stopPropagation(); toggleFav(${game.id})" class="fa-star ${isFav ? 'fas text-yellow-500' : 'far text-gray-600'} text-2xl transition hover:scale-125"></i>
                                 </div>
                             </div>
+
                             <div id="details-${game.id}" class="hidden bg-[#0D0F14] border-t border-trading-border animate-in">
                                 <div class="flex border-b border-trading-border overflow-x-auto no-scrollbar px-6">
-                                    <button onclick="switchTab(${game.id}, 'resumo')" id="tab-resumo-${game.id}" class="tab-btn active px-6 py-4 mr-6">${t.tab_resumo}</button>
-                                    <button onclick="switchTab(${game.id}, 'info')" id="tab-info-${game.id}" class="tab-btn px-6 py-4 mr-6">${game.isCup ? t.tab_info_cup : t.tab_info}</button>
-                                    <button onclick="switchTab(${game.id}, 'h2h')" id="tab-h2h-${game.id}" class="tab-btn px-6 py-4 mr-6">${t.tab_h2h}</button>
-                                    <button onclick="switchTab(${game.id}, 'top')" id="tab-top-${game.id}" class="tab-btn px-6 py-4">${t.tab_top}</button>
+                                    <button onclick="switchTab(${game.id}, 'resumo')" id="tab-resumo-${game.id}" class="tab-btn active px-6 py-4 mr-6">${t.t_resumo}</button>
+                                    <button onclick="switchTab(${game.id}, 'info')" id="tab-info-${game.id}" class="tab-btn px-6 py-4 mr-6">${game.isCup ? t.t_chave : t.t_class}</button>
+                                    <button onclick="switchTab(${game.id}, 'h2h')" id="tab-h2h-${game.id}" class="tab-btn px-6 py-4 mr-6">${t.t_h2h}</button>
+                                    <button onclick="switchTab(${game.id}, 'top')" id="tab-top-${game.id}" class="tab-btn px-6 py-4">${t.t_top}</button>
                                 </div>
+
                                 <div class="p-8">
                                     <div id="content-resumo-${game.id}" class="tab-content-${game.id} space-y-10">
                                         <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
@@ -260,6 +254,7 @@
                                             </div>
                                         </div>
                                     </div>
+
                                     <div id="content-info-${game.id}" class="tab-content-${game.id} hidden">
                                         ${!game.isCup ? `<div class="grid grid-cols-1 md:grid-cols-2 gap-10">
                                             <div>
@@ -280,6 +275,7 @@
                                             </div>
                                         </div>` : `<div class="flex flex-col items-center py-10 opacity-60"><i class="fas fa-trophy text-4xl mb-4 text-trading-highlight"></i><p class="text-xs font-black uppercase tracking-[3px] text-white">${game.stage}</p></div>`}
                                     </div>
+
                                     <div id="content-h2h-${game.id}" class="tab-content-${game.id} hidden">
                                         <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
                                             <div class="space-y-4">
@@ -292,8 +288,16 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div id="content-top-${game.id}" class="tab-content-${game.id} hidden">
+                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                                            <div><h5 class="text-[10px] text-gray-500 font-black uppercase mb-4 tracking-[2px]">${game.home}</h5>${game.topPlayers.home.map(p => `<div class="flex justify-between items-center bg-trading-panel p-3 rounded-xl mb-2"><span><b class="text-white">${p.n}</b> <small class="text-gray-500 ml-2">(${p.g}G)</small></span> <span class="bg-trading-rating text-black px-2 py-1 rounded-md text-[10px] font-black">${p.r}</span></div>`).join('')}</div>
+                                            <div><h5 class="text-[10px] text-gray-500 font-black uppercase mb-4 tracking-[2px]">${game.away}</h5>${game.topPlayers.away.map(p => `<div class="flex justify-between items-center bg-trading-panel p-3 rounded-xl mb-2"><span><b class="text-white">${p.n}</b> <small class="text-gray-500 ml-2">(${p.g}G)</small></span> <span class="bg-trading-rating text-black px-2 py-1 rounded-md text-[10px] font-black">${p.r}</span></div>`).join('')}</div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div></div>`;
+                            </div>
+                        </div>`;
                     });
                     groupHtml += `</div></div>`;
                     list.innerHTML += groupHtml;

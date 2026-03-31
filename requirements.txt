@@ -3,4 +3,3 @@ uvicorn
 soccerdata
 pandas
 lxml
-tls-requests

@@ -31,8 +31,6 @@
 
     <style>
         body { background-color: #0B0E14; color: #E2E8F0; font-family: 'Inter', sans-serif; }
-        
-        /* Ajuste na Navbar para Centralizar Idiomas */
         .navbar { display: flex !important; justify-content: space-between; align-items: center; }
         
         .tab-btn { position: relative; transition: 0.2s; color: #718096; white-space: nowrap; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
@@ -50,8 +48,8 @@
         .sub-tab.active { background: #FFB100 !important; color: #000 !important; border-color: #FFB100 !important; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         
-        /* Estilo das Bandeiras */
-        .lang-btn { filter: grayscale(100%); transition: 0.3s; cursor: pointer; font-size: 1.2rem; }
+        /* Correção das Bandeiras: Garantindo renderização como Emoji */
+        .lang-btn { filter: grayscale(100%); transition: 0.3s; cursor: pointer; font-size: 1.4rem; line-height: 1; display: inline-block; }
         .lang-btn.active { filter: grayscale(0%); transform: scale(1.2); }
 
         .animate-in { animation: fadeIn 0.3s ease-out; }
@@ -65,10 +63,10 @@
 
         <div class="hidden md:flex items-center gap-4 bg-trading-dark/50 px-6 py-2 rounded-full border border-trading-border">
             <span class="text-[9px] font-black text-gray-500 uppercase tracking-widest" data-i18n="lang_label">Idioma:</span>
-            <div class="flex gap-3">
-                <span onclick="setLanguage('pt')" id="lang-pt" class="lang-btn active" title="Português">🇧🇷</span>
-                <span onclick="setLanguage('es')" id="lang-es" class="lang-btn" title="Español">🇪🇸</span>
-                <span onclick="setLanguage('en')" id="lang-en" class="lang-btn" title="English">🇬🇧</span>
+            <div class="flex gap-4">
+                <span onclick="setLanguage('pt')" id="lang-pt" class="lang-btn active" title="Português">&#127463;&#127479;</span>
+                <span onclick="setLanguage('es')" id="lang-es" class="lang-btn" title="Español">&#127466;&#127480;</span>
+                <span onclick="setLanguage('en')" id="lang-en" class="lang-btn" title="English">&#127468;&#127463;</span>
             </div>
         </div>
 
@@ -101,12 +99,12 @@
     </main>
 
     <script>
-        // DICIONÁRIO INTERNACIONAL (I18N)
+        // DICIONÁRIO INTERNACIONAL COMPLETO - CORRIGIDO
         const i18n = {
             pt: {
                 lang_label: "Idioma:", menu_inicio: "Início", menu_dashboard: "Dashboard", menu_aovivo: "Ao Vivo", menu_comunidade: "Comunidade", menu_sair: "Sair",
                 title_quartel: "QUARTEL", title_general: "GENERAL", subtitle_robust: "Análise robusta para", subtitle_matches: "partidas hoje.",
-                search_placeholder: "🔎 Time, Liga, Juiz ou Craque...", start: "Início",
+                search_placeholder: "🔎 Time, Liga, Juiz ou Craque...", start: "Início", cup_badge: "Mata-Mata",
                 tab_resumo: "Resumo", tab_class: "Classificação", tab_chave: "Chaveamento", tab_h2h: "H2H / Sequências", tab_top: "Destaques",
                 label_judge: "Logística e Juiz", ref: "Árbitro", loc: "Local", agg: "Agregado", momentum: "Momentum (C/F)", tip_label: "Dica do Mestre",
                 filter_all: "Geral", filter_home: "Casa", filter_away: "Fora", rank_title: "#", team_title: "Equipe", pts_title: "PTS",
@@ -116,7 +114,7 @@
             es: {
                 lang_label: "Idioma:", menu_inicio: "Inicio", menu_dashboard: "Dashboard", menu_aovivo: "En Vivo", menu_comunidade: "Comunidad", menu_sair: "Salir",
                 title_quartel: "CUARTEL", title_general: "GENERAL", subtitle_robust: "Análisis robusto para", subtitle_matches: "partidos hoy.",
-                search_placeholder: "🔎 Equipo, Liga, Árbitro...", start: "Inicio",
+                search_placeholder: "🔎 Equipo, Liga, Árbitro...", start: "Inicio", cup_badge: "Eliminatorias",
                 tab_resumo: "Resumen", tab_class: "Clasificación", tab_chave: "Cuadro", tab_h2h: "H2H / Rachas", tab_top: "Destacados",
                 label_judge: "Logística y Árbitro", ref: "Árbitro", loc: "Sede", agg: "Global", momentum: "Momentum (C/F)", tip_label: "Consejo del Maestro",
                 filter_all: "Todo", filter_home: "Casa", filter_away: "Fuera", rank_title: "#", team_title: "Equipo", pts_title: "PTS",
@@ -126,7 +124,7 @@
             en: {
                 lang_label: "Language:", menu_inicio: "Home", menu_dashboard: "Dashboard", menu_aovivo: "Live", menu_comunidade: "Community", menu_sair: "Logout",
                 title_quartel: "HEAD", title_general: "QUARTERS", subtitle_robust: "Robust analysis for", subtitle_matches: "matches today.",
-                search_placeholder: "🔎 Team, League, Referee...", start: "Start",
+                search_placeholder: "🔎 Team, League, Referee...", start: "Start", cup_badge: "Playoffs",
                 tab_resumo: "Summary", tab_class: "Standings", tab_chave: "Bracket", tab_h2h: "H2H / Streaks", tab_top: "Top Players",
                 label_judge: "Logistics & Referee", ref: "Referee", loc: "Venue", agg: "Aggregate", momentum: "Momentum (H/A)", tip_label: "Pro Tip",
                 filter_all: "Overall", filter_home: "Home", filter_away: "Away", rank_title: "#", team_title: "Team", pts_title: "PTS",
@@ -208,14 +206,17 @@
                 el.innerText = i18n[lang][key];
             });
             
+            // Corrige o Placeholder
             document.getElementById('agendaSearch').placeholder = i18n[lang].search_placeholder;
+            
+            // Atualiza a agenda inteira para traduzir o conteúdo dinâmico
             renderAgenda();
         }
 
         function renderAgenda() {
             const list = document.getElementById('agenda-list');
             const search = document.getElementById('agendaSearch').value.toUpperCase();
-            const t = i18n[currentLang];
+            const t = i18n[currentLang]; // Pega o dicionário do idioma atual
             let count = 0;
             list.innerHTML = '';
 
@@ -249,7 +250,7 @@
                                         <div>
                                             <div class="flex items-center gap-3 mb-1">
                                                 <h3 class="text-lg font-black text-white uppercase tracking-tight">${game.home} <span class="text-gray-700 font-light px-1">vs</span> ${game.away}</h3>
-                                                ${game.isCup ? `<span class="bg-red-600 text-white text-[8px] px-2 py-0.5 rounded font-black uppercase">Mata-Mata</span>` : ''}
+                                                ${game.isCup ? `<span class="bg-red-600 text-white text-[8px] px-2 py-0.5 rounded font-black uppercase">${t.cup_badge}</span>` : ''}
                                             </div>
                                             <p class="text-[10px] text-gray-500 font-bold uppercase tracking-widest"><i class="fas fa-map-marker-alt mr-1 text-trading-highlight"></i> ${game.stadium}</p>
                                         </div>

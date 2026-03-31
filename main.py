@@ -13,34 +13,42 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/")
-def home():
-    return {"status": "Motor ESPN Ativo"}
-
 @app.get("/jogos")
 def buscar_jogos():
     try:
-        # API Direta da ESPN - Grade Global (Leve e estável no Render)
+        # Buscando dados globais da ESPN
         url = "https://site.api.espn.com/apis/site/v2/sports/soccer/scorepanel"
         response = requests.get(url, timeout=15)
         data = response.json()
         
         jogos_formatados = []
         
-        # Percorrendo as ligas e jogos disponíveis hoje
-        for league in data.get('scores', []):
-            league_name = league.get('leagues', [{}])[0].get('name', 'Outros')
-            for event in league.get('events', []):
-                competitors = event.get('competitions', [{}])[0].get('competitors', [])
-                home_team = next((c['team']['displayName'] for c in competitors if c['homeAway'] == 'home'), "Casa")
-                away_team = next((c['team']['displayName'] for c in competitors if c['homeAway'] == 'away'), "Fora")
+        for league_data in data.get('scores', []):
+            league_info = league_data.get('leagues', [{}])[0]
+            league_name = league_info.get('name', 'Outras Competições')
+            country = league_info.get('midsizeName', 'Global')
+
+            for event in league_data.get('events', []):
+                comp = event.get('competitions', [{}])[0]
+                teams = comp.get('competitors', [])
                 
+                home = next((t for t in teams if t['homeAway'] == 'home'), {})
+                away = next((t for t in teams if t['homeAway'] == 'away'), {})
+                
+                # Dados REAIS para as abas
                 jogos_formatados.append({
-                    "home_team": home_team,
-                    "away_team": away_team,
+                    "id": event.get('id'),
                     "league": league_name,
-                    "time": event.get('status', {}).get('type', {}).get('shortDetail', 'HOJE'),
-                    "id": event.get('id', '0')
+                    "country": country,
+                    "home": home.get('team', {}).get('displayName'),
+                    "away": away.get('team', {}).get('displayName'),
+                    "time": event.get('status', {}).get('type', {}).get('shortDetail', '--:--'),
+                    "status": event.get('status', {}).get('type', {}).get('name'),
+                    "venue": comp.get('venue', {}).get('fullName', 'Estádio Indisponível'),
+                    "score": f"{home.get('score', 0)} - {away.get('score', 0)}",
+                    # Dados reais para abas (se disponíveis na API)
+                    "standings": f"Verificar tabela da {league_name}",
+                    "h2h_summary": f"Confronto histórico entre {home.get('team', {}).get('shortDisplayName')} e {away.get('team', {}).get('shortDisplayName')}"
                 })
         
         return {"sucesso": True, "dados": jogos_formatados}

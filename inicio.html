@@ -81,6 +81,14 @@
         let gamesData = [];
         let favorites = JSON.parse(localStorage.getItem('futTraderFavs')) || [];
 
+        // FUNÇÃO CIRÚRGICA: Trata o horário e finalização
+        function tratarStatus(status) {
+            if (!status) return "--:--";
+            const finalizacoes = ["FT", "Final", "Ended", "Fim"];
+            if (finalizacoes.some(f => status.includes(f))) return "FIM";
+            return status.replace("AM", "").replace("PM", "").trim();
+        }
+
         async function conectarAoMotor() {
             try {
                 // Tenta buscar do Render (Seu Backend)
@@ -130,20 +138,33 @@
                         totalCount++;
                         const isFav = favorites.includes(String(game.id));
                         
-                        // ARQUITETURA SÊNIOR: O HTML de TODAS as abas é gerado aqui. 
-                        // Tags <span> com IDs específicos são usadas para receber os dados do motor depois.
+                        // Lógica Mata-Mata
+                        const copas = ["Copa", "Cup", "Champions", "Libertadores", "Trophy", "Mata-Mata", "Playoffs", "FA Cup"];
+                        const ehMataMata = copas.some(c => league.name.includes(c));
+                        
+                        // Formatação do Tempo
+                        const statusFormatado = tratarStatus(game.time);
+                        const statusColor = statusFormatado === 'FIM' ? 'text-red-500' : 'text-trading-highlight';
+                        
+                        // ARQUITETURA SÊNIOR MANTIDA
                         html += `
                             <div class="game-item">
                                 <div class="p-5 flex items-center justify-between cursor-pointer hover:bg-white/[0.02] transition" onclick="toggleDetails('${game.id}')">
                                     <div class="flex items-center gap-8">
-                                        <div class="text-center min-w-[50px]">
-                                            <p class="text-trading-highlight font-mono font-black text-sm">${game.time}</p>
+                                        <div class="text-center min-w-[60px]">
+                                            <p class="${statusColor} font-mono font-black text-sm uppercase">${statusFormatado}</p>
                                         </div>
                                         <div class="flex flex-col">
                                             <div class="flex items-center gap-4">
                                                 <span class="text-base font-black text-white uppercase tracking-tight">${game.home}</span>
                                                 <span class="text-[10px] text-gray-700 font-black italic">VS</span>
                                                 <span class="text-base font-black text-white uppercase tracking-tight">${game.away}</span>
+                                                
+                                                ${ehMataMata ? `
+                                                    <span class="bg-red-600/20 text-red-500 text-[8px] px-2 py-0.5 rounded border border-red-500/30 font-black uppercase tracking-tighter">
+                                                        <i class="fas fa-trophy mr-1"></i>Mata-Mata
+                                                    </span>
+                                                ` : ''}
                                             </div>
                                             <span class="text-[9px] text-gray-500 uppercase mt-1 tracking-wider"><i class="fas fa-map-marker-alt mr-1"></i>${game.venue}</span>
                                         </div>

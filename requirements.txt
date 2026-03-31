@@ -2,3 +2,5 @@ fastapi
 uvicorn
 soccerdata
 pandas
+lxml
+tls-requests

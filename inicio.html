@@ -33,7 +33,6 @@
         body { background-color: #0B0E14; color: #E2E8F0; font-family: 'Inter', sans-serif; }
         .navbar { display: flex !important; }
         
-        /* Sistema de Abas Estilo SofaScore Elite */
         .tab-btn { position: relative; transition: 0.2s; color: #718096; white-space: nowrap; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
         .tab-btn.active { color: #FFB100; }
         .tab-btn.active::after { content: ''; position: absolute; bottom: -12px; left: 0; width: 100%; height: 2px; background: #FFB100; }
@@ -44,13 +43,11 @@
         .form-dot { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; color: white; }
         .league-header { background: #151A22; border-left: 4px solid #2A3241; }
         
-        /* Gráfico de Performance (SofaScore Ouro) */
         .performance-bar { width: 6px; border-radius: 2px; transition: height 0.3s ease; }
         
         .sub-tab.active { background: #FFB100 !important; color: #000 !important; border-color: #FFB100 !important; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         
-        /* Animação */
         .animate-in { animation: fadeIn 0.3s ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
     </style>
@@ -95,37 +92,43 @@
         async function conectarAoMotor() {
             const loadingAlert = document.getElementById('loading-alert');
             try {
-                // Chamada oficial para o servidor no Render
                 const response = await fetch('https://motor-ferrari.onrender.com/jogos');
-                const result = await response.json(); // ALTERAÇÃO CIRÚRGICA: response em vez de reply
+                const result = await response.json();
 
-                if (result.sucesso) {
-                    // Mapeamento para os dados leves do Motor Blindado
+                if (result.sucesso && result.dados.length > 0) {
                     gamesData = [{
-                        league: "Elite Intelligence",
-                        country: "Global",
+                        league: "Grade Global - Live",
+                        country: "Mundo",
                         games: result.dados.map((dado, index) => ({
-                            id: index + 100,
-                            time: "HOJE",
+                            id: dado.id || (index + 100),
+                            time: dado.time && dado.time !== 'nan' ? dado.time : "LIVE",
                             home: dado.home_team,
                             away: dado.away_team,
-                            stadium: "Análise Pro",
+                            stadium: dado.league || "International",
                             referee: "FIFA",
                             isCup: false,
                             odds: { home: 1.80, draw: 3.40, away: 4.20 },
                             form: { home: ['V','V','E'], away: ['D','E','V'] },
                             h2h: { homeWins: 5, draws: 2, awayWins: 3, last5: [] },
-                            streaks: [{ team: "Pro", text: "Alta tendência de gols", type: "pos" }],
+                            streaks: [{ team: "Pro", text: "Análise em Tempo Real", type: "pos" }],
                             topPlayers: { home: [], away: [] },
-                            tip: "Conexão estabelecida. O motor está enviando dados em tempo real."
+                            tip: "Conexão estabelecida via ESPN Global. Aguardando dados de pressão."
                         }))
                     }];
                     loadingAlert.classList.add('hidden');
                     renderAgenda();
+                } else {
+                    throw new Error("Motor vazio");
                 }
             } catch (error) {
                 console.error("Erro na conexão:", error);
-                loadingAlert.innerHTML = `<p class="text-red-500 font-bold uppercase text-[10px]">O Motor está aquecendo... Atualize em 1 minuto.</p>`;
+                loadingAlert.innerHTML = `
+                    <i class="fas fa-sync fa-spin text-trading-highlight text-xl"></i>
+                    <p class="text-yellow-500 font-bold uppercase text-[10px] mt-4">O Motor está processando a grade mundial...</p>
+                    <p class="text-gray-600 text-[9px] italic">O Render leva 30-60s para 'acordar' na primeira vez.</p>
+                `;
+                // Tenta reconectar automaticamente em 10 segundos
+                setTimeout(conectarAoMotor, 10000);
             }
         }
 

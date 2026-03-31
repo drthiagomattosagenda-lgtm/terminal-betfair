@@ -18,28 +18,33 @@ app.add_middleware(
 @app.get("/jogos")
 def buscar_jogos():
     try:
-        # Usaremos o FBRef para pegar o calendário de jogos
-        # É leve e traz dados de ligas tops (Premier League, La Liga, etc.)
-        fbref = sd.FBRef(leagues=['ENG-Premier League', 'ESP-La Liga', 'BRA-Serie A'], seasons='2025-2026')
-        schedule = fbref.read_schedule()
+        # O motor ESPN é o segredo: ele traz a grade global de hoje muito rápido
+        espn = sd.ESPN(leagues=None, seasons='2025-2026') # 'None' busca o que estiver disponível
+        schedule = espn.read_schedule()
         
-        # Filtramos apenas os jogos que ainda não aconteceram (futuros)
+        # Resetamos o index para facilitar a leitura das colunas
+        df = schedule.reset_index()
+        
+        # Filtramos apenas jogos de HOJE para não sobrecarregar
         hoje = datetime.now().strftime('%Y-%m-%d')
-        jogos_hoje = schedule[schedule.index.get_level_values('date') >= hoje].head(10).reset_index()
+        jogos_hoje = df[df['date'].astype(str).str.contains(hoje)]
+        
+        # Se não houver jogos de hoje no log, pegamos os próximos 20 da lista
+        if jogos_hoje.empty:
+            jogos_hoje = df.head(20)
 
         dados_finais = []
         for _, row in jogos_hoje.iterrows():
             dados_finais.append({
-                "home_team": row['home_team'],
-                "away_team": row['away_team'],
-                "league": row.get('league', 'Elite League'),
-                "time": row['time'] if pd.notna(row['time']) else "A definir",
-                "stadium": row.get('venue', 'Estádio Principal')
+                "home_team": str(row['home_team']),
+                "away_team": str(row['away_team']),
+                "league": str(row.get('league', 'International')),
+                "time": str(row.get('time', 'A definir')),
+                "id": str(row.get('game_id', '0'))
             })
             
         return {"sucesso": True, "dados": dados_finais}
     except Exception as e:
-        # Se o SoccerData falhar por timeout, mandamos um sinal para o site não travar
         return {"sucesso": False, "erro": str(e)}
 
 if __name__ == "__main__":

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Início - QG Fut Trader</title>
+    <title>QG Fut Trader - Central de Inteligência</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -21,7 +21,7 @@
                             win: '#10B981',
                             loss: '#EF4444',
                             draw: '#718096',
-                            rating: '#20C997' // Verde SofaScore
+                            rating: '#20C997'
                         }
                     }
                 }
@@ -30,18 +30,25 @@
     </script>
 
     <style>
-        body { background-color: #0B0E14; color: #E2E8F0; margin: 0; }
-        .game-row { transition: all 0.2s ease; border-left: 4px solid transparent; cursor: pointer; }
-        .game-row:hover { background-color: #1a222d; border-left: 4px solid #FFB100; }
-        
-        /* Abas Estilo Profissional */
-        .tab-btn.active { border-bottom: 2px solid #FFB100; color: #FFB100; }
-        .sub-tab-btn.active { background-color: #FFB100; color: #000; }
-        
-        .form-circle { width: 18px; height: 18px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; color: white; }
-        .player-rating { padding: 2px 6px; border-radius: 4px; font-weight: bold; font-size: 11px; }
-        
+        body { background-color: #0B0E14; color: #E2E8F0; font-family: 'Inter', sans-serif; }
         .navbar { display: flex !important; }
+        
+        /* Estilo Abas SofaScore */
+        .tab-btn { position: relative; transition: 0.2s; color: #718096; }
+        .tab-btn.active { color: #FFB100; }
+        .tab-btn.active::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: #FFB100; }
+        
+        .game-card { border-left: 4px solid transparent; transition: 0.3s; }
+        .game-card:hover { border-left-color: #FFB100; background: #1a222d; }
+        
+        .form-dot { width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; color: white; }
+        
+        /* Barra de Probabilidade H2H */
+        .h2h-bar { height: 8px; border-radius: 4px; overflow: hidden; display: flex; background: #2A3241; }
+        
+        /* Scrollbar fina */
+        ::-webkit-scrollbar { width: 4px; height: 4px; }
+        ::-webkit-scrollbar-thumb { background: #2A3241; border-radius: 10px; }
     </style>
 </head>
 <body class="antialiased">
@@ -57,37 +64,39 @@
         </ul>
     </nav>
 
-    <header class="max-w-7xl mx-auto p-6 mt-4">
-        <div class="flex justify-between items-center">
+    <main class="max-w-6xl mx-auto p-4 md:p-8">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
             <div>
-                <h1 class="text-2xl font-bold text-white">Quartel General</h1>
-                <p class="text-gray-400 text-sm">Ouro extraído para o seu planejamento.</p>
+                <h1 class="text-3xl font-black text-white tracking-tight">AGENDA <span class="text-trading-highlight text-sm font-mono ml-2">LIVE DATA</span></h1>
+                <p class="text-gray-500 text-sm">Análise profunda pré-jogo extraída de fontes de elite.</p>
             </div>
-            <div class="bg-trading-panel border border-trading-border px-4 py-2 rounded-lg text-trading-highlight font-mono font-bold" id="date-display"></div>
-        </div>
-    </header>
-
-    <main class="max-w-7xl mx-auto p-6">
-        <div class="mb-6">
-            <input type="text" id="agendaSearch" oninput="renderAgenda()" placeholder="🔎 Buscar por time, craque ou campeonato..." 
-            class="w-full bg-trading-panel border border-trading-border rounded-xl py-3 px-12 text-sm focus:outline-none focus:border-trading-highlight text-white">
+            <div class="relative group">
+                <input type="text" id="agendaSearch" oninput="renderAgenda()" placeholder="🔎 Filtrar partida ou liga..." 
+                class="bg-trading-panel border border-trading-border rounded-xl py-2 px-10 text-xs focus:outline-none focus:border-trading-highlight text-white w-64">
+            </div>
         </div>
 
-        <div id="agenda-list" class="space-y-4"></div>
+        <div id="agenda-list" class="space-y-4">
+            </div>
     </main>
 
     <script>
-        const dailyGames = [
-            { 
-                id: 101, time: "21:30", home: "Botafogo", away: "Flamengo", league: "Brasileirão Série A", 
-                isEliminatory: false, referee: "Daronco", stadium: "Nilton Santos", odds: "2.40 | 3.20 | 2.90",
-                formHome: ['V','V','E','D','V'], formAway: ['V','E','V','V','D'],
-                topPlayersHome: [ {name: "Tiquinho", rating: "7.8", goals: 12}, {name: "Luiz Henrique", rating: "7.4", goals: 5} ],
-                topPlayersAway: [ {name: "Pedro", rating: "8.1", goals: 18}, {name: "Arrascaeta", rating: "7.6", goals: 4} ],
+        // O OURO: Dados Estruturados estilo SofaScore
+        const gamesData = [
+            {
+                id: 501, time: "16:00", home: "Cádiz", away: "Real Valladolid", league: "La Liga", stadium: "Estadio Nuevo Mirandilla", referee: "Isidro Díaz de Mera",
+                odds: { home: 2.15, draw: 3.20, away: 3.60 },
+                form: { home: ['D','V','D','E','V'], away: ['V','D','V','D','D'] },
+                h2h: { homeWins: 4, draws: 5, awayWins: 3 },
+                streaks: [
+                    { team: "Cádiz", text: "Sem sofrer gols em 3 jogos", type: "pos" },
+                    { team: "Valladolid", text: "Mais de 2.5 gols em 5/6 jogos", type: "neutral" },
+                    { team: "Confronto", text: "Menos de 10.5 escanteios em 4/5 jogos", type: "pos" }
+                ],
                 table: {
-                    all: [ {pos: 1, team: "Botafogo", pts: 46}, {pos: 2, team: "Flamengo", pts: 45} ],
-                    home: [ {pos: 1, team: "Botafogo", pts: 30}, {pos: 5, team: "Flamengo", pts: 22} ],
-                    away: [ {pos: 1, team: "Flamengo", pts: 23}, {pos: 3, team: "Botafogo", pts: 16} ]
+                    general: [ {p: 14, t: "Valladolid", j: 34, sg: -20, pts: 35}, {p: 16, t: "Cádiz", j: 34, sg: -23, pts: 35} ],
+                    home: [ {p: 10, t: "Cádiz", pts: 25} ],
+                    away: [ {p: 18, t: "Valladolid", pts: 10} ]
                 }
             }
         ];
@@ -99,83 +108,110 @@
             const search = document.getElementById('agendaSearch').value.toUpperCase();
             list.innerHTML = '';
 
-            let filtered = dailyGames.filter(g => g.home.toUpperCase().includes(search) || g.league.toUpperCase().includes(search));
+            const filtered = gamesData.filter(g => g.home.toUpperCase().includes(search) || g.league.toUpperCase().includes(search));
 
             filtered.forEach(game => {
                 const isFav = favorites.includes(game.id);
                 list.innerHTML += `
-                    <div class="bg-trading-panel border border-trading-border rounded-lg overflow-hidden">
-                        <div class="game-row p-4 flex items-center justify-between" onclick="toggleDetails(${game.id})">
+                    <div class="bg-trading-panel border border-trading-border rounded-2xl overflow-hidden shadow-2xl">
+                        <div class="game-card p-5 flex items-center justify-between cursor-pointer" onclick="toggleDetails(${game.id})">
                             <div class="flex items-center gap-6">
-                                <span class="font-mono text-trading-highlight font-bold">${game.time}</span>
+                                <div class="text-center">
+                                    <p class="text-xs text-gray-500 font-bold uppercase">Início</p>
+                                    <p class="text-trading-highlight font-mono font-bold">${game.time}</p>
+                                </div>
                                 <div>
-                                    <span class="font-bold text-white">${game.home} x ${game.away}</span>
-                                    <span class="text-gray-500 text-xs ml-2">${game.league}</span>
+                                    <h3 class="text-lg font-bold text-white">${game.home} <span class="text-gray-600 font-light mx-2">vs</span> ${game.away}</h3>
+                                    <p class="text-[10px] text-gray-500 uppercase tracking-widest font-bold">${game.league} • <span class="text-trading-highlight">${game.stadium}</span></p>
                                 </div>
                             </div>
-                            <div class="flex items-center gap-4">
-                                <span class="text-[10px] text-gray-500 font-bold">${game.odds}</span>
-                                <i onclick="event.stopPropagation(); toggleFavorite(${game.id})" class="fa-star ${isFav ? 'fas text-yellow-500' : 'far text-gray-500'}"></i>
+                            
+                            <div class="flex items-center gap-6">
+                                <div class="hidden md:flex gap-2">
+                                    <span class="bg-trading-dark border border-trading-border text-[10px] px-3 py-1 rounded-md text-white font-bold">${game.odds.home}</span>
+                                    <span class="bg-trading-dark border border-trading-border text-[10px] px-3 py-1 rounded-md text-white font-bold">${game.odds.draw}</span>
+                                    <span class="bg-trading-dark border border-trading-border text-[10px] px-3 py-1 rounded-md text-white font-bold">${game.odds.away}</span>
+                                </div>
+                                <i onclick="event.stopPropagation(); toggleFav(${game.id})" class="fa-star ${isFav?'fas text-yellow-500':'far text-gray-600'} text-xl transition hover:scale-125"></i>
                             </div>
                         </div>
 
-                        <div id="details-${game.id}" class="hidden bg-[#0B0E14] border-t border-trading-border">
-                            <div class="flex border-b border-trading-border px-4 text-[10px] font-bold uppercase tracking-widest overflow-x-auto">
-                                <button onclick="switchTab(${game.id}, 'resumo')" id="btn-resumo-${game.id}" class="tab-btn-${game.id} py-4 px-6 tab-btn active whitespace-nowrap">Resumo</button>
-                                <button onclick="switchTab(${game.id}, 'tabela')" id="btn-tabela-${game.id}" class="tab-btn-${game.id} py-4 px-6 tab-btn whitespace-nowrap">Classificação</button>
-                                <button onclick="switchTab(${game.id}, 'players')" id="btn-players-${game.id}" class="tab-btn-${game.id} py-4 px-6 tab-btn whitespace-nowrap">Destaques</button>
-                                <button onclick="switchTab(${game.id}, 'h2h')" id="btn-h2h-${game.id}" class="tab-btn-${game.id} py-4 px-6 tab-btn whitespace-nowrap">H2H</button>
+                        <div id="details-${game.id}" class="hidden bg-trading-dark border-t border-trading-border animate-fade-in">
+                            <div class="flex px-6 border-b border-trading-border overflow-x-auto">
+                                <button onclick="switchTab(${game.id}, 'resumo')" id="tab-resumo-${game.id}" class="tab-btn active px-4 py-4 text-xs font-bold uppercase tracking-tighter mr-4">Resumo</button>
+                                <button onclick="switchTab(${game.id}, 'tabela')" id="tab-tabela-${game.id}" class="tab-btn px-4 py-4 text-xs font-bold uppercase tracking-tighter mr-4">Classificação</button>
+                                <button onclick="switchTab(${game.id}, 'partidas')" id="tab-partidas-${game.id}" class="tab-btn px-4 py-4 text-xs font-bold uppercase tracking-tighter mr-4">Sequências</button>
+                                <button onclick="switchTab(${game.id}, 'h2h')" id="tab-h2h-${game.id}" class="tab-btn px-4 py-4 text-xs font-bold uppercase tracking-tighter">H2H</button>
                             </div>
 
                             <div class="p-6">
-                                <div id="content-resumo-${game.id}" class="tab-content-${game.id} grid grid-cols-1 md:grid-cols-2 gap-10">
+                                <div id="content-resumo-${game.id}" class="tab-content-${game.id} grid grid-cols-1 md:grid-cols-3 gap-8">
                                     <div class="space-y-4">
-                                        <h4 class="text-trading-highlight text-[10px] font-black uppercase">Informações do Match</h4>
-                                        <div class="grid grid-cols-2 gap-4 text-sm">
-                                            <div class="bg-trading-panel p-3 rounded">
-                                                <p class="text-gray-500 text-[9px] mb-1">JUIZ</p>
-                                                <p class="font-bold text-white">${game.referee}</p>
+                                        <h4 class="text-[10px] text-gray-500 font-black uppercase tracking-widest">Informações da Partida</h4>
+                                        <div class="text-sm space-y-2">
+                                            <p class="flex justify-between border-b border-trading-border/30 pb-2"><span class="text-gray-500">Árbitro</span> <span class="text-white font-bold">${game.referee}</span></p>
+                                            <p class="flex justify-between border-b border-trading-border/30 pb-2"><span class="text-gray-500">Local</span> <span class="text-white font-bold">${game.stadium}</span></p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="space-y-4">
+                                        <h4 class="text-[10px] text-gray-500 font-black uppercase tracking-widest text-center">Forma (Últimos 5)</h4>
+                                        <div class="flex justify-around items-center h-full">
+                                            <div class="text-center">
+                                                <p class="text-[9px] text-gray-600 mb-2">CASA</p>
+                                                <div class="flex gap-1">${game.form.home.map(r => `<div class="form-dot bg-${r=='V'?'trading-win':r=='D'?'trading-loss':'trading-draw'}">${r}</div>`).join('')}</div>
                                             </div>
-                                            <div class="bg-trading-panel p-3 rounded">
-                                                <p class="text-gray-500 text-[9px] mb-1">LOCAL</p>
-                                                <p class="font-bold text-white">${game.stadium}</p>
+                                            <div class="text-center">
+                                                <p class="text-[9px] text-gray-600 mb-2">FORA</p>
+                                                <div class="flex gap-1">${game.form.away.map(r => `<div class="form-dot bg-${r=='V'?'trading-win':r=='D'?'trading-loss':'trading-draw'}">${r}</div>`).join('')}</div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div>
-                                        <h4 class="text-trading-highlight text-[10px] font-black uppercase mb-4">Forma Recente (C/F)</h4>
-                                        <div class="flex gap-10">
-                                            <div><span class="text-[9px] text-gray-500 mb-2 block">CASA</span>
-                                            <div class="flex gap-1">${game.formHome.map(r => `<span class="form-circle bg-${r=='V'?'trading-win':r=='D'?'trading-loss':'trading-draw'}">${r}</span>`).join('')}</div></div>
-                                            <div><span class="text-[9px] text-gray-500 mb-2 block">FORA</span>
-                                            <div class="flex gap-1">${game.formAway.map(r => `<span class="form-circle bg-${r=='V'?'trading-win':r=='D'?'trading-loss':'trading-draw'}">${r}</span>`).join('')}</div></div>
-                                        </div>
+
+                                    <div class="bg-trading-panel p-4 rounded-xl border border-trading-border/50">
+                                        <h4 class="text-[10px] text-trading-highlight font-black uppercase tracking-widest mb-3">Dica do Netuno</h4>
+                                        <p class="text-xs text-gray-400 italic">"Confronto direto contra o rebaixamento. Cádiz é muito sólido em casa, mas o mercado de Under Escanteios tem valor aqui."</p>
                                     </div>
                                 </div>
 
                                 <div id="content-tabela-${game.id}" class="tab-content-${game.id} hidden">
-                                    <div class="flex gap-2 mb-4">
-                                        <button class="sub-tab-btn active text-[9px] font-bold px-3 py-1 rounded border border-trading-border uppercase">Todos</button>
-                                        <button class="sub-tab-btn text-[9px] font-bold px-3 py-1 rounded border border-trading-border uppercase">Casa</button>
-                                        <button class="sub-tab-btn text-[9px] font-bold px-3 py-1 rounded border border-trading-border uppercase">Fora</button>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                        <table class="w-full text-xs">
+                                            <thead><tr class="text-gray-600 border-b border-trading-border"><th class="pb-2">#</th><th class="pb-2">TIME</th><th class="pb-2">J</th><th class="pb-2">PTS</th></tr></thead>
+                                            <tbody>${game.table.general.map(t => `<tr class="border-b border-trading-border/20"><td class="py-3 font-bold">${t.p}</td><td class="text-white font-bold">${t.t}</td><td>${t.j}</td><td class="text-trading-highlight font-black">${t.pts}</td></tr>`).join('')}</tbody>
+                                        </table>
+                                        <div class="bg-trading-panel/30 p-4 rounded-lg border border-trading-border flex items-center justify-center">
+                                            <p class="text-[10px] text-gray-500 font-bold uppercase">Gráfico de desempenho sazonal em breve</p>
+                                        </div>
                                     </div>
-                                    <table class="w-full text-xs">
-                                        <thead><tr class="text-gray-500 text-left border-b border-trading-border"><th class="pb-2">#</th><th class="pb-2">Equipe</th><th class="pb-2">PTS</th></tr></thead>
-                                        <tbody>${game.table.all.map(t=>`<tr class="border-b border-trading-border/30"><td class="py-3">${t.pos}</td><td class="font-bold">${t.team}</td><td class="text-trading-highlight font-black">${t.pts}</td></tr>`).join('')}</tbody>
-                                    </table>
                                 </div>
 
-                                <div id="content-players-${game.id}" class="tab-content-${game.id} hidden grid grid-cols-1 md:grid-cols-2 gap-8">
-                                    <div><h5 class="text-[10px] text-gray-500 font-bold mb-3 uppercase">${game.home}</h5>
-                                    ${game.topPlayersHome.map(p=>`<div class="flex justify-between items-center bg-trading-panel p-2 mb-1 rounded"><span>${p.name} <small class="text-gray-500">(${p.goals}G)</small></span> <span class="player-rating bg-trading-rating text-black">${p.rating}</span></div>`).join('')}</div>
-                                    <div><h5 class="text-[10px] text-gray-500 font-bold mb-3 uppercase">${game.away}</h5>
-                                    ${game.topPlayersAway.map(p=>`<div class="flex justify-between items-center bg-trading-panel p-2 mb-1 rounded"><span>${p.name} <small class="text-gray-500">(${p.goals}G)</small></span> <span class="player-rating bg-trading-rating text-black">${p.rating}</span></div>`).join('')}</div>
+                                <div id="content-partidas-${game.id}" class="tab-content-${game.id} hidden">
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        ${game.streaks.map(s => `
+                                            <div class="flex items-center gap-4 bg-trading-panel p-3 rounded-xl border border-trading-border">
+                                                <div class="w-2 h-2 rounded-full ${s.type=='pos'?'bg-trading-win':'bg-trading-highlight'}"></div>
+                                                <div class="text-xs">
+                                                    <p class="text-gray-500 font-black uppercase text-[9px]">${s.team}</p>
+                                                    <p class="text-white font-bold">${s.text}</p>
+                                                </div>
+                                            </div>
+                                        `).join('')}
+                                    </div>
                                 </div>
 
                                 <div id="content-h2h-${game.id}" class="tab-content-${game.id} hidden">
-                                    <div class="bg-trading-panel p-4 rounded-lg">
-                                        <div class="flex justify-between text-xs mb-2"><span>Vitórias ${game.home} (3)</span> <span>Vitórias ${game.away} (2)</span></div>
-                                        <div class="flex h-2 w-full rounded-full overflow-hidden"><div class="bg-trading-home w-[60%]"></div><div class="bg-trading-away w-[40%]"></div></div>
+                                    <div class="max-w-md mx-auto text-center">
+                                        <div class="flex justify-between text-[10px] font-black uppercase mb-2">
+                                            <span>Vitórias ${game.home}: ${game.h2h.homeWins}</span>
+                                            <span>Vitórias ${game.away}: ${game.h2h.awayWins}</span>
+                                        </div>
+                                        <div class="h2h-bar">
+                                            <div style="width: 40%; background: #10B981;"></div>
+                                            <div style="width: 30%; background: #718096;"></div>
+                                            <div style="width: 30%; background: #EF4444;"></div>
+                                        </div>
+                                        <p class="text-[9px] text-gray-600 mt-2 italic">Histórico de confrontos diretos recentes.</p>
                                     </div>
                                 </div>
                             </div>
@@ -185,23 +221,23 @@
             });
         }
 
+        // Funções de Interface
+        function toggleDetails(id) { document.getElementById(`details-${id}`).classList.toggle('hidden'); }
+        
         function switchTab(gameId, tab) {
-            document.querySelectorAll(`.tab-btn-${gameId}`).forEach(b => b.classList.remove('active'));
             document.querySelectorAll(`.tab-content-${gameId}`).forEach(c => c.classList.add('hidden'));
-            document.getElementById(`btn-${tab}-${gameId}`).classList.add('active');
+            document.querySelectorAll(`.tab-btn`).forEach(b => b.classList.remove('active'));
             document.getElementById(`content-${tab}-${gameId}`).classList.remove('hidden');
+            document.getElementById(`tab-${tab}-${gameId}`).classList.add('active');
             event.stopPropagation();
         }
 
-        function toggleDetails(id) { document.getElementById(`details-${id}`).classList.toggle('hidden'); }
-        function toggleFavorite(id) {
-            if (favorites.includes(id)) favorites = favorites.filter(f => f !== id);
-            else favorites.push(id);
+        function toggleFav(id) {
+            favorites.includes(id) ? favorites = favorites.filter(f => f !== id) : favorites.push(id);
             localStorage.setItem('futTraderFavs', JSON.stringify(favorites));
             renderAgenda();
         }
 
-        document.getElementById('date-display').innerText = new Date().toLocaleDateString('pt-br', {day:'2-digit', month:'long'});
         renderAgenda();
     </script>
 </body>

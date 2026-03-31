@@ -33,20 +33,27 @@
         body { background-color: #0B0E14; color: #E2E8F0; font-family: 'Inter', sans-serif; }
         .navbar { display: flex !important; }
         
-        /* Abas Estilo SofaScore */
-        .tab-btn { position: relative; transition: 0.2s; color: #718096; white-space: nowrap; }
+        /* Sistema de Abas Estilo Profissional */
+        .tab-btn { position: relative; transition: 0.2s; color: #718096; white-space: nowrap; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
         .tab-btn.active { color: #FFB100; }
-        .tab-btn.active::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: #FFB100; }
+        .tab-btn.active::after { content: ''; position: absolute; bottom: -12px; left: 0; width: 100%; height: 2px; background: #FFB100; }
         
         .game-card { border-left: 4px solid transparent; transition: 0.3s; }
         .game-card:hover { border-left-color: #FFB100; background: #1a222d; }
         
-        .form-dot { width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: bold; color: white; }
+        /* Gráfico de Performance Sazonal */
+        .perf-dot { width: 8px; height: 8px; border-radius: 50%; }
+        .form-dot { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; color: white; }
         
-        .league-header { background: linear-gradient(90deg, #151A22 0%, #0B0E14 100%); border-left: 4px solid #2A3241; }
+        .league-header { background: #151A22; border-left: 4px solid #2A3241; sticky top: 70px; z-index: 30; }
         
-        /* Animação suave para expandir */
-        .details-content { transition: max-height 0.3s ease-out; }
+        /* Sub-abas de Classificação */
+        .sub-tab.active { background: #FFB100; color: #000; }
+
+        /* Utilitários */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .animate-in { animation: fadeIn 0.3s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body class="antialiased">
@@ -63,40 +70,44 @@
     </nav>
 
     <main class="max-w-6xl mx-auto p-4 md:p-8">
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-10 gap-6">
             <div>
-                <h1 class="text-3xl font-black text-white tracking-tight uppercase">Agenda <span class="text-trading-highlight">Global</span></h1>
-                <p class="text-gray-500 text-sm">Monitorando <span id="game-count">0</span> partidas ao redor do mundo.</p>
+                <h1 class="text-4xl font-black text-white tracking-tighter uppercase italic">QUARTEL <span class="text-trading-highlight">GENERAL</span></h1>
+                <p class="text-gray-500 text-sm font-medium">A maior cobertura de dados do mercado para <span id="game-count" class="text-white">0</span> partidas hoje.</p>
             </div>
-            <div class="relative">
-                <input type="text" id="agendaSearch" oninput="renderAgenda()" placeholder="🔎 Time, Liga ou Jogador..." 
-                class="bg-trading-panel border border-trading-border rounded-xl py-2 px-10 text-xs focus:outline-none focus:border-trading-highlight text-white w-64 shadow-lg">
+            <div class="w-full md:w-auto">
+                <input type="text" id="agendaSearch" oninput="renderAgenda()" placeholder="🔎 Buscar por time, liga, estádio ou craque..." 
+                class="w-full md:w-80 bg-trading-panel border border-trading-border rounded-xl py-3 px-12 text-xs focus:outline-none focus:border-trading-highlight text-white shadow-2xl">
             </div>
         </div>
 
-        <div id="agenda-list" class="space-y-6">
+        <div id="agenda-list" class="space-y-8">
             </div>
     </main>
 
     <script>
-        // BANCO DE DADOS: Suporta múltiplos tipos de torneios
+        // O BANCO DE DADOS COMPLETO (OURO E DIAMANTE)
         const gamesData = [
             {
                 league: "Champions League - Playoffs",
                 country: "Europa",
                 games: [
                     {
-                        id: 701, time: "16:00", home: "Real Madrid", away: "Manchester City", stadium: "Santiago Bernabéu", referee: "François Letexier",
-                        isCup: true, leg: "Quartas de Final - Volta", aggregate: "3 - 3",
-                        odds: { home: 2.80, draw: 3.50, away: 2.45 },
+                        id: 901, time: "16:00", home: "Real Madrid", away: "Manchester City", 
+                        stadium: "Santiago Bernabéu", referee: "François Letexier (FRA)",
+                        isCup: true, stage: "Quartas de Final", leg: "Volta", aggregate: "3 - 3",
+                        odds: { home: 2.85, draw: 3.60, away: 2.40 },
                         form: { home: ['V','V','V','E','V'], away: ['V','V','E','V','V'] },
-                        h2h: { homeWins: 4, draws: 4, awayWins: 4 },
+                        h2h: { homeWins: 4, draws: 4, awayWins: 4, last5: ["3-3","1-1","4-3","1-2","1-0"] },
                         streaks: [
-                            { team: "Real Madrid", text: "14 partidas sem perder", type: "pos" },
-                            { team: "Man City", text: "10 partidas sem perder", type: "pos" },
-                            { team: "Confronto", text: "Mais de 2.5 gols em 4/5 jogos", type: "pos" }
+                            { team: "Real Madrid", text: "Sem perder há 14 jogos", type: "pos" },
+                            { team: "Man City", text: "Mais de 2.5 gols em 5/6 jogos", type: "neutral" },
+                            { team: "Confronto", text: "Ambas Marcam em 4/5 jogos", type: "pos" }
                         ],
-                        tip: "Duelo de gigantes. O Real em casa na Champions é implacável, mas o City tem o controle. Chance alta de Ambas Marcam."
+                        topPlayers: {
+                            home: [{n: "Vinícius Jr", r: "8.2", g: 6}, {n: "Bellingham", r: "7.9", g: 4}],
+                            away: [{n: "Haaland", r: "8.5", g: 8}, {n: "De Bruyne", r: "8.0", g: 2}]
+                        }
                     }
                 ]
             },
@@ -105,16 +116,22 @@
                 country: "Espanha",
                 games: [
                     {
-                        id: 501, time: "16:00", home: "Cádiz", away: "Real Valladolid", stadium: "Nuevo Mirandilla", referee: "Isidro Díaz",
-                        isCup: false,
+                        id: 501, time: "16:00", home: "Cádiz", away: "Real Valladolid",
+                        stadium: "Estadio Nuevo Mirandilla", referee: "Isidro Díaz de Mera Escuderos",
+                        isCup: false, round: "35ª Rodada",
                         odds: { home: 2.15, draw: 3.20, away: 3.60 },
                         form: { home: ['D','V','D','E','V'], away: ['V','D','V','D','D'] },
-                        h2h: { homeWins: 4, draws: 5, awayWins: 3 },
-                        table: [ {p: 14, t: "Valladolid", pts: 35}, {p: 16, t: "Cádiz", pts: 35} ],
+                        h2h: { homeWins: 4, draws: 5, awayWins: 3, last5: ["0-0","1-1","0-1","1-0","1-1"] },
                         streaks: [
-                            { team: "Confronto", text: "Menos de 2.5 gols em 5/7 jogos", type: "pos" }
+                            { team: "Confronto", text: "Menos de 2.5 gols em 6/7 jogos", type: "pos" },
+                            { team: "Cádiz", text: "Primeiro a marcar em 5/5 jogos", type: "pos" }
                         ],
-                        tip: "Jogo tenso de rebaixamento. O Cádiz deve amarrar o jogo."
+                        table: {
+                            general: [ {p: 1, t: "Barcelona", pts: 82}, {p: 14, t: "Valladolid", pts: 35}, {p: 16, t: "Cádiz", pts: 35} ],
+                            home: [ {p: 10, t: "Cádiz", pts: 25} ],
+                            away: [ {p: 18, t: "Valladolid", pts: 10} ]
+                        },
+                        performanceGraph: ['up','up','down','equal','up','down','up']
                     }
                 ]
             }
@@ -137,94 +154,114 @@
 
                 if (filteredGames.length > 0) {
                     let groupHtml = `
-                        <div class="league-group">
-                            <div class="league-header px-4 py-2 flex items-center gap-3 rounded-t-xl border-b border-trading-border">
-                                <span class="text-[10px] font-black text-gray-500 uppercase tracking-widest">${group.country} : ${group.league}</span>
+                        <div class="league-section animate-in">
+                            <div class="league-header px-6 py-3 flex items-center justify-between rounded-t-2xl border-b border-trading-border">
+                                <span class="text-xs font-black text-gray-400 uppercase tracking-[3px]">${group.country} : ${group.league}</span>
                             </div>
-                            <div class="bg-trading-panel divide-y divide-trading-border/30 rounded-b-xl overflow-hidden shadow-xl border-x border-b border-trading-border">
+                            <div class="bg-trading-panel divide-y divide-trading-border/30 rounded-b-2xl overflow-hidden shadow-2xl border-x border-b border-trading-border">
                     `;
 
                     filteredGames.forEach(game => {
                         count++;
                         const isFav = favorites.includes(game.id);
                         groupHtml += `
-                            <div class="game-item">
-                                <div class="game-card p-4 flex items-center justify-between cursor-pointer" onclick="toggleDetails(${game.id})">
-                                    <div class="flex items-center gap-6">
-                                        <div class="text-center min-w-[45px]">
-                                            <p class="text-trading-highlight font-mono font-bold">${game.time}</p>
+                            <div class="game-wrapper">
+                                <div class="game-card p-6 flex items-center justify-between cursor-pointer" onclick="toggleDetails(${game.id})">
+                                    <div class="flex items-center gap-8">
+                                        <div class="text-center">
+                                            <p class="text-[10px] text-gray-600 font-black uppercase">Start</p>
+                                            <p class="text-trading-highlight font-mono font-black text-lg">${game.time}</p>
                                         </div>
                                         <div>
-                                            <div class="flex items-center gap-2">
-                                                <h3 class="text-sm md:text-base font-bold text-white">${game.home} x ${game.away}</h3>
-                                                ${game.isCup ? `<span class="bg-red-900/50 text-red-400 text-[9px] px-1.5 py-0.5 rounded uppercase font-bold">Mata-Mata</span>` : ''}
+                                            <div class="flex items-center gap-3 mb-1">
+                                                <h3 class="text-lg font-black text-white uppercase tracking-tight">${game.home} <span class="text-gray-700 font-light lowercase px-2">vs</span> ${game.away}</h3>
+                                                ${game.isCup ? `<span class="bg-red-600 text-white text-[8px] px-2 py-0.5 rounded font-black uppercase">${game.stage}</span>` : ''}
                                             </div>
-                                            <p class="text-[10px] text-gray-500 font-medium">${game.stadium} | <span class="text-gray-400">${game.referee}</span></p>
+                                            <p class="text-[10px] text-gray-500 font-bold uppercase tracking-widest"><i class="fas fa-map-marker-alt mr-1 text-trading-highlight"></i> ${game.stadium}</p>
                                         </div>
                                     </div>
-                                    <div class="flex items-center gap-4">
-                                        <div class="hidden sm:flex gap-2 text-[10px] font-mono text-gray-400">
-                                            <span class="bg-black/40 px-2 py-1 rounded">${game.odds.home}</span>
-                                            <span class="bg-black/40 px-2 py-1 rounded">${game.odds.away}</span>
+                                    <div class="flex items-center gap-8">
+                                        <div class="hidden md:flex gap-3 text-xs">
+                                            <div class="bg-trading-dark border border-trading-border px-4 py-2 rounded-lg text-white font-black">${game.odds.home}</div>
+                                            <div class="bg-trading-dark border border-trading-border px-4 py-2 rounded-lg text-white font-black">${game.odds.draw}</div>
+                                            <div class="bg-trading-dark border border-trading-border px-4 py-2 rounded-lg text-white font-black">${game.odds.away}</div>
                                         </div>
-                                        <i onclick="event.stopPropagation(); toggleFav(${game.id})" class="fa-star ${isFav ? 'fas text-yellow-500' : 'far text-gray-600'} text-lg transition hover:scale-125"></i>
+                                        <i onclick="event.stopPropagation(); toggleFav(${game.id})" class="fa-star ${isFav ? 'fas text-yellow-500' : 'far text-gray-600'} text-2xl transition hover:scale-125"></i>
                                     </div>
                                 </div>
 
-                                <div id="details-${game.id}" class="hidden bg-trading-dark border-t border-trading-border">
-                                    <div class="flex border-b border-trading-border overflow-x-auto no-scrollbar">
-                                        <button onclick="switchTab(${game.id}, 'resumo')" id="tab-resumo-${game.id}" class="tab-btn active px-6 py-3 text-[10px] font-black uppercase tracking-tighter">Resumo</button>
-                                        <button onclick="switchTab(${game.id}, 'info')" id="tab-info-${game.id}" class="tab-btn px-6 py-3 text-[10px] font-black uppercase tracking-tighter">Info</button>
-                                        <button onclick="switchTab(${game.id}, 'h2h')" id="tab-h2h-${game.id}" class="tab-btn px-6 py-3 text-[10px] font-black uppercase tracking-tighter">Confrontos</button>
+                                <div id="details-${game.id}" class="hidden bg-[#0D0F14] border-t border-trading-border animate-in">
+                                    <div class="flex border-b border-trading-border overflow-x-auto no-scrollbar px-6">
+                                        <button onclick="switchTab(${game.id}, 'resumo')" id="tab-resumo-${game.id}" class="tab-btn active px-6 py-4 mr-6">Resumo</button>
+                                        <button onclick="switchTab(${game.id}, 'class')" id="tab-class-${game.id}" class="tab-btn px-6 py-4 mr-6">${game.isCup ? 'Chaveamento' : 'Tabela'}</button>
+                                        <button onclick="switchTab(${game.id}, 'h2h')" id="tab-h2h-${game.id}" class="tab-btn px-6 py-4 mr-6">Confrontos</button>
+                                        <button onclick="switchTab(${game.id}, 'top')" id="tab-top-${game.id}" class="tab-btn px-6 py-4">Destaques</button>
                                     </div>
 
-                                    <div class="p-5">
-                                        <div id="content-resumo-${game.id}" class="tab-content-${game.id} space-y-6">
-                                            ${game.isCup ? `
-                                            <div class="bg-red-900/10 border border-red-900/30 p-3 rounded-lg flex justify-between items-center">
-                                                <span class="text-[10px] font-bold text-red-400 uppercase tracking-widest"><i class="fas fa-trophy mr-2"></i> Placar Agregado</span>
-                                                <span class="text-white font-black">${game.aggregate}</span>
-                                            </div>` : ''}
-
-                                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                                <div class="space-y-4">
-                                                    <h4 class="text-[9px] text-gray-600 font-black uppercase">Forma Recente</h4>
-                                                    <div class="flex gap-8">
-                                                        <div class="flex gap-1">${game.form.home.map(r => `<div class="form-dot bg-${r=='V'?'trading-win':r=='D'?'trading-loss':'trading-draw'}">${r}</div>`).join('')}</div>
-                                                        <div class="flex gap-1">${game.form.away.map(r => `<div class="form-dot bg-${r=='V'?'trading-win':r=='D'?'trading-loss':'trading-draw'}">${r}</div>`).join('')}</div>
+                                    <div class="p-8">
+                                        <div id="content-resumo-${game.id}" class="tab-content-${game.id} space-y-10">
+                                            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                                                <div class="space-y-6">
+                                                    <h4 class="text-[10px] text-gray-500 font-black uppercase tracking-[2px]">Logística do Jogo</h4>
+                                                    <div class="bg-trading-panel p-5 rounded-2xl border border-trading-border space-y-4">
+                                                        <div class="flex justify-between items-center"><span class="text-xs text-gray-500">Árbitro</span><span class="text-xs font-bold text-white">${game.referee}</span></div>
+                                                        <div class="flex justify-between items-center"><span class="text-xs text-gray-500">Estádio</span><span class="text-xs font-bold text-white">${game.stadium}</span></div>
+                                                        ${game.isCup ? `<div class="flex justify-between items-center bg-red-900/20 p-2 rounded"><span class="text-xs text-red-400 font-bold uppercase">Agregado</span><span class="text-xs font-black text-white">${game.aggregate}</span></div>` : ''}
                                                     </div>
                                                 </div>
-                                                <div class="bg-trading-panel p-3 rounded-lg border-l-2 border-trading-highlight">
-                                                    <h4 class="text-[9px] text-trading-highlight font-black uppercase mb-1">Dica Pro</h4>
-                                                    <p class="text-[11px] text-gray-400 italic leading-relaxed">"${game.tip}"</p>
+                                                <div class="space-y-6">
+                                                    <h4 class="text-[10px] text-gray-500 font-black uppercase tracking-[2px] text-center">Momento Atual (C/F)</h4>
+                                                    <div class="flex justify-around items-center h-full">
+                                                        <div class="flex gap-1.5">${game.form.home.map(r => `<div class="form-dot bg-${r=='V'?'trading-win':r=='D'?'trading-loss':'trading-draw'}">${r}</div>`).join('')}</div>
+                                                        <div class="w-[1px] h-10 bg-trading-border"></div>
+                                                        <div class="flex gap-1.5">${game.form.away.map(r => `<div class="form-dot bg-${r=='V'?'trading-win':r=='D'?'trading-loss':'trading-draw'}">${r}</div>`).join('')}</div>
+                                                    </div>
+                                                </div>
+                                                <div class="space-y-6">
+                                                    <h4 class="text-[10px] text-trading-highlight font-black uppercase tracking-[2px]">Diretriz NETTUNO</h4>
+                                                    <div class="bg-[#1A1D23] p-5 rounded-2xl border-l-4 border-trading-highlight italic text-xs text-gray-400 leading-relaxed">
+                                                        "${game.id === 901 ? 'Jogo de altíssima volatilidade. Man City deve manter 60%+ de posse, mas o Real Madrid tem transição letal. Atenção ao Live para entrar no Over 1.0 HT se o ritmo for frenético.' : 'Expectativa de jogo amarrado. O Cádiz em casa é uma fortaleza para o Under 2.5.'}"
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div id="content-info-${game.id}" class="tab-content-${game.id} hidden">
+                                        <div id="content-class-${game.id}" class="tab-content-${game.id} hidden animate-in">
                                             ${!game.isCup ? `
-                                            <table class="w-full text-[11px]">
-                                                <tr class="text-gray-500 border-b border-trading-border"><th class="pb-2 text-left">#</th><th class="pb-2 text-left">TIME</th><th class="pb-2 text-right">PTS</th></tr>
-                                                ${game.table.map(t => `<tr class="border-b border-trading-border/20"><td class="py-2">${t.p}</td><td class="font-bold text-white">${t.t}</td><td class="text-right text-trading-highlight font-black">${t.pts}</td></tr>`).join('')}
+                                            <div class="flex gap-2 mb-6">
+                                                <button class="sub-tab active px-4 py-1.5 rounded-lg text-[10px] font-bold uppercase border border-trading-border">Geral</button>
+                                                <button class="sub-tab px-4 py-1.5 rounded-lg text-[10px] font-bold uppercase border border-trading-border">Casa</button>
+                                                <button class="sub-tab px-4 py-1.5 rounded-lg text-[10px] font-bold uppercase border border-trading-border">Fora</button>
+                                            </div>
+                                            <table class="w-full text-left text-sm">
+                                                <thead class="text-[10px] text-gray-500 font-black uppercase border-b border-trading-border"><tr class="pb-2"><th class="pb-3">#</th><th>Equipe</th><th class="text-right">PTS</th></tr></thead>
+                                                <tbody>${game.table.general.map(t => `<tr class="border-b border-trading-border/20"><td class="py-4 font-bold">${t.p}</td><td class="font-bold text-white uppercase">${t.t}</td><td class="text-right font-black text-trading-highlight">${t.pts}</td></tr>`).join('')}</tbody>
                                             </table>
                                             ` : `
-                                            <div class="text-center py-4">
-                                                <p class="text-[10px] text-gray-500 font-bold uppercase mb-2">Chaveamento do Torneio</p>
-                                                <div class="flex justify-center items-center gap-4 text-xs font-bold">
-                                                    <span class="text-white">Quartas</span> <i class="fas fa-long-arrow-alt-right text-gray-700"></i> <span class="text-gray-600">Semis</span>
-                                                </div>
+                                            <div class="flex flex-col items-center py-10 opacity-50">
+                                                <i class="fas fa-sitemap text-4xl mb-4"></i>
+                                                <p class="text-xs font-bold uppercase tracking-widest text-gray-400">Diagrama de Chaveamento em desenvolvimento</p>
                                             </div>
                                             `}
                                         </div>
 
-                                        <div id="content-h2h-${game.id}" class="tab-content-${game.id} hidden space-y-4">
-                                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                                ${game.streaks.map(s => `
-                                                    <div class="bg-trading-panel/50 p-2 border border-trading-border rounded-md text-[11px]">
-                                                        <span class="text-gray-600 font-black text-[9px] uppercase">${s.team}</span>
-                                                        <p class="text-white font-semibold">${s.text}</p>
-                                                    </div>
-                                                `).join('')}
+                                        <div id="content-h2h-${game.id}" class="tab-content-${game.id} hidden animate-in">
+                                            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                                                <div class="space-y-4">
+                                                    <h4 class="text-[10px] text-gray-500 font-black uppercase tracking-[2px]">Sequências Cruciais</h4>
+                                                    <div class="grid grid-cols-1 gap-2">${game.streaks.map(s => `<div class="bg-trading-panel/40 p-3 border border-trading-border rounded-xl text-xs"><span class="text-[9px] font-black text-gray-600 block uppercase">${s.team}</span><span class="text-white font-bold">${s.text}</span></div>`).join('')}</div>
+                                                </div>
+                                                <div class="space-y-4">
+                                                    <h4 class="text-[10px] text-gray-500 font-black uppercase tracking-[2px] text-center">Resultados Recentes</h4>
+                                                    <div class="space-y-2">${game.h2h.last5.map(res => `<div class="flex justify-between bg-trading-panel/20 p-3 rounded-lg text-[11px] font-mono"><span class="text-gray-500">Match Direct</span><span class="text-white font-black">${res}</span></div>`).join('')}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div id="content-top-${game.id}" class="tab-content-${game.id} hidden animate-in">
+                                            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                                                <div><h5 class="text-[10px] text-gray-600 font-black uppercase mb-4 tracking-[2px]">${game.home}</h5>${game.topPlayers.home.map(p => `<div class="flex justify-between items-center bg-trading-panel p-3 rounded-xl mb-2"><span><b class="text-white">${p.n}</b> <small class="text-gray-500 ml-2">${p.g}G</small></span> <span class="bg-trading-rating text-black px-2 py-1 rounded-md text-[10px] font-black">${p.r}</span></div>`).join('')}</div>
+                                                <div><h5 class="text-[10px] text-gray-600 font-black uppercase mb-4 tracking-[2px]">${game.away}</h5>${game.topPlayers.away.map(p => `<div class="flex justify-between items-center bg-trading-panel p-3 rounded-xl mb-2"><span><b class="text-white">${p.n}</b> <small class="text-gray-500 ml-2">${p.g}G</small></span> <span class="bg-trading-rating text-black px-2 py-1 rounded-md text-[10px] font-black">${p.r}</span></div>`).join('')}</div>
                                             </div>
                                         </div>
                                     </div>
@@ -242,10 +279,11 @@
         function toggleDetails(id) { document.getElementById(`details-${id}`).classList.toggle('hidden'); }
         
         function switchTab(gameId, tab) {
-            document.querySelectorAll(`.tab-content-${gameId}`).forEach(c => c.classList.add('hidden'));
-            document.querySelectorAll(`#details-${gameId} .tab-btn`).forEach(b => b.classList.remove('active'));
-            document.getElementById(`content-${tab}-${gameId}`).classList.remove('hidden');
-            document.getElementById(`tab-${tab}-${gameId}`).classList.add('active');
+            const hub = document.getElementById(`details-${gameId}`);
+            hub.querySelectorAll(`.tab-content-${gameId}`).forEach(c => c.classList.add('hidden'));
+            hub.querySelectorAll(`.tab-btn`).forEach(b => b.classList.remove('active'));
+            hub.querySelector(`#content-${tab}-${gameId}`).classList.remove('hidden');
+            hub.querySelector(`#tab-${tab}-${gameId}`).classList.add('active');
             event.stopPropagation();
         }
 

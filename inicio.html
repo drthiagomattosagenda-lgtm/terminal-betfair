@@ -81,7 +81,6 @@
         let gamesData = [];
         let favorites = JSON.parse(localStorage.getItem('futTraderFavs')) || [];
 
-        // 🛡️ CORREÇÃO 2: Limpeza robusta de horário (Regex Insensível a Maiúsculas)
         function tratarStatus(status) {
             if (!status) return "--:--";
             
@@ -95,7 +94,6 @@
             const finalizacoes = ["FT", "FINAL", "ENDED", "FIM", "FULL TIME"];
             if (finalizacoes.some(f => s === f || s.includes(f))) return "FIM";
             
-            // Remove AM/PM em qualquer formato e formata limpo
             return status.replace(/AM|PM/gi, "").trim();
         }
 
@@ -110,12 +108,10 @@
                 
                 const result = await response.json();
 
-                // 🛡️ CORREÇÃO 1: Trata dados vazios ou erro da API no backend
                 if (!result.sucesso) throw new Error("Erro da API: " + result.erro);
 
                 if (result.dados && result.dados.length > 0) {
                     const grouped = result.dados.reduce((acc, game) => {
-                        // 🛡️ CORREÇÃO 3: Proteção contra "null" na liga
                         const key = game.league || "Outras Competições";
                         if (!acc[key]) acc[key] = { name: key, games: [] };
                         acc[key].games.push(game);
@@ -126,13 +122,11 @@
                     alertBox.classList.add('hidden');
                     renderAgenda();
                 } else {
-                    // Dia sem jogos
                     alertIcon.className = "fas fa-calendar-times text-gray-600 text-3xl";
                     alertText.innerText = "Nenhum evento detectado para hoje.";
                 }
             } catch (error) {
                 console.warn("Motor dormindo ou indisponível. Tentando acordar...", error);
-                // Feedback visual de que está tentando reconectar (padrão Render Grátis)
                 alertIcon.className = "fas fa-sync fa-spin text-red-500 text-3xl";
                 alertText.innerHTML = "Acordando o Servidor de Dados...<br><span class='text-[8px] opacity-50'>Pode levar até 50s na primeira tentativa.</span>";
                 setTimeout(conectarAoMotor, 5000); 
@@ -228,7 +222,7 @@
                                             </div>
                                             <div class="bg-trading-highlight/5 p-4 rounded-2xl border-l-4 border-trading-highlight">
                                                 <h4 class="text-[10px] text-trading-highlight font-black uppercase mb-2">Monitoramento</h4>
-                                                <p class="text-xs text-gray-400 italic" id="tip-${game.id}">Aguardando volume de jogo e gráficos de pressão.</p>
+                                                <p class="text-xs text-gray-400 italic" id="tip-${game.id}">Aguardando dados...</p>
                                             </div>
                                         </div>
 
@@ -266,7 +260,7 @@
 
         function switchTab(id, aba) {
             const container = document.getElementById(`details-${id}`);
-            if(!container) return; // Proteção adicional
+            if(!container) return; 
             container.querySelectorAll(`.tab-content-${id}`).forEach(c => c.classList.add('hidden'));
             container.querySelectorAll(`.tab-btn`).forEach(b => b.classList.remove('active'));
             document.getElementById(`content-${aba}-${id}`).classList.remove('hidden');
@@ -297,24 +291,45 @@
             renderAgenda();
         }
 
+        // 🛡️ A INJEÇÃO CIRÚRGICA DE ELITE (Conexão direta com seu main.py V8)
         async function buscarDetalhesSeguros(id) {
             try {
-                const resp = await fetch(`https://site.api.espn.com/apis/site/v2/sports/soccer/summary?event=${id}`);
-                if (!resp.ok) throw new Error("API Indisponível");
-                const data = await resp.json();
+                // Chama a rota /detalhes/{id} do seu Render
+                const resp = await fetch(`https://motor-ferrari.onrender.com/detalhes/${id}`);
+                const result = await resp.json();
 
-                let statusTraduzido = tratarStatus(data.header?.competitions[0]?.status?.type?.detail || 'Ao Vivo');
+                if (!result.sucesso) throw new Error("Erro no Motor V8");
+
+                // 1. Atualiza Status
+                let statusTraduzido = tratarStatus(result.status || 'Ao Vivo');
                 document.getElementById(`status-${id}`).innerText = statusTraduzido;
+
+                // 2. Injeta a Forma Recente (Protegido contra falhas do array)
+                const buildForm = (formArray) => {
+                    if (!formArray || !Array.isArray(formArray)) return `<span class="text-xs text-gray-600 italic">Sem dados</span>`;
+                    return formArray.map(r => `<div class="form-dot bg-trading-${r=='V'?'win':r=='D'?'loss':'draw'}">${r}</div>`).join('');
+                };
                 
+                document.getElementById(`form-home-${id}`).innerHTML = buildForm(result.forma?.home);
+                document.getElementById(`form-away-${id}`).innerHTML = buildForm(result.forma?.away);
+
+                // 3. Injeta a Inteligência do SOCCERDATA
+                const eloHome = result.soccerdata?.home_elo;
+                const eloAway = result.soccerdata?.away_elo;
+                
+                if (eloHome !== 'N/A' && eloAway !== 'N/A') {
+                    document.getElementById(`tip-${id}`).innerHTML = `<b class="text-white">Avaliação ClubElo:</b> Casa (${eloHome}) vs Fora (${eloAway})`;
+                } else {
+                    document.getElementById(`tip-${id}`).innerText = `Análise SoccerData não encontrada para esta liga.`;
+                }
+
+                // 4. H2H Placeholder
                 document.getElementById(`h2h-msg-${id}`).innerText = "Dados históricos protegidos. Acesse a área PRO.";
 
-                document.getElementById(`form-home-${id}`).innerHTML = `<div class="form-dot bg-gray-700 opacity-50">?</div><div class="form-dot bg-gray-700 opacity-50">?</div>`;
-                document.getElementById(`form-away-${id}`).innerHTML = `<div class="form-dot bg-gray-700 opacity-50">?</div><div class="form-dot bg-gray-700 opacity-50">?</div>`;
-
             } catch (e) {
-                console.warn("Falha silenciosa ao buscar detalhes do jogo:", id);
+                console.warn("Falha silenciosa ao buscar detalhes profundos:", id, e);
                 document.getElementById(`status-${id}`).innerText = 'Falha de Conexão';
-                document.getElementById(`tip-${id}`).innerText = 'Impossível carregar análise. Verifique a Central.';
+                document.getElementById(`tip-${id}`).innerText = 'Motor em resfriamento. Impossível extrair análise SoccerData agora.';
             }
         }
 

@@ -29,15 +29,12 @@
 
     <style>
         body { background-color: #0B0E14; color: #E2E8F0; font-family: 'Inter', sans-serif; }
-        .nav-links { display: flex; gap: 20px; list-style: none; }
-        .nav-links a { color: #718096; font-size: 14px; font-weight: 600; text-decoration: none; transition: 0.3s; }
-        .nav-links a:hover { color: #FFB100; }
         .tab-btn { color: #718096; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; transition: 0.2s; position: relative; padding-bottom: 12px; }
         .tab-btn.active { color: #FFB100; }
         .tab-btn.active::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: #FFB100; }
-        .form-dot { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; color: white; }
-        .animate-in { animation: fadeIn 0.4s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .form-dot { width: 18px; height: 18px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: bold; color: white; }
+        .animate-in { animation: fadeIn 0.3s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
         .no-scrollbar::-webkit-scrollbar { display: none; }
     </style>
 </head>
@@ -46,62 +43,39 @@
     <nav class="border-b border-trading-border p-4 mb-8">
         <div class="max-w-6xl mx-auto flex justify-between items-center">
             <div class="text-xl font-black italic tracking-tighter text-white">FUT <span class="text-trading-highlight">TRADER</span></div>
-            <ul class="nav-links">
-                <li><a href="inicio.html" class="text-trading-highlight">Início</a></li>
-                <li><a href="dashboard.html">Dashboard</a></li>
-                <li><a href="aovivo.html">Ao Vivo</a></li>
-                <li><a href="index.html" class="text-red-500">Sair</a></li>
+            <ul class="flex gap-6 list-none">
+                <li><a href="inicio.html" class="text-trading-highlight font-bold text-sm">Início</a></li>
+                <li><a href="dashboard.html" class="text-gray-500 font-bold text-sm">Dashboard</a></li>
+                <li><a href="aovivo.html" class="text-gray-500 font-bold text-sm">Ao Vivo</a></li>
             </ul>
         </div>
     </nav>
 
     <main class="max-w-6xl mx-auto p-4">
-        <div class="flex flex-col md:flex-row justify-between items-end mb-10 gap-6">
-            <div>
-                <h1 class="text-4xl font-black text-white tracking-tighter uppercase italic leading-none">QUARTEL <span class="text-trading-highlight">GENERAL</span></h1>
-                <p class="text-gray-500 text-xs mt-2 font-medium tracking-wide">Analizando <span id="game-count" class="text-white">0</span> eventos reais via ESPN Global.</p>
-            </div>
-            <div class="w-full md:w-auto">
-                <input type="text" id="agendaSearch" oninput="renderAgenda()" placeholder="🔎 Filtrar time ou liga..." 
-                class="w-full md:w-80 bg-trading-panel border border-trading-border rounded-xl py-3 px-6 text-xs focus:outline-none focus:border-trading-highlight text-white shadow-2xl transition-all">
-            </div>
+        <div class="mb-10">
+            <h1 class="text-4xl font-black text-white tracking-tighter uppercase italic leading-none">QUARTEL <span class="text-trading-highlight">GENERAL</span></h1>
+            <p class="text-gray-500 text-xs mt-2 font-medium">Analizando <span id="game-count" class="text-white">0</span> eventos reais via API Global.</p>
         </div>
 
         <div id="loading-alert" class="text-center py-20">
             <i class="fas fa-circle-notch fa-spin text-trading-highlight text-3xl"></i>
-            <p class="text-gray-500 mt-4 font-bold uppercase text-[10px] tracking-[3px]">Sincronizando Inteligência...</p>
+            <p class="text-gray-500 mt-4 font-bold uppercase text-[10px] tracking-[3px]">Sincronizando Grade Mundial...</p>
         </div>
 
-        <div id="agenda-list" class="space-y-12"></div>
+        <div id="agenda-list" class="space-y-8"></div>
     </main>
 
     <script>
         let gamesData = [];
-        let favorites = JSON.parse(localStorage.getItem('futTraderFavs')) || [];
-
-        // FUNÇÕES DE "INTELIGÊNCIA" PARA GERAR DADOS ÚNICOS POR JOGO
-        const getSeedData = (id) => {
-            const seed = parseInt(id.toString().slice(-3)) || 123;
-            const forms = ['V', 'D', 'E'];
-            const generateForm = () => Array.from({length: 5}, (_, i) => forms[(seed + i) % 3]);
-            return {
-                hHome: (seed % 7) + 1,
-                hDraw: (seed % 3) + 1,
-                hAway: (seed % 5) + 1,
-                fHome: generateForm(),
-                fAway: generateForm().reverse(),
-                tip: seed % 2 === 0 ? "Tendência de Over 1.5 no segundo tempo." : "Forte pressão lateral detectada. Cuidado com o empate."
-            };
-        };
 
         async function conectarAoMotor() {
             try {
                 const response = await fetch('https://motor-ferrari.onrender.com/jogos');
                 const result = await response.json();
-                if (result.sucesso && result.dados.length > 0) {
+                if (result.sucesso) {
                     const grouped = result.dados.reduce((acc, game) => {
                         const key = game.league;
-                        if (!acc[key]) acc[key] = { name: key, country: game.country, games: [] };
+                        if (!acc[key]) acc[key] = { name: key, games: [] };
                         acc[key].games.push(game);
                         return acc;
                     }, {});
@@ -109,129 +83,107 @@
                     document.getElementById('loading-alert').classList.add('hidden');
                     renderAgenda();
                 }
-            } catch (error) {
-                setTimeout(conectarAoMotor, 5000);
-            }
+            } catch (e) { setTimeout(conectarAoMotor, 5000); }
         }
 
         function renderAgenda() {
             const list = document.getElementById('agenda-list');
-            const search = document.getElementById('agendaSearch').value.toUpperCase();
-            let totalCount = 0;
             list.innerHTML = '';
+            let count = 0;
 
             gamesData.forEach(league => {
-                const filteredGames = league.games.filter(g => 
-                    g.home.toUpperCase().includes(search) || g.away.toUpperCase().includes(search)
-                );
+                let html = `
+                    <div class="league-section animate-in">
+                        <div class="flex items-center gap-3 mb-3 px-2">
+                            <span class="text-[11px] font-black text-white uppercase tracking-[2px]">${league.name}</span>
+                        </div>
+                        <div class="bg-trading-panel rounded-2xl border border-trading-border overflow-hidden divide-y divide-white/5 shadow-2xl">
+                `;
 
-                if (filteredGames.length > 0) {
-                    let html = `
-                        <div class="league-section animate-in">
-                            <div class="flex items-center gap-3 mb-4 px-2">
-                                <span class="text-[11px] font-black text-white uppercase tracking-[2px]">${league.country}: ${league.name}</span>
+                league.games.forEach(game => {
+                    count++;
+                    html += `
+                        <div class="game-item">
+                            <div class="p-5 flex items-center justify-between cursor-pointer hover:bg-white/[0.02]" onclick="toggleDetails('${game.id}')">
+                                <div class="flex items-center gap-8">
+                                    <span class="text-trading-highlight font-mono font-black text-sm">${game.time}</span>
+                                    <div class="flex flex-col">
+                                        <span class="text-sm font-black text-white uppercase">${game.home} vs ${game.away}</span>
+                                        <span class="text-[9px] text-gray-600 uppercase tracking-wider">${game.venue}</span>
+                                    </div>
+                                </div>
+                                <div class="bg-black/40 px-4 py-2 rounded-xl border border-white/5 text-sm font-mono font-black text-white">${game.score}</div>
                             </div>
-                            <div class="bg-trading-panel rounded-2xl border border-trading-border overflow-hidden divide-y divide-white/5 shadow-2xl">
+
+                            <div id="details-${game.id}" class="hidden bg-[#0D1117] border-t border-white/5 animate-in">
+                                <div class="flex gap-8 px-8 border-b border-white/5 overflow-x-auto no-scrollbar">
+                                    <button onclick="switchTab('${game.id}', 'resumo')" id="tab-resumo-${game.id}" class="tab-btn active">Resumo</button>
+                                    <button onclick="switchTab('${game.id}', 'class')" id="tab-class-${game.id}" class="tab-btn">Classificação</button>
+                                    <button onclick="switchTab('${game.id}', 'h2h')" id="tab-h2h-${game.id}" class="tab-btn">H2H</button>
+                                    <button onclick="switchTab('${game.id}', 'top')" id="tab-top-${game.id}" class="tab-btn">Destaques</button>
+                                </div>
+                                <div class="p-8 min-h-[150px]" id="content-area-${game.id}">
+                                    <div class="flex items-center justify-center h-full py-10">
+                                        <i class="fas fa-spinner fa-spin text-trading-highlight"></i>
+                                        <span class="ml-3 text-xs text-gray-500 uppercase font-bold tracking-widest">Buscando dados REAIS da ESPN...</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     `;
-
-                    filteredGames.forEach(game => {
-                        totalCount++;
-                        const isFav = favorites.includes(game.id);
-                        const intel = getSeedData(game.id); // Gera os dados únicos para este jogo
-
-                        html += `
-                            <div class="game-item">
-                                <div class="p-5 flex items-center justify-between cursor-pointer hover:bg-white/[0.02]" onclick="toggleDetails('${game.id}')">
-                                    <div class="flex items-center gap-8">
-                                        <div class="text-center min-w-[50px]">
-                                            <p class="text-trading-highlight font-mono font-black text-sm">${game.time}</p>
-                                        </div>
-                                        <div class="flex flex-col">
-                                            <div class="flex items-center gap-4">
-                                                <span class="text-base font-black text-white uppercase tracking-tight">${game.home}</span>
-                                                <span class="text-[10px] text-gray-700 font-black italic">VS</span>
-                                                <span class="text-base font-black text-white uppercase tracking-tight">${game.away}</span>
-                                            </div>
-                                            <span class="text-[9px] text-gray-500 uppercase mt-1"><i class="fas fa-map-marker-alt mr-1"></i>${game.venue}</span>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-center gap-6">
-                                        <div class="bg-black/40 px-4 py-2 rounded-xl border border-white/5 text-sm font-mono font-black text-white">${game.score}</div>
-                                        <i onclick="event.stopPropagation(); toggleFav('${game.id}')" class="fa-star ${isFav ? 'fas text-trading-highlight' : 'far text-gray-700'} text-xl transition active:scale-150"></i>
-                                    </div>
-                                </div>
-
-                                <div id="details-${game.id}" class="hidden bg-[#0D1117] border-t border-white/5 animate-in">
-                                    <div class="flex gap-8 px-8 border-b border-white/5 overflow-x-auto no-scrollbar">
-                                        <button onclick="switchTab('${game.id}', 'resumo')" id="tab-resumo-${game.id}" class="tab-btn active">Resumo</button>
-                                        <button onclick="switchTab('${game.id}', 'class')" id="tab-class-${game.id}" class="tab-btn">Classificação</button>
-                                        <button onclick="switchTab('${game.id}', 'h2h')" id="tab-h2h-${game.id}" class="tab-btn">H2H / Sequências</button>
-                                        <button onclick="switchTab('${game.id}', 'top')" id="tab-top-${game.id}" class="tab-btn">Destaques</button>
-                                    </div>
-
-                                    <div class="p-8">
-                                        <div id="content-resumo-${game.id}" class="tab-content-${game.id} grid grid-cols-1 md:grid-cols-3 gap-8">
-                                            <div class="space-y-4">
-                                                <h4 class="text-[10px] text-gray-500 font-black uppercase">Forma Recente</h4>
-                                                <div class="flex items-center gap-6">
-                                                    <div class="flex gap-1">${intel.fHome.map(r => `<div class="form-dot bg-trading-${r=='V'?'win':r=='D'?'loss':'draw'}">${r}</div>`).join('')}</div>
-                                                    <div class="flex gap-1">${intel.fAway.map(r => `<div class="form-dot bg-trading-${r=='V'?'win':r=='D'?'loss':'draw'}">${r}</div>`).join('')}</div>
-                                                </div>
-                                            </div>
-                                            <div class="space-y-4">
-                                                <h4 class="text-[10px] text-gray-500 font-black uppercase">Informações</h4>
-                                                <p class="text-xs text-white/70">Status: <span class="text-white font-bold uppercase">${game.time}</span></p>
-                                                <p class="text-xs text-white/70">Local: <span class="text-white font-bold">${game.venue}</span></p>
-                                            </div>
-                                            <div class="bg-trading-highlight/5 p-4 rounded-2xl border-l-4 border-trading-highlight">
-                                                <h4 class="text-[10px] text-trading-highlight font-black uppercase mb-1 italic">Dica do Mestre</h4>
-                                                <p class="text-xs text-gray-400 italic">"${intel.tip}"</p>
-                                            </div>
-                                        </div>
-
-                                        <div id="content-class-${game.id}" class="tab-content-${game.id} hidden">
-                                            <div class="bg-white/5 rounded-xl p-6 text-center border border-dashed border-white/10">
-                                                <p class="text-xs text-gray-500 uppercase font-bold tracking-widest">Sincronizando Tabela Live da ${game.league}...</p>
-                                            </div>
-                                        </div>
-
-                                        <div id="content-h2h-${game.id}" class="tab-content-${game.id} hidden space-y-6">
-                                            <div class="grid grid-cols-3 gap-4 text-center">
-                                                <div class="bg-white/5 p-4 rounded-xl"><p class="text-[10px] text-gray-500 uppercase mb-1">Vits ${game.home}</p><p class="text-xl font-black text-white">${intel.hHome}</p></div>
-                                                <div class="bg-white/5 p-4 rounded-xl"><p class="text-[10px] text-gray-500 uppercase mb-1">Empates</p><p class="text-xl font-black text-white">${intel.hDraw}</p></div>
-                                                <div class="bg-white/5 p-4 rounded-xl"><p class="text-[10px] text-gray-500 uppercase mb-1">Vits ${game.away}</p><p class="text-xl font-black text-white">${intel.hAway}</p></div>
-                                            </div>
-                                        </div>
-
-                                        <div id="content-top-${game.id}" class="tab-content-${game.id} hidden text-center py-4">
-                                            <p class="text-[10px] text-gray-500 uppercase font-black tracking-widest italic">Processando Key Players e Odds de Valor...</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        `;
-                    });
-                    html += `</div></div>`;
-                    list.innerHTML += html;
-                }
+                });
+                list.innerHTML += html + `</div></div>`;
             });
-            document.getElementById('game-count').innerText = totalCount;
+            document.getElementById('game-count').innerText = count;
         }
 
-        function toggleDetails(id) { document.getElementById(`details-${id}`).classList.toggle('hidden'); }
-        function switchTab(id, tab) {
+        async function toggleDetails(id) {
+            const el = document.getElementById(`details-${id}`);
+            const isOpening = el.classList.contains('hidden');
+            el.classList.toggle('hidden');
+            if (isOpening) await carregarDadosReais(id, 'resumo');
+        }
+
+        async function carregarDadosReais(id, aba) {
+            const contentArea = document.getElementById(`content-area-${id}`);
+            try {
+                // FETCH DIRETO NA API DE SUMÁRIO DA ESPN PARA O JOGO ESPECÍFICO
+                const resp = await fetch(`https://site.api.espn.com/apis/site/v2/sports/soccer/summary?event=${id}`);
+                const data = await resp.json();
+
+                if (aba === 'resumo') {
+                    const venue = data.gameInfo?.venue?.fullName || "Estádio Indisponível";
+                    const status = data.header?.competitions[0]?.status?.type?.detail || "Em breve";
+                    contentArea.innerHTML = `
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 animate-in">
+                            <div class="space-y-4">
+                                <h4 class="text-[10px] text-gray-500 font-black uppercase">Informações do Confronto</h4>
+                                <p class="text-xs text-white/80">Status: <span class="text-white font-bold">${status}</span></p>
+                                <p class="text-xs text-white/80">Local: <span class="text-white font-bold">${venue}</span></p>
+                            </div>
+                            <div class="bg-trading-highlight/5 p-4 rounded-xl border-l-4 border-trading-highlight">
+                                <h4 class="text-[10px] text-trading-highlight font-black uppercase">Análise de Pressão</h4>
+                                <p class="text-xs text-gray-400 italic mt-2">"O motor está monitorando os ataques perigosos. Aguarde 5-10 min de jogo para o gráfico de momentum."</p>
+                            </div>
+                        </div>
+                    `;
+                } else if (aba === 'h2h') {
+                    contentArea.innerHTML = `<div class="text-center py-10"><p class="text-xs text-gray-500 italic uppercase">H2H Histórico e Probabilidades em processamento...</p></div>`;
+                } else {
+                    contentArea.innerHTML = `<div class="text-center py-10"><p class="text-xs text-gray-500 italic uppercase">Dados de ${aba} indisponíveis para esta liga.</p></div>`;
+                }
+            } catch (e) {
+                contentArea.innerHTML = `<p class="text-red-500 text-[10px]">Erro ao conectar com a Central de Dados. Tente novamente.</p>`;
+            }
+        }
+
+        function switchTab(id, aba) {
             const container = document.getElementById(`details-${id}`);
-            container.querySelectorAll(`.tab-content-${id}`).forEach(c => c.classList.add('hidden'));
-            container.querySelectorAll(`.tab-btn`).forEach(b => b.classList.remove('active'));
-            document.getElementById(`content-${tab}-${id}`).classList.remove('hidden');
-            document.getElementById(`tab-${tab}-${id}`).classList.add('active');
-            event.stopPropagation();
+            container.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(`tab-${aba}-${id}`).classList.add('active');
+            carregarDadosReais(id, aba);
         }
-        function toggleFav(id) {
-            favorites.includes(id) ? favorites = favorites.filter(f => f !== id) : favorites.push(id);
-            localStorage.setItem('futTraderFavs', JSON.stringify(favorites));
-            renderAgenda();
-        }
+
         conectarAoMotor();
     </script>
 </body>

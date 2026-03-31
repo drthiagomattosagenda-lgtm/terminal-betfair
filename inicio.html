@@ -44,7 +44,10 @@
         .form-dot { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; color: white; }
         .league-header { background: #151A22; border-left: 4px solid #2A3241; }
         
-        .sub-tab.active { background: #FFB100; color: #000; }
+        /* Gráfico de Performance (SofaScore Ouro) */
+        .performance-bar { width: 6px; border-radius: 2px; transition: height 0.3s ease; }
+        
+        .sub-tab.active { background: #FFB100 !important; color: #000 !important; border-color: #FFB100 !important; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         
         /* Animação */
@@ -82,7 +85,7 @@
     </main>
 
     <script>
-        // O DIAMANTE: Banco de dados com os dois exemplos reais solicitados
+        // O DIAMANTE: Banco de dados atualizado com informações de performance
         const gamesData = [
             {
                 league: "Champions League - Playoffs",
@@ -125,10 +128,12 @@
                             { team: "Confronto", text: "Menos de 2.5 gols em 6/7 jogos", type: "pos" }
                         ],
                         table: {
-                            general: [ {p: 14, t: "Valladolid", pts: 35}, {p: 16, t: "Cádiz", pts: 35}, {p: 18, t: "Getafe", pts: 34} ],
-                            home: [ {p: 10, t: "Cádiz", pts: 25} ],
-                            away: [ {p: 18, t: "Valladolid", pts: 10} ]
+                            general: [ {p: 14, t: "Valladolid", pts: 35}, {p: 16, t: "Cádiz", pts: 35}, {p: 18, t: "Getafe", pts: 34}, {p: 19, t: "Espanyol", pts: 31}, {p: 20, t: "Elche", pts: 20} ],
+                            home: [ {p: 10, t: "Cádiz", pts: 25}, {p: 15, t: "Valladolid", pts: 20} ],
+                            away: [ {p: 12, t: "Cádiz", pts: 10}, {p: 18, t: "Valladolid", pts: 15} ]
                         },
+                        // Dados do gráfico de performance (posições/pontos últimos 7 jogos)
+                        perfGraph: [12, 14, 13, 16, 16, 17, 16], 
                         topPlayers: {
                             home: [{n: "Ledesma", r: "7.5", g: 0}, {n: "Bongonda", r: "7.1", g: 4}],
                             away: [{n: "Masip", r: "7.2", g: 0}, {n: "Larin", r: "7.0", g: 8}]
@@ -230,15 +235,26 @@
 
                                         <div id="content-info-${game.id}" class="tab-content-${game.id} hidden">
                                             ${!game.isCup ? `
-                                            <div class="flex gap-2 mb-6">
-                                                <button class="sub-tab active px-4 py-1.5 rounded-lg text-[10px] font-bold uppercase border border-trading-border">Geral</button>
-                                                <button class="sub-tab px-4 py-1.5 rounded-lg text-[10px] font-bold uppercase border border-trading-border">Casa</button>
-                                                <button class="sub-tab px-4 py-1.5 rounded-lg text-[10px] font-bold uppercase border border-trading-border">Fora</button>
-                                            </div>
-                                            <table class="w-full text-left text-sm">
-                                                <thead class="text-[10px] text-gray-500 font-black uppercase border-b border-trading-border"><tr class="pb-2"><th class="pb-3">#</th><th>Equipe</th><th class="text-right">PTS</th></tr></thead>
-                                                <tbody>${game.table.general.map(t => `<tr class="border-b border-trading-border/20"><td class="py-4 font-bold">${t.p}</td><td class="font-bold text-white uppercase">${t.t}</td><td class="text-right font-black text-trading-highlight">${t.pts}</td></tr>`).join('')}</tbody>
-                                            </table>` : `
+                                            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                                                <div>
+                                                    <div class="flex gap-2 mb-6">
+                                                        <button onclick="switchSubTab(${game.id}, 'general', this)" class="sub-tab sub-tab-${game.id} active px-4 py-1.5 rounded-lg text-[10px] font-bold uppercase border border-trading-border transition">Geral</button>
+                                                        <button onclick="switchSubTab(${game.id}, 'home', this)" class="sub-tab sub-tab-${game.id} px-4 py-1.5 rounded-lg text-[10px] font-bold uppercase border border-trading-border transition">Casa</button>
+                                                        <button onclick="switchSubTab(${game.id}, 'away', this)" class="sub-tab sub-tab-${game.id} px-4 py-1.5 rounded-lg text-[10px] font-bold uppercase border border-trading-border transition">Fora</button>
+                                                    </div>
+                                                    <table class="w-full text-left text-sm">
+                                                        <thead class="text-[10px] text-gray-500 font-black uppercase border-b border-trading-border"><tr class="pb-2"><th class="pb-3">#</th><th>Equipe</th><th class="text-right">PTS</th></tr></thead>
+                                                        <tbody id="tbody-class-${game.id}">${game.table.general.map(t => `<tr class="border-b border-trading-border/20"><td class="py-4 font-bold">${t.p}</td><td class="font-bold text-white uppercase">${t.t}</td><td class="text-right font-black text-trading-highlight">${t.pts}</td></tr>`).join('')}</tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="bg-trading-panel/30 p-6 rounded-2xl border border-trading-border flex flex-col items-center justify-center">
+                                                    <h5 class="text-[10px] text-gray-500 font-black uppercase mb-6 tracking-widest">Gráfico de Performance (Posição)</h5>
+                                                    <div class="flex items-end gap-2 h-32">
+                                                        ${game.perfGraph ? game.perfGraph.map(val => `<div class="performance-bar bg-trading-highlight/40" style="height: ${(20-val)*5}%"></div>`).join('') : ''}
+                                                    </div>
+                                                    <p class="text-[9px] text-gray-600 mt-4 italic uppercase">Tendência de classificação sazonal</p>
+                                                </div>
+                                            </div>` : `
                                             <div class="flex flex-col items-center py-10 opacity-60">
                                                 <i class="fas fa-trophy text-4xl mb-4 text-trading-highlight"></i>
                                                 <p class="text-xs font-black uppercase tracking-[3px] text-white">${game.stage}</p>
@@ -275,6 +291,34 @@
                 }
             });
             document.getElementById('game-count').innerText = count;
+        }
+
+        // --- FUNÇÃO CIRÚRGICA PARA SUB-ABAS (GERAL/CASA/FORA) ---
+        function switchSubTab(gameId, type, btnEl) {
+            // 1. Achar o jogo no banco de dados
+            let game;
+            gamesData.forEach(group => {
+                const found = group.games.find(g => g.id === gameId);
+                if (found) game = found;
+            });
+            if (!game) return;
+
+            // 2. Atualizar o visual dos botões
+            document.querySelectorAll(`.sub-tab-${gameId}`).forEach(btn => btn.classList.remove('active'));
+            btnEl.classList.add('active');
+
+            // 3. Atualizar o corpo da tabela
+            const tbody = document.getElementById(`tbody-class-${gameId}`);
+            const data = game.table[type];
+            tbody.innerHTML = data.map(t => `
+                <tr class="border-b border-trading-border/20 animate-in">
+                    <td class="py-4 font-bold">${t.p}</td>
+                    <td class="font-bold text-white uppercase">${t.t}</td>
+                    <td class="text-right font-black text-trading-highlight">${t.pts}</td>
+                </tr>
+            `).join('');
+
+            event.stopPropagation();
         }
 
         function toggleDetails(id) { document.getElementById(`details-${id}`).classList.toggle('hidden'); }

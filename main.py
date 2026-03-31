@@ -4,7 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 import pandas as pd
-import soccerdata as sd
+import io
 
 app = FastAPI()
 
@@ -15,20 +15,29 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Cache em memória para o SoccerData (Evita travar o Render baixando toda hora)
+# Cache leve em memória
 elo_cache = None
 
-def carregar_soccerdata():
+def carregar_clubelo():
     global elo_cache
     try:
-        # Inicializa o módulo ClubElo do soccerdata (Leve e poderoso para Power Rating)
-        elo = sd.ClubElo()
-        elo_cache = elo.read_by_date()
+        print("Baixando base de dados do ClubElo...")
+        # Busca o CSV oficial do ClubElo direto (super leve)
+        url = "http://api.clubelo.com/api/ranking"
+        response = requests.get(url, timeout=15)
+        response.raise_for_status()
+        
+        # Converte para DataFrame do Pandas
+        df = pd.read_csv(io.StringIO(response.text))
+        
+        # Filtra apenas a coluna Clube e Elo
+        elo_cache = df[['Club', 'Elo']].set_index('Club')
+        print("Base ClubElo carregada com sucesso!")
     except Exception as e:
-        print(f"Aviso SoccerData: {e}")
-        elo_cache = pd.DataFrame() # DataFrame vazio em caso de falha
+        print(f"Aviso ClubElo: {e}")
+        elo_cache = pd.DataFrame()
 
-# ROTA 1: A Grade Rápida (Mantém o site voando)
+# ROTA 1: A Grade Rápida
 @app.get("/jogos")
 def buscar_jogos():
     try:
@@ -54,42 +63,40 @@ def buscar_jogos():
     except Exception as e:
         return {"sucesso": False, "erro": str(e)}
 
-# ROTA 2: A Inteligência Profunda (H2H da ESPN + Power Rating do SoccerData)
+# ROTA 2: A Inteligência Profunda
 @app.get("/detalhes/{id}")
 def buscar_detalhes(id: str):
     try:
         url = f"https://site.api.espn.com/apis/site/v2/sports/soccer/summary?event={id}"
         espn_data = requests.get(url, timeout=10).json()
 
-        # 1. Tratamento da Forma Recente (W/D/L -> V/E/D)
+        # Tratamento da Forma Recente
         form_home, form_away = [], []
         try:
             teams = espn_data['header']['competitions'][0]['competitors']
             home_team = next(t for t in teams if t['homeAway'] == 'home')
             away_team = next(t for t in teams if t['homeAway'] == 'away')
             
-            # Tradutor de Resultados
             mapa_form = {"W": "V", "D": "E", "L": "D"}
             form_home = [mapa_form.get(f, "?") for f in home_team.get('form', '')[-5:]]
             form_away = [mapa_form.get(f, "?") for f in away_team.get('form', '')[-5:]]
         except:
             form_home, form_away = ["?"], ["?"]
 
-        # 2. Integração SOCCERDATA (Buscando Força Elo do time)
-        home_name = home_team['team'].get('displayName', '')
-        away_name = away_team['team'].get('displayName', '')
+        # Busca do Rating direto na API oficial (Substituindo o soccerdata)
+        home_name = espn_data['header']['competitions'][0]['competitors'][0]['team'].get('displayName', '')
+        away_name = espn_data['header']['competitions'][0]['competitors'][1]['team'].get('displayName', '')
         home_rating, away_rating = "N/A", "N/A"
         
         global elo_cache
         if elo_cache is None:
-            carregar_soccerdata()
+            carregar_clubelo()
             
         if not elo_cache.empty:
-            # Fuzzy match simples (Como a ESPN e o Soccerdata usam nomes diferentes, pegamos o mais próximo)
             try:
-                # Exemplo: Filtra times no ClubElo que contenham parte do nome da ESPN
-                h_match = elo_cache[elo_cache.index.str.contains(home_name[:5], case=False, na=False)]
-                a_match = elo_cache[elo_cache.index.str.contains(away_name[:5], case=False, na=False)]
+                # Tenta casar o começo do nome (Ex: "Arsenal" no ClubElo = "Arsenal" na ESPN)
+                h_match = elo_cache[elo_cache.index.str.contains(home_name[:6], case=False, na=False)]
+                a_match = elo_cache[elo_cache.index.str.contains(away_name[:6], case=False, na=False)]
                 if not h_match.empty: home_rating = str(int(h_match['Elo'].values[0]))
                 if not a_match.empty: away_rating = str(int(a_match['Elo'].values[0]))
             except:
@@ -98,7 +105,7 @@ def buscar_detalhes(id: str):
         return {
             "sucesso": True,
             "forma": {"home": form_home, "away": form_away},
-            "soccerdata": {"home_elo": home_rating, "away_elo": away_rating},
+            "soccerdata": {"home_elo": home_rating, "away_elo": away_rating}, # Mantive a chave 'soccerdata' pro frontend não quebrar
             "venue": espn_data.get('gameInfo', {}).get('venue', {}).get('fullName', 'N/A'),
             "status": espn_data['header']['competitions'][0]['status']['type']['detail']
         }
@@ -106,6 +113,5 @@ def buscar_detalhes(id: str):
         return {"sucesso": False, "erro": "Falha na central de dados"}
 
 if __name__ == "__main__":
-    # Inicia o cache do soccerdata ao ligar o servidor
-    carregar_soccerdata()
+    carregar_clubelo()
     uvicorn.run(app, host="0.0.0.0", port=int(os.environ.get("PORT", 10000)))

@@ -7,54 +7,47 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script>
-        tailwind.config = { theme: { extend: { colors: { trading: { dark: '#0B0E14', panel: '#151A22', border: '#2A3241', highlight: '#FFB100' } } } } }
+        tailwind.config = { theme: { extend: { colors: { trading: { dark: '#0B0E14', panel: '#151A22', border: '#2A3241', highlight: '#FFB100', win: '#10B981', loss: '#EF4444' } } } } }
     </script>
     <style>
         body { background-color: #0B0E14; color: #E2E8F0; font-family: 'Inter', sans-serif; }
         .tab-btn { color: #718096; font-size: 10px; font-weight: 800; text-transform: uppercase; transition: 0.2s; position: relative; padding-bottom: 12px; }
         .tab-btn.active { color: #FFB100; }
         .tab-btn.active::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: #FFB100; }
-        .animate-in { animation: fadeIn 0.3s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+        .form-dot { width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: bold; color: white; }
     </style>
 </head>
 <body class="antialiased">
     <nav class="border-b border-trading-border p-4 mb-8">
         <div class="max-w-6xl mx-auto flex justify-between items-center">
             <div class="text-xl font-black italic text-white uppercase">FUT <span class="text-trading-highlight">TRADER</span></div>
-            <div class="flex gap-4">
-                <a href="inicio.html" class="text-trading-highlight text-sm font-bold">Início</a>
-                <a href="dashboard.html" class="text-gray-500 text-sm">Dashboard</a>
-            </div>
+            <ul class="flex gap-6 list-none text-sm font-bold">
+                <li><a href="inicio.html" class="text-trading-highlight">Início</a></li>
+                <li><a href="dashboard.html" class="text-gray-500">Dashboard</a></li>
+            </ul>
         </div>
     </nav>
 
     <main class="max-w-6xl mx-auto p-4">
-        <div class="mb-10">
-            <h1 class="text-4xl font-black text-white tracking-tighter uppercase italic">QUARTEL <span class="text-trading-highlight">GENERAL</span></h1>
-            <p class="text-gray-500 text-xs mt-2">Dados processados em tempo real via Central Global.</p>
+        <h1 class="text-4xl font-black text-white italic">QUARTEL <span class="text-trading-highlight">GENERAL</span></h1>
+        <p class="text-gray-500 text-xs mt-2 font-medium tracking-wide">Analizando <span id="game-count" class="text-white">0</span> eventos mundiais.</p>
+
+        <div id="loading-alert" class="text-center py-20">
+            <i class="fas fa-circle-notch fa-spin text-trading-highlight text-3xl"></i>
+            <p class="text-gray-500 mt-4 font-bold uppercase text-[10px]">Sincronizando Grade Global...</p>
         </div>
 
-        <div id="loading-alert" class="text-center py-10">
-            <i class="fas fa-sync fa-spin text-trading-highlight text-2xl"></i>
-            <p id="status-text" class="text-gray-500 mt-4 font-bold uppercase text-[10px] tracking-widest">Iniciando Sincronização...</p>
-        </div>
-
-        <div id="agenda-list" class="space-y-8"></div>
+        <div id="agenda-list" class="mt-10 space-y-10"></div>
     </main>
 
     <script>
         let gamesData = [];
 
         async function conectarAoMotor() {
-            const statusText = document.getElementById('status-text');
             try {
                 const response = await fetch('https://motor-ferrari.onrender.com/jogos');
-                if (!response.ok) throw new Error("Servidor Offline");
                 const result = await response.json();
-                
                 if (result.sucesso) {
-                    // Agrupar por Liga
                     const grouped = result.dados.reduce((acc, game) => {
                         const key = game.league;
                         if (!acc[key]) acc[key] = { name: key, games: [] };
@@ -65,47 +58,51 @@
                     document.getElementById('loading-alert').classList.add('hidden');
                     renderAgenda();
                 }
-            } catch (e) {
-                statusText.innerText = "Aguardando o Motor Ferrari acordar... (Render Grátis)";
-                setTimeout(conectarAoMotor, 5000);
-            }
+            } catch (e) { setTimeout(conectarAoMotor, 5000); }
         }
 
         function renderAgenda() {
             const list = document.getElementById('agenda-list');
             list.innerHTML = '';
+            let count = 0;
+
             gamesData.forEach(league => {
-                let leagueHtml = `
-                    <div class="league-section animate-in">
-                        <div class="mb-3 px-2 flex items-center gap-2">
-                            <div class="w-1 h-3 bg-trading-highlight"></div>
-                            <span class="text-[11px] font-black text-white uppercase tracking-widest">${league.name}</span>
-                        </div>
-                        <div class="bg-trading-panel rounded-2xl border border-trading-border overflow-hidden divide-y divide-white/5">
-                `;
+                let html = `<div class="league-section">
+                    <div class="mb-4 px-2 flex items-center gap-2">
+                        <div class="w-1 h-3 bg-trading-highlight"></div>
+                        <span class="text-[11px] font-black text-white uppercase tracking-widest">${league.name}</span>
+                    </div>
+                    <div class="bg-trading-panel rounded-2xl border border-trading-border overflow-hidden divide-y divide-white/5">`;
+
                 league.games.forEach(game => {
-                    leagueHtml += `
+                    count++;
+                    html += `
                         <div class="game-item">
-                            <div class="p-5 flex items-center justify-between cursor-pointer hover:bg-white/5 transition" onclick="toggleDetails('${game.id}')">
-                                <div class="flex items-center gap-6">
+                            <div class="p-5 flex items-center justify-between cursor-pointer hover:bg-white/5" onclick="toggleDetails('${game.id}')">
+                                <div class="flex items-center gap-8">
                                     <span class="text-trading-highlight font-mono font-black text-sm">${game.time}</span>
                                     <span class="text-sm font-black text-white uppercase">${game.home} vs ${game.away}</span>
                                 </div>
-                                <div class="bg-black/40 px-3 py-1 rounded-lg text-xs font-mono text-white">${game.score}</div>
+                                <div class="bg-black/40 px-4 py-2 rounded-xl border border-white/5 text-sm font-mono text-white">${game.score}</div>
                             </div>
-                            <div id="details-${game.id}" class="hidden bg-[#0D1117] border-t border-white/5 p-6 animate-in">
-                                <div class="flex gap-8 border-b border-white/5 mb-6">
+
+                            <div id="details-${game.id}" class="hidden bg-[#0D1117] border-t border-white/5 animate-in">
+                                <div class="flex gap-8 px-8 border-b border-white/5 overflow-x-auto">
                                     <button onclick="switchTab('${game.id}', 'resumo')" id="tab-resumo-${game.id}" class="tab-btn active">Resumo</button>
-                                    <button onclick="switchTab('${game.id}', 'h2h')" id="tab-h2h-${game.id}" class="tab-btn">H2H</button>
                                     <button onclick="switchTab('${game.id}', 'class')" id="tab-class-${game.id}" class="tab-btn">Classificação</button>
+                                    <button onclick="switchTab('${game.id}', 'h2h')" id="tab-h2h-${game.id}" class="tab-btn">H2H / Sequências</button>
+                                    <button onclick="switchTab('${game.id}', 'top')" id="tab-top-${game.id}" class="tab-btn">Destaques</button>
                                 </div>
-                                <div id="content-${game.id}" class="text-xs text-gray-500 italic">Carregando dados reais...</div>
+                                <div class="p-8" id="content-area-${game.id}">
+                                    <p class="text-xs text-gray-500 italic uppercase tracking-widest">Carregando Inteligência...</p>
+                                </div>
                             </div>
                         </div>
                     `;
                 });
-                list.innerHTML += leagueHtml + `</div></div>`;
+                list.innerHTML += html + `</div></div>`;
             });
+            document.getElementById('game-count').innerText = count;
         }
 
         async function toggleDetails(id) {
@@ -115,33 +112,36 @@
         }
 
         async function switchTab(id, aba) {
-            const content = document.getElementById(`content-${id}`);
-            const buttons = document.querySelectorAll(`#details-${id} .tab-btn`);
-            buttons.forEach(b => b.classList.remove('active'));
+            const area = document.getElementById(`content-area-${id}`);
+            document.querySelectorAll(`#details-${id} .tab-btn`).forEach(b => b.classList.remove('active'));
             document.getElementById(`tab-${aba}-${id}`).classList.add('active');
 
-            content.innerHTML = `<i class="fas fa-spinner fa-spin mr-2"></i> Consultando ESPN...`;
+            area.innerHTML = `<i class="fas fa-spinner fa-spin mr-2"></i> Consultando Central de Dados...`;
 
             try {
-                const resp = await fetch(`https://site.api.espn.com/apis/site/v2/sports/soccer/summary?event=${id}`);
+                // AGORA BUSCA PELO BACKEND (Evita erro de Conexão/CORS)
+                const resp = await fetch(`https://motor-ferrari.onrender.com/detalhes/${id}`);
                 const data = await resp.json();
-                
+
                 if (aba === 'resumo') {
-                    const info = data.gameInfo || {};
-                    content.innerHTML = `
-                        <div class="grid grid-cols-2 gap-4 text-white/80">
-                            <div><b>Local:</b> ${info.venue?.fullName || 'N/A'}</div>
-                            <div><b>Árbitro:</b> FIFA Pro</div>
-                            <div class="col-span-2 bg-trading-highlight/5 p-3 border-l-2 border-trading-highlight italic">
-                                Dica: Volume de jogo monitorado. Dados reais via API Sumário.
+                    area.innerHTML = `
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 animate-in">
+                            <div class="space-y-4">
+                                <h4 class="text-[10px] text-gray-500 font-black uppercase tracking-widest">Logística e Local</h4>
+                                <p class="text-xs text-white">Local: <span class="font-bold">${data.gameInfo?.venue?.fullName || 'N/A'}</span></p>
                             </div>
-                        </div>
-                    `;
+                            <div class="bg-trading-highlight/5 p-5 rounded-2xl border-l-4 border-trading-highlight">
+                                <h4 class="text-[10px] text-trading-highlight font-black uppercase mb-2 italic">Dica do Mestre</h4>
+                                <p class="text-xs text-gray-400">Motor processando pressão. Status: ${data.header?.competitions[0]?.status?.type?.detail || 'Ao Vivo'}</p>
+                            </div>
+                        </div>`;
+                } else if (aba === 'h2h') {
+                    area.innerHTML = `<div class="text-center py-10 text-xs text-gray-500 italic uppercase">H2H Histórico em processamento para ${id}...</div>`;
                 } else {
-                    content.innerHTML = `<p class="uppercase font-bold text-[10px]">Dados de ${aba} em sincronização para esta partida.</p>`;
+                    area.innerHTML = `<div class="text-center py-10 text-xs text-gray-500 italic uppercase">Dados de ${aba} indisponíveis para esta liga no momento.</div>`;
                 }
             } catch (e) {
-                content.innerHTML = `<span class="text-red-500 font-bold">Erro de Conexão. O servidor de dados demorou a responder.</span>`;
+                area.innerHTML = `<p class="text-red-500 font-bold text-xs">Erro ao conectar com o Motor Ferrari. Verifique se ele está "Live".</p>`;
             }
         }
 

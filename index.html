@@ -23,21 +23,21 @@
       function handleCredentialResponse(response) {
           console.log("Login realizado com sucesso!");
           
-          // Alerta opcional para confirmar que funcionou (pode remover depois se quiser)
-          alert("Login realizado! Redirecionando para o seu painel...");
+          // Opcional: Alerta de confirmação (pode remover se preferir algo mais direto)
+          alert("Login realizado! Entrando no seu Quartel General...");
 
-          // REDIRECIONAMENTO ATIVADO: leva o usuário para a página dashboard.html
-          window.location.href = "dashboard.html"; 
+          // MUDANÇA CIRÚRGICA: O usuário agora cai direto na página de Início (Agenda)
+          window.location.href = "inicio.html"; 
       }
 
-      // Configuração inicial quando a página termina de carregar
+      // Configuração inicial do Google Sign-In
       window.onload = function () {
         google.accounts.id.initialize({
           client_id: "55444728820-elc9cufjb3l5mk4fvtlp1bho6ribua05.apps.googleusercontent.com",
           callback: handleCredentialResponse
         });
         
-        // Renderização visual do botão
+        // Renderização visual do botão (Design Pill/Outline)
         google.accounts.id.renderButton(
           document.getElementById("buttonDiv"),
           { 
@@ -48,7 +48,7 @@
           }  
         );
         
-        // Exibe o "One Tap" (janelinha flutuante de login rápido)
+        // Ativa o One Tap (login rápido flutuante)
         google.accounts.id.prompt(); 
       }
     </script>

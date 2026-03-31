@@ -1,6 +1,8 @@
+import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import soccerdata as sd
+import uvicorn
 
 app = FastAPI()
 
@@ -11,22 +13,21 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.get("/")
+def home():
+    return {"status": "Ferrari Online no Render"}
+
 @app.get("/jogos")
 def buscar_jogos():
     try:
-        # Buscando os dados da Premier League
-        ws = sd.WhoScored(leagues=['ENG-Premier League'], seasons='2023')
-        jogos = ws.read_schedule()
-        
-        # --- A LINHA MÁGICA ESTÁ AQUI ---
-        # O .fillna("") preenche os campos vazios (NaN) para o navegador não dar erro
+        # Usando ClubElo para o primeiro teste (mais leve para o Render)
+        elo = sd.ClubElo()
+        jogos = elo.read_by_date()
         resultado = jogos.reset_index().fillna("").to_dict(orient="records")
-        
         return {"sucesso": True, "dados": resultado}
     except Exception as e:
         return {"sucesso": False, "erro": str(e)}
 
 if __name__ == "__main__":
-    import uvicorn
-    print("🚀 FERRARI REVISADA: Agora com limpeza de dados automática.")
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port)

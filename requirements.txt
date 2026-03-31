@@ -1,5 +1,3 @@
 fastapi
 uvicorn
-soccerdata
-pandas
-lxml
+requests

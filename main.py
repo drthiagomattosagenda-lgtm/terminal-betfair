@@ -1,11 +1,13 @@
 import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+import soccerdata as sd
 import uvicorn
+import pandas as pd
 
 app = FastAPI()
 
-# Configuração de Segurança (CORS) - LIBERADO TOTAL
+# Liberação de CORS para o seu site no GitHub Pages conversar com o Render
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -15,23 +17,33 @@ app.add_middleware(
 
 @app.get("/")
 def home():
-    return {"status": "Motor Ferrari Online"}
+    return {"status": "Motor Real Online e Turbinado"}
 
 @app.get("/jogos")
 def buscar_jogos():
     try:
-        # Dados simplificados e rápidos para garantir que o Render não dê Erro 500
-        # Em breve voltaremos com o SoccerData assim que o túnel estiver estável
-        dados_vips = [
-            {"home_team": "Real Madrid", "away_team": "Man City", "home_score": "3", "away_score": "3"},
-            {"home_team": "Arsenal", "away_team": "Bayern", "home_score": "2", "away_score": "2"},
-            {"home_team": "Inter", "away_team": "Milan", "home_score": "1", "away_score": "0"},
-            {"home_team": "Flamengo", "away_team": "Palmeiras", "home_score": "0", "away_score": "0"}
-        ]
-        return {"sucesso": True, "dados": dados_vips}
+        # Buscando dados reais de ranking/jogos via ClubElo (Leve e estável)
+        elo = sd.ClubElo()
+        df = elo.read_by_date() 
+        
+        # Pegamos os 10 primeiros registros para garantir velocidade
+        top_jogos = df.head(10).reset_index()
+        
+        dados_reais = []
+        for _, row in top_jogos.iterrows():
+            # Mapeamos as colunas do SoccerData para o que o seu site espera
+            dados_reais.append({
+                "home_team": row['team'],
+                "away_team": f"Elo: {int(row['elo'])}", # Mostra o nível de força do time
+                "home_score": "-", 
+                "away_score": "-"
+            })
+            
+        return {"sucesso": True, "dados": dados_reais}
     except Exception as e:
         return {"sucesso": False, "erro": str(e)}
 
 if __name__ == "__main__":
+    # Ajuste automático de porta para o servidor do Render
     port = int(os.environ.get("PORT", 10000))
     uvicorn.run(app, host="0.0.0.0", port=port)

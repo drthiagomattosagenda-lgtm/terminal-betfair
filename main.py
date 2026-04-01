@@ -19,9 +19,9 @@ app.add_middleware(
 elo_cache = None
 elo_lock = asyncio.Lock()
 
-# 🛡️ DISFARCE OBRIGATÓRIO: Impede a ESPN de bloquear a grade de jogos
+# 🛡️ O DISFARCE SUPREMO: Impede a ESPN de bloquear sua API
 HEADERS = {
-    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
     "Accept": "application/json, text/plain, */*",
     "Accept-Language": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7",
 }
@@ -44,13 +44,11 @@ async def carregar_clubelo_async():
 async def buscar_jogos():
     try:
         url = "https://site.api.espn.com/apis/site/v2/sports/soccer/scorepanel"
-        # Usando o disfarce na requisição!
+        # Disfarce aplicado na requisição
         async with httpx.AsyncClient(follow_redirects=True, headers=HEADERS) as client:
             response = await client.get(url, timeout=15.0)
-            
             if response.status_code != 200:
-                return {"sucesso": False, "erro": f"ESPN bloqueou a conexão (Status: {response.status_code})"}
-                
+                return {"sucesso": False, "erro": f"ESPN bloqueou a conexão (Erro {response.status_code})."}
             data = response.json()
             
         jogos = []
@@ -73,20 +71,21 @@ async def buscar_jogos():
                         "time": status_short,
                         "venue": venue
                     })
-                except: continue 
+                except:
+                    continue 
         return {"sucesso": True, "dados": jogos}
     except Exception as e:
-        return {"sucesso": False, "erro": f"Erro interno no Python: {str(e)}"}
+        return {"sucesso": False, "erro": f"Erro interno: {str(e)}"}
 
 @app.get("/detalhes/{id}")
 async def buscar_detalhes(id: str):
     url_resumo = f"https://site.api.espn.com/apis/site/v2/sports/soccer/summary?event={id}"
+    
     try:
-        # Usando o disfarce na requisição!
         async with httpx.AsyncClient(follow_redirects=True, headers=HEADERS) as client:
             resp_resumo = await client.get(url_resumo, timeout=15.0)
             if resp_resumo.status_code != 200:
-                raise Exception("A API da ESPN recusou a conexão.")
+                raise Exception("API da ESPN recusou a conexão.")
             espn_data = resp_resumo.json()
             
             competitions = espn_data.get('header', {}).get('competitions', [{}])
@@ -179,6 +178,7 @@ async def buscar_detalhes(id: str):
             "status": comp.get('status', {}).get('type', {}).get('detail', 'N/A')
         }
     except Exception as e:
+        print("Erro Protegido:", str(e))
         return {"sucesso": False, "erro": "Jogo com escassez de dados."}
 
 if __name__ == "__main__":

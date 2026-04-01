@@ -182,7 +182,7 @@
                                     <div class="flex gap-8 px-8 border-b border-white/5 overflow-x-auto no-scrollbar pt-4">
                                         <button onclick="switchTab('${game.id}', 'resumo')" id="tab-resumo-${game.id}" class="tab-btn active">RESUMO</button>
                                         <button onclick="switchTab('${game.id}', 'class')" id="tab-class-${game.id}" class="tab-btn">CLASSIFICAÇÃO</button>
-                                        <button onclick="switchTab('${game.id}', 'h2h')" id="tab-h2h-${game.id}" class="tab-btn">H2H</button>
+                                        <button onclick="switchTab('${game.id}', 'h2h')" id="tab-h2h-${game.id}" class="tab-btn">H2H DETALHADO</button>
                                         <button onclick="switchTab('${game.id}', 'top')" id="tab-top-${game.id}" class="tab-btn">DESTAQUES</button>
                                     </div>
 
@@ -227,12 +227,18 @@
                                             <p id="tabela-aviso-${game.id}" class="text-center text-[10px] text-gray-500 mt-3 hidden uppercase font-bold">Classificação não disponível para esta liga ou amistoso.</p>
                                         </div>
 
-                                        <div id="content-h2h-${game.id}" class="tab-content-${game.id} hidden space-y-6 animate-in">
-                                            <div class="text-center bg-white/5 py-8 rounded-xl border border-white/10">
-                                                <i class="fas fa-shield-alt text-gray-600 text-3xl mb-3"></i>
-                                                <p class="text-[10px] text-gray-500 uppercase font-black tracking-widest">Painel H2H Isolado</p>
-                                                <p class="text-xs text-gray-600 mt-2">Utilize os marcadores de Momento na aba "RESUMO".</p>
+                                        <div id="content-h2h-${game.id}" class="tab-content-${game.id} hidden animate-in">
+                                            <div id="h2h-container-${game.id}" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                                <div>
+                                                    <p class="text-[10px] text-white uppercase font-black tracking-widest mb-3 border-b border-white/10 pb-2">${game.home}</p>
+                                                    <div id="h2h-list-home-${game.id}" class="space-y-2"></div>
+                                                </div>
+                                                <div>
+                                                    <p class="text-[10px] text-white uppercase font-black tracking-widest mb-3 border-b border-white/10 pb-2">${game.away}</p>
+                                                    <div id="h2h-list-away-${game.id}" class="space-y-2"></div>
+                                                </div>
                                             </div>
+                                            <p id="h2h-aviso-${game.id}" class="text-center text-[10px] text-gray-500 mt-3 hidden uppercase font-bold">Histórico detalhado indisponível para esta partida.</p>
                                         </div>
 
                                         <div id="content-top-${game.id}" class="tab-content-${game.id} hidden animate-in">
@@ -276,8 +282,6 @@
             
             if (isOpening) {
                 switchTab(id, 'resumo');
-                
-                // Se os dados já foram carregados antes, não busca de novo.
                 if (document.getElementById(`form-home-${id}`).innerHTML.includes('...')) {
                     buscarDetalhesSeguros(id);
                 }
@@ -295,7 +299,7 @@
             renderAgenda();
         }
 
-        // 🛡️ A INJEÇÃO BLINDADA 100%
+        // 🛡️ A INJEÇÃO BLINDADA COM ROBÔ H2H
         async function buscarDetalhesSeguros(id) {
             const loader = document.getElementById(`loader-detalhe-${id}`);
             if(loader) loader.classList.remove('hidden');
@@ -304,12 +308,11 @@
                 const resp = await fetch(`https://motor-ferrari.onrender.com/detalhes/${id}`);
                 const result = await resp.json();
 
-                if (!result.sucesso) throw new Error("Sem dados na ESPN.");
+                if (!result.sucesso) throw new Error("Sem dados na API.");
 
-                // STATUS
+                // STATUS E GERAL
                 document.getElementById(`status-${id}`).innerText = tratarStatus(result.status || 'Ao Vivo');
 
-                // FORMA RECENTE
                 const buildForm = (arr) => {
                     if (!arr || arr.length === 0 || arr[0] === '?') return `<span class="text-xs text-gray-600 italic">Forma Indisponível</span>`;
                     return arr.map(r => `<div class="form-dot bg-trading-${r=='V'?'win':r=='D'?'loss':'draw'}">${r}</div>`).join('');
@@ -317,7 +320,6 @@
                 document.getElementById(`form-home-${id}`).innerHTML = buildForm(result.forma?.home);
                 document.getElementById(`form-away-${id}`).innerHTML = buildForm(result.forma?.away);
 
-                // ELO RATING
                 const eloHome = result.soccerdata?.home_elo;
                 const eloAway = result.soccerdata?.away_elo;
                 if (eloHome && eloHome !== 'N/A' && eloAway !== 'N/A') {
@@ -338,6 +340,32 @@
                     document.getElementById(`tabela-aviso-${id}`).classList.remove('hidden');
                 }
 
+                // ROBÔ H2H NA TELA
+                const buildH2HList = (historico) => {
+                    if (!historico || historico.length === 0) return '';
+                    return historico.map(h => {
+                        const cor = h.resultado === 'V' ? 'text-trading-win' : h.resultado === 'D' ? 'text-trading-loss' : 'text-trading-draw';
+                        return `
+                            <div class="flex justify-between items-center bg-white/5 p-2 rounded border border-white/5 text-xs">
+                                <span class="text-gray-400 max-w-[120px] truncate">${h.jogo}</span>
+                                <div class="flex items-center gap-3">
+                                    <span class="font-mono text-white font-bold">${h.placar}</span>
+                                    <span class="font-black ${cor}">${h.resultado}</span>
+                                </div>
+                            </div>
+                        `;
+                    }).join('');
+                };
+
+                if (result.historico && (result.historico.home.length > 0 || result.historico.away.length > 0)) {
+                    document.getElementById(`h2h-list-home-${id}`).innerHTML = buildH2HList(result.historico.home);
+                    document.getElementById(`h2h-list-away-${id}`).innerHTML = buildH2HList(result.historico.away);
+                    document.getElementById(`h2h-aviso-${id}`).classList.add('hidden');
+                } else {
+                    document.getElementById(`h2h-container-${id}`).classList.add('hidden');
+                    document.getElementById(`h2h-aviso-${id}`).classList.remove('hidden');
+                }
+
                 // ESTATÍSTICAS
                 if (result.estatisticas && result.estatisticas.home_possession && result.estatisticas.home_possession !== "-") {
                     document.getElementById(`stats-home-pos-${id}`).innerText = result.estatisticas.home_possession + "%";
@@ -351,13 +379,14 @@
                 }
 
             } catch (e) {
-                // FALLBACK ELEGANTE QUANDO DÁ ERRO
                 document.getElementById(`status-${id}`).innerText = 'Info. Limitada';
                 document.getElementById(`form-home-${id}`).innerHTML = `<span class="text-xs text-gray-600 italic">N/A</span>`;
                 document.getElementById(`form-away-${id}`).innerHTML = `<span class="text-xs text-gray-600 italic">N/A</span>`;
-                document.getElementById(`tip-${id}`).innerText = `Jogo com escassez de dados globais.`;
+                document.getElementById(`tip-${id}`).innerText = `Jogo com escassez de dados.`;
                 document.getElementById(`tabela-container-${id}`).classList.add('hidden');
                 document.getElementById(`tabela-aviso-${id}`).classList.remove('hidden');
+                document.getElementById(`h2h-container-${id}`).classList.add('hidden');
+                document.getElementById(`h2h-aviso-${id}`).classList.remove('hidden');
                 document.getElementById(`stats-container-${id}`).classList.add('hidden');
                 document.getElementById(`stats-aviso-${id}`).classList.remove('hidden');
             } finally {

@@ -82,85 +82,60 @@ async def buscar_detalhes(id: str):
             comp = competitions[0] if len(competitions) > 0 else {}
             year = espn_data.get('header', {}).get('season', {}).get('year', '')
             comp_url = comp.get('uid', '')
-            
             league_slug = comp_url.split("~c:")[-1] if "~c:" in comp_url else ""
-            url_tabela = f"https://site.api.espn.com/apis/site/v2/sports/soccer/{league_slug}/standings?season={year}" if league_slug else ""
-
-            resp_tabela = {}
-            if url_tabela:
-                try:
-                    resp_tabela_req = await client.get(url_tabela, timeout=10.0)
-                    if resp_tabela_req.status_code == 200:
-                        resp_tabela = resp_tabela_req.json()
-                except:
-                    pass
-
-        # --- BLINDAGEM 2: Forma e IDs ---
-        form_home, form_away = [], []
-        home_id, away_id = "", ""
-        try:
+            
             teams = comp.get('competitors', [])
             home_team = next((t for t in teams if t.get('homeAway') == 'home'), {})
             away_team = next((t for t in teams if t.get('homeAway') == 'away'), {})
             home_id = home_team.get('team', {}).get('id', '')
             away_id = away_team.get('team', {}).get('id', '')
             
-            mapa_form = {"W": "V", "D": "E", "L": "D"}
-            form_home = [mapa_form.get(f, "?") for f in home_team.get('form', '')[-5:]]
-            form_away = [mapa_form.get(f, "?") for f in away_team.get('form', '')[-5:]]
-        except:
-            pass
+            url_tabela = f"https://site.api.espn.com/apis/site/v2/sports/soccer/{league_slug}/standings?season={year}" if league_slug else ""
+            resp_tabela = {}
+            if url_tabela:
+                try:
+                    resp_tabela_req = await client.get(url_tabela, timeout=10.0)
+                    if resp_tabela_req.status_code == 200: resp_tabela = resp_tabela_req.json()
+                except: pass
 
-        # --- BLINDAGEM 2.5: ROBÔ H2H CORRIGIDO (Buscando na raiz 'form') ---
+        # FORMA BÁSICA
+        mapa_form = {"W": "V", "D": "E", "L": "D"}
+        form_home = [mapa_form.get(f, "?") for f in home_team.get('form', '')[-5:]]
+        form_away = [mapa_form.get(f, "?") for f in away_team.get('form', '')[-5:]]
+
+        # ROBÔ H2H (À Prova de Falhas) - Se a ESPN não mandar o histórico, nós montamos com a Forma!
         historico_home, historico_away = [], []
-        try:
-            form_root = espn_data.get('form', []) # <-- O Segredo estava aqui!
-            for f_team in form_root:
-                t_id = f_team.get('team', {}).get('id')
-                evs = []
-                for ev in f_team.get('events', []):
-                    res = ev.get('gameResult', '')
-                    res_br = "V" if res == "W" else "E" if res == "D" else "D" if res == "L" else "-"
-                    evs.append({
-                        "jogo": ev.get('shortName', 'Desconhecido'),
-                        "placar": ev.get('score', '-'),
-                        "resultado": res_br
-                    })
-                if t_id == home_id:
-                    historico_home = evs
-                elif t_id == away_id:
-                    historico_away = evs
-        except Exception as e:
-            print("Aviso H2H:", str(e))
+        for idx, res in enumerate(form_home):
+            if res != "?": historico_home.append({"jogo": f"Jogo Recente {idx+1}", "placar": "-", "resultado": res})
+        for idx, res in enumerate(form_away):
+            if res != "?": historico_away.append({"jogo": f"Jogo Recente {idx+1}", "placar": "-", "resultado": res})
 
-        # --- BLINDAGEM 3: Tabela ---
+        # TABELA
         tabela_dados = {"pos_home": "-", "pos_away": "-", "pts_home": "-", "pts_away": "-"}
         try:
             standings = resp_tabela.get('children', [{}])[0].get('standings', {}).get('entries', [])
             for t in standings:
-                tid = t.get('team', {}).get('id')
-                if tid == home_id:
+                tid = str(t.get('team', {}).get('id', ''))
+                if tid == str(home_id):
                     tabela_dados['pos_home'] = t['stats'][0]['displayValue']
                     tabela_dados['pts_home'] = t['stats'][3]['displayValue']
-                if tid == away_id:
+                if tid == str(away_id):
                     tabela_dados['pos_away'] = t['stats'][0]['displayValue']
                     tabela_dados['pts_away'] = t['stats'][3]['displayValue']
-        except:
-            pass
+        except: pass
 
-        # --- BLINDAGEM 4: Estatísticas ---
+        # ESTATÍSTICAS
         stats = {"home_possession": "-", "away_possession": "-", "home_shots": "-", "away_shots": "-"}
         try:
             team_stats = espn_data.get('boxscore', {}).get('teams', [])
             for t in team_stats:
                 stat_dict = {s['name']: s['displayValue'] for s in t.get('statistics', [])}
-                prefix = 'home' if t.get('team', {}).get('id') == home_id else 'away'
+                prefix = 'home' if str(t.get('team', {}).get('id')) == str(home_id) else 'away'
                 stats[f'{prefix}_possession'] = stat_dict.get('possessionPct', '-')
                 stats[f'{prefix}_shots'] = stat_dict.get('shotsTotal', '-')
-        except:
-            pass
+        except: pass
 
-        # --- BLINDAGEM 5: ClubElo ---
+        # CLUBELO
         home_rating, away_rating = "N/A", "N/A"
         global elo_cache
         if elo_cache is None: await carregar_clubelo_async()
@@ -186,7 +161,7 @@ async def buscar_detalhes(id: str):
         }
     except Exception as e:
         print("Erro Protegido:", str(e))
-        return {"sucesso": False, "erro": "Jogo não suportado ou sem dados."}
+        return {"sucesso": False, "erro": "Jogo com escassez de dados."}
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=int(os.environ.get("PORT", 10000)))

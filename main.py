@@ -17,23 +17,20 @@ app.add_middleware(
 )
 
 elo_cache = None
-elo_lock = asyncio.Lock() # Trava para não afogar o servidor com múltiplos pedidos
+elo_lock = asyncio.Lock()
 
-# Função Assíncrona que não trava o boot do servidor
 async def carregar_clubelo_async():
     global elo_cache
     async with elo_lock:
-        if elo_cache is not None:
-            return 
+        if elo_cache is not None: return 
         try:
             url = "http://api.clubelo.com/api/ranking"
             async with httpx.AsyncClient(follow_redirects=True) as client:
                 response = await client.get(url, timeout=15.0)
-                response.raise_for_status()
-                df = pd.read_csv(io.StringIO(response.text))
-                elo_cache = df[['Club', 'Elo']].set_index('Club')
-        except Exception as e:
-            print(f"Aviso silencioso ClubElo: {e}")
+                if response.status_code == 200:
+                    df = pd.read_csv(io.StringIO(response.text))
+                    elo_cache = df[['Club', 'Elo']].set_index('Club')
+        except:
             elo_cache = pd.DataFrame() 
 
 @app.get("/jogos")
@@ -49,23 +46,26 @@ async def buscar_jogos():
             l_name = league.get('leagues', [{}])[0].get('name', 'Geral')
             for event in league.get('events', []):
                 try:
-                    comp = event['competitions'][0]
-                    home = next(t['team']['displayName'] for t in comp['competitors'] if t['homeAway'] == 'home')
-                    away = next(t['team']['displayName'] for t in comp['competitors'] if t['homeAway'] == 'away')
+                    comp = event.get('competitions', [{}])[0]
+                    home = next(t['team']['displayName'] for t in comp.get('competitors', []) if t.get('homeAway') == 'home')
+                    away = next(t['team']['displayName'] for t in comp.get('competitors', []) if t.get('homeAway') == 'away')
+                    status_short = comp.get('status', {}).get('type', {}).get('shortDetail', '--:--')
+                    venue = comp.get('venue', {}).get('fullName', 'Estádio não informado')
+                    
                     jogos.append({
                         "id": event['id'], 
                         "home": home, 
                         "away": away, 
                         "league": l_name,
-                        "score": comp['status']['type']['shortDetail'],
-                        "time": comp['status']['type']['shortDetail'],
-                        "venue": comp.get('venue', {}).get('fullName', 'Estádio não informado')
+                        "score": status_short,
+                        "time": status_short,
+                        "venue": venue
                     })
-                except Exception:
-                    continue # Ignora jogo quebrado da ESPN sem derrubar o motor
+                except:
+                    continue 
         return {"sucesso": True, "dados": jogos}
     except Exception as e:
-        return {"sucesso": False, "erro": str(e)}
+        return {"sucesso": False, "erro": "Falha geral ao buscar a grade."}
 
 @app.get("/detalhes/{id}")
 async def buscar_detalhes(id: str):
@@ -73,57 +73,66 @@ async def buscar_detalhes(id: str):
     
     try:
         async with httpx.AsyncClient(follow_redirects=True) as client:
-            resp_resumo = await client.get(url_resumo, timeout=10.0)
+            resp_resumo = await client.get(url_resumo, timeout=15.0)
+            if resp_resumo.status_code != 200:
+                raise Exception("API da ESPN recusou a conexão do detalhe.")
             espn_data = resp_resumo.json()
             
-            year = espn_data.get('header', {}).get('season', {}).get('year')
-            comp_url = espn_data.get('header', {}).get('competitions', [{}])[0].get('uid', '')
+            # --- BLINDAGEM 1: Extração segura de liga e ano ---
+            competitions = espn_data.get('header', {}).get('competitions', [{}])
+            comp = competitions[0] if len(competitions) > 0 else {}
+            year = espn_data.get('header', {}).get('season', {}).get('year', '')
+            comp_url = comp.get('uid', '')
             
-            # Extração Cirúrgica do ID da Liga (Ex: eng.1)
             league_slug = ""
             if "~c:" in comp_url:
                 league_slug = comp_url.split("~c:")[-1]
 
             url_tabela = f"https://site.api.espn.com/apis/site/v2/sports/soccer/{league_slug}/standings?season={year}" if league_slug else ""
 
-            # Bate na Tabela separadamente
+            resp_tabela = {}
             if url_tabela:
-                resp_tabela_req = await client.get(url_tabela, timeout=10.0)
-                resp_tabela = resp_tabela_req.json()
-            else:
-                resp_tabela = {}
+                try:
+                    resp_tabela_req = await client.get(url_tabela, timeout=10.0)
+                    if resp_tabela_req.status_code == 200:
+                        resp_tabela = resp_tabela_req.json()
+                except:
+                    pass # Se falhar a tabela, ignora e segue a vida
 
-        # 1. TRATANDO ABA GERAL
+        # --- BLINDAGEM 2: Forma e IDs ---
         form_home, form_away = [], []
         home_id, away_id = "", ""
+        home_team, away_team = {}, {}
         try:
-            teams = espn_data['header']['competitions'][0]['competitors']
-            home_team = next(t for t in teams if t['homeAway'] == 'home')
-            away_team = next(t for t in teams if t['homeAway'] == 'away')
-            home_id = home_team['team']['id']
-            away_id = away_team['team']['id']
+            teams = comp.get('competitors', [])
+            home_team = next((t for t in teams if t.get('homeAway') == 'home'), {})
+            away_team = next((t for t in teams if t.get('homeAway') == 'away'), {})
+            
+            home_id = home_team.get('team', {}).get('id', '')
+            away_id = away_team.get('team', {}).get('id', '')
             
             mapa_form = {"W": "V", "D": "E", "L": "D"}
             form_home = [mapa_form.get(f, "?") for f in home_team.get('form', '')[-5:]]
             form_away = [mapa_form.get(f, "?") for f in away_team.get('form', '')[-5:]]
         except:
-            home_team, away_team = {}, {}
+            pass
 
-        # 2. TRATANDO ABA CLASSIFICAÇÃO
+        # --- BLINDAGEM 3: Tabela ---
         tabela_dados = {"pos_home": "-", "pos_away": "-", "pts_home": "-", "pts_away": "-"}
         try:
             standings = resp_tabela.get('children', [{}])[0].get('standings', {}).get('entries', [])
             for t in standings:
-                if t.get('team', {}).get('id') == home_id:
+                tid = t.get('team', {}).get('id')
+                if tid == home_id:
                     tabela_dados['pos_home'] = t['stats'][0]['displayValue']
                     tabela_dados['pts_home'] = t['stats'][3]['displayValue']
-                if t.get('team', {}).get('id') == away_id:
+                if tid == away_id:
                     tabela_dados['pos_away'] = t['stats'][0]['displayValue']
                     tabela_dados['pts_away'] = t['stats'][3]['displayValue']
         except:
             pass
 
-        # 3. TRATANDO ABA DESTAQUES
+        # --- BLINDAGEM 4: Estatísticas ---
         stats = {"home_possession": "-", "away_possession": "-", "home_shots": "-", "away_shots": "-"}
         try:
             team_stats = espn_data.get('boxscore', {}).get('teams', [])
@@ -135,7 +144,7 @@ async def buscar_detalhes(id: str):
         except:
             pass
 
-        # 4. TRATANDO CLUB ELO (Carrega apenas se alguém pedir)
+        # --- BLINDAGEM 5: ClubElo ---
         home_name = home_team.get('team', {}).get('displayName', '')
         away_name = away_team.get('team', {}).get('displayName', '')
         home_rating, away_rating = "N/A", "N/A"
@@ -146,8 +155,8 @@ async def buscar_detalhes(id: str):
             
         if elo_cache is not None and not elo_cache.empty:
             try:
-                h_match = elo_cache[elo_cache.index.str.contains(home_name[:6], case=False, na=False)]
-                a_match = elo_cache[elo_cache.index.str.contains(away_name[:6], case=False, na=False)]
+                h_match = elo_cache[elo_cache.index.str.contains(home_name[:5], case=False, na=False)]
+                a_match = elo_cache[elo_cache.index.str.contains(away_name[:5], case=False, na=False)]
                 if not h_match.empty: home_rating = str(int(h_match['Elo'].values[0]))
                 if not a_match.empty: away_rating = str(int(a_match['Elo'].values[0]))
             except: 
@@ -160,12 +169,11 @@ async def buscar_detalhes(id: str):
             "estatisticas": stats,
             "soccerdata": {"home_elo": home_rating, "away_elo": away_rating},
             "venue": espn_data.get('gameInfo', {}).get('venue', {}).get('fullName', 'N/A'),
-            "status": espn_data.get('header', {}).get('competitions', [{}])[0].get('status', {}).get('type', {}).get('detail', 'N/A')
+            "status": comp.get('status', {}).get('type', {}).get('detail', 'N/A')
         }
     except Exception as e:
-        print("Erro Profundo:", str(e))
-        return {"sucesso": False, "erro": "Falha na central de dados"}
+        print("Erro Protegido:", str(e))
+        return {"sucesso": False, "erro": "Jogo não suportado ou sem dados."}
 
-# LIGA O SERVIDOR IMEDIATAMENTE (Sem bloqueios!)
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=int(os.environ.get("PORT", 10000)))

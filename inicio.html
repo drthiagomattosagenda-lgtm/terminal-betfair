@@ -16,10 +16,7 @@
                             dark: '#0B0E14',
                             panel: '#151A22',
                             border: '#2A3241',
-                            highlight: '#FFB100',
-                            win: '#10B981',
-                            loss: '#EF4444',
-                            draw: '#718096'
+                            highlight: '#FFB100'
                         }
                     }
                 }
@@ -78,8 +75,20 @@
     </main>
 
     <script>
+        // 🛡️ VACINA DO LOCAL STORAGE: Impede a tela de congelar se tiver cache quebrado
+        let favorites = [];
+        try {
+            let saved = localStorage.getItem('futTraderFavs');
+            if (saved) {
+                favorites = JSON.parse(saved);
+                if (!Array.isArray(favorites)) favorites = [];
+            }
+        } catch (e) {
+            favorites = [];
+            localStorage.removeItem('futTraderFavs'); 
+        }
+
         let gamesData = [];
-        let favorites = JSON.parse(localStorage.getItem('futTraderFavs')) || [];
 
         function tratarStatus(status) {
             if (!status) return "--:--";
@@ -299,7 +308,7 @@
             renderAgenda();
         }
 
-        // 🛡️ INJEÇÃO DEFINITIVA (Imune a erros vermelhos antigos)
+        // 🛡️ INJEÇÃO DEFINITIVA BLINDADA (Cores Nativas do Tailwind)
         async function buscarDetalhesSeguros(id) {
             const loader = document.getElementById(`loader-detalhe-${id}`);
             if(loader) loader.classList.remove('hidden');
@@ -312,12 +321,13 @@
 
                 document.getElementById(`status-${id}`).innerText = tratarStatus(result.status || 'Ao Vivo');
 
+                // Usando cores padrão do Tailwind para não sumir no CDN!
                 const buildForm = (arr) => {
                     if (!arr || arr.length === 0 || arr[0] === '?') return `<span class="text-xs text-gray-600 italic">Indisponível</span>`;
                     return arr.map(r => {
-                        let corClass = 'bg-trading-draw';
-                        if (r === 'V') corClass = 'bg-trading-win';
-                        if (r === 'D') corClass = 'bg-trading-loss';
+                        let corClass = 'bg-gray-500';
+                        if (r === 'V') corClass = 'bg-emerald-500';
+                        if (r === 'D') corClass = 'bg-red-500';
                         return `<div class="form-dot ${corClass}">${r}</div>`;
                     }).join('');
                 };
@@ -341,15 +351,15 @@
                     document.getElementById(`tabela-container-${id}`).classList.remove('hidden');
                     document.getElementById(`tabela-aviso-${id}`).classList.add('hidden');
                 } else {
-                    document.getElementById(`tabela-aviso-${id}`).innerText = "Classificação isolada não disponível para amistosos ou copas.";
+                    document.getElementById(`tabela-aviso-${id}`).innerText = "Classificação não disponível para esta liga ou amistoso.";
                 }
 
                 const buildH2HList = (historico) => {
                     if (!historico || historico.length === 0) return '';
                     return historico.map(h => {
-                        let textCor = 'text-trading-draw';
-                        if (h.resultado === 'V') textCor = 'text-trading-win';
-                        if (h.resultado === 'D') textCor = 'text-trading-loss';
+                        let textCor = 'text-gray-400';
+                        if (h.resultado === 'V') textCor = 'text-emerald-500';
+                        if (h.resultado === 'D') textCor = 'text-red-500';
                         const jogoLimpo = h.jogo.replace(/"/g, '&quot;');
                         
                         return `
@@ -370,7 +380,7 @@
                     document.getElementById(`h2h-container-${id}`).classList.remove('hidden');
                     document.getElementById(`h2h-aviso-${id}`).classList.add('hidden');
                 } else {
-                    document.getElementById(`h2h-aviso-${id}`).innerText = "Histórico bloqueado. O jogo é um amistoso ou divisão não suportada.";
+                    document.getElementById(`h2h-aviso-${id}`).innerText = "Histórico detalhado indisponível.";
                 }
 
                 if (result.estatisticas && result.estatisticas.home_possession && result.estatisticas.home_possession !== "-") {
@@ -385,14 +395,13 @@
                 }
 
             } catch (e) {
-                // Caso ocorra qualquer erro de comunicação, os paineis viram cinza elegantes. NENHUM TEXTO VERMELHO.
-                document.getElementById(`status-${id}`).innerText = 'Limitado';
-                document.getElementById(`form-home-${id}`).innerHTML = `<span class="text-xs text-gray-600 italic">-</span>`;
-                document.getElementById(`form-away-${id}`).innerHTML = `<span class="text-xs text-gray-600 italic">-</span>`;
-                document.getElementById(`tip-${id}`).innerText = `Sem conexão com dados.`;
-                document.getElementById(`tabela-aviso-${id}`).innerText = "Erro ao extrair tabela.";
-                document.getElementById(`h2h-aviso-${id}`).innerText = "Erro ao extrair histórico.";
-                document.getElementById(`stats-aviso-${id}`).innerText = "Erro ao extrair destaques.";
+                document.getElementById(`status-${id}`).innerText = 'Info. Limitada';
+                document.getElementById(`form-home-${id}`).innerHTML = `<span class="text-xs text-gray-600 italic">N/A</span>`;
+                document.getElementById(`form-away-${id}`).innerHTML = `<span class="text-xs text-gray-600 italic">N/A</span>`;
+                document.getElementById(`tip-${id}`).innerText = `Jogo com escassez de dados.`;
+                document.getElementById(`tabela-aviso-${id}`).innerText = "Dados indisponíveis.";
+                document.getElementById(`h2h-aviso-${id}`).innerText = "Dados indisponíveis.";
+                document.getElementById(`stats-aviso-${id}`).innerText = "Dados indisponíveis.";
             } finally {
                 if(loader) loader.classList.add('hidden');
             }

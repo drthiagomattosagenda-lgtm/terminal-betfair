@@ -95,10 +95,9 @@ async def buscar_detalhes(id: str):
                 except:
                     pass
 
-        # --- BLINDAGEM 2: Forma ---
+        # --- BLINDAGEM 2: Forma e IDs ---
         form_home, form_away = [], []
         home_id, away_id = "", ""
-        home_team, away_team = {}, {}
         try:
             teams = comp.get('competitors', [])
             home_team = next((t for t in teams if t.get('homeAway') == 'home'), {})
@@ -112,25 +111,27 @@ async def buscar_detalhes(id: str):
         except:
             pass
 
-        # --- BLINDAGEM 2.5: ROBÔ H2H (Últimos Jogos Detalhados) ---
-        def extrair_historico(competitor_data):
-            historico = []
-            try:
-                eventos = competitor_data.get('events', [])
-                for ev in eventos:
-                    res_raw = ev.get('gameResult', '')
-                    res_br = "V" if res_raw == "W" else "E" if res_raw == "D" else "D" if res_raw == "L" else "-"
-                    historico.append({
+        # --- BLINDAGEM 2.5: ROBÔ H2H CORRIGIDO (Buscando na raiz 'form') ---
+        historico_home, historico_away = [], []
+        try:
+            form_root = espn_data.get('form', []) # <-- O Segredo estava aqui!
+            for f_team in form_root:
+                t_id = f_team.get('team', {}).get('id')
+                evs = []
+                for ev in f_team.get('events', []):
+                    res = ev.get('gameResult', '')
+                    res_br = "V" if res == "W" else "E" if res == "D" else "D" if res == "L" else "-"
+                    evs.append({
                         "jogo": ev.get('shortName', 'Desconhecido'),
                         "placar": ev.get('score', '-'),
                         "resultado": res_br
                     })
-            except:
-                pass
-            return historico
-
-        historico_home = extrair_historico(home_team)
-        historico_away = extrair_historico(away_team)
+                if t_id == home_id:
+                    historico_home = evs
+                elif t_id == away_id:
+                    historico_away = evs
+        except Exception as e:
+            print("Aviso H2H:", str(e))
 
         # --- BLINDAGEM 3: Tabela ---
         tabela_dados = {"pos_home": "-", "pos_away": "-", "pts_home": "-", "pts_away": "-"}
@@ -160,13 +161,13 @@ async def buscar_detalhes(id: str):
             pass
 
         # --- BLINDAGEM 5: ClubElo ---
-        home_name = home_team.get('team', {}).get('displayName', '')
-        away_name = away_team.get('team', {}).get('displayName', '')
         home_rating, away_rating = "N/A", "N/A"
         global elo_cache
         if elo_cache is None: await carregar_clubelo_async()
         if elo_cache is not None and not elo_cache.empty:
             try:
+                home_name = home_team.get('team', {}).get('displayName', '')
+                away_name = away_team.get('team', {}).get('displayName', '')
                 h_match = elo_cache[elo_cache.index.str.contains(home_name[:5], case=False, na=False)]
                 a_match = elo_cache[elo_cache.index.str.contains(away_name[:5], case=False, na=False)]
                 if not h_match.empty: home_rating = str(int(h_match['Elo'].values[0]))

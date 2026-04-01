@@ -19,10 +19,10 @@ app.add_middleware(
 elo_cache = None
 elo_lock = asyncio.Lock()
 
-# Disfarce para a ESPN não bloquear o Render
+# 🛡️ O DISFARCE: Impede a ESPN de bloquear o seu servidor Render
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-    "Accept": "application/json"
+    "Accept": "application/json, text/plain, */*"
 }
 
 async def carregar_clubelo_async():
@@ -31,7 +31,7 @@ async def carregar_clubelo_async():
         if elo_cache is not None: return 
         try:
             url = "http://api.clubelo.com/api/ranking"
-            async with httpx.AsyncClient(follow_redirects=True) as client:
+            async with httpx.AsyncClient(follow_redirects=True, headers=HEADERS) as client:
                 response = await client.get(url, timeout=15.0)
                 if response.status_code == 200:
                     df = pd.read_csv(io.StringIO(response.text))
@@ -43,8 +43,11 @@ async def carregar_clubelo_async():
 async def buscar_jogos():
     try:
         url = "https://site.api.espn.com/apis/site/v2/sports/soccer/scorepanel"
+        # Usando o disfarce aqui
         async with httpx.AsyncClient(follow_redirects=True, headers=HEADERS) as client:
             response = await client.get(url, timeout=15.0)
+            if response.status_code != 200:
+                return {"sucesso": False, "erro": "ESPN bloqueou o acesso à grade."}
             data = response.json()
             
         jogos = []
@@ -67,7 +70,8 @@ async def buscar_jogos():
                         "time": status_short,
                         "venue": venue
                     })
-                except: continue 
+                except:
+                    continue 
         return {"sucesso": True, "dados": jogos}
     except Exception as e:
         return {"sucesso": False, "erro": str(e)}
@@ -75,10 +79,13 @@ async def buscar_jogos():
 @app.get("/detalhes/{id}")
 async def buscar_detalhes(id: str):
     url_resumo = f"https://site.api.espn.com/apis/site/v2/sports/soccer/summary?event={id}"
+    
     try:
+        # Usando o disfarce aqui
         async with httpx.AsyncClient(follow_redirects=True, headers=HEADERS) as client:
             resp_resumo = await client.get(url_resumo, timeout=15.0)
-            if resp_resumo.status_code != 200: raise Exception("API bloqueou")
+            if resp_resumo.status_code != 200:
+                raise Exception("API da ESPN recusou a conexão do detalhe.")
             espn_data = resp_resumo.json()
             
             competitions = espn_data.get('header', {}).get('competitions', [{}])
@@ -102,11 +109,9 @@ async def buscar_detalhes(id: str):
                 except: pass
 
         # FORMA BÁSICA
-        form_home_raw = home_team.get('form') or ""
-        form_away_raw = away_team.get('form') or ""
         mapa_form = {"W": "V", "D": "E", "L": "D"}
-        form_home = [mapa_form.get(f, "?") for f in form_home_raw[-5:]]
-        form_away = [mapa_form.get(f, "?") for f in form_away_raw[-5:]]
+        form_home = [mapa_form.get(f, "?") for f in home_team.get('form', '')[-5:]]
+        form_away = [mapa_form.get(f, "?") for f in away_team.get('form', '')[-5:]]
 
         # ROBÔ H2H REAL (Busca os detalhes reais se a ESPN enviar)
         historico_home, historico_away = [], []
@@ -123,7 +128,7 @@ async def buscar_detalhes(id: str):
                 elif t_id == away_id: historico_away = evs
         except: pass
 
-        # BLINDAGEM H2H: Se não tiver histórico real (Ex: Amistosos), fabrica com a forma!
+        # BLINDAGEM H2H: Se não tiver histórico real, fabrica com a forma!
         if not historico_home:
             historico_home = [{"jogo": f"Jogo Recente {i+1}", "placar": "-", "resultado": r} for i, r in enumerate(form_home) if r != "?"]
         if not historico_away:
@@ -179,6 +184,7 @@ async def buscar_detalhes(id: str):
             "status": comp.get('status', {}).get('type', {}).get('detail', 'N/A')
         }
     except Exception as e:
+        print("Erro Protegido:", str(e))
         return {"sucesso": False, "erro": "Jogo com escassez de dados."}
 
 if __name__ == "__main__":

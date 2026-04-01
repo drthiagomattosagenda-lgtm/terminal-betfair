@@ -158,10 +158,8 @@
                     filteredGames.forEach(game => {
                         totalCount++;
                         const isFav = favorites.includes(String(game.id));
-                        
                         const copas = ["Copa", "Cup", "Champions", "Libertadores", "Trophy", "Mata-Mata", "Playoffs", "FA Cup"];
                         const ehMataMata = copas.some(c => league.name.toUpperCase().includes(c.toUpperCase()));
-                        
                         const statusFormatado = tratarStatus(game.time);
                         const statusColor = ['FIM', 'Cancelado', 'Adiado', 'FT-Penal'].includes(statusFormatado) ? 'text-red-500' : 'text-trading-highlight';
                         
@@ -177,12 +175,7 @@
                                                 <span class="text-base font-black text-white uppercase tracking-tight">${game.home || 'Time Casa'}</span>
                                                 <span class="text-[10px] text-gray-700 font-black italic">VS</span>
                                                 <span class="text-base font-black text-white uppercase tracking-tight">${game.away || 'Time Fora'}</span>
-                                                
-                                                ${ehMataMata ? `
-                                                    <span class="bg-red-600/20 text-red-500 text-[8px] px-2 py-0.5 rounded border border-red-500/30 font-black uppercase tracking-tighter">
-                                                        <i class="fas fa-trophy mr-1"></i>Mata-Mata
-                                                    </span>
-                                                ` : ''}
+                                                ${ehMataMata ? `<span class="bg-red-600/20 text-red-500 text-[8px] px-2 py-0.5 rounded border border-red-500/30 font-black uppercase tracking-tighter"><i class="fas fa-trophy mr-1"></i>Mata-Mata</span>` : ''}
                                             </div>
                                             <span class="text-[9px] text-gray-500 uppercase mt-1 tracking-wider"><i class="fas fa-map-marker-alt mr-1"></i>${game.venue || 'Local não informado'}</span>
                                         </div>
@@ -195,10 +188,10 @@
 
                                 <div id="details-${game.id}" class="hidden bg-[#0D1117] border-t border-white/5">
                                     <div class="flex gap-8 px-8 border-b border-white/5 overflow-x-auto no-scrollbar pt-4">
-                                        <button onclick="switchTab('${game.id}', 'resumo')" id="tab-resumo-${game.id}" class="tab-btn active">Resumo</button>
+                                        <button onclick="switchTab('${game.id}', 'resumo')" id="tab-resumo-${game.id}" class="tab-btn active">Geral</button>
                                         <button onclick="switchTab('${game.id}', 'class')" id="tab-class-${game.id}" class="tab-btn">Classificação</button>
                                         <button onclick="switchTab('${game.id}', 'h2h')" id="tab-h2h-${game.id}" class="tab-btn">H2H / Forma</button>
-                                        <button onclick="switchTab('${game.id}', 'top')" id="tab-top-${game.id}" class="tab-btn">Destaques</button>
+                                        <button onclick="switchTab('${game.id}', 'top')" id="tab-top-${game.id}" class="tab-btn">Destaques (Ao Vivo)</button>
                                     </div>
 
                                     <div class="p-8">
@@ -206,13 +199,9 @@
                                             <div class="space-y-4">
                                                 <h4 class="text-[10px] text-gray-500 font-black uppercase">Momento</h4>
                                                 <div class="flex items-center gap-4">
-                                                    <div class="flex gap-1" id="form-home-${game.id}">
-                                                        <span class="text-xs text-gray-600 italic">Buscando...</span>
-                                                    </div>
+                                                    <div class="flex gap-1" id="form-home-${game.id}"><span class="text-xs text-gray-600 italic">Buscando...</span></div>
                                                     <div class="w-px h-6 bg-white/10"></div>
-                                                    <div class="flex gap-1" id="form-away-${game.id}">
-                                                        <span class="text-xs text-gray-600 italic">Buscando...</span>
-                                                    </div>
+                                                    <div class="flex gap-1" id="form-away-${game.id}"><span class="text-xs text-gray-600 italic">Buscando...</span></div>
                                                 </div>
                                             </div>
                                             <div class="space-y-4">
@@ -227,24 +216,36 @@
                                         </div>
 
                                         <div id="content-class-${game.id}" class="tab-content-${game.id} hidden animate-in">
-                                            <div class="bg-white/5 rounded-xl p-6 text-center border border-dashed border-white/10">
-                                                <i class="fas fa-table text-gray-600 text-2xl mb-3"></i>
-                                                <p class="text-xs text-gray-500 uppercase font-bold tracking-widest">Tabela em processamento...</p>
+                                            <div class="grid grid-cols-2 gap-8 text-center bg-white/5 rounded-xl p-6 border border-white/10">
+                                                <div>
+                                                    <p class="text-[10px] text-trading-highlight uppercase font-bold tracking-widest">${game.home}</p>
+                                                    <p class="text-xs text-white mt-2">Posição: <span id="pos-home-${game.id}" class="font-black text-lg">...</span></p>
+                                                    <p class="text-xs text-gray-400">Pontos: <span id="pts-home-${game.id}" class="font-bold">...</span></p>
+                                                </div>
+                                                <div class="border-l border-white/10">
+                                                    <p class="text-[10px] text-trading-highlight uppercase font-bold tracking-widest">${game.away}</p>
+                                                    <p class="text-xs text-white mt-2">Posição: <span id="pos-away-${game.id}" class="font-black text-lg">...</span></p>
+                                                    <p class="text-xs text-gray-400">Pontos: <span id="pts-away-${game.id}" class="font-bold">...</span></p>
+                                                </div>
                                             </div>
+                                            <p id="tabela-aviso-${game.id}" class="text-center text-[10px] text-red-500 mt-3 hidden">Tabela não disponível para ligas de Mata-Mata ou divisões inferiores.</p>
                                         </div>
 
                                         <div id="content-h2h-${game.id}" class="tab-content-${game.id} hidden space-y-6 animate-in">
-                                            <div class="grid grid-cols-3 gap-4 text-center">
-                                                <div class="bg-white/5 p-4 rounded-xl"><p class="text-[10px] text-gray-500 uppercase">Vit. Casa</p><p id="h2h-home-${game.id}" class="text-xl font-black text-white">-</p></div>
-                                                <div class="bg-white/5 p-4 rounded-xl"><p class="text-[10px] text-gray-500 uppercase">Empates</p><p id="h2h-draw-${game.id}" class="text-xl font-black text-white">-</p></div>
-                                                <div class="bg-white/5 p-4 rounded-xl"><p class="text-[10px] text-gray-500 uppercase">Vit. Fora</p><p id="h2h-away-${game.id}" class="text-xl font-black text-white">-</p></div>
-                                            </div>
-                                            <div class="text-center"><p id="h2h-msg-${game.id}" class="text-[10px] text-gray-500 uppercase italic">Buscando histórico...</p></div>
+                                            <div class="text-center"><p id="h2h-msg-${game.id}" class="text-[10px] text-gray-500 uppercase italic">Dados históricos isolados protegidos. Utilize a aba GERAL para momentum.</p></div>
                                         </div>
 
-                                        <div id="content-top-${game.id}" class="tab-content-${game.id} hidden animate-in text-center py-6">
-                                            <i class="fas fa-star text-trading-highlight mb-3 text-xl"></i>
-                                            <p class="text-[10px] text-gray-500 uppercase font-black tracking-widest italic">Aguardando escalação e destaques.</p>
+                                        <div id="content-top-${game.id}" class="tab-content-${game.id} hidden animate-in">
+                                             <div class="grid grid-cols-3 gap-4 text-center items-center bg-white/5 p-6 rounded-xl border border-white/10">
+                                                <div><p id="stats-home-pos-${game.id}" class="text-2xl font-black text-white">-</p></div>
+                                                <div><p class="text-[10px] text-gray-500 uppercase font-black tracking-widest">Posse de Bola</p></div>
+                                                <div><p id="stats-away-pos-${game.id}" class="text-2xl font-black text-white">-</p></div>
+
+                                                <div><p id="stats-home-shots-${game.id}" class="text-xl font-bold text-gray-300">-</p></div>
+                                                <div><p class="text-[10px] text-gray-500 uppercase font-black tracking-widest mt-4">Chutes Totais</p></div>
+                                                <div><p id="stats-away-shots-${game.id}" class="text-xl font-bold text-gray-300">-</p></div>
+                                            </div>
+                                            <p id="stats-aviso-${game.id}" class="text-center text-[10px] text-trading-highlight mt-3 hidden">Estatísticas disponíveis apenas quando o jogo iniciar.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -300,36 +301,49 @@
 
                 if (!result.sucesso) throw new Error("Erro no Motor V8");
 
-                // 1. Atualiza Status
+                // ABA GERAL
                 let statusTraduzido = tratarStatus(result.status || 'Ao Vivo');
                 document.getElementById(`status-${id}`).innerText = statusTraduzido;
 
-                // 2. Injeta a Forma Recente (Protegido contra falhas do array)
                 const buildForm = (formArray) => {
                     if (!formArray || !Array.isArray(formArray)) return `<span class="text-xs text-gray-600 italic">Sem dados</span>`;
                     return formArray.map(r => `<div class="form-dot bg-trading-${r=='V'?'win':r=='D'?'loss':'draw'}">${r}</div>`).join('');
                 };
-                
                 document.getElementById(`form-home-${id}`).innerHTML = buildForm(result.forma?.home);
                 document.getElementById(`form-away-${id}`).innerHTML = buildForm(result.forma?.away);
 
-                // 3. Injeta a Inteligência do SOCCERDATA
                 const eloHome = result.soccerdata?.home_elo;
                 const eloAway = result.soccerdata?.away_elo;
-                
                 if (eloHome !== 'N/A' && eloAway !== 'N/A') {
                     document.getElementById(`tip-${id}`).innerHTML = `<b class="text-white">Avaliação ClubElo:</b> Casa (${eloHome}) vs Fora (${eloAway})`;
                 } else {
-                    document.getElementById(`tip-${id}`).innerText = `Análise SoccerData não encontrada para esta liga.`;
+                    document.getElementById(`tip-${id}`).innerText = `Análise de Rating indisponível para esta liga.`;
                 }
 
-                // 4. H2H Placeholder
-                document.getElementById(`h2h-msg-${id}`).innerText = "Dados históricos protegidos. Acesse a área PRO.";
+                // ABA CLASSIFICAÇÃO
+                if (result.tabela && result.tabela.pos_home !== "-") {
+                    document.getElementById(`pos-home-${id}`).innerText = result.tabela.pos_home + "º";
+                    document.getElementById(`pos-away-${id}`).innerText = result.tabela.pos_away + "º";
+                    document.getElementById(`pts-home-${id}`).innerText = result.tabela.pts_home;
+                    document.getElementById(`pts-away-${id}`).innerText = result.tabela.pts_away;
+                } else {
+                    document.getElementById(`tabela-aviso-${id}`).classList.remove('hidden');
+                }
+
+                // ABA DESTAQUES (Estatísticas Ao Vivo)
+                if (result.estatisticas && result.estatisticas.home_possession !== "-") {
+                    document.getElementById(`stats-home-pos-${id}`).innerText = result.estatisticas.home_possession + "%";
+                    document.getElementById(`stats-away-pos-${id}`).innerText = result.estatisticas.away_possession + "%";
+                    document.getElementById(`stats-home-shots-${id}`).innerText = result.estatisticas.home_shots;
+                    document.getElementById(`stats-away-shots-${id}`).innerText = result.estatisticas.away_shots;
+                } else {
+                    document.getElementById(`stats-aviso-${id}`).classList.remove('hidden');
+                }
 
             } catch (e) {
                 console.warn("Falha silenciosa ao buscar detalhes profundos:", id, e);
                 document.getElementById(`status-${id}`).innerText = 'Falha de Conexão';
-                document.getElementById(`tip-${id}`).innerText = 'Motor em resfriamento. Impossível extrair análise SoccerData agora.';
+                document.getElementById(`tip-${id}`).innerText = 'Motor em resfriamento. Impossível extrair dados no momento.';
             }
         }
 

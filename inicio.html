@@ -37,7 +37,7 @@
         .tab-btn.active { color: #FFB100; }
         .tab-btn.active::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: #FFB100; }
         
-        .form-dot { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; color: white; }
+        .form-dot { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; color: white; text-shadow: 0px 1px 2px rgba(0,0,0,0.5); }
         .animate-in { animation: fadeIn 0.3s ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         .no-scrollbar::-webkit-scrollbar { display: none; }
@@ -187,7 +187,7 @@
                                     </div>
 
                                     <div class="p-8 relative">
-                                        <div id="loader-detalhe-${game.id}" class="absolute inset-0 bg-[#0D1117] flex items-center justify-center z-10 hidden">
+                                        <div id="loader-detalhe-${game.id}" class="absolute inset-0 bg-[#0D1117]/90 flex items-center justify-center z-10 hidden">
                                             <i class="fas fa-circle-notch fa-spin text-trading-highlight text-2xl"></i>
                                         </div>
 
@@ -212,7 +212,7 @@
                                         </div>
 
                                         <div id="content-class-${game.id}" class="tab-content-${game.id} hidden animate-in">
-                                            <div id="tabela-container-${game.id}" class="grid grid-cols-2 gap-8 text-center bg-white/5 rounded-xl p-6 border border-white/10">
+                                            <div id="tabela-container-${game.id}" class="grid grid-cols-2 gap-8 text-center bg-white/5 rounded-xl p-6 border border-white/10 hidden">
                                                 <div>
                                                     <p class="text-[10px] text-trading-highlight uppercase font-bold tracking-widest">${game.home}</p>
                                                     <p class="text-xs text-white mt-2">Posição: <span id="pos-home-${game.id}" class="font-black text-lg">-</span></p>
@@ -224,11 +224,11 @@
                                                     <p class="text-xs text-gray-400">Pontos: <span id="pts-away-${game.id}" class="font-bold">-</span></p>
                                                 </div>
                                             </div>
-                                            <p id="tabela-aviso-${game.id}" class="text-center text-[10px] text-gray-500 mt-3 hidden uppercase font-bold">Classificação não disponível para esta liga ou amistoso.</p>
+                                            <p id="tabela-aviso-${game.id}" class="text-center text-[10px] text-gray-500 mt-3 uppercase font-bold">Aguardando dados da tabela...</p>
                                         </div>
 
                                         <div id="content-h2h-${game.id}" class="tab-content-${game.id} hidden animate-in">
-                                            <div id="h2h-container-${game.id}" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                            <div id="h2h-container-${game.id}" class="grid grid-cols-1 md:grid-cols-2 gap-8 hidden">
                                                 <div>
                                                     <p class="text-[10px] text-white uppercase font-black tracking-widest mb-3 border-b border-white/10 pb-2">${game.home}</p>
                                                     <div id="h2h-list-home-${game.id}" class="space-y-2"></div>
@@ -238,11 +238,11 @@
                                                     <div id="h2h-list-away-${game.id}" class="space-y-2"></div>
                                                 </div>
                                             </div>
-                                            <p id="h2h-aviso-${game.id}" class="text-center text-[10px] text-gray-500 mt-3 hidden uppercase font-bold">Histórico detalhado indisponível para esta partida.</p>
+                                            <p id="h2h-aviso-${game.id}" class="text-center text-[10px] text-gray-500 mt-3 uppercase font-bold">Aguardando histórico de confrontos...</p>
                                         </div>
 
                                         <div id="content-top-${game.id}" class="tab-content-${game.id} hidden animate-in">
-                                             <div id="stats-container-${game.id}" class="grid grid-cols-3 gap-4 text-center items-center bg-white/5 p-6 rounded-xl border border-white/10">
+                                             <div id="stats-container-${game.id}" class="grid grid-cols-3 gap-4 text-center items-center bg-white/5 p-6 rounded-xl border border-white/10 hidden">
                                                 <div><p id="stats-home-pos-${game.id}" class="text-2xl font-black text-white">-</p></div>
                                                 <div><p class="text-[10px] text-gray-500 uppercase font-black tracking-widest">Posse de Bola</p></div>
                                                 <div><p id="stats-away-pos-${game.id}" class="text-2xl font-black text-white">-</p></div>
@@ -251,7 +251,7 @@
                                                 <div><p class="text-[10px] text-gray-500 uppercase font-black tracking-widest mt-4">Chutes Totais</p></div>
                                                 <div><p id="stats-away-shots-${game.id}" class="text-xl font-bold text-gray-300">-</p></div>
                                             </div>
-                                            <p id="stats-aviso-${game.id}" class="text-center text-[10px] text-gray-500 mt-3 hidden uppercase font-bold">As estatísticas ao vivo aparecerão quando o jogo iniciar.</p>
+                                            <p id="stats-aviso-${game.id}" class="text-center text-[10px] text-gray-500 mt-3 uppercase font-bold">Aguardando estatísticas do jogo...</p>
                                         </div>
                                     </div>
                                 </div>
@@ -299,7 +299,7 @@
             renderAgenda();
         }
 
-        // 🛡️ A INJEÇÃO BLINDADA COM ROBÔ H2H
+        // 🛡️ A INJEÇÃO BLINDADA COM CORREÇÃO DO TAILWIND CSS
         async function buscarDetalhesSeguros(id) {
             const loader = document.getElementById(`loader-detalhe-${id}`);
             if(loader) loader.classList.remove('hidden');
@@ -313,13 +313,21 @@
                 // STATUS E GERAL
                 document.getElementById(`status-${id}`).innerText = tratarStatus(result.status || 'Ao Vivo');
 
+                // CORREÇÃO CRÍTICA DO TAILWIND CSS (Cores explícitas)
                 const buildForm = (arr) => {
-                    if (!arr || arr.length === 0 || arr[0] === '?') return `<span class="text-xs text-gray-600 italic">Forma Indisponível</span>`;
-                    return arr.map(r => `<div class="form-dot bg-trading-${r=='V'?'win':r=='D'?'loss':'draw'}">${r}</div>`).join('');
+                    if (!arr || arr.length === 0 || arr[0] === '?') return `<span class="text-xs text-gray-600 italic">Indisponível</span>`;
+                    return arr.map(r => {
+                        let corClass = 'bg-trading-draw';
+                        if (r === 'V') corClass = 'bg-trading-win';
+                        if (r === 'D') corClass = 'bg-trading-loss';
+                        return `<div class="form-dot ${corClass}">${r}</div>`;
+                    }).join('');
                 };
+
                 document.getElementById(`form-home-${id}`).innerHTML = buildForm(result.forma?.home);
                 document.getElementById(`form-away-${id}`).innerHTML = buildForm(result.forma?.away);
 
+                // ELO RATING
                 const eloHome = result.soccerdata?.home_elo;
                 const eloAway = result.soccerdata?.away_elo;
                 if (eloHome && eloHome !== 'N/A' && eloAway !== 'N/A') {
@@ -337,21 +345,24 @@
                     document.getElementById(`tabela-container-${id}`).classList.remove('hidden');
                     document.getElementById(`tabela-aviso-${id}`).classList.add('hidden');
                 } else {
-                    document.getElementById(`tabela-container-${id}`).classList.add('hidden');
-                    document.getElementById(`tabela-aviso-${id}`).classList.remove('hidden');
+                    document.getElementById(`tabela-aviso-${id}`).innerText = "Classificação não disponível para esta liga ou amistoso.";
                 }
 
-                // ROBÔ H2H NA TELA
+                // ROBÔ H2H NA TELA (CORREÇÃO DE TEXTO LONGO)
                 const buildH2HList = (historico) => {
                     if (!historico || historico.length === 0) return '';
                     return historico.map(h => {
-                        const cor = h.resultado === 'V' ? 'text-trading-win' : h.resultado === 'D' ? 'text-trading-loss' : 'text-trading-draw';
+                        let textCor = 'text-trading-draw';
+                        if (h.resultado === 'V') textCor = 'text-trading-win';
+                        if (h.resultado === 'D') textCor = 'text-trading-loss';
+                        const jogoLimpo = h.jogo.replace(/"/g, '&quot;'); // Evita quebrar o HTML
+                        
                         return `
                             <div class="flex justify-between items-center bg-white/5 p-2 rounded border border-white/5 text-xs">
-                                <span class="text-gray-400 max-w-[120px] truncate" title="${h.jogo}">${h.jogo}</span>
+                                <span class="text-gray-400 max-w-[120px] truncate" title="${jogoLimpo}">${jogoLimpo}</span>
                                 <div class="flex items-center gap-3">
                                     <span class="font-mono text-white font-bold">${h.placar}</span>
-                                    <span class="font-black ${cor}">${h.resultado}</span>
+                                    <span class="font-black ${textCor}">${h.resultado}</span>
                                 </div>
                             </div>
                         `;
@@ -364,8 +375,7 @@
                     document.getElementById(`h2h-container-${id}`).classList.remove('hidden');
                     document.getElementById(`h2h-aviso-${id}`).classList.add('hidden');
                 } else {
-                    document.getElementById(`h2h-container-${id}`).classList.add('hidden');
-                    document.getElementById(`h2h-aviso-${id}`).classList.remove('hidden');
+                    document.getElementById(`h2h-aviso-${id}`).innerText = "Histórico detalhado indisponível para esta partida.";
                 }
 
                 // ESTATÍSTICAS
@@ -377,21 +387,17 @@
                     document.getElementById(`stats-container-${id}`).classList.remove('hidden');
                     document.getElementById(`stats-aviso-${id}`).classList.add('hidden');
                 } else {
-                    document.getElementById(`stats-container-${id}`).classList.add('hidden');
-                    document.getElementById(`stats-aviso-${id}`).classList.remove('hidden');
+                    document.getElementById(`stats-aviso-${id}`).innerText = "Estatísticas do jogo indisponíveis no momento.";
                 }
 
             } catch (e) {
                 document.getElementById(`status-${id}`).innerText = 'Info. Limitada';
                 document.getElementById(`form-home-${id}`).innerHTML = `<span class="text-xs text-gray-600 italic">N/A</span>`;
                 document.getElementById(`form-away-${id}`).innerHTML = `<span class="text-xs text-gray-600 italic">N/A</span>`;
-                document.getElementById(`tip-${id}`).innerText = `Jogo com escassez de dados.`;
-                document.getElementById(`tabela-container-${id}`).classList.add('hidden');
-                document.getElementById(`tabela-aviso-${id}`).classList.remove('hidden');
-                document.getElementById(`h2h-container-${id}`).classList.add('hidden');
-                document.getElementById(`h2h-aviso-${id}`).classList.remove('hidden');
-                document.getElementById(`stats-container-${id}`).classList.add('hidden');
-                document.getElementById(`stats-aviso-${id}`).classList.remove('hidden');
+                document.getElementById(`tip-${id}`).innerText = `Jogo com escassez de dados globais.`;
+                document.getElementById(`tabela-aviso-${id}`).innerText = "Dados Indisponíveis.";
+                document.getElementById(`h2h-aviso-${id}`).innerText = "Dados Indisponíveis.";
+                document.getElementById(`stats-aviso-${id}`).innerText = "Dados Indisponíveis.";
             } finally {
                 if(loader) loader.classList.add('hidden');
             }

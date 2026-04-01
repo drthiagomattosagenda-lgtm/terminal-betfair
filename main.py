@@ -75,19 +75,15 @@ async def buscar_detalhes(id: str):
         async with httpx.AsyncClient(follow_redirects=True) as client:
             resp_resumo = await client.get(url_resumo, timeout=15.0)
             if resp_resumo.status_code != 200:
-                raise Exception("API da ESPN recusou a conexão do detalhe.")
+                raise Exception("API da ESPN recusou a conexão.")
             espn_data = resp_resumo.json()
             
-            # --- BLINDAGEM 1: Extração segura de liga e ano ---
             competitions = espn_data.get('header', {}).get('competitions', [{}])
             comp = competitions[0] if len(competitions) > 0 else {}
             year = espn_data.get('header', {}).get('season', {}).get('year', '')
             comp_url = comp.get('uid', '')
             
-            league_slug = ""
-            if "~c:" in comp_url:
-                league_slug = comp_url.split("~c:")[-1]
-
+            league_slug = comp_url.split("~c:")[-1] if "~c:" in comp_url else ""
             url_tabela = f"https://site.api.espn.com/apis/site/v2/sports/soccer/{league_slug}/standings?season={year}" if league_slug else ""
 
             resp_tabela = {}
@@ -97,9 +93,9 @@ async def buscar_detalhes(id: str):
                     if resp_tabela_req.status_code == 200:
                         resp_tabela = resp_tabela_req.json()
                 except:
-                    pass # Se falhar a tabela, ignora e segue a vida
+                    pass
 
-        # --- BLINDAGEM 2: Forma e IDs ---
+        # --- BLINDAGEM 2: Forma ---
         form_home, form_away = [], []
         home_id, away_id = "", ""
         home_team, away_team = {}, {}
@@ -107,7 +103,6 @@ async def buscar_detalhes(id: str):
             teams = comp.get('competitors', [])
             home_team = next((t for t in teams if t.get('homeAway') == 'home'), {})
             away_team = next((t for t in teams if t.get('homeAway') == 'away'), {})
-            
             home_id = home_team.get('team', {}).get('id', '')
             away_id = away_team.get('team', {}).get('id', '')
             
@@ -116,6 +111,26 @@ async def buscar_detalhes(id: str):
             form_away = [mapa_form.get(f, "?") for f in away_team.get('form', '')[-5:]]
         except:
             pass
+
+        # --- BLINDAGEM 2.5: ROBÔ H2H (Últimos Jogos Detalhados) ---
+        def extrair_historico(competitor_data):
+            historico = []
+            try:
+                eventos = competitor_data.get('events', [])
+                for ev in eventos:
+                    res_raw = ev.get('gameResult', '')
+                    res_br = "V" if res_raw == "W" else "E" if res_raw == "D" else "D" if res_raw == "L" else "-"
+                    historico.append({
+                        "jogo": ev.get('shortName', 'Desconhecido'),
+                        "placar": ev.get('score', '-'),
+                        "resultado": res_br
+                    })
+            except:
+                pass
+            return historico
+
+        historico_home = extrair_historico(home_team)
+        historico_away = extrair_historico(away_team)
 
         # --- BLINDAGEM 3: Tabela ---
         tabela_dados = {"pos_home": "-", "pos_away": "-", "pts_home": "-", "pts_away": "-"}
@@ -148,23 +163,20 @@ async def buscar_detalhes(id: str):
         home_name = home_team.get('team', {}).get('displayName', '')
         away_name = away_team.get('team', {}).get('displayName', '')
         home_rating, away_rating = "N/A", "N/A"
-        
         global elo_cache
-        if elo_cache is None:
-            await carregar_clubelo_async()
-            
+        if elo_cache is None: await carregar_clubelo_async()
         if elo_cache is not None and not elo_cache.empty:
             try:
                 h_match = elo_cache[elo_cache.index.str.contains(home_name[:5], case=False, na=False)]
                 a_match = elo_cache[elo_cache.index.str.contains(away_name[:5], case=False, na=False)]
                 if not h_match.empty: home_rating = str(int(h_match['Elo'].values[0]))
                 if not a_match.empty: away_rating = str(int(a_match['Elo'].values[0]))
-            except: 
-                pass
+            except: pass
 
         return {
             "sucesso": True,
             "forma": {"home": form_home, "away": form_away},
+            "historico": {"home": historico_home, "away": historico_away},
             "tabela": tabela_dados,
             "estatisticas": stats,
             "soccerdata": {"home_elo": home_rating, "away_elo": away_rating},

@@ -19,6 +19,12 @@ app.add_middleware(
 elo_cache = None
 elo_lock = asyncio.Lock()
 
+# Disfarce para a ESPN não bloquear o Render
+HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    "Accept": "application/json"
+}
+
 async def carregar_clubelo_async():
     global elo_cache
     async with elo_lock:
@@ -37,7 +43,7 @@ async def carregar_clubelo_async():
 async def buscar_jogos():
     try:
         url = "https://site.api.espn.com/apis/site/v2/sports/soccer/scorepanel"
-        async with httpx.AsyncClient(follow_redirects=True) as client:
+        async with httpx.AsyncClient(follow_redirects=True, headers=HEADERS) as client:
             response = await client.get(url, timeout=15.0)
             data = response.json()
             
@@ -47,8 +53,8 @@ async def buscar_jogos():
             for event in league.get('events', []):
                 try:
                     comp = event.get('competitions', [{}])[0]
-                    home = next(t['team']['displayName'] for t in comp.get('competitors', []) if t.get('homeAway') == 'home')
-                    away = next(t['team']['displayName'] for t in comp.get('competitors', []) if t.get('homeAway') == 'away')
+                    home = next((t['team']['displayName'] for t in comp.get('competitors', []) if t.get('homeAway') == 'home'), "Casa")
+                    away = next((t['team']['displayName'] for t in comp.get('competitors', []) if t.get('homeAway') == 'away'), "Fora")
                     status_short = comp.get('status', {}).get('type', {}).get('shortDetail', '--:--')
                     venue = comp.get('venue', {}).get('fullName', 'Estádio não informado')
                     
@@ -61,21 +67,18 @@ async def buscar_jogos():
                         "time": status_short,
                         "venue": venue
                     })
-                except:
-                    continue 
+                except: continue 
         return {"sucesso": True, "dados": jogos}
     except Exception as e:
-        return {"sucesso": False, "erro": "Falha geral ao buscar a grade."}
+        return {"sucesso": False, "erro": str(e)}
 
 @app.get("/detalhes/{id}")
 async def buscar_detalhes(id: str):
     url_resumo = f"https://site.api.espn.com/apis/site/v2/sports/soccer/summary?event={id}"
-    
     try:
-        async with httpx.AsyncClient(follow_redirects=True) as client:
+        async with httpx.AsyncClient(follow_redirects=True, headers=HEADERS) as client:
             resp_resumo = await client.get(url_resumo, timeout=15.0)
-            if resp_resumo.status_code != 200:
-                raise Exception("API da ESPN recusou a conexão.")
+            if resp_resumo.status_code != 200: raise Exception("API bloqueou")
             espn_data = resp_resumo.json()
             
             competitions = espn_data.get('header', {}).get('competitions', [{}])
@@ -87,8 +90,8 @@ async def buscar_detalhes(id: str):
             teams = comp.get('competitors', [])
             home_team = next((t for t in teams if t.get('homeAway') == 'home'), {})
             away_team = next((t for t in teams if t.get('homeAway') == 'away'), {})
-            home_id = home_team.get('team', {}).get('id', '')
-            away_id = away_team.get('team', {}).get('id', '')
+            home_id = str(home_team.get('team', {}).get('id', ''))
+            away_id = str(away_team.get('team', {}).get('id', ''))
             
             url_tabela = f"https://site.api.espn.com/apis/site/v2/sports/soccer/{league_slug}/standings?season={year}" if league_slug else ""
             resp_tabela = {}
@@ -99,16 +102,32 @@ async def buscar_detalhes(id: str):
                 except: pass
 
         # FORMA BÁSICA
+        form_home_raw = home_team.get('form') or ""
+        form_away_raw = away_team.get('form') or ""
         mapa_form = {"W": "V", "D": "E", "L": "D"}
-        form_home = [mapa_form.get(f, "?") for f in home_team.get('form', '')[-5:]]
-        form_away = [mapa_form.get(f, "?") for f in away_team.get('form', '')[-5:]]
+        form_home = [mapa_form.get(f, "?") for f in form_home_raw[-5:]]
+        form_away = [mapa_form.get(f, "?") for f in form_away_raw[-5:]]
 
-        # ROBÔ H2H (À Prova de Falhas) - Se a ESPN não mandar o histórico, nós montamos com a Forma!
+        # ROBÔ H2H REAL (Busca os detalhes reais se a ESPN enviar)
         historico_home, historico_away = [], []
-        for idx, res in enumerate(form_home):
-            if res != "?": historico_home.append({"jogo": f"Jogo Recente {idx+1}", "placar": "-", "resultado": res})
-        for idx, res in enumerate(form_away):
-            if res != "?": historico_away.append({"jogo": f"Jogo Recente {idx+1}", "placar": "-", "resultado": res})
+        try:
+            form_root = espn_data.get('form', [])
+            for f_team in form_root:
+                t_id = str(f_team.get('team', {}).get('id', ''))
+                evs = []
+                for ev in f_team.get('events', []):
+                    res = ev.get('gameResult', '')
+                    res_br = "V" if res == "W" else "E" if res == "D" else "D" if res == "L" else "-"
+                    evs.append({"jogo": ev.get('shortName', 'Desconhecido'), "placar": ev.get('score', '-'), "resultado": res_br})
+                if t_id == home_id: historico_home = evs
+                elif t_id == away_id: historico_away = evs
+        except: pass
+
+        # BLINDAGEM H2H: Se não tiver histórico real (Ex: Amistosos), fabrica com a forma!
+        if not historico_home:
+            historico_home = [{"jogo": f"Jogo Recente {i+1}", "placar": "-", "resultado": r} for i, r in enumerate(form_home) if r != "?"]
+        if not historico_away:
+            historico_away = [{"jogo": f"Jogo Recente {i+1}", "placar": "-", "resultado": r} for i, r in enumerate(form_away) if r != "?"]
 
         # TABELA
         tabela_dados = {"pos_home": "-", "pos_away": "-", "pts_home": "-", "pts_away": "-"}
@@ -116,10 +135,10 @@ async def buscar_detalhes(id: str):
             standings = resp_tabela.get('children', [{}])[0].get('standings', {}).get('entries', [])
             for t in standings:
                 tid = str(t.get('team', {}).get('id', ''))
-                if tid == str(home_id):
+                if tid == home_id:
                     tabela_dados['pos_home'] = t['stats'][0]['displayValue']
                     tabela_dados['pts_home'] = t['stats'][3]['displayValue']
-                if tid == str(away_id):
+                if tid == away_id:
                     tabela_dados['pos_away'] = t['stats'][0]['displayValue']
                     tabela_dados['pts_away'] = t['stats'][3]['displayValue']
         except: pass
@@ -130,7 +149,7 @@ async def buscar_detalhes(id: str):
             team_stats = espn_data.get('boxscore', {}).get('teams', [])
             for t in team_stats:
                 stat_dict = {s['name']: s['displayValue'] for s in t.get('statistics', [])}
-                prefix = 'home' if str(t.get('team', {}).get('id')) == str(home_id) else 'away'
+                prefix = 'home' if str(t.get('team', {}).get('id')) == home_id else 'away'
                 stats[f'{prefix}_possession'] = stat_dict.get('possessionPct', '-')
                 stats[f'{prefix}_shots'] = stat_dict.get('shotsTotal', '-')
         except: pass
@@ -160,7 +179,6 @@ async def buscar_detalhes(id: str):
             "status": comp.get('status', {}).get('type', {}).get('detail', 'N/A')
         }
     except Exception as e:
-        print("Erro Protegido:", str(e))
         return {"sucesso": False, "erro": "Jogo com escassez de dados."}
 
 if __name__ == "__main__":

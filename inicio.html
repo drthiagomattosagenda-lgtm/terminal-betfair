@@ -158,8 +158,10 @@
                     filteredGames.forEach(game => {
                         totalCount++;
                         const isFav = favorites.includes(String(game.id));
+                        
                         const copas = ["Copa", "Cup", "Champions", "Libertadores", "Trophy", "Mata-Mata", "Playoffs", "FA Cup"];
                         const ehMataMata = copas.some(c => league.name.toUpperCase().includes(c.toUpperCase()));
+                        
                         const statusFormatado = tratarStatus(game.time);
                         const statusColor = ['FIM', 'Cancelado', 'Adiado', 'FT-Penal'].includes(statusFormatado) ? 'text-red-500' : 'text-trading-highlight';
                         
@@ -175,7 +177,12 @@
                                                 <span class="text-base font-black text-white uppercase tracking-tight">${game.home || 'Time Casa'}</span>
                                                 <span class="text-[10px] text-gray-700 font-black italic">VS</span>
                                                 <span class="text-base font-black text-white uppercase tracking-tight">${game.away || 'Time Fora'}</span>
-                                                ${ehMataMata ? `<span class="bg-red-600/20 text-red-500 text-[8px] px-2 py-0.5 rounded border border-red-500/30 font-black uppercase tracking-tighter"><i class="fas fa-trophy mr-1"></i>Mata-Mata</span>` : ''}
+                                                
+                                                ${ehMataMata ? `
+                                                    <span class="bg-red-600/20 text-red-500 text-[8px] px-2 py-0.5 rounded border border-red-500/30 font-black uppercase tracking-tighter">
+                                                        <i class="fas fa-trophy mr-1"></i>Mata-Mata
+                                                    </span>
+                                                ` : ''}
                                             </div>
                                             <span class="text-[9px] text-gray-500 uppercase mt-1 tracking-wider"><i class="fas fa-map-marker-alt mr-1"></i>${game.venue || 'Local não informado'}</span>
                                         </div>
@@ -292,10 +299,9 @@
             renderAgenda();
         }
 
-        // 🛡️ A INJEÇÃO CIRÚRGICA DE ELITE (Conexão direta com seu main.py V8)
+        // 🛡️ INJEÇÃO CIRÚRGICA 100% BLINDADA
         async function buscarDetalhesSeguros(id) {
             try {
-                // Chama a rota /detalhes/{id} do seu Render
                 const resp = await fetch(`https://motor-ferrari.onrender.com/detalhes/${id}`);
                 const result = await resp.json();
 
@@ -309,33 +315,36 @@
                     if (!formArray || !Array.isArray(formArray)) return `<span class="text-xs text-gray-600 italic">Sem dados</span>`;
                     return formArray.map(r => `<div class="form-dot bg-trading-${r=='V'?'win':r=='D'?'loss':'draw'}">${r}</div>`).join('');
                 };
+                
                 document.getElementById(`form-home-${id}`).innerHTML = buildForm(result.forma?.home);
                 document.getElementById(`form-away-${id}`).innerHTML = buildForm(result.forma?.away);
 
                 const eloHome = result.soccerdata?.home_elo;
                 const eloAway = result.soccerdata?.away_elo;
-                if (eloHome !== 'N/A' && eloAway !== 'N/A') {
+                if (eloHome && eloAway && eloHome !== 'N/A' && eloAway !== 'N/A') {
                     document.getElementById(`tip-${id}`).innerHTML = `<b class="text-white">Avaliação ClubElo:</b> Casa (${eloHome}) vs Fora (${eloAway})`;
                 } else {
                     document.getElementById(`tip-${id}`).innerText = `Análise de Rating indisponível para esta liga.`;
                 }
 
                 // ABA CLASSIFICAÇÃO
-                if (result.tabela && result.tabela.pos_home !== "-") {
+                if (result.tabela && result.tabela.pos_home && result.tabela.pos_home !== "-") {
                     document.getElementById(`pos-home-${id}`).innerText = result.tabela.pos_home + "º";
                     document.getElementById(`pos-away-${id}`).innerText = result.tabela.pos_away + "º";
                     document.getElementById(`pts-home-${id}`).innerText = result.tabela.pts_home;
                     document.getElementById(`pts-away-${id}`).innerText = result.tabela.pts_away;
+                    document.getElementById(`tabela-aviso-${id}`).classList.add('hidden'); // Oculta aviso se achar
                 } else {
                     document.getElementById(`tabela-aviso-${id}`).classList.remove('hidden');
                 }
 
                 // ABA DESTAQUES (Estatísticas Ao Vivo)
-                if (result.estatisticas && result.estatisticas.home_possession !== "-") {
+                if (result.estatisticas && result.estatisticas.home_possession && result.estatisticas.home_possession !== "-") {
                     document.getElementById(`stats-home-pos-${id}`).innerText = result.estatisticas.home_possession + "%";
                     document.getElementById(`stats-away-pos-${id}`).innerText = result.estatisticas.away_possession + "%";
                     document.getElementById(`stats-home-shots-${id}`).innerText = result.estatisticas.home_shots;
                     document.getElementById(`stats-away-shots-${id}`).innerText = result.estatisticas.away_shots;
+                    document.getElementById(`stats-aviso-${id}`).classList.add('hidden'); // Oculta aviso se achar
                 } else {
                     document.getElementById(`stats-aviso-${id}`).classList.remove('hidden');
                 }

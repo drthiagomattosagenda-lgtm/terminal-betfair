@@ -16,7 +16,10 @@
                             dark: '#0B0E14',
                             panel: '#151A22',
                             border: '#2A3241',
-                            highlight: '#FFB100'
+                            highlight: '#FFB100',
+                            win: '#10B981',
+                            loss: '#EF4444',
+                            draw: '#718096'
                         }
                     }
                 }
@@ -75,17 +78,17 @@
     </main>
 
     <script>
-        // 🛡️ VACINA DO LOCAL STORAGE: Impede a tela de congelar se tiver cache quebrado
+        // 🛡️ A VACINA DO LOCAL STORAGE: Protege contra travamentos se os favoritos estiverem bugados
         let favorites = [];
         try {
-            let saved = localStorage.getItem('futTraderFavs');
-            if (saved) {
-                favorites = JSON.parse(saved);
+            let salvos = localStorage.getItem('futTraderFavs');
+            if (salvos) {
+                favorites = JSON.parse(salvos);
                 if (!Array.isArray(favorites)) favorites = [];
             }
         } catch (e) {
             favorites = [];
-            localStorage.removeItem('futTraderFavs'); 
+            localStorage.removeItem('futTraderFavs');
         }
 
         let gamesData = [];
@@ -130,7 +133,7 @@
                     alertText.innerText = "Nenhum evento detectado para hoje.";
                 }
             } catch (error) {
-                console.warn("Motor em inicialização...");
+                console.warn("Motor em inicialização ou bloqueado...");
                 alertIcon.className = "fas fa-sync fa-spin text-red-500 text-3xl";
                 alertText.innerHTML = "Acordando Servidor (Isso leva uns 40s)...";
                 setTimeout(conectarAoMotor, 5000); 
@@ -308,7 +311,7 @@
             renderAgenda();
         }
 
-        // 🛡️ INJEÇÃO DEFINITIVA BLINDADA (Cores Nativas do Tailwind)
+        // 🛡️ INJEÇÃO BLINDADA COM CORES NATIVAS TAILWIND
         async function buscarDetalhesSeguros(id) {
             const loader = document.getElementById(`loader-detalhe-${id}`);
             if(loader) loader.classList.remove('hidden');
@@ -321,7 +324,6 @@
 
                 document.getElementById(`status-${id}`).innerText = tratarStatus(result.status || 'Ao Vivo');
 
-                // Usando cores padrão do Tailwind para não sumir no CDN!
                 const buildForm = (arr) => {
                     if (!arr || arr.length === 0 || arr[0] === '?') return `<span class="text-xs text-gray-600 italic">Indisponível</span>`;
                     return arr.map(r => {
@@ -351,7 +353,7 @@
                     document.getElementById(`tabela-container-${id}`).classList.remove('hidden');
                     document.getElementById(`tabela-aviso-${id}`).classList.add('hidden');
                 } else {
-                    document.getElementById(`tabela-aviso-${id}`).innerText = "Classificação não disponível para esta liga ou amistoso.";
+                    document.getElementById(`tabela-aviso-${id}`).innerText = "Classificação não disponível para esta liga.";
                 }
 
                 const buildH2HList = (historico) => {
@@ -396,9 +398,9 @@
 
             } catch (e) {
                 document.getElementById(`status-${id}`).innerText = 'Info. Limitada';
-                document.getElementById(`form-home-${id}`).innerHTML = `<span class="text-xs text-gray-600 italic">N/A</span>`;
-                document.getElementById(`form-away-${id}`).innerHTML = `<span class="text-xs text-gray-600 italic">N/A</span>`;
-                document.getElementById(`tip-${id}`).innerText = `Jogo com escassez de dados.`;
+                document.getElementById(`form-home-${id}`).innerHTML = `<span class="text-xs text-gray-600 italic">-</span>`;
+                document.getElementById(`form-away-${id}`).innerHTML = `<span class="text-xs text-gray-600 italic">-</span>`;
+                document.getElementById(`tip-${id}`).innerText = `Sem conexão com dados.`;
                 document.getElementById(`tabela-aviso-${id}`).innerText = "Dados indisponíveis.";
                 document.getElementById(`h2h-aviso-${id}`).innerText = "Dados indisponíveis.";
                 document.getElementById(`stats-aviso-${id}`).innerText = "Dados indisponíveis.";

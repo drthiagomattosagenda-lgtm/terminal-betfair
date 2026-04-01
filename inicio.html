@@ -334,6 +334,7 @@
                     document.getElementById(`pos-away-${id}`).innerText = result.tabela.pos_away + "º";
                     document.getElementById(`pts-home-${id}`).innerText = result.tabela.pts_home;
                     document.getElementById(`pts-away-${id}`).innerText = result.tabela.pts_away;
+                    document.getElementById(`tabela-container-${id}`).classList.remove('hidden');
                     document.getElementById(`tabela-aviso-${id}`).classList.add('hidden');
                 } else {
                     document.getElementById(`tabela-container-${id}`).classList.add('hidden');
@@ -347,7 +348,7 @@
                         const cor = h.resultado === 'V' ? 'text-trading-win' : h.resultado === 'D' ? 'text-trading-loss' : 'text-trading-draw';
                         return `
                             <div class="flex justify-between items-center bg-white/5 p-2 rounded border border-white/5 text-xs">
-                                <span class="text-gray-400 max-w-[120px] truncate">${h.jogo}</span>
+                                <span class="text-gray-400 max-w-[120px] truncate" title="${h.jogo}">${h.jogo}</span>
                                 <div class="flex items-center gap-3">
                                     <span class="font-mono text-white font-bold">${h.placar}</span>
                                     <span class="font-black ${cor}">${h.resultado}</span>
@@ -360,6 +361,7 @@
                 if (result.historico && (result.historico.home.length > 0 || result.historico.away.length > 0)) {
                     document.getElementById(`h2h-list-home-${id}`).innerHTML = buildH2HList(result.historico.home);
                     document.getElementById(`h2h-list-away-${id}`).innerHTML = buildH2HList(result.historico.away);
+                    document.getElementById(`h2h-container-${id}`).classList.remove('hidden');
                     document.getElementById(`h2h-aviso-${id}`).classList.add('hidden');
                 } else {
                     document.getElementById(`h2h-container-${id}`).classList.add('hidden');
@@ -372,6 +374,7 @@
                     document.getElementById(`stats-away-pos-${id}`).innerText = result.estatisticas.away_possession + "%";
                     document.getElementById(`stats-home-shots-${id}`).innerText = result.estatisticas.home_shots;
                     document.getElementById(`stats-away-shots-${id}`).innerText = result.estatisticas.away_shots;
+                    document.getElementById(`stats-container-${id}`).classList.remove('hidden');
                     document.getElementById(`stats-aviso-${id}`).classList.add('hidden');
                 } else {
                     document.getElementById(`stats-container-${id}`).classList.add('hidden');

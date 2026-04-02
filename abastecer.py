@@ -3,6 +3,14 @@ import json
 import requests
 from datetime import datetime, timedelta, timezone
 
+# Preparando o terreno para o SoccerData (Instalado via Actions)
+try:
+    import soccerdata as sd
+    import pandas as pd
+    soccerdata_ready = True
+except ImportError:
+    soccerdata_ready = False
+
 TOKEN = "f0772d6c4ebf4102b615b3466f97fd4b"
 
 hoje = datetime.now(timezone.utc)
@@ -12,10 +20,18 @@ amanha = hoje + timedelta(days=2)
 date_from = ontem.strftime('%Y-%m-%d')
 date_to = amanha.strftime('%Y-%m-%d')
 
+# BASE: Puxar o "Coração Ao Vivo" da API
 url_api = f"https://api.football-data.org/v4/competitions/BSA/matches?dateFrom={date_from}&dateTo={date_to}"
 req = urllib.request.Request(url_api, headers={'X-Auth-Token': TOKEN})
 
-# Dicionário de Tradução: Ensina o Python a converter os nomes da API para o padrão ClubElo
+# O FILTRO PURIFICADOR: Transforma o lixo da API em nomes de Elite
+correcao_nomes = {
+    "Mineiro": "Atlético-MG",
+    "Clube do Remo": "Remo",
+    "Chapecoense AF": "Chapecoense"
+}
+
+# MAPA CLUBELO
 mapa_clubelo = {
     "Fluminense": "Fluminense",
     "Corinthians": "Corinthians",
@@ -28,26 +44,21 @@ mapa_clubelo = {
     "Atlético-MG": "AtleticoMineiro",
     "São Paulo": "SaoPaulo",
     "Vasco da Gama": "Vasco",
-    "Mineiro": "AtleticoMineiro" # Correção para o nome genérico da API gratuita
+    "Chapecoense": "Chapecoense",
+    "Remo": "Remo"
 }
 
-def buscar_elo(time_nome_api):
-    # Se o nome estiver no mapa, usa ele. Se não, tenta remover os espaços
-    time_elo = mapa_clubelo.get(time_nome_api, time_nome_api.replace(" ", ""))
-    
+def buscar_elo(time_nome):
+    time_elo = mapa_clubelo.get(time_nome, time_nome.replace(" ", ""))
     try:
         url = f"http://api.clubelo.com/{time_elo}"
         resposta = requests.get(url, timeout=5)
-        
-        # O ClubElo retorna um CSV de texto puro
         if resposta.status_code == 200 and "Elo" in resposta.text:
             linhas = resposta.text.strip().split('\n')
             ultima_linha = linhas[-1].split(',')
-            # O Elo atual fica na 4ª coluna (índice 3)
-            elo_atual = float(ultima_linha[3])
-            return round(elo_atual)
+            return round(float(ultima_linha[3]))
         return "N/A"
-    except Exception as e:
+    except:
         return "N/A"
 
 try:
@@ -57,19 +68,29 @@ try:
     jogos_enriquecidos = []
     
     for match in dados_originais.get('matches', []):
-        home_name = match['homeTeam'].get('shortName', match['homeTeam']['name'])
-        away_name = match['awayTeam'].get('shortName', match['awayTeam']['name'])
+        home_api = match['homeTeam'].get('shortName', match['homeTeam']['name'])
+        away_api = match['awayTeam'].get('shortName', match['awayTeam']['name'])
         
-        print(f"Minerando dados extras para: {home_name} vs {away_name}...")
+        # Passa pelo corretor para arrumar o Chassi visual
+        home_oficial = correcao_nomes.get(home_api, home_api)
+        away_oficial = correcao_nomes.get(away_api, away_api)
         
-        # INJEÇÃO V12: Adiciona um novo bloco chamado 'inteligencia' dentro de cada jogo
+        # Devolve o nome purificado para o JSON que o seu HTML vai ler!
+        match['homeTeam']['shortName'] = home_oficial
+        match['awayTeam']['shortName'] = away_oficial
+        match['homeTeam']['name'] = home_oficial
+        match['awayTeam']['name'] = away_oficial
+        
+        print(f"Minerando: {home_oficial} vs {away_oficial}...")
+        
+        # Injeta a Inteligência
         match['inteligencia'] = {
             'clubelo': {
-                'home_elo': buscar_elo(home_name),
-                'away_elo': buscar_elo(away_name)
+                'home_elo': buscar_elo(home_oficial),
+                'away_elo': buscar_elo(away_oficial)
             },
             'recent_form': {
-                'home': ['V', 'V', 'E', 'D', 'V'], # Espaço preparado para o próximo passo (SofaScore)
+                'home': ['V', 'V', 'E', 'D', 'V'], # Em breve: alimentado pelo SoccerData
                 'away': ['D', 'E', 'V', 'D', 'E']
             }
         }
@@ -80,7 +101,7 @@ try:
     with open('jogos_de_hoje.json', 'w', encoding='utf-8') as f:
         json.dump(dados_finais, f, ensure_ascii=False, indent=2)
         
-    print(f"Tanque V12 cheio! Dados básicos + ClubElo cruzados com sucesso.")
+    print("Tanque Bi-Turbo cheio! Nomes purificados + ClubElo capturado.")
 
 except Exception as e:
     print(f"Erro Fatal no motor V12: {e}")

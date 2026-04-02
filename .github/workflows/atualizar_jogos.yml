@@ -1,71 +1,50 @@
-name: 🔥 Motor ETL — Atualizar Jogos do Dia
+name: ⛽ Motor ETL — Atualizar Jogos do Dia
 
-# ──────────────────────────────────────────────
-#  QUANDO RODAR
-# ──────────────────────────────────────────────
 on:
-  # Automático: a cada hora (de 9h às 2h UTC = 6h às 23h Brasília)
+  # Dispara automaticamente a cada hora (cobertura total do dia)
   schedule:
-    - cron: '0 9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,0,1,2 * * *'
+    - cron: '0 * * * *'
 
-  # Manual via painel do GitHub Actions
+  # Dispara também a cada push no repositório (útil para testar)
+  push:
+    branches: [ main, master ]
+
+  # Permite disparo manual via painel do GitHub
   workflow_dispatch:
-    inputs:
-      motivo:
-        description: 'Motivo do disparo manual'
-        required: false
-        default: 'Atualização manual solicitada'
 
-# ──────────────────────────────────────────────
-#  PERMISSÕES
-# ──────────────────────────────────────────────
 permissions:
-  contents: write  # necessário para fazer commit do JSON
+  contents: write
 
-# ──────────────────────────────────────────────
-#  JOBS
-# ──────────────────────────────────────────────
 jobs:
   gerar-combustivel:
     name: ⛽ Gerar jogos_de_hoje.json
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Checkout do repositório
-      - name: 📥 Checkout do repositório
+      - name: 📥 Checkout
         uses: actions/checkout@v4
 
-      # 2. Configura Python 3.11
-      - name: 🐍 Configurar Python 3.11
+      - name: 🐍 Python 3.11
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-          cache: 'pip'
 
-      # 3. Instala dependências
-      - name: 📦 Instalar dependências
+      - name: 📦 Instalar requests
         run: pip install requests
 
-      # 4. Roda o ETL
       - name: 🚀 Executar Motor ETL
         env:
           FOOTBALL_DATA_API_KEY: ${{ secrets.FOOTBALL_DATA_API_KEY }}
         run: python gerar_jogos.py
 
-      # 5. Commit + Push do JSON atualizado
       - name: 💾 Commit e Push do JSON
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          
           git add jogos_de_hoje.json
-          
-          # Só commita se houve mudança real no arquivo
           if git diff --staged --quiet; then
-            echo "ℹ️  Nenhuma mudança no JSON. Nada a commitar."
+            echo "ℹ️  Sem mudanças no JSON."
           else
-            HORARIO=$(date -u '+%d/%m %H:%M UTC')
-            git commit -m "⛽ Combustível injetado — ${HORARIO}"
+            git commit -m "⛽ Combustível injetado — $(date -u '+%d/%m %H:%M UTC')"
             git push
-            echo "✅ JSON atualizado e publicado no GitHub Pages!"
           fi

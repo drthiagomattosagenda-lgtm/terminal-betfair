@@ -80,111 +80,138 @@
     </main>
 
     <script>
+        // ═══════════════════════════════════════════════════════
+        //  ⚙️  CONFIGURAÇÃO — coloque sua chave aqui
+        //  Cadastro grátis em: https://www.football-data.org
+        // ═══════════════════════════════════════════════════════
+        const FOOTBALL_API_KEY = "f0772d6c4ebf4102b615b3466f97fd4b";
+        // ═══════════════════════════════════════════════════════
+
         let liveGamesData = []; 
         let favorites = [];
         
         try { favorites = JSON.parse(localStorage.getItem('futTraderFavs')) || []; } catch(e) { favorites = []; }
 
+        // ─────────────────────────────────────────────────────
+        //  MOTOR DE CARGA — tenta JSON local, depois API direta
+        // ─────────────────────────────────────────────────────
         async function carregarCombustivel() {
-            const url = "jogos_de_hoje.json?v=" + new Date().getTime(); 
-            
+            const fusoBR = { timeZone: "America/Sao_Paulo" };
+            const hoje   = new Date().toLocaleDateString("en-CA", fusoBR); // YYYY-MM-DD
+
+            let dados = null;
+            let fonte = "";
+
+            // ── TENTATIVA 1: JSON gerado pelo GitHub Actions (dados enriquecidos) ──
             try {
-                const resposta = await fetch(url);
-                if (!resposta.ok) throw new Error("Conexão falhou (Erro HTTP " + resposta.status + ")");
-                
-                const text = await resposta.text();
-                if (!text || text.trim() === "") throw new Error("Arquivo JSON em branco.");
-                
-                const dados = JSON.parse(text);
-                if (!dados.matches) throw new Error("Aguardando formato correto do JSON...");
-
-                const ligasAgrupadas = {};
-                
-                // O SEGREDO DOS HORÁRIOS: Cravar tudo no Fuso de São Paulo/Brasília
-                const fusoBR = { timeZone: "America/Sao_Paulo" };
-                const dataHojeBR = new Date().toLocaleDateString("pt-BR", fusoBR);
-
-                dados.matches.forEach(match => {
-                    const dataUTC = new Date(match.utcDate);
-                    const dataJogoBR = dataUTC.toLocaleDateString("pt-BR", fusoBR);
-
-                    // FILTRO CRÍTICO: Se a data do jogo não for rigorosamente hoje no Brasil, ignora!
-                    if (dataJogoBR !== dataHojeBR) {
-                        return; 
+                const r = await fetch("jogos_de_hoje.json?v=" + Date.now());
+                if (r.ok) {
+                    const txt = await r.text();
+                    if (txt && txt.trim() && !txt.includes("404")) {
+                        const parsed = JSON.parse(txt);
+                        if (parsed.matches && parsed.matches.length > 0) {
+                            dados = parsed;
+                            fonte = "cache";
+                        }
                     }
+                }
+            } catch(e) { /* sem JSON local, tudo bem */ }
 
-                    const nomeLiga = match.competition.name.toUpperCase();
-                    if (!ligasAgrupadas[nomeLiga]) {
-                        ligasAgrupadas[nomeLiga] = { name: nomeLiga, games: [] };
-                    }
+            // ── TENTATIVA 2: API direta via proxy CORS (dados básicos, sempre frescos) ──
+            if (!dados) {
+                if (!FOOTBALL_API_KEY || FOOTBALL_API_KEY === "SUA_CHAVE_AQUI") {
+                    throw new Error("Configure a chave da API em inicio.html → linha: const FOOTBALL_API_KEY");
+                }
+                const apiUrl   = `https://api.football-data.org/v4/matches?dateFrom=${hoje}&dateTo=${hoje}&token=${FOOTBALL_API_KEY}`;
+                const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(apiUrl)}`;
 
-                    // Força o horário a renderizar no fuso brasileiro
-                    let horarioStr = dataUTC.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit", timeZone: "America/Sao_Paulo" });
-                    let statusClass = "text-gray-400";
-                    let alerta = "";
-                    
-                    if (match.status === "IN_PLAY" || match.status === "PAUSED") {
-                        horarioStr = match.minute ? `${match.minute}'` : "AO VIVO";
-                        statusClass = "text-trading-highlight animate-pulse";
-                        alerta = match.status === "PAUSED" ? "INTERVALO" : "AO VIVO";
-                    } else if (match.status === "FINISHED") {
-                        horarioStr = "ENCERRADO";
-                        statusClass = "text-gray-500";
-                    } else if (match.status === "POSTPONED" || match.status === "CANCELLED") {
-                        horarioStr = match.status === "POSTPONED" ? "ADIADO" : "CANCELADO";
-                        statusClass = "text-red-500";
-                    }
-
-                    const golsCasa = match.score?.fullTime?.home !== null && match.score?.fullTime?.home !== undefined ? match.score.fullTime.home.toString() : "";
-                    const golsFora = match.score?.fullTime?.away !== null && match.score?.fullTime?.away !== undefined ? match.score.fullTime.away.toString() : "";
-
-                    const intl = match.inteligencia || { 
-                        clubelo: { home_elo: 'N/A', away_elo: 'N/A' }, 
-                        recent_form: { home: ['-','-','-','-','-'], away: ['-','-','-','-','-'] },
-                        standings: { home: {pos: '-', pts: '-', p: '-', sg: '-'}, away: {pos: '-', pts: '-', p: '-', sg: '-'} },
-                        h2h: [],
-                        stats: { info: "Sem dados", reliability: "0.0" }
-                    };
-
-                    ligasAgrupadas[nomeLiga].games.push({
-                        id: match.id.toString(),
-                        type: "pontos_corridos", 
-                        time: horarioStr,
-                        statusClass: statusClass,
-                        home: match.homeTeam.shortName || match.homeTeam.name,
-                        away: match.awayTeam.shortName || match.awayTeam.name,
-                        scoreHome: golsCasa,
-                        scoreAway: golsFora,
-                        venue: "ESTÁDIO",
-                        alert: alerta,
-                        eloHome: intl.clubelo.home_elo,
-                        eloAway: intl.clubelo.away_elo,
-                        formHome: Array.isArray(intl.recent_form.home) ? intl.recent_form.home : ['-','-','-','-','-'],
-                        formAway: Array.isArray(intl.recent_form.away) ? intl.recent_form.away : ['-','-','-','-','-'],
-                        standings: intl.standings,
-                        h2h: intl.h2h,
-                        stats: intl.stats
-                    });
-                });
-
-                liveGamesData = Object.values(ligasAgrupadas);
-                document.getElementById('game-count').innerText = liveGamesData.reduce((acc, liga) => acc + liga.games.length, 0);
-
-                const loadingInfo = document.getElementById('loading-ferrari');
-                if (loadingInfo) loadingInfo.remove();
-
-                renderAgenda();
-
-            } catch (erro) {
-                console.error("Falha no motor:", erro);
-                document.getElementById('agenda-list').innerHTML = `
-                    <div class="text-center py-10 bg-red-900/20 border border-red-500/30 rounded-xl max-w-2xl mx-auto">
-                        <p class="text-red-500 text-xs font-black uppercase"><i class="fas fa-exclamation-triangle mr-2"></i>Aguardando Sincronização</p>
-                        <p class="text-gray-400 text-[10px] mt-4 font-mono">${erro.message}</p>
-                    </div>`;
+                const r = await fetch(proxyUrl);
+                if (!r.ok) throw new Error("Proxy CORS falhou — verifique sua conexão (HTTP " + r.status + ")");
+                const envelope = await r.json();
+                dados = JSON.parse(envelope.contents);
+                fonte = "api";
+                console.log("✅ Dados carregados direto da API football-data.org");
             }
+
+            if (!dados || !dados.matches) throw new Error("Formato de dados inesperado.");
+
+            // ── PROCESSA PARTIDAS ──
+            const ligasAgrupadas = {};
+            const dataHojeBR = new Date().toLocaleDateString("pt-BR", fusoBR);
+
+            dados.matches.forEach(match => {
+                const dataUTC  = new Date(match.utcDate);
+                const dataJogoBR = dataUTC.toLocaleDateString("pt-BR", fusoBR);
+                if (dataJogoBR !== dataHojeBR) return;
+
+                const nomeLiga = match.competition.name.toUpperCase();
+                if (!ligasAgrupadas[nomeLiga]) {
+                    ligasAgrupadas[nomeLiga] = { name: nomeLiga, games: [] };
+                }
+
+                let horarioStr = dataUTC.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit", timeZone: "America/Sao_Paulo" });
+                let statusClass = "text-gray-400";
+                let alerta = "";
+                
+                if (match.status === "IN_PLAY" || match.status === "PAUSED") {
+                    horarioStr  = match.minute ? `${match.minute}'` : "AO VIVO";
+                    statusClass = "text-trading-highlight animate-pulse";
+                    alerta      = match.status === "PAUSED" ? "INTERVALO" : "AO VIVO";
+                } else if (match.status === "FINISHED") {
+                    horarioStr  = "ENCERRADO";
+                    statusClass = "text-gray-500";
+                } else if (match.status === "POSTPONED" || match.status === "CANCELLED") {
+                    horarioStr  = match.status === "POSTPONED" ? "ADIADO" : "CANCELADO";
+                    statusClass = "text-red-500";
+                }
+
+                const golsCasa = match.score?.fullTime?.home ?? "";
+                const golsFora = match.score?.fullTime?.away ?? "";
+                const gh = golsCasa !== "" ? golsCasa.toString() : "";
+                const ga = golsFora !== "" ? golsFora.toString() : "";
+
+                // Inteligência: usa dados enriquecidos se disponíveis, caso contrário usa padrão vazio
+                const intl = match.inteligencia || {
+                    clubelo:     { home_elo: 'N/A', away_elo: 'N/A' },
+                    recent_form: { home: ['-','-','-','-','-'], away: ['-','-','-','-','-'] },
+                    standings:   { home: {pos:'-',pts:'-',p:'-',sg:'-'}, away: {pos:'-',pts:'-',p:'-',sg:'-'} },
+                    h2h:         [],
+                    stats:       { info: fonte === "api" ? "Dados básicos (sem ETL). Configure o GitHub Actions para dados enriquecidos." : "Sem dados", reliability: "N/A" }
+                };
+
+                ligasAgrupadas[nomeLiga].games.push({
+                    id:         match.id.toString(),
+                    type:       "pontos_corridos",
+                    time:       horarioStr,
+                    statusClass,
+                    home:       match.homeTeam.shortName || match.homeTeam.name,
+                    away:       match.awayTeam.shortName || match.awayTeam.name,
+                    scoreHome:  gh,
+                    scoreAway:  ga,
+                    venue:      match.venue || "ESTÁDIO",
+                    alert:      alerta,
+                    eloHome:    intl.clubelo.home_elo,
+                    eloAway:    intl.clubelo.away_elo,
+                    formHome:   Array.isArray(intl.recent_form.home) ? intl.recent_form.home : ['-','-','-','-','-'],
+                    formAway:   Array.isArray(intl.recent_form.away) ? intl.recent_form.away : ['-','-','-','-','-'],
+                    standings:  intl.standings,
+                    h2h:        intl.h2h,
+                    stats:      intl.stats
+                });
+            });
+
+            liveGamesData = Object.values(ligasAgrupadas);
+            document.getElementById('game-count').innerText = liveGamesData.reduce((acc, liga) => acc + liga.games.length, 0);
+
+            const loadingInfo = document.getElementById('loading-ferrari');
+            if (loadingInfo) loadingInfo.remove();
+
+            renderAgenda();
         }
 
+        // ─────────────────────────────────────────────────────
+        //  FAVORITOS
+        // ─────────────────────────────────────────────────────
         function toggleFav(id) {
             id = String(id);
             if (favorites.includes(id)) { favorites = favorites.filter(f => f !== id); } 
@@ -193,15 +220,18 @@
             renderAgenda(); 
         }
 
+        // ─────────────────────────────────────────────────────
+        //  TABS
+        // ─────────────────────────────────────────────────────
         function switchTab(id, aba) {
             const container = document.getElementById(`details-${id}`);
             if(!container) return; 
             container.querySelectorAll(`.tab-content-${id}`).forEach(c => c.classList.add('hidden'));
             container.querySelectorAll(`.tab-btn-${id}`).forEach(b => b.classList.remove('active'));
             const content = document.getElementById(`content-${aba}-${id}`);
-            const tab = document.getElementById(`tab-${aba}-${id}`);
+            const tab     = document.getElementById(`tab-${aba}-${id}`);
             if (content) content.classList.remove('hidden');
-            if (tab) tab.classList.add('active');
+            if (tab)     tab.classList.add('active');
         }
 
         function toggleDetails(id) { 
@@ -213,26 +243,34 @@
             }
         }
 
+        // ─────────────────────────────────────────────────────
+        //  FORM DOTS
+        // ─────────────────────────────────────────────────────
         function renderFormDots(formArray) {
-            return formArray.map(resultado => {
-                let colorClass = 'bg-trading-draw';
-                if (resultado === 'V') colorClass = 'bg-trading-win';
-                if (resultado === 'D') colorClass = 'bg-trading-loss';
-                return `<div class="form-dot ${colorClass}">${resultado}</div>`;
+            return formArray.map(r => {
+                let c = 'bg-trading-draw';
+                if (r === 'V') c = 'bg-trading-win';
+                if (r === 'D') c = 'bg-trading-loss';
+                return `<div class="form-dot ${c}">${r}</div>`;
             }).join('');
         }
 
+        // ─────────────────────────────────────────────────────
+        //  RENDER PRINCIPAL
+        // ─────────────────────────────────────────────────────
         function renderAgenda() {
-            const list = document.getElementById('agenda-list');
+            const list   = document.getElementById('agenda-list');
             const search = document.getElementById('agendaSearch').value.toUpperCase();
             list.innerHTML = '';
 
             let leaguesCopy = JSON.parse(JSON.stringify(liveGamesData));
-            let favGames = [];
+            let favGames    = [];
 
             leaguesCopy.forEach(league => {
                 league.games = league.games.filter(g => {
-                    const home = g.home.toUpperCase(); const away = g.away.toUpperCase(); const lname = league.name.toUpperCase();
+                    const home  = g.home.toUpperCase();
+                    const away  = g.away.toUpperCase();
+                    const lname = league.name.toUpperCase();
                     if (!(home.includes(search) || away.includes(search) || lname.includes(search))) return false; 
                     if (favorites.includes(g.id)) { favGames.push(g); return false; }
                     return true;
@@ -261,9 +299,11 @@
 
                 league.games.forEach(game => {
                     const isFav = favorites.includes(game.id);
+
                     let scoreHtml = (game.scoreHome !== "" || game.scoreAway !== "") 
                         ? `<span class="text-lg md:text-xl font-black text-trading-highlight mx-2">${game.scoreHome}</span><span class="text-[9px] text-gray-500 font-black italic bg-black/40 px-2 py-1 rounded">VS</span><span class="text-lg md:text-xl font-black text-trading-highlight mx-2">${game.scoreAway}</span>`
                         : `<span class="text-[9px] text-gray-500 font-black italic bg-black/40 px-2 py-1 rounded mx-3">VS</span>`;
+
                     let alertHtml = game.alert ? `<span class="bg-red-600 text-white text-[8px] font-black uppercase px-2 py-0.5 rounded shadow-[0_0_8px_rgba(220,38,38,0.8)] ml-3 animate-pulse border border-red-400">${game.alert}</span>` : '';
 
                     const stdH = game.standings.home;
@@ -358,7 +398,7 @@
                             </div>
                             <div class="flex-1 bg-white/[0.02] p-5 rounded-xl border border-white/5">
                                 <p class="text-[9px] text-gray-500 uppercase font-bold mb-4">Últimos Confrontos</p>
-                                <div class="space-y-2">${h2hLinhas}</div>
+                                <div class="space-y-2">${h2hLinhas.length > 0 ? h2hLinhas : '<p class="text-gray-600 text-xs text-center py-4">Sem dados de H2H disponíveis.</p>'}</div>
                             </div>
                         </div>`;
 
@@ -445,9 +485,9 @@
                             <div id="details-${game.id}" class="hidden bg-[#0D1117] border-t border-white/5 shadow-inner">
                                 <div class="flex gap-6 md:gap-8 px-6 md:px-8 border-b border-white/5 overflow-x-auto no-scrollbar pt-4">
                                     <button onclick="switchTab('${game.id}', 'resumo')" id="tab-resumo-${game.id}" class="tab-btn tab-btn-${game.id} active whitespace-nowrap">RESUMO</button>
-                                    <button onclick="switchTab('${game.id}', 'class')" id="tab-class-${game.id}" class="tab-btn tab-btn-${game.id} whitespace-nowrap">CLASSIFICAÇÃO</button>
-                                    <button onclick="switchTab('${game.id}', 'h2h')" id="tab-h2h-${game.id}" class="tab-btn tab-btn-${game.id} whitespace-nowrap">H2H DETALHADO</button>
-                                    <button onclick="switchTab('${game.id}', 'top')" id="tab-top-${game.id}" class="tab-btn tab-btn-${game.id} whitespace-nowrap">DESTAQUES</button>
+                                    <button onclick="switchTab('${game.id}', 'class')"  id="tab-class-${game.id}"  class="tab-btn tab-btn-${game.id} whitespace-nowrap">CLASSIFICAÇÃO</button>
+                                    <button onclick="switchTab('${game.id}', 'h2h')"    id="tab-h2h-${game.id}"    class="tab-btn tab-btn-${game.id} whitespace-nowrap">H2H DETALHADO</button>
+                                    <button onclick="switchTab('${game.id}', 'top')"    id="tab-top-${game.id}"    class="tab-btn tab-btn-${game.id} whitespace-nowrap">DESTAQUES</button>
                                 </div>
 
                                 <div class="p-6 md:p-8 relative min-h-[150px]">
@@ -469,31 +509,46 @@
                                             <h4 class="text-[9px] text-trading-highlight font-black uppercase mb-1 tracking-widest">Análise ClubElo</h4>
                                             <div class="flex justify-between items-center mt-2">
                                                 <div class="text-center">
-                                                    <p class="text-[9px] text-gray-400 uppercase font-bold mb-1">${game.home.substring(0, 8)}</p>
+                                                    <p class="text-[9px] text-gray-400 uppercase font-bold mb-1">${game.home.substring(0,8)}</p>
                                                     <p class="text-lg font-black text-white">${game.eloHome}</p>
                                                 </div>
                                                 <span class="text-gray-600 text-[10px] mx-2 font-black italic">VS</span>
                                                 <div class="text-center">
-                                                    <p class="text-[9px] text-gray-400 uppercase font-bold mb-1">${game.away.substring(0, 8)}</p>
+                                                    <p class="text-[9px] text-gray-400 uppercase font-bold mb-1">${game.away.substring(0,8)}</p>
                                                     <p class="text-lg font-black text-white">${game.eloAway}</p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div id="content-class-${game.id}" class="tab-content-${game.id} hidden animate-in">${classHtml}</div>
-                                    <div id="content-h2h-${game.id}" class="tab-content-${game.id} hidden animate-in">${h2hHtml}</div>
-                                    <div id="content-top-${game.id}" class="tab-content-${game.id} hidden animate-in">${statsHtml}</div>
+                                    <div id="content-h2h-${game.id}"   class="tab-content-${game.id} hidden animate-in">${h2hHtml}</div>
+                                    <div id="content-top-${game.id}"   class="tab-content-${game.id} hidden animate-in">${statsHtml}</div>
                                 </div>
                             </div>
                         </div>
                     `;
                 });
+
                 html += `</div></div>`;
                 list.innerHTML += html;
             });
         }
 
-        window.onload = () => { carregarCombustivel(); };
+        // ─────────────────────────────────────────────────────
+        //  INIT — com tratamento de erro visível
+        // ─────────────────────────────────────────────────────
+        window.onload = async () => {
+            try {
+                await carregarCombustivel();
+            } catch (erro) {
+                console.error("Falha no motor:", erro);
+                document.getElementById('agenda-list').innerHTML = `
+                    <div class="text-center py-10 bg-red-900/20 border border-red-500/30 rounded-xl max-w-2xl mx-auto">
+                        <p class="text-red-500 text-xs font-black uppercase"><i class="fas fa-exclamation-triangle mr-2"></i>Aguardando Sincronização</p>
+                        <p class="text-gray-400 text-[10px] mt-4 font-mono bg-black/40 p-3 rounded">${erro.message}</p>
+                    </div>`;
+            }
+        };
     </script>
 </body>
 </html>

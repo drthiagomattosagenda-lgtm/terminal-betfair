@@ -1,0 +1,28 @@
+name: Motor V8 - Buscar Partidas
+
+on:
+  schedule:
+    - cron: '*/30 * * * *' # Abastece sozinho a cada 30 minutos
+  workflow_dispatch: # Botão para abastecer manualmente
+
+permissions:
+  contents: write
+
+jobs:
+  abastecer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Ligar o Motor (Puxar API)
+        run: python abastecer.py
+      - name: Guardar no Tanque
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "Mecanico V8"
+          git add jogos_de_hoje.json
+          git commit -m "Automático: Abastecendo jogos de hoje" || echo "Sem mudanças"
+          git push

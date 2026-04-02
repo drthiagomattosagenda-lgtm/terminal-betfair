@@ -89,13 +89,14 @@
         // Nova Injeção: Busca os dados reais na API assim que a página abre
         async function carregarCombustivel() {
             const token = "f0772d6c4ebf4102b615b3466f97fd4b"; // Sua chave exclusiva
-            const url = "https://corsproxy.io/?https://api.football-data.org/v4/matches";
+            const url = "https://api.football-data.org/v4/matches"; // Voltamos para injeção direta sem proxy
             
             try {
                 const resposta = await fetch(url, { headers: { 'X-Auth-Token': token } });
                 
+                // Se o servidor reclamar, vamos capturar o código exato do erro
                 if (!resposta.ok) {
-                    throw new Error("Erro na API de Futebol");
+                    throw new Error(`Código do Erro: ${resposta.status}`);
                 }
                 
                 const dados = await resposta.json();
@@ -162,8 +163,10 @@
                 console.error("Falha no motor V8:", erro);
                 document.getElementById('agenda-list').innerHTML = `
                     <div class="text-center py-10 bg-red-900/20 border border-red-500/30 rounded-xl">
-                        <p class="text-red-500 text-xs font-black uppercase">Falha ao carregar combustível da API.</p>
-                        <p class="text-gray-500 text-[10px] mt-2">Verifique se o limite de chamadas não estourou (10 por minuto).</p>
+                        <p class="text-red-500 text-xs font-black uppercase">Falha na Injeção: ${erro.message}</p>
+                        <p class="text-gray-400 text-[10px] mt-4 font-mono">Dicas do Mecânico:</p>
+                        <p class="text-gray-500 text-[10px] mt-1">1. Erro 400 ou 403? Você esqueceu de clicar no link de confirmação no seu e-mail.</p>
+                        <p class="text-gray-500 text-[10px]">2. Erro 429? Limite de velocidade! (Max 10 atualizações por minuto).</p>
                     </div>
                 `;
             }

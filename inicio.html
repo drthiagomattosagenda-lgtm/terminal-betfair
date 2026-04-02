@@ -81,28 +81,25 @@
 
     <script>
         // ======= O MOTOR V8 DE DADOS ======= //
-        let liveGamesData = []; // Onde o combustível real vai ficar armazenado
+        let liveGamesData = []; 
         let favorites = [];
         
         try { favorites = JSON.parse(localStorage.getItem('futTraderFavs')) || []; } catch(e) { favorites = []; }
 
-        // Nova Injeção: Busca os dados reais na API assim que a página abre
         async function carregarCombustivel() {
-            const token = "f0772d6c4ebf4102b615b3466f97fd4b"; // Sua chave exclusiva
-            const url = "https://api.football-data.org/v4/matches"; // Voltamos para injeção direta sem proxy
+            // A Ferrari agora puxa direto do galão abastecido pelo Python!
+            const url = "jogos_de_hoje.json?v=" + new Date().getTime(); // Evita cache antigo
             
             try {
-                const resposta = await fetch(url, { headers: { 'X-Auth-Token': token } });
+                const resposta = await fetch(url);
                 
-                // Se o servidor reclamar, vamos capturar o código exato do erro
                 if (!resposta.ok) {
-                    throw new Error(`Código do Erro: ${resposta.status}`);
+                    throw new Error("Tanque Vazio");
                 }
                 
                 const dados = await resposta.json();
                 const ligasAgrupadas = {};
 
-                // Processa cada partida e transforma no formato que sua lataria já entende
                 dados.matches.forEach(match => {
                     const nomeLiga = match.competition.name.toUpperCase();
                     
@@ -110,7 +107,6 @@
                         ligasAgrupadas[nomeLiga] = { name: nomeLiga, games: [] };
                     }
 
-                    // Identificando o Status do Jogo
                     let horarioStr = new Date(match.utcDate).toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
                     let statusClass = "text-gray-400";
                     let alerta = "";
@@ -127,12 +123,11 @@
                         statusClass = "text-red-500";
                     }
 
-                    // Puxando Gols
                     const golsCasa = match.score.fullTime.home !== null ? match.score.fullTime.home.toString() : "";
                     const golsFora = match.score.fullTime.away !== null ? match.score.fullTime.away.toString() : "";
 
                     ligasAgrupadas[nomeLiga].games.push({
-                        id: match.id.toString(), // ID real da partida para seu sistema de favoritos/abas funcionar
+                        id: match.id.toString(),
                         type: "pontos_corridos", 
                         time: horarioStr,
                         statusClass: statusClass,
@@ -140,33 +135,28 @@
                         away: match.awayTeam.shortName || match.awayTeam.name,
                         scoreHome: golsCasa,
                         scoreAway: golsFora,
-                        venue: "ESTÁDIO", // A API free nem sempre manda o estádio
+                        venue: "ESTÁDIO",
                         alert: alerta
                     });
                 });
 
-                // Transforma o objeto em um Array
                 liveGamesData = Object.values(ligasAgrupadas);
                 
-                // Atualiza o painel "Monitorando X eventos"
                 const totalJogos = liveGamesData.reduce((acc, liga) => acc + liga.games.length, 0);
                 document.getElementById('game-count').innerText = totalJogos;
 
-                // Remove o loading
                 const loadingInfo = document.getElementById('loading-ferrari');
                 if (loadingInfo) loadingInfo.remove();
 
-                // Dá a partida e renderiza a tela
                 renderAgenda();
 
             } catch (erro) {
                 console.error("Falha no motor V8:", erro);
                 document.getElementById('agenda-list').innerHTML = `
                     <div class="text-center py-10 bg-red-900/20 border border-red-500/30 rounded-xl">
-                        <p class="text-red-500 text-xs font-black uppercase">Falha na Injeção: ${erro.message}</p>
-                        <p class="text-gray-400 text-[10px] mt-4 font-mono">Dicas do Mecânico:</p>
-                        <p class="text-gray-500 text-[10px] mt-1">1. Erro 400 ou 403? Você esqueceu de clicar no link de confirmação no seu e-mail.</p>
-                        <p class="text-gray-500 text-[10px]">2. Erro 429? Limite de velocidade! (Max 10 atualizações por minuto).</p>
+                        <p class="text-red-500 text-xs font-black uppercase">O Tanque está vazio!</p>
+                        <p class="text-gray-400 text-[10px] mt-4">O caminhão tanque (Python) ainda não trouxe os dados.</p>
+                        <p class="text-gray-500 text-[10px] mt-2 font-mono">1. Vá no seu repositório no GitHub.<br>2. Clique na aba "Actions" lá em cima.<br>3. Clique em "Motor V8" na esquerda.<br>4. Clique em "Run workflow" para encher o tanque a 1ª vez!</p>
                     </div>
                 `;
             }
@@ -206,7 +196,6 @@
             const search = document.getElementById('agendaSearch').value.toUpperCase();
             list.innerHTML = '';
 
-            // Agora usamos liveGamesData ao invés do mockup estático!
             let leaguesCopy = JSON.parse(JSON.stringify(liveGamesData));
             let favGames = [];
 
@@ -246,7 +235,6 @@
                         : `<span class="text-[9px] text-gray-500 font-black italic bg-black/40 px-2 py-1 rounded mx-3">VS</span>`;
                     let alertHtml = game.alert ? `<span class="bg-red-600 text-white text-[8px] font-black uppercase px-2 py-0.5 rounded shadow-[0_0_8px_rgba(220,38,38,0.8)] ml-3 animate-pulse border border-red-400">${game.alert}</span>` : '';
 
-                    // CLASSIFICAÇÃO: MANTIDO INTACTO
                     let classHtml = '';
                     if (game.type === 'pontos_corridos') {
                         classHtml = `
@@ -321,7 +309,6 @@
                             </div>`;
                     }
 
-                    // H2H DETALHADO: MANTIDO INTACTO
                     let h2hHtml = `
                         <div class="flex flex-col md:flex-row gap-6 animate-in">
                             <div class="w-full md:w-5/12 bg-white/[0.02] p-5 rounded-xl border border-white/5">
@@ -367,7 +354,6 @@
                             </div>
                         </div>`;
 
-                    // DESTAQUES (INTELIGÊNCIA): MANTIDO INTACTO
                     let statsHtml = `
                         <div class="animate-in space-y-6">
                             <div>
@@ -491,7 +477,6 @@
             });
         }
 
-        // Liga o motor assim que a página terminar de carregar
         window.onload = () => { carregarCombustivel(); };
     </script>
 </body>

@@ -30,14 +30,14 @@
       "lastUpdated": "2026-04-02T02:34:19Z",
       "homeTeam": {
         "id": 1770,
-        "name": "Botafogo FR",
+        "name": "Botafogo",
         "shortName": "Botafogo",
         "tla": "BOT",
         "crest": "https://crests.football-data.org/1770.png"
       },
       "awayTeam": {
         "id": 4364,
-        "name": "Mirassol FC",
+        "name": "Mirassol",
         "shortName": "Mirassol",
         "tla": "MIR",
         "crest": "https://crests.football-data.org/4364.png"
@@ -118,14 +118,14 @@
       "lastUpdated": "2026-04-02T02:29:09Z",
       "homeTeam": {
         "id": 6684,
-        "name": "SC Internacional",
+        "name": "Internacional",
         "shortName": "Internacional",
         "tla": "SCI",
         "crest": "https://crests.football-data.org/6684.png"
       },
       "awayTeam": {
         "id": 1776,
-        "name": "São Paulo FC",
+        "name": "São Paulo",
         "shortName": "São Paulo",
         "tla": "PAU",
         "crest": "https://crests.football-data.org/1776.png"
@@ -206,14 +206,14 @@
       "lastUpdated": "2026-04-02T02:59:59Z",
       "homeTeam": {
         "id": 1777,
-        "name": "EC Bahia",
+        "name": "Bahia",
         "shortName": "Bahia",
         "tla": "BAH",
         "crest": "https://crests.football-data.org/1777.png"
       },
       "awayTeam": {
         "id": 1768,
-        "name": "CA Paranaense",
+        "name": "Paranaense",
         "shortName": "Paranaense",
         "tla": "CAP",
         "crest": "https://crests.football-data.org/1768.png"
@@ -294,14 +294,14 @@
       "lastUpdated": "2026-04-02T02:59:59Z",
       "homeTeam": {
         "id": 1771,
-        "name": "Cruzeiro EC",
+        "name": "Cruzeiro",
         "shortName": "Cruzeiro",
         "tla": "CRU",
         "crest": "https://crests.football-data.org/1771.png"
       },
       "awayTeam": {
         "id": 1782,
-        "name": "EC Vitória",
+        "name": "Vitória",
         "shortName": "Vitória",
         "tla": "VIT",
         "crest": "https://crests.football-data.org/1782.png"
@@ -382,14 +382,14 @@
       "lastUpdated": "2026-04-02T01:38:34Z",
       "homeTeam": {
         "id": 4241,
-        "name": "Coritiba FBC",
+        "name": "Coritiba",
         "shortName": "Coritiba",
         "tla": "COR",
         "crest": "https://crests.football-data.org/4241.png"
       },
       "awayTeam": {
         "id": 1780,
-        "name": "CR Vasco da Gama",
+        "name": "Vasco da Gama",
         "shortName": "Vasco da Gama",
         "tla": "VAS",
         "crest": "https://crests.football-data.org/1780.png"
@@ -482,14 +482,14 @@
       "lastUpdated": "2026-04-02T02:37:09Z",
       "homeTeam": {
         "id": 1765,
-        "name": "Fluminense FC",
+        "name": "Fluminense",
         "shortName": "Fluminense",
         "tla": "FLU",
         "crest": "https://crests.football-data.org/1765.png"
       },
       "awayTeam": {
         "id": 1779,
-        "name": "SC Corinthians Paulista",
+        "name": "Corinthians",
         "shortName": "Corinthians",
         "tla": "COR",
         "crest": "https://crests.football-data.org/1779.png"
@@ -582,15 +582,15 @@
       "lastUpdated": "2026-04-02T01:32:00Z",
       "homeTeam": {
         "id": 1772,
-        "name": "Chapecoense AF",
+        "name": "Chapecoense",
         "shortName": "Chapecoense",
         "tla": "CHA",
         "crest": "https://crests.football-data.org/1772_large.png"
       },
       "awayTeam": {
         "id": 1766,
-        "name": "CA Mineiro",
-        "shortName": "Mineiro",
+        "name": "Atlético-MG",
+        "shortName": "Atlético-MG",
         "tla": "CAM",
         "crest": "https://crests.football-data.org/1766.png"
       },
@@ -663,15 +663,15 @@
       "lastUpdated": "2026-04-02T01:32:00Z",
       "homeTeam": {
         "id": 6685,
-        "name": "Santos FC",
+        "name": "Santos",
         "shortName": "Santos",
         "tla": "SAN",
         "crest": "https://crests.football-data.org/6685.png"
       },
       "awayTeam": {
         "id": 4287,
-        "name": "Clube do Remo",
-        "shortName": "Clube do Remo",
+        "name": "Remo",
+        "shortName": "Remo",
         "tla": "CRE",
         "crest": "https://crests.football-data.org/4287.png"
       },
@@ -744,14 +744,14 @@
       "lastUpdated": "2026-04-02T01:32:00Z",
       "homeTeam": {
         "id": 4286,
-        "name": "RB Bragantino",
+        "name": "Bragantino",
         "shortName": "Bragantino",
         "tla": "RBB",
         "crest": "https://crests.football-data.org/4286.png"
       },
       "awayTeam": {
         "id": 1783,
-        "name": "CR Flamengo",
+        "name": "Flamengo",
         "shortName": "Flamengo",
         "tla": "FLA",
         "crest": "https://crests.football-data.org/1783.png"
@@ -825,14 +825,14 @@
       "lastUpdated": "2026-04-02T01:32:00Z",
       "homeTeam": {
         "id": 1769,
-        "name": "SE Palmeiras",
+        "name": "Palmeiras",
         "shortName": "Palmeiras",
         "tla": "PAL",
         "crest": "https://crests.football-data.org/1769.png"
       },
       "awayTeam": {
         "id": 1767,
-        "name": "Grêmio FBPA",
+        "name": "Grêmio",
         "shortName": "Grêmio",
         "tla": "FBP",
         "crest": "https://crests.football-data.org/1767.png"
@@ -906,14 +906,14 @@
       "lastUpdated": "2026-04-02T01:32:02Z",
       "homeTeam": {
         "id": 1776,
-        "name": "São Paulo FC",
+        "name": "São Paulo",
         "shortName": "São Paulo",
         "tla": "PAU",
         "crest": "https://crests.football-data.org/1776.png"
       },
       "awayTeam": {
         "id": 1771,
-        "name": "Cruzeiro EC",
+        "name": "Cruzeiro",
         "shortName": "Cruzeiro",
         "tla": "CRU",
         "crest": "https://crests.football-data.org/1771.png"
@@ -987,14 +987,14 @@
       "lastUpdated": "2026-03-31T01:32:03Z",
       "homeTeam": {
         "id": 4241,
-        "name": "Coritiba FBC",
+        "name": "Coritiba",
         "shortName": "Coritiba",
         "tla": "COR",
         "crest": "https://crests.football-data.org/4241.png"
       },
       "awayTeam": {
         "id": 1765,
-        "name": "Fluminense FC",
+        "name": "Fluminense",
         "shortName": "Fluminense",
         "tla": "FLU",
         "crest": "https://crests.football-data.org/1765.png"
@@ -1068,14 +1068,14 @@
       "lastUpdated": "2026-04-02T01:32:02Z",
       "homeTeam": {
         "id": 1780,
-        "name": "CR Vasco da Gama",
+        "name": "Vasco da Gama",
         "shortName": "Vasco da Gama",
         "tla": "VAS",
         "crest": "https://crests.football-data.org/1780.png"
       },
       "awayTeam": {
         "id": 1770,
-        "name": "Botafogo FR",
+        "name": "Botafogo",
         "shortName": "Botafogo",
         "tla": "BOT",
         "crest": "https://crests.football-data.org/1770.png"

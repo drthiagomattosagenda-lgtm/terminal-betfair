@@ -13,20 +13,32 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Instalar Pecas do Motor Bi-Turbo
+          
+      - name: Cofre de Dados (Cache SoccerData)
+        uses: actions/cache@v4
+        with:
+          path: ~/.soccerdata
+          key: soccerdata-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: |
+            soccerdata-${{ runner.os }}-
+            
+      - name: Instalar Pecas do Motor
         run: |
           python -m pip install --upgrade pip
           pip install requests soccerdata pandas
-      - name: Ligar o Motor V12
+          
+      - name: Ligar o Motor
         run: python abastecer.py
+        
       - name: Guardar no Tanque
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "Mecanico V8"
           git add jogos_de_hoje.json
-          git commit -m "Automático: Abastecendo V12 (SoccerData Ready)" || echo "Sem mudanças"
+          git commit -m "Automático: Abastecendo (SoccerData com Cache)" || echo "Sem mudanças"
           git push

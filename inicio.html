@@ -17,9 +17,9 @@
                             panel: '#151A22',
                             border: '#2A3241',
                             highlight: '#FFB100',
-                            win: '#10B981',    /* Verde Nativo */
-                            loss: '#EF4444',   /* Vermelho Nativo */
-                            draw: '#718096'    /* Cinza Nativo */
+                            win: '#10B981',
+                            loss: '#EF4444',
+                            draw: '#718096'
                         }
                     }
                 }
@@ -61,191 +61,245 @@
         <div class="flex flex-col md:flex-row justify-between items-end mb-10 gap-6">
             <div>
                 <h1 class="text-4xl font-black text-white tracking-tighter uppercase italic leading-none">QUARTEL <span class="text-trading-highlight">GENERAL</span></h1>
-                <p class="text-gray-500 text-xs mt-2 font-medium tracking-wide">Monitorando <span id="game-count" class="text-white font-bold">2</span> eventos estruturais em tempo real.</p>
+                <p class="text-gray-500 text-xs mt-2 font-medium tracking-wide">Monitorando <span id="game-count" class="text-white font-bold">5</span> eventos (Modo Chassi).</p>
             </div>
             <div class="w-full md:w-auto relative">
                 <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
-                <input type="text" id="agendaSearch" placeholder="Busca desativada no modo chassi..." disabled
-                class="w-full md:w-80 bg-trading-panel border border-trading-border rounded-xl py-3 pl-10 pr-6 text-xs focus:outline-none text-gray-500 shadow-2xl transition-all cursor-not-allowed">
+                <input type="text" id="agendaSearch" oninput="renderAgenda()" placeholder="Filtrar time ou liga..." 
+                class="w-full md:w-80 bg-trading-panel border border-trading-border rounded-xl py-3 pl-10 pr-6 text-xs focus:outline-none focus:border-trading-highlight text-white shadow-2xl transition-all">
             </div>
         </div>
 
-        <div id="agenda-list" class="space-y-10 pb-20">
-            
-            <div class="league-section animate-in">
-                <div class="flex items-center gap-3 mb-3 px-2">
-                    <div class="w-1 h-4 bg-trading-highlight rounded-full"></div>
-                    <span class="text-[11px] font-black text-white uppercase tracking-[2px]">PREMIER LEAGUE FANTASY (TESTE VISUAL)</span>
-                </div>
-                <div class="bg-trading-panel rounded-xl border border-trading-border overflow-hidden divide-y divide-white/5 shadow-xl">
-                    
-                    <div class="game-item relative">
-                        <div class="p-5 md:p-6 flex items-center justify-between cursor-pointer hover:bg-white/[0.02] transition-colors" onclick="toggleDetails('teste1')">
-                            <div class="flex items-center gap-4 md:gap-8 w-full">
-                                <div class="text-center min-w-[50px] md:min-w-[60px]">
-                                    <p class="text-trading-highlight font-mono font-black text-xs md:text-sm uppercase tracking-tighter">75'</p>
-                                </div>
-                                <div class="flex flex-col flex-1">
-                                    <div class="flex items-center gap-3 flex-wrap">
-                                        <span class="text-sm md:text-base font-black text-white uppercase tracking-tight">Arsenal</span>
-                                        <span class="text-[9px] text-gray-700 font-black italic px-1 rounded bg-black/30">VS</span>
-                                        <span class="text-sm md:text-base font-black text-white uppercase tracking-tight">Liverpool</span>
-                                    </div>
-                                    <span class="text-[9px] text-gray-500 uppercase mt-1 tracking-wider truncate max-w-xs"><i class="fas fa-map-marker-alt mr-1 text-gray-600"></i>Emirates Stadium</span>
-                                </div>
-                            </div>
-                            <div class="flex items-center gap-4 md:gap-6 pl-2">
-                                <div class="bg-black/50 px-3 md:px-4 py-2 rounded-lg border border-white/5 text-xs md:text-sm font-mono font-black text-white min-w-[50px] text-center shadow-inner">2-1</div>
-                                <button class="focus:outline-none p-2">
-                                    <i class="fa-star fas text-trading-highlight text-lg md:text-xl transition-transform hover:scale-125"></i>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div id="details-teste1" class="hidden bg-[#0D1117] border-t border-white/5 shadow-inner">
-                            <div class="flex gap-6 md:gap-8 px-6 md:px-8 border-b border-white/5 overflow-x-auto no-scrollbar pt-4">
-                                <button onclick="switchTab('teste1', 'resumo')" id="tab-resumo-teste1" class="tab-btn active whitespace-nowrap">RESUMO</button>
-                                <button onclick="switchTab('teste1', 'class')" id="tab-class-teste1" class="tab-btn whitespace-nowrap">CLASSIFICAÇÃO</button>
-                                <button onclick="switchTab('teste1', 'h2h')" id="tab-h2h-teste1" class="tab-btn whitespace-nowrap">H2H DETALHADO</button>
-                                <button onclick="switchTab('teste1', 'top')" id="tab-top-teste1" class="tab-btn whitespace-nowrap">DESTAQUES</button>
-                            </div>
-
-                            <div class="p-6 md:p-8 relative min-h-[150px]">
-                                <div id="content-resumo-teste1" class="tab-content-teste1 grid grid-cols-1 md:grid-cols-3 gap-6 animate-in">
-                                    <div class="space-y-3 bg-white/[0.02] p-4 rounded-xl border border-white/5">
-                                        <h4 class="text-[9px] text-gray-500 font-black uppercase tracking-widest">Momento Recente</h4>
-                                        <div class="flex items-center gap-4">
-                                            <div class="flex gap-1">
-                                                <div class="form-dot bg-trading-win">V</div><div class="form-dot bg-trading-win">V</div><div class="form-dot bg-trading-draw">E</div><div class="form-dot bg-trading-loss">D</div><div class="form-dot bg-trading-win">V</div>
-                                            </div>
-                                            <div class="w-px h-6 bg-white/10"></div>
-                                            <div class="flex gap-1">
-                                                <div class="form-dot bg-trading-loss">D</div><div class="form-dot bg-trading-draw">E</div><div class="form-dot bg-trading-win">V</div><div class="form-dot bg-trading-win">V</div><div class="form-dot bg-trading-win">V</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="space-y-3 bg-white/[0.02] p-4 rounded-xl border border-white/5">
-                                        <h4 class="text-[9px] text-gray-500 font-black uppercase tracking-widest">Status da Partida</h4>
-                                        <p class="text-[11px] text-white/70">Situação: <span class="text-white font-bold ml-1">2º Tempo Em Andamento</span></p>
-                                        <p class="text-[11px] text-white/70 truncate">Local: <span class="text-white font-bold ml-1">Londres, Inglaterra</span></p>
-                                    </div>
-                                    <div class="bg-trading-highlight/10 p-4 rounded-xl border-l-4 border-trading-highlight flex flex-col justify-center">
-                                        <h4 class="text-[9px] text-trading-highlight font-black uppercase mb-1 tracking-widest">Análise ClubElo</h4>
-                                        <p class="text-xs text-gray-300"><span class="text-white font-black text-sm">Casa (1920)</span> <span class="text-gray-500 text-[10px] mx-1">VS</span> <span class="text-white font-black text-sm">Fora (1985)</span></p>
-                                    </div>
-                                </div>
-
-                                <div id="content-class-teste1" class="tab-content-teste1 hidden animate-in">
-                                    <div class="grid grid-cols-2 gap-4 text-center bg-white/[0.02] rounded-xl p-6 border border-white/5">
-                                        <div class="flex flex-col items-center justify-center space-y-2">
-                                            <p class="text-[10px] text-white uppercase font-black tracking-widest bg-black/40 px-3 py-1 rounded-full truncate max-w-full">Arsenal</p>
-                                            <div class="flex gap-6 mt-2">
-                                                <div><p class="text-[9px] text-gray-500 uppercase font-bold">Posição</p><p class="font-black text-xl text-trading-highlight mt-1">2º</p></div>
-                                                <div><p class="text-[9px] text-gray-500 uppercase font-bold">Pontos</p><p class="font-black text-xl text-white mt-1">68</p></div>
-                                            </div>
-                                        </div>
-                                        <div class="flex flex-col items-center justify-center space-y-2 border-l border-white/10 pl-4">
-                                            <p class="text-[10px] text-white uppercase font-black tracking-widest bg-black/40 px-3 py-1 rounded-full truncate max-w-full">Liverpool</p>
-                                            <div class="flex gap-6 mt-2">
-                                                <div><p class="text-[9px] text-gray-500 uppercase font-bold">Posição</p><p class="font-black text-xl text-trading-highlight mt-1">1º</p></div>
-                                                <div><p class="text-[9px] text-gray-500 uppercase font-bold">Pontos</p><p class="font-black text-xl text-white mt-1">71</p></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div id="content-h2h-teste1" class="tab-content-teste1 hidden animate-in">
-                                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                                        <div class="bg-white/[0.02] p-4 rounded-xl border border-white/5">
-                                            <p class="text-[10px] text-trading-highlight uppercase font-black tracking-widest mb-4 border-b border-white/10 pb-2 flex items-center gap-2"><i class="fas fa-shield-alt"></i> Arsenal (Últimos Jogos)</p>
-                                            <div class="space-y-2">
-                                                <div class="flex justify-between items-center bg-black/20 p-3 rounded-lg border border-white/5 text-xs hover:bg-black/40 transition-colors">
-                                                    <span class="text-gray-300 w-[60%] truncate font-medium">Arsenal vs Chelsea</span>
-                                                    <div class="flex items-center gap-4 w-[40%] justify-end">
-                                                        <span class="font-mono text-white font-black bg-white/5 px-2 py-1 rounded">3-1</span><span class="font-black text-trading-win w-4 text-center text-sm drop-shadow-md">V</span>
-                                                    </div>
-                                                </div>
-                                                <div class="flex justify-between items-center bg-black/20 p-3 rounded-lg border border-white/5 text-xs hover:bg-black/40 transition-colors">
-                                                    <span class="text-gray-300 w-[60%] truncate font-medium">Tottenham vs Arsenal</span>
-                                                    <div class="flex items-center gap-4 w-[40%] justify-end">
-                                                        <span class="font-mono text-white font-black bg-white/5 px-2 py-1 rounded">2-2</span><span class="font-black text-trading-draw w-4 text-center text-sm drop-shadow-md">E</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="bg-white/[0.02] p-4 rounded-xl border border-white/5">
-                                            <p class="text-[10px] text-trading-highlight uppercase font-black tracking-widest mb-4 border-b border-white/10 pb-2 flex items-center gap-2"><i class="fas fa-shield-alt"></i> Liverpool (Últimos Jogos)</p>
-                                            <div class="space-y-2">
-                                                <div class="flex justify-between items-center bg-black/20 p-3 rounded-lg border border-white/5 text-xs hover:bg-black/40 transition-colors">
-                                                    <span class="text-gray-300 w-[60%] truncate font-medium">Liverpool vs Man City</span>
-                                                    <div class="flex items-center gap-4 w-[40%] justify-end">
-                                                        <span class="font-mono text-white font-black bg-white/5 px-2 py-1 rounded">1-1</span><span class="font-black text-trading-draw w-4 text-center text-sm drop-shadow-md">E</span>
-                                                    </div>
-                                                </div>
-                                                <div class="flex justify-between items-center bg-black/20 p-3 rounded-lg border border-white/5 text-xs hover:bg-black/40 transition-colors">
-                                                    <span class="text-gray-300 w-[60%] truncate font-medium">Everton vs Liverpool</span>
-                                                    <div class="flex items-center gap-4 w-[40%] justify-end">
-                                                        <span class="font-mono text-white font-black bg-white/5 px-2 py-1 rounded">0-2</span><span class="font-black text-trading-win w-4 text-center text-sm drop-shadow-md">V</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div id="content-top-teste1" class="tab-content-teste1 hidden animate-in">
-                                     <div class="grid grid-cols-3 gap-6 text-center items-center bg-white/[0.02] p-6 rounded-xl border border-white/5">
-                                        <div class="flex flex-col items-center">
-                                            <p class="text-[9px] text-gray-500 uppercase font-bold mb-1 w-full truncate">Arsenal</p>
-                                            <p class="text-2xl font-black text-white">55%</p>
-                                        </div>
-                                        <div>
-                                            <i class="fas fa-futbol text-trading-highlight text-xl mb-1 opacity-50"></i>
-                                            <p class="text-[10px] text-gray-400 uppercase font-black tracking-widest">Posse de Bola</p>
-                                        </div>
-                                        <div class="flex flex-col items-center">
-                                            <p class="text-[9px] text-gray-500 uppercase font-bold mb-1 w-full truncate">Liverpool</p>
-                                            <p class="text-2xl font-black text-white">45%</p>
-                                        </div>
-
-                                        <div class="pt-4 border-t border-white/5">
-                                            <p class="text-xl font-bold text-gray-300">12</p>
-                                        </div>
-                                        <div class="pt-4 border-t border-white/5">
-                                            <p class="text-[10px] text-gray-400 uppercase font-black tracking-widest">Chutes Totais</p>
-                                        </div>
-                                        <div class="pt-4 border-t border-white/5">
-                                            <p class="text-xl font-bold text-gray-300">8</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
+        <div id="agenda-list" class="space-y-10 pb-20"></div>
     </main>
 
     <script>
-        // FUNÇÃO SIMPLES PARA ALTERNAR ABAS NO TESTE VISUAL
-        function switchTab(id, aba) {
-            const container = document.getElementById(`details-${id}`);
-            if(!container) return; 
-            container.querySelectorAll(`.tab-content-${id}`).forEach(c => c.classList.add('hidden'));
-            container.querySelectorAll(`.tab-btn`).forEach(b => b.classList.remove('active'));
-            const content = document.getElementById(`content-${aba}-${id}`);
-            const tab = document.getElementById(`tab-${aba}-${id}`);
-            if (content) content.classList.remove('hidden');
-            if (tab) tab.classList.add('active');
+        // 1. MOCK DATA (Os 5 cenários exigidos)
+        const mockGamesData = [
+            {
+                name: "PREMIER LEAGUE (INGLATERRA)",
+                games: [
+                    {
+                        id: "game_live",
+                        time: "75'",
+                        statusClass: "text-trading-highlight animate-pulse",
+                        home: "Arsenal",
+                        away: "Liverpool",
+                        scoreHome: "2",
+                        scoreAway: "1",
+                        venue: "Emirates Stadium",
+                        alert: ""
+                    }
+                ]
+            },
+            {
+                name: "UEFA CHAMPIONS LEAGUE",
+                games: [
+                    {
+                        id: "game_breve",
+                        time: "Em Breve",
+                        statusClass: "text-gray-400",
+                        home: "Real Madrid",
+                        away: "Bayern Munich",
+                        scoreHome: "",
+                        scoreAway: "",
+                        venue: "Santiago Bernabéu",
+                        alert: "MATA-MATA"
+                    }
+                ]
+            },
+            {
+                name: "BRASILEIRÃO SÉRIE A",
+                games: [
+                    {
+                        id: "game_1700",
+                        time: "17:00",
+                        statusClass: "text-gray-400",
+                        home: "Flamengo",
+                        away: "Fluminense",
+                        scoreHome: "",
+                        scoreAway: "",
+                        venue: "Maracanã",
+                        alert: ""
+                    }
+                ]
+            },
+            {
+                name: "SÉRIE A ITALIANA",
+                games: [
+                    {
+                        id: "game_adiado",
+                        time: "Adiado",
+                        statusClass: "text-red-500",
+                        home: "Milan",
+                        away: "Inter de Milão",
+                        scoreHome: "",
+                        scoreAway: "",
+                        venue: "San Siro",
+                        alert: ""
+                    }
+                ]
+            },
+            {
+                name: "COPA LIBERTADORES",
+                games: [
+                    {
+                        id: "game_cancel",
+                        time: "Cancelado",
+                        statusClass: "text-red-500",
+                        home: "Boca Juniors",
+                        away: "River Plate",
+                        scoreHome: "",
+                        scoreAway: "",
+                        venue: "La Bombonera",
+                        alert: ""
+                    }
+                ]
+            }
+        ];
+
+        // 2. SISTEMA DE FAVORITOS
+        let favorites = [];
+        try {
+            favorites = JSON.parse(localStorage.getItem('futTraderFavs')) || [];
+        } catch(e) { favorites = []; }
+
+        function toggleFav(id) {
+            id = String(id);
+            if (favorites.includes(id)) {
+                favorites = favorites.filter(f => f !== id);
+            } else {
+                favorites.push(id);
+            }
+            localStorage.setItem('futTraderFavs', JSON.stringify(favorites));
+            renderAgenda(); // Re-renderiza para jogar pro topo
+        }
+
+        // 3. RENDERIZAÇÃO INTELIGENTE
+        function renderAgenda() {
+            const list = document.getElementById('agenda-list');
+            const search = document.getElementById('agendaSearch').value.toUpperCase();
+            list.innerHTML = '';
+
+            // Cópia profunda para podermos separar os favoritos sem estragar os dados originais
+            let leaguesCopy = JSON.parse(JSON.stringify(mockGamesData));
+            let favGames = [];
+
+            // Filtragem da busca e separação dos favoritos
+            leaguesCopy.forEach(league => {
+                league.games = league.games.filter(g => {
+                    // Filtro de busca
+                    const home = g.home.toUpperCase();
+                    const away = g.away.toUpperCase();
+                    const lname = league.name.toUpperCase();
+                    if (!(home.includes(search) || away.includes(search) || lname.includes(search))) {
+                        return false; 
+                    }
+
+                    // Se for favorito, joga pra lista de favoritos e TIRA da liga normal
+                    if (favorites.includes(g.id)) {
+                        favGames.push(g);
+                        return false; 
+                    }
+                    return true;
+                });
+            });
+
+            let displayData = [];
+            
+            // SE EXISTIREM FAVORITOS, ELES ENTRAM PRIMEIRO (NO TOPO)
+            if (favGames.length > 0) {
+                displayData.push({ name: "⭐ EVENTOS FAVORITOS", isFavSection: true, games: favGames });
+            }
+
+            // DEPOIS ENTRAM AS LIGAS NORMAIS
+            leaguesCopy.forEach(league => {
+                if(league.games.length > 0) displayData.push(league);
+            });
+
+            // DESENHANDO O HTML
+            displayData.forEach(league => {
+                const headerColor = league.isFavSection ? "text-trading-highlight" : "text-white";
+                
+                let html = `
+                    <div class="league-section animate-in">
+                        <div class="flex items-center gap-3 mb-3 px-2">
+                            <div class="w-1 h-4 bg-trading-highlight rounded-full ${league.isFavSection ? 'animate-pulse' : ''}"></div>
+                            <span class="text-[11px] font-black ${headerColor} uppercase tracking-[2px]">${league.name}</span>
+                        </div>
+                        <div class="bg-trading-panel rounded-xl border ${league.isFavSection ? 'border-trading-highlight/30' : 'border-trading-border'} overflow-hidden divide-y divide-white/5 shadow-xl">
+                `;
+
+                league.games.forEach(game => {
+                    const isFav = favorites.includes(game.id);
+                    
+                    // Montando o bloco do placar integrado
+                    let scoreHtml = '';
+                    if (game.scoreHome !== "" || game.scoreAway !== "") {
+                        scoreHtml = `
+                            <span class="text-lg md:text-xl font-black text-trading-highlight mx-2">${game.scoreHome}</span>
+                            <span class="text-[9px] text-gray-500 font-black italic bg-black/40 px-2 py-1 rounded">VS</span>
+                            <span class="text-lg md:text-xl font-black text-trading-highlight mx-2">${game.scoreAway}</span>
+                        `;
+                    } else {
+                        scoreHtml = `<span class="text-[9px] text-gray-500 font-black italic bg-black/40 px-2 py-1 rounded mx-3">VS</span>`;
+                    }
+
+                    // Alerta Vermelho de Mata-Mata
+                    let alertHtml = game.alert ? `<span class="bg-red-600 text-white text-[8px] font-black uppercase px-2 py-0.5 rounded shadow-[0_0_8px_rgba(220,38,38,0.8)] ml-3 animate-pulse border border-red-400">${game.alert}</span>` : '';
+
+                    html += `
+                        <div class="game-item relative">
+                            <div class="p-5 md:p-6 flex items-center justify-between cursor-pointer hover:bg-white/[0.02] transition-colors" onclick="toggleDetails('${game.id}')">
+                                
+                                <div class="flex items-center gap-4 md:gap-8 w-full">
+                                    <div class="text-center min-w-[50px] md:min-w-[60px]">
+                                        <p class="${game.statusClass} font-mono font-black text-xs md:text-sm uppercase tracking-tighter">${game.time}</p>
+                                    </div>
+                                    
+                                    <div class="flex flex-col flex-1">
+                                        <div class="flex items-center flex-wrap">
+                                            <span class="text-sm md:text-base font-black text-white uppercase tracking-tight">${game.home}</span>
+                                            ${scoreHtml}
+                                            <span class="text-sm md:text-base font-black text-white uppercase tracking-tight">${game.away}</span>
+                                            ${alertHtml}
+                                        </div>
+                                        <span class="text-[9px] text-gray-500 uppercase mt-2 tracking-wider truncate max-w-xs"><i class="fas fa-map-marker-alt mr-1 text-gray-600"></i>${game.venue}</span>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center pl-2">
+                                    <button onclick="event.stopPropagation(); toggleFav('${game.id}')" class="focus:outline-none p-3">
+                                        <i class="fa-star ${isFav ? 'fas text-trading-highlight drop-shadow-[0_0_5px_rgba(255,177,0,0.5)]' : 'far text-gray-700'} text-xl md:text-2xl transition-transform hover:scale-125"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div id="details-${game.id}" class="hidden bg-[#0D1117] border-t border-white/5 shadow-inner">
+                                <div class="p-8 text-center">
+                                    <i class="fas fa-tools text-gray-600 text-3xl mb-3"></i>
+                                    <p class="text-xs text-gray-400 font-bold uppercase tracking-widest">Painel de Detalhes em Modo Chassi</p>
+                                    <p class="text-[10px] text-gray-600 mt-2">Os dados da API serão injetados aqui após a aprovação visual.</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+                html += `</div></div>`;
+                list.innerHTML += html;
+            });
         }
 
         function toggleDetails(id) { 
             const el = document.getElementById(`details-${id}`);
-            if(!el) return;
-            el.classList.toggle('hidden');
+            if(el) el.classList.toggle('hidden');
         }
+
+        // Inicia a renderização assim que a página carregar
+        window.onload = () => {
+            renderAgenda();
+        };
+
     </script>
 </body>
 </html>

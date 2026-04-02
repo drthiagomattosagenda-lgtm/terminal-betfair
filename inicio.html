@@ -89,7 +89,7 @@
         // Nova Injeção: Busca os dados reais na API assim que a página abre
         async function carregarCombustivel() {
             const token = "f0772d6c4ebf4102b615b3466f97fd4b"; // Sua chave exclusiva
-            const url = "https://api.football-data.org/v4/matches";
+            const url = "https://corsproxy.io/?https://api.football-data.org/v4/matches";
             
             try {
                 const resposta = await fetch(url, { headers: { 'X-Auth-Token': token } });

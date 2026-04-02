@@ -73,17 +73,17 @@
         "recent_form": {
           "home": [
             "V",
-            "V",
-            "E",
-            "D",
-            "V"
-          ],
-          "away": [
-            "D",
             "E",
             "V",
             "D",
             "E"
+          ],
+          "away": [
+            "D",
+            "D",
+            "E",
+            "V",
+            "D"
           ]
         }
       }
@@ -161,17 +161,17 @@
         "recent_form": {
           "home": [
             "V",
-            "V",
-            "E",
-            "D",
-            "V"
-          ],
-          "away": [
-            "D",
             "E",
             "V",
             "D",
             "E"
+          ],
+          "away": [
+            "D",
+            "D",
+            "E",
+            "V",
+            "D"
           ]
         }
       }
@@ -249,17 +249,17 @@
         "recent_form": {
           "home": [
             "V",
-            "V",
-            "E",
-            "D",
-            "V"
-          ],
-          "away": [
-            "D",
             "E",
             "V",
             "D",
             "E"
+          ],
+          "away": [
+            "D",
+            "D",
+            "E",
+            "V",
+            "D"
           ]
         }
       }
@@ -337,17 +337,17 @@
         "recent_form": {
           "home": [
             "V",
-            "V",
-            "E",
-            "D",
-            "V"
-          ],
-          "away": [
-            "D",
             "E",
             "V",
             "D",
             "E"
+          ],
+          "away": [
+            "D",
+            "D",
+            "E",
+            "V",
+            "D"
           ]
         }
       }
@@ -389,8 +389,8 @@
       },
       "awayTeam": {
         "id": 1780,
-        "name": "Vasco da Gama",
-        "shortName": "Vasco da Gama",
+        "name": "Vasco",
+        "shortName": "Vasco",
         "tla": "VAS",
         "crest": "https://crests.football-data.org/1780.png"
       },
@@ -437,17 +437,17 @@
         "recent_form": {
           "home": [
             "V",
-            "V",
-            "E",
-            "D",
-            "V"
-          ],
-          "away": [
-            "D",
             "E",
             "V",
             "D",
             "E"
+          ],
+          "away": [
+            "D",
+            "D",
+            "E",
+            "V",
+            "D"
           ]
         }
       }
@@ -537,17 +537,17 @@
         "recent_form": {
           "home": [
             "V",
-            "V",
-            "E",
-            "D",
-            "V"
-          ],
-          "away": [
-            "D",
             "E",
             "V",
             "D",
             "E"
+          ],
+          "away": [
+            "D",
+            "D",
+            "E",
+            "V",
+            "D"
           ]
         }
       }
@@ -618,17 +618,17 @@
         "recent_form": {
           "home": [
             "V",
-            "V",
-            "E",
-            "D",
-            "V"
-          ],
-          "away": [
-            "D",
             "E",
             "V",
             "D",
             "E"
+          ],
+          "away": [
+            "D",
+            "D",
+            "E",
+            "V",
+            "D"
           ]
         }
       }
@@ -699,17 +699,17 @@
         "recent_form": {
           "home": [
             "V",
-            "V",
-            "E",
-            "D",
-            "V"
-          ],
-          "away": [
-            "D",
             "E",
             "V",
             "D",
             "E"
+          ],
+          "away": [
+            "D",
+            "D",
+            "E",
+            "V",
+            "D"
           ]
         }
       }
@@ -780,17 +780,17 @@
         "recent_form": {
           "home": [
             "V",
-            "V",
-            "E",
-            "D",
-            "V"
-          ],
-          "away": [
-            "D",
             "E",
             "V",
             "D",
             "E"
+          ],
+          "away": [
+            "D",
+            "D",
+            "E",
+            "V",
+            "D"
           ]
         }
       }
@@ -861,17 +861,17 @@
         "recent_form": {
           "home": [
             "V",
-            "V",
-            "E",
-            "D",
-            "V"
-          ],
-          "away": [
-            "D",
             "E",
             "V",
             "D",
             "E"
+          ],
+          "away": [
+            "D",
+            "D",
+            "E",
+            "V",
+            "D"
           ]
         }
       }
@@ -942,17 +942,17 @@
         "recent_form": {
           "home": [
             "V",
-            "V",
-            "E",
-            "D",
-            "V"
-          ],
-          "away": [
-            "D",
             "E",
             "V",
             "D",
             "E"
+          ],
+          "away": [
+            "D",
+            "D",
+            "E",
+            "V",
+            "D"
           ]
         }
       }
@@ -1023,17 +1023,17 @@
         "recent_form": {
           "home": [
             "V",
-            "V",
-            "E",
-            "D",
-            "V"
-          ],
-          "away": [
-            "D",
             "E",
             "V",
             "D",
             "E"
+          ],
+          "away": [
+            "D",
+            "D",
+            "E",
+            "V",
+            "D"
           ]
         }
       }
@@ -1068,8 +1068,8 @@
       "lastUpdated": "2026-04-02T01:32:02Z",
       "homeTeam": {
         "id": 1780,
-        "name": "Vasco da Gama",
-        "shortName": "Vasco da Gama",
+        "name": "Vasco",
+        "shortName": "Vasco",
         "tla": "VAS",
         "crest": "https://crests.football-data.org/1780.png"
       },
@@ -1104,17 +1104,17 @@
         "recent_form": {
           "home": [
             "V",
-            "V",
-            "E",
-            "D",
-            "V"
-          ],
-          "away": [
-            "D",
             "E",
             "V",
             "D",
             "E"
+          ],
+          "away": [
+            "D",
+            "D",
+            "E",
+            "V",
+            "D"
           ]
         }
       }

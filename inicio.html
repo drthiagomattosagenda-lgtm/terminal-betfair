@@ -80,6 +80,7 @@
     </main>
 
     <script>
+        // ======= O MOTOR V8 DE DADOS ======= //
         let liveGamesData = []; 
         let favorites = [];
         
@@ -90,36 +91,31 @@
             
             try {
                 const resposta = await fetch(url);
+                
+                // BLINDAGEM 1: Verifica se a internet ou o servidor falhou
                 if (!resposta.ok) throw new Error("Conexão falhou (Erro HTTP " + resposta.status + ")");
                 
+                // BLINDAGEM 2: Lê o texto antes de converter para JSON para evitar quebra de site
                 const text = await resposta.text();
-                if (!text || text.trim() === "") throw new Error("Arquivo JSON em branco.");
+                if (!text || text.trim() === "") throw new Error("Arquivo JSON em branco (Github Actions processando...)");
                 
                 const dados = JSON.parse(text);
+                
+                // BLINDAGEM 3: Verifica se o JSON tem a estrutura correta de jogos
                 if (!dados.matches) throw new Error("Aguardando formato correto do JSON...");
 
                 const ligasAgrupadas = {};
                 
-                // O SEGREDO DOS HORÁRIOS: Cravar tudo no Fuso de São Paulo/Brasília
-                const fusoBR = { timeZone: "America/Sao_Paulo" };
-                const dataHojeBR = new Date().toLocaleDateString("pt-BR", fusoBR);
-
+                // O Motor V12 traz jogos globais. Removida a trava rígida de data 
+                // para garantir que Premier League e La Liga de hoje apareçam perfeitamente.
                 dados.matches.forEach(match => {
-                    const dataUTC = new Date(match.utcDate);
-                    const dataJogoBR = dataUTC.toLocaleDateString("pt-BR", fusoBR);
-
-                    // FILTRO CRÍTICO: Se a data do jogo não for rigorosamente hoje no Brasil, ignora!
-                    if (dataJogoBR !== dataHojeBR) {
-                        return; 
-                    }
-
                     const nomeLiga = match.competition.name.toUpperCase();
+                    
                     if (!ligasAgrupadas[nomeLiga]) {
                         ligasAgrupadas[nomeLiga] = { name: nomeLiga, games: [] };
                     }
 
-                    // Força o horário a renderizar no fuso brasileiro
-                    let horarioStr = dataUTC.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit", timeZone: "America/Sao_Paulo" });
+                    let horarioStr = new Date(match.utcDate).toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit", timeZone: "America/Sao_Paulo" });
                     let statusClass = "text-gray-400";
                     let alerta = "";
                     
@@ -138,12 +134,13 @@
                     const golsCasa = match.score?.fullTime?.home !== null && match.score?.fullTime?.home !== undefined ? match.score.fullTime.home.toString() : "";
                     const golsFora = match.score?.fullTime?.away !== null && match.score?.fullTime?.away !== undefined ? match.score.fullTime.away.toString() : "";
 
-                    const intl = match.inteligencia || { 
+                    // Lendo as chaves geradas pelo Motor Python V12
+                    const inteligencia = match.inteligencia || { 
                         clubelo: { home_elo: 'N/A', away_elo: 'N/A' }, 
                         recent_form: { home: ['-','-','-','-','-'], away: ['-','-','-','-','-'] },
-                        standings: { home: {pos: '-', pts: '-', p: '-', sg: '-'}, away: {pos: '-', pts: '-', p: '-', sg: '-'} },
                         h2h: [],
-                        stats: { info: "Sem dados", reliability: "0.0" }
+                        standings: { home: {pos: '-', pts: '-', p: '-', sg: '-'}, away: {pos: '-', pts: '-', p: '-', sg: '-'} },
+                        stats: { info: "Aguardando processamento...", reliability: "0.00" }
                     };
 
                     ligasAgrupadas[nomeLiga].games.push({
@@ -157,18 +154,21 @@
                         scoreAway: golsFora,
                         venue: "ESTÁDIO",
                         alert: alerta,
-                        eloHome: intl.clubelo.home_elo,
-                        eloAway: intl.clubelo.away_elo,
-                        formHome: Array.isArray(intl.recent_form.home) ? intl.recent_form.home : ['-','-','-','-','-'],
-                        formAway: Array.isArray(intl.recent_form.away) ? intl.recent_form.away : ['-','-','-','-','-'],
-                        standings: intl.standings,
-                        h2h: intl.h2h,
-                        stats: intl.stats
+                        eloHome: inteligencia.clubelo.home_elo,
+                        eloAway: inteligencia.clubelo.away_elo,
+                        formHome: Array.isArray(inteligencia.recent_form.home) ? inteligencia.recent_form.home : ['-','-','-','-','-'],
+                        formAway: Array.isArray(inteligencia.recent_form.away) ? inteligencia.recent_form.away : ['-','-','-','-','-'],
+                        // Injetando no Front as variáveis do Submenu (Classificação, H2H, Destaques)
+                        standings: inteligencia.standings || { home: {pos: '-', pts: '-', p: '-', sg: '-'}, away: {pos: '-', pts: '-', p: '-', sg: '-'} },
+                        h2h: inteligencia.h2h || [],
+                        stats: inteligencia.stats || { info: "Scouting em processamento.", reliability: "0.00" }
                     });
                 });
 
                 liveGamesData = Object.values(ligasAgrupadas);
-                document.getElementById('game-count').innerText = liveGamesData.reduce((acc, liga) => acc + liga.games.length, 0);
+                
+                const totalJogos = liveGamesData.reduce((acc, liga) => acc + liga.games.length, 0);
+                document.getElementById('game-count').innerText = totalJogos;
 
                 const loadingInfo = document.getElementById('loading-ferrari');
                 if (loadingInfo) loadingInfo.remove();
@@ -179,12 +179,15 @@
                 console.error("Falha no motor:", erro);
                 document.getElementById('agenda-list').innerHTML = `
                     <div class="text-center py-10 bg-red-900/20 border border-red-500/30 rounded-xl max-w-2xl mx-auto">
-                        <p class="text-red-500 text-xs font-black uppercase"><i class="fas fa-exclamation-triangle mr-2"></i>Aguardando Sincronização</p>
+                        <p class="text-red-500 text-xs font-black uppercase"><i class="fas fa-exclamation-triangle mr-2"></i>Aguardando Sincronização de Dados</p>
                         <p class="text-gray-400 text-[10px] mt-4 font-mono">${erro.message}</p>
-                    </div>`;
+                        <p class="text-gray-500 text-[10px] mt-2 font-mono">O robô está processando estatísticas pesadas. A tela voltará ao normal em instantes.</p>
+                    </div>
+                `;
             }
         }
 
+        // ======= FUNÇÕES DA LATARIA (INTACTAS) ======= //
         function toggleFav(id) {
             id = String(id);
             if (favorites.includes(id)) { favorites = favorites.filter(f => f !== id); } 
@@ -244,7 +247,7 @@
             leaguesCopy.forEach(league => { if(league.games.length > 0) displayData.push(league); });
 
             if(displayData.length === 0) {
-                list.innerHTML = `<div class="text-center py-20 text-gray-500 text-xs font-bold uppercase">Nenhum evento de hoje encontrado.</div>`;
+                list.innerHTML = `<div class="text-center py-20 text-gray-500 text-xs font-bold uppercase">Nenhum evento encontrado.</div>`;
                 return;
             }
 
@@ -266,69 +269,89 @@
                         : `<span class="text-[9px] text-gray-500 font-black italic bg-black/40 px-2 py-1 rounded mx-3">VS</span>`;
                     let alertHtml = game.alert ? `<span class="bg-red-600 text-white text-[8px] font-black uppercase px-2 py-0.5 rounded shadow-[0_0_8px_rgba(220,38,38,0.8)] ml-3 animate-pulse border border-red-400">${game.alert}</span>` : '';
 
+                    // LENDO VARIÁVEIS REAIS DE CLASSIFICAÇÃO
                     const stdH = game.standings.home;
                     const stdA = game.standings.away;
 
-                    let classHtml = `
-                        <div class="flex flex-col gap-6 animate-in">
-                            <div class="w-full bg-white/[0.02] p-4 rounded-xl border border-white/5">
-                                <div class="flex gap-2 mb-4">
-                                    <button class="text-[9px] bg-trading-highlight text-black font-black px-3 py-1 rounded">GERAL</button>
-                                    <button class="text-[9px] bg-white/10 text-gray-400 hover:text-white font-bold px-3 py-1 rounded transition">CASA</button>
-                                    <button class="text-[9px] bg-white/10 text-gray-400 hover:text-white font-bold px-3 py-1 rounded transition">FORA</button>
-                                </div>
-                                <table class="w-full text-xs text-left">
-                                    <thead class="text-[9px] text-gray-500 uppercase border-b border-white/10">
-                                        <tr><th class="pb-2 w-8">#</th><th class="pb-2">Time</th><th class="pb-2 text-center w-8">P</th><th class="pb-2 text-center w-8">J</th><th class="pb-2 text-center w-8">SG</th></tr>
-                                    </thead>
-                                    <tbody class="text-white">
-                                        <tr class="border-b border-white/5 hover:bg-white/5">
-                                            <td class="py-3 text-trading-highlight font-bold">${stdA.pos}</td><td class="py-3 font-black">${game.away}</td><td class="py-3 text-center font-black">${stdA.pts}</td><td class="py-3 text-center text-gray-400">${stdA.p}</td><td class="py-3 text-center text-gray-400">${stdA.sg}</td>
-                                        </tr>
-                                        <tr class="hover:bg-white/5">
-                                            <td class="py-3 text-trading-highlight font-bold">${stdH.pos}</td><td class="py-3 font-black">${game.home}</td><td class="py-3 text-center font-black">${stdH.pts}</td><td class="py-3 text-center text-gray-400">${stdH.p}</td><td class="py-3 text-center text-gray-400">${stdH.sg}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="w-full bg-white/[0.02] p-6 rounded-xl border border-white/5">
-                                <p class="text-[10px] text-gray-500 uppercase font-bold mb-6 text-center tracking-widest">Pontuação nas últimas 15 rodadas</p>
-                                <div class="flex justify-between items-center text-[10px] uppercase font-black mb-6 px-4">
-                                    <div class="flex items-center gap-2"><div class="w-3 h-3 bg-trading-highlight rounded-full border-2 border-white/20"></div><span class="text-trading-highlight">${game.home}</span></div>
-                                    <div class="flex items-center gap-2"><span class="text-trading-awayTeam">${game.away}</span><div class="w-3 h-3 bg-trading-awayTeam rounded-full border-2 border-white/20"></div></div>
-                                </div>
-                                <div class="w-full h-40 relative px-10 mb-2 mt-4 font-mono font-bold text-gray-600 text-[8px]">
-                                    <div class="absolute left-0 h-full w-8 flex flex-col justify-between items-end pr-3">
-                                        <span class="transform -translate-y-1/2">1°</span><span class="transform -translate-y-1/2">10°</span><span class="transform -translate-y-1/2">20°</span>
+                    let classHtml = '';
+                    if (game.type === 'pontos_corridos') {
+                        classHtml = `
+                            <div class="flex flex-col gap-6 animate-in">
+                                <div class="w-full bg-white/[0.02] p-4 rounded-xl border border-white/5">
+                                    <div class="flex gap-2 mb-4">
+                                        <button class="text-[9px] bg-trading-highlight text-black font-black px-3 py-1 rounded">GERAL</button>
+                                        <button class="text-[9px] bg-white/10 text-gray-400 hover:text-white font-bold px-3 py-1 rounded transition">CASA</button>
+                                        <button class="text-[9px] bg-white/10 text-gray-400 hover:text-white font-bold px-3 py-1 rounded transition">FORA</button>
                                     </div>
-                                    <svg class="absolute inset-0 w-full h-full px-10" viewBox="0 0 100 100" preserveAspectRatio="none">
-                                        <line x1="0" y1="0" x2="100" y2="0" stroke="rgba(255,255,255,0.05)" stroke-width="0.5" />
-                                        <line x1="0" y1="50" x2="100" y2="50" stroke="rgba(255,255,255,0.05)" stroke-width="0.5" />
-                                        <line x1="0" y1="100" x2="100" y2="100" stroke="rgba(255,255,255,0.05)" stroke-width="0.5" />
-                                        <path d="M 0 50 Q 7 35, 14 45 Q 21 55, 28 40 Q 35 25, 42 15 Q 49 5, 56 10 Q 63 15, 70 0" fill="none" stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round"/>
-                                        <path d="M 0 80 Q 7 70, 14 60 Q 21 50, 28 65 Q 35 80, 42 60 Q 49 40, 56 30 Q 63 20, 70 10" fill="none" stroke="#FFB100" stroke-width="1.5" stroke-linecap="round"/>
-                                    </svg>
-                                    <div class="absolute inset-0 px-10 flex h-full">
-                                        <div class="w-full h-full relative">
-                                            <div class="absolute -right-2 top-[0%] transform -translate-y-1/2"><div class="w-4 h-4 rounded-full bg-trading-awayTeam border-4 border-[#0D1117] relative flex items-center justify-center"><div class="absolute w-6 h-6 rounded-full bg-trading-awayTeam opacity-20 animate-pulse"></div></div></div>
-                                            <div class="absolute -right-2 top-[10%] transform -translate-y-1/2"><div class="w-4 h-4 rounded-full bg-trading-highlight border-4 border-[#0D1117] relative flex items-center justify-center"><div class="absolute w-6 h-6 rounded-full bg-trading-highlight opacity-30 animate-pulse"></div></div></div>
+                                    <table class="w-full text-xs text-left">
+                                        <thead class="text-[9px] text-gray-500 uppercase border-b border-white/10">
+                                            <tr><th class="pb-2 w-8">#</th><th class="pb-2">Time</th><th class="pb-2 text-center w-8">P</th><th class="pb-2 text-center w-8">J</th><th class="pb-2 text-center w-8">SG</th></tr>
+                                        </thead>
+                                        <tbody class="text-white">
+                                            <tr class="border-b border-white/5 hover:bg-white/5">
+                                                <td class="py-3 text-trading-highlight font-bold">${stdA.pos}</td>
+                                                <td class="py-3 font-black">${game.away}</td>
+                                                <td class="py-3 text-center font-black">${stdA.pts}</td>
+                                                <td class="py-3 text-center text-gray-400">${stdA.p}</td>
+                                                <td class="py-3 text-center text-gray-400">${stdA.sg}</td>
+                                            </tr>
+                                            <tr class="hover:bg-white/5">
+                                                <td class="py-3 text-trading-highlight font-bold">${stdH.pos}</td>
+                                                <td class="py-3 font-black">${game.home}</td>
+                                                <td class="py-3 text-center font-black">${stdH.pts}</td>
+                                                <td class="py-3 text-center text-gray-400">${stdH.p}</td>
+                                                <td class="py-3 text-center text-gray-400">${stdH.sg}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="w-full bg-white/[0.02] p-6 rounded-xl border border-white/5">
+                                    <p class="text-[10px] text-gray-500 uppercase font-bold mb-6 text-center tracking-widest">Pontuação nas últimas 15 rodadas</p>
+                                    <div class="flex justify-between items-center text-[10px] uppercase font-black mb-6 px-4">
+                                        <div class="flex items-center gap-2"><div class="w-3 h-3 bg-trading-highlight rounded-full border-2 border-white/20"></div><span class="text-trading-highlight">${game.home}</span></div>
+                                        <div class="flex items-center gap-2"><span class="text-trading-awayTeam">${game.away}</span><div class="w-3 h-3 bg-trading-awayTeam rounded-full border-2 border-white/20"></div></div>
+                                    </div>
+                                    <div class="w-full h-40 relative px-10 mb-2 mt-4 font-mono font-bold text-gray-600 text-[8px]">
+                                        <div class="absolute left-0 h-full w-8 flex flex-col justify-between items-end pr-3">
+                                            <span class="transform -translate-y-1/2">1°</span><span class="transform -translate-y-1/2">10°</span><span class="transform -translate-y-1/2">20°</span>
+                                        </div>
+                                        <svg class="absolute inset-0 w-full h-full px-10" viewBox="0 0 100 100" preserveAspectRatio="none">
+                                            <line x1="0" y1="0" x2="100" y2="0" stroke="rgba(255,255,255,0.05)" stroke-width="0.5" />
+                                            <line x1="0" y1="50" x2="100" y2="50" stroke="rgba(255,255,255,0.05)" stroke-width="0.5" />
+                                            <line x1="0" y1="100" x2="100" y2="100" stroke="rgba(255,255,255,0.05)" stroke-width="0.5" />
+                                            <path d="M 0 50 Q 7 35, 14 45 Q 21 55, 28 40 Q 35 25, 42 15 Q 49 5, 56 10 Q 63 15, 70 0" fill="none" stroke="#3B82F6" stroke-width="1.5" stroke-linecap="round"/>
+                                            <path d="M 0 80 Q 7 70, 14 60 Q 21 50, 28 65 Q 35 80, 42 60 Q 49 40, 56 30 Q 63 20, 70 10" fill="none" stroke="#FFB100" stroke-width="1.5" stroke-linecap="round"/>
+                                        </svg>
+                                        <div class="absolute inset-0 px-10 flex h-full">
+                                            <div class="w-full h-full relative">
+                                                <div class="absolute -right-2 top-[0%] transform -translate-y-1/2"><div class="w-4 h-4 rounded-full bg-trading-awayTeam border-4 border-[#0D1117] relative flex items-center justify-center"><div class="absolute w-6 h-6 rounded-full bg-trading-awayTeam opacity-20 animate-pulse"></div></div></div>
+                                                <div class="absolute -right-2 top-[10%] transform -translate-y-1/2"><div class="w-4 h-4 rounded-full bg-trading-highlight border-4 border-[#0D1117] relative flex items-center justify-center"><div class="absolute w-6 h-6 rounded-full bg-trading-highlight opacity-30 animate-pulse"></div></div></div>
+                                            </div>
                                         </div>
                                     </div>
+                                    <div class="flex justify-between items-center h-4 font-mono font-bold text-gray-600 text-[8px] pl-10 pr-6 mt-1">
+                                        <span>R1</span><span>R2</span><span>R3</span><span>R4</span><span>R5</span><span>R6</span><span>R7</span><span>R8</span><span>R9</span><span>R10</span><span>R11</span><span>R12</span><span>R13</span><span>R14</span><span>R15</span>
+                                    </div>
                                 </div>
-                                <div class="flex justify-between items-center h-4 font-mono font-bold text-gray-600 text-[8px] pl-10 pr-6 mt-1">
-                                    <span>R1</span><span>R2</span><span>R3</span><span>R4</span><span>R5</span><span>R6</span><span>R7</span><span>R8</span><span>R9</span><span>R10</span><span>R11</span><span>R12</span><span>R13</span><span>R14</span><span>R15</span>
-                                </div>
-                            </div>
-                        </div>`;
+                            </div>`;
+                    } else {
+                        classHtml = `<div class="text-center py-4 text-gray-500 text-xs">Apenas ligas de pontos corridos possuem classificação.</div>`;
+                    }
 
-                    let h2hLinhas = game.h2h.map(h => `
-                        <div class="flex justify-between items-center bg-black/30 p-2.5 rounded-lg border border-white/5 text-xs hover:bg-black/50 transition">
-                            <span class="text-gray-500 w-16 text-[9px] font-bold">${h.date}</span>
-                            <div class="flex-1 text-right text-gray-400 font-bold pr-3">${h.home}</div>
-                            <div class="bg-black/60 px-3 py-1 rounded border border-white/5 text-white font-mono font-black w-14 text-center shadow-inner">${h.score}</div>
-                            <div class="flex-1 text-left text-white font-black pl-3">${h.away}</div>
-                        </div>
-                    `).join('');
+                    // CONSTRUINDO AS LINHAS DO H2H DE FORMA DINÂMICA LENDO A INTELIGENCIA DO PYTHON
+                    let h2hLines = '';
+                    if (game.h2h && game.h2h.length > 0) {
+                        h2hLines = game.h2h.map(h => `
+                            <div class="flex justify-between items-center bg-black/30 p-2.5 rounded-lg border border-white/5 text-xs hover:bg-black/50 transition">
+                                <span class="text-gray-500 w-16 text-[9px] font-bold">${h.date}</span>
+                                <div class="flex-1 text-right text-gray-400 font-bold pr-3">${h.home}</div>
+                                <div class="bg-black/60 px-3 py-1 rounded border border-white/5 text-white font-mono font-black w-14 text-center shadow-inner">${h.score}</div>
+                                <div class="flex-1 text-left text-white font-black pl-3">${h.away}</div>
+                            </div>
+                        `).join('');
+                    } else {
+                        h2hLines = `<div class="text-center text-gray-500 text-[10px] py-4 uppercase font-bold tracking-widest border border-white/5 rounded-lg bg-black/20">Aguardando dados históricos do FBref...</div>`;
+                    }
 
                     let h2hHtml = `
                         <div class="flex flex-col md:flex-row gap-6 animate-in">
@@ -358,7 +381,9 @@
                             </div>
                             <div class="flex-1 bg-white/[0.02] p-5 rounded-xl border border-white/5">
                                 <p class="text-[9px] text-gray-500 uppercase font-bold mb-4">Últimos Confrontos</p>
-                                <div class="space-y-2">${h2hLinhas}</div>
+                                <div class="space-y-2">
+                                    ${h2hLines}
+                                </div>
                             </div>
                         </div>`;
 
@@ -386,6 +411,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div class="bg-white/[0.02] border border-white/5 p-5 rounded-2xl">
                                     <h4 class="text-[10px] text-gray-500 font-black uppercase tracking-widest mb-4 flex justify-between items-center">
@@ -402,6 +428,7 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="bg-white/[0.02] border border-white/5 p-5 rounded-2xl">
                                     <h4 class="text-[10px] text-gray-500 font-black uppercase tracking-widest mb-4">Fatores Externos</h4>
                                     <div class="grid grid-cols-2 gap-4 mb-4">
@@ -452,6 +479,7 @@
 
                                 <div class="p-6 md:p-8 relative min-h-[150px]">
                                     <div id="content-resumo-${game.id}" class="tab-content-${game.id} grid grid-cols-1 md:grid-cols-3 gap-6 animate-in">
+                                        
                                         <div class="space-y-3 bg-white/[0.02] p-4 rounded-xl border border-white/5">
                                             <h4 class="text-[9px] text-gray-500 font-black uppercase tracking-widest">Momento Recente</h4>
                                             <div class="flex items-center gap-4">
@@ -460,11 +488,13 @@
                                                 <div class="flex gap-1">${renderFormDots(game.formAway)}</div>
                                             </div>
                                         </div>
+                                        
                                         <div class="space-y-3 bg-white/[0.02] p-4 rounded-xl border border-white/5">
                                             <h4 class="text-[9px] text-gray-500 font-black uppercase tracking-widest">Status da Partida</h4>
                                             <p class="text-[11px] text-white/70">Situação: <span class="text-white font-bold ml-1">${game.time}</span></p>
                                             <p class="text-[11px] text-white/70 truncate">Local: <span class="text-white font-bold ml-1">${game.venue}</span></p>
                                         </div>
+                                        
                                         <div class="bg-trading-highlight/10 p-4 rounded-xl border-l-4 border-trading-highlight flex flex-col justify-center">
                                             <h4 class="text-[9px] text-trading-highlight font-black uppercase mb-1 tracking-widest">Análise ClubElo</h4>
                                             <div class="flex justify-between items-center mt-2">
@@ -479,6 +509,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        
                                     </div>
                                     <div id="content-class-${game.id}" class="tab-content-${game.id} hidden animate-in">${classHtml}</div>
                                     <div id="content-h2h-${game.id}" class="tab-content-${game.id} hidden animate-in">${h2hHtml}</div>
@@ -497,5 +528,3 @@
     </script>
 </body>
 </html>
-
-

@@ -111,7 +111,7 @@
         "currentMatchday": 9,
         "winner": null
       },
-      "id": 554829,
+      "id": 554823,
       "utcDate": "2026-04-02T22:00:00Z",
       "status": "TIMED",
       "matchday": 9,
@@ -119,18 +119,18 @@
       "group": null,
       "lastUpdated": "2026-04-02T01:32:00Z",
       "homeTeam": {
-        "id": 6685,
-        "name": "Santos FC",
-        "shortName": "Santos",
-        "tla": "SAN",
-        "crest": "https://crests.football-data.org/6685.png"
+        "id": 1772,
+        "name": "Chapecoense AF",
+        "shortName": "Chapecoense",
+        "tla": "CHA",
+        "crest": "https://crests.football-data.org/1772_large.png"
       },
       "awayTeam": {
-        "id": 4287,
-        "name": "Clube do Remo",
-        "shortName": "Clube do Remo",
-        "tla": "CRE",
-        "crest": "https://crests.football-data.org/4287.png"
+        "id": 1766,
+        "name": "CA Mineiro",
+        "shortName": "Mineiro",
+        "tla": "CAM",
+        "crest": "https://crests.football-data.org/1766.png"
       },
       "score": {
         "winner": null,
@@ -170,7 +170,7 @@
         "currentMatchday": 9,
         "winner": null
       },
-      "id": 554823,
+      "id": 554829,
       "utcDate": "2026-04-02T22:00:00Z",
       "status": "TIMED",
       "matchday": 9,
@@ -178,18 +178,18 @@
       "group": null,
       "lastUpdated": "2026-04-02T01:32:00Z",
       "homeTeam": {
-        "id": 1772,
-        "name": "Chapecoense AF",
-        "shortName": "Chapecoense",
-        "tla": "CHA",
-        "crest": "https://crests.football-data.org/1772_large.png"
+        "id": 6685,
+        "name": "Santos FC",
+        "shortName": "Santos",
+        "tla": "SAN",
+        "crest": "https://crests.football-data.org/6685.png"
       },
       "awayTeam": {
-        "id": 1766,
-        "name": "CA Mineiro",
-        "shortName": "Mineiro",
-        "tla": "CAM",
-        "crest": "https://crests.football-data.org/1766.png"
+        "id": 4287,
+        "name": "Clube do Remo",
+        "shortName": "Clube do Remo",
+        "tla": "CRE",
+        "crest": "https://crests.football-data.org/4287.png"
       },
       "score": {
         "winner": null,

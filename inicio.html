@@ -87,27 +87,29 @@
         try { favorites = JSON.parse(localStorage.getItem('futTraderFavs')) || []; } catch(e) { favorites = []; }
 
         async function carregarCombustivel() {
-            // A Ferrari agora puxa direto do galão abastecido pelo Python!
-            const url = "jogos_de_hoje.json?v=" + new Date().getTime(); // Evita cache antigo
+            const url = "jogos_de_hoje.json?v=" + new Date().getTime(); 
             
             try {
                 const resposta = await fetch(url);
                 
-                if (!resposta.ok) {
-                    throw new Error("Tanque Vazio");
-                }
+                // BLINDAGEM 1: Verifica se a internet ou o servidor falhou
+                if (!resposta.ok) throw new Error("Conexão falhou (Erro HTTP " + resposta.status + ")");
                 
-                const dados = await resposta.json();
-                const ligasAgrupadas = {};
+                // BLINDAGEM 2: Lê o texto antes de converter para JSON para evitar quebra de site
+                const text = await resposta.text();
+                if (!text || text.trim() === "") throw new Error("Arquivo JSON em branco (Github Actions processando...)");
+                
+                const dados = JSON.parse(text);
+                
+                // BLINDAGEM 3: Verifica se o JSON tem a estrutura correta de jogos
+                if (!dados.matches) throw new Error("Aguardando formato correto do JSON...");
 
-                // Pega a data EXATA de hoje no fuso do Brasil
+                const ligasAgrupadas = {};
                 const dataHojeBR = new Date().toLocaleDateString("pt-BR", { timeZone: "America/Sao_Paulo" });
 
                 dados.matches.forEach(match => {
-                    // Descobre a data do jogo no fuso do Brasil
                     const dataJogoBR = new Date(match.utcDate).toLocaleDateString("pt-BR", { timeZone: "America/Sao_Paulo" });
 
-                    // O FILTRO CIRÚRGICO: Se o jogo não for de hoje, pula e ignora!
                     if (dataJogoBR !== dataHojeBR) {
                         return; 
                     }
@@ -118,7 +120,6 @@
                         ligasAgrupadas[nomeLiga] = { name: nomeLiga, games: [] };
                     }
 
-                    // Força o horário a renderizar no fuso brasileiro também
                     let horarioStr = new Date(match.utcDate).toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit", timeZone: "America/Sao_Paulo" });
                     let statusClass = "text-gray-400";
                     let alerta = "";
@@ -135,10 +136,9 @@
                         statusClass = "text-red-500";
                     }
 
-                    const golsCasa = match.score.fullTime.home !== null ? match.score.fullTime.home.toString() : "";
-                    const golsFora = match.score.fullTime.away !== null ? match.score.fullTime.away.toString() : "";
+                    const golsCasa = match.score?.fullTime?.home !== null && match.score?.fullTime?.home !== undefined ? match.score.fullTime.home.toString() : "";
+                    const golsFora = match.score?.fullTime?.away !== null && match.score?.fullTime?.away !== undefined ? match.score.fullTime.away.toString() : "";
 
-                    // Puxando os dados de inteligência injetados pelo Python V12
                     const inteligencia = match.inteligencia || { 
                         clubelo: { home_elo: 'N/A', away_elo: 'N/A' }, 
                         recent_form: { home: ['-','-','-','-','-'], away: ['-','-','-','-','-'] } 
@@ -155,11 +155,11 @@
                         scoreAway: golsFora,
                         venue: "ESTÁDIO",
                         alert: alerta,
-                        // Novas variáveis V12 (Apenas elas são usadas no momento):
                         eloHome: inteligencia.clubelo.home_elo,
                         eloAway: inteligencia.clubelo.away_elo,
-                        formHome: inteligencia.recent_form.home,
-                        formAway: inteligencia.recent_form.away
+                        // BLINDAGEM 4: Garante que formHome e formAway sejam sempre Arrays
+                        formHome: Array.isArray(inteligencia.recent_form.home) ? inteligencia.recent_form.home : ['-','-','-','-','-'],
+                        formAway: Array.isArray(inteligencia.recent_form.away) ? inteligencia.recent_form.away : ['-','-','-','-','-']
                     });
                 });
 
@@ -174,12 +174,13 @@
                 renderAgenda();
 
             } catch (erro) {
-                console.error("Falha no motor V8:", erro);
+                console.error("Falha no motor:", erro);
+                // BLINDAGEM 5: Tela de erro elegante que não destrói o visual do site
                 document.getElementById('agenda-list').innerHTML = `
-                    <div class="text-center py-10 bg-red-900/20 border border-red-500/30 rounded-xl">
-                        <p class="text-red-500 text-xs font-black uppercase">O Tanque está vazio!</p>
-                        <p class="text-gray-400 text-[10px] mt-4">O caminhão tanque (Python) ainda não trouxe os dados.</p>
-                        <p class="text-gray-500 text-[10px] mt-2 font-mono">1. Vá no seu repositório no GitHub.<br>2. Clique na aba "Actions" lá em cima.<br>3. Clique em "Motor V8" na esquerda.<br>4. Clique em "Run workflow" para encher o tanque a 1ª vez!</p>
+                    <div class="text-center py-10 bg-red-900/20 border border-red-500/30 rounded-xl max-w-2xl mx-auto">
+                        <p class="text-red-500 text-xs font-black uppercase"><i class="fas fa-exclamation-triangle mr-2"></i>Aguardando Sincronização de Dados</p>
+                        <p class="text-gray-400 text-[10px] mt-4 font-mono">${erro.message}</p>
+                        <p class="text-gray-500 text-[10px] mt-2 font-mono">O robô está processando estatísticas pesadas. A tela voltará ao normal em instantes.</p>
                     </div>
                 `;
             }
@@ -214,7 +215,6 @@
             }
         }
 
-        // Função auxiliar para pintar as bolinhas do Momento Recente dinamicamente
         function renderFormDots(formArray) {
             return formArray.map(resultado => {
                 let colorClass = 'bg-trading-draw';

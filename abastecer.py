@@ -3,10 +3,9 @@ import json
 import requests
 from datetime import datetime, timedelta, timezone
 
-# Preparando o terreno para o SoccerData (Instalado via Actions)
+# Deixando a porta aberta para o SoccerData (Estatísticas Avançadas)
 try:
     import soccerdata as sd
-    import pandas as pd
     soccerdata_ready = True
 except ImportError:
     soccerdata_ready = False
@@ -20,38 +19,44 @@ amanha = hoje + timedelta(days=2)
 date_from = ontem.strftime('%Y-%m-%d')
 date_to = amanha.strftime('%Y-%m-%d')
 
-# BASE: Puxar o "Coração Ao Vivo" da API
+# RELÓGIO AO VIVO: Mantemos a API oficial APENAS para os minutos e placar real-time.
+# Isso evita que o GitHub Actions seja banido pelos bloqueios do Sofascore/FBref.
 url_api = f"https://api.football-data.org/v4/competitions/BSA/matches?dateFrom={date_from}&dateTo={date_to}"
 req = urllib.request.Request(url_api, headers={'X-Auth-Token': TOKEN})
 
-# O FILTRO PURIFICADOR: Transforma o lixo da API em nomes de Elite
-correcao_nomes = {
-    "Mineiro": "Atlético-MG",
-    "Clube do Remo": "Remo",
-    "Chapecoense AF": "Chapecoense"
-}
+# O SUPER TRADUTOR V12: Identifica times mesmo se a API mandar o nome bagunçado
+def padronizar_time(nome_sujo):
+    n = nome_sujo.upper()
+    if "MINEIRO" in n: return "Atlético-MG", "AtleticoMineiro"
+    if "CHAPECO" in n: return "Chapecoense", "Chapecoense"
+    if "REMO" in n: return "Remo", "Remo"
+    if "SANTOS" in n: return "Santos", "Santos"
+    if "FLAMENGO" in n: return "Flamengo", "Flamengo"
+    if "FLUMINENSE" in n: return "Fluminense", "Fluminense"
+    if "CORINTHIANS" in n: return "Corinthians", "Corinthians"
+    if "PALMEIRAS" in n: return "Palmeiras", "Palmeiras"
+    if "BOTAFOGO" in n: return "Botafogo", "Botafogo"
+    if "GREMIO" in n or "GRÊMIO" in n: return "Grêmio", "Gremio"
+    if "INTER" in n: return "Internacional", "Internacional"
+    if "CRUZEIRO" in n: return "Cruzeiro", "Cruzeiro"
+    if "PAULO" in n: return "São Paulo", "SaoPaulo"
+    if "VASCO" in n: return "Vasco", "Vasco"
+    if "PARANAENSE" in n: return "Athletico-PR", "Athletico"
+    if "BAHIA" in n: return "Bahia", "Bahia"
+    if "VITORIA" in n or "VITÓRIA" in n: return "Vitória", "Vitoria"
+    if "FORTALEZA" in n: return "Fortaleza", "Fortaleza"
+    if "JUVENTUDE" in n: return "Juventude", "Juventude"
+    if "CRICI" in n: return "Criciúma", "Criciuma"
+    if "BRAGANTINO" in n: return "Bragantino", "Bragantino"
+    if "GOIANIENSE" in n: return "Atlético-GO", "AtleticoGO"
+    if "CUIAB" in n: return "Cuiabá", "Cuiaba"
+    
+    # Fallback caso seja um time que não mapeamos
+    return nome_sujo.title(), nome_sujo.replace(" ", "")
 
-# MAPA CLUBELO
-mapa_clubelo = {
-    "Fluminense": "Fluminense",
-    "Corinthians": "Corinthians",
-    "Palmeiras": "Palmeiras",
-    "Flamengo": "Flamengo",
-    "Botafogo": "Botafogo",
-    "Grêmio": "Gremio",
-    "Internacional": "Internacional",
-    "Cruzeiro": "Cruzeiro",
-    "Atlético-MG": "AtleticoMineiro",
-    "São Paulo": "SaoPaulo",
-    "Vasco da Gama": "Vasco",
-    "Chapecoense": "Chapecoense",
-    "Remo": "Remo"
-}
-
-def buscar_elo(time_nome):
-    time_elo = mapa_clubelo.get(time_nome, time_nome.replace(" ", ""))
+def buscar_elo(nome_clubelo):
     try:
-        url = f"http://api.clubelo.com/{time_elo}"
+        url = f"http://api.clubelo.com/{nome_clubelo}"
         resposta = requests.get(url, timeout=5)
         if resposta.status_code == 200 and "Elo" in resposta.text:
             linhas = resposta.text.strip().split('\n')
@@ -68,29 +73,28 @@ try:
     jogos_enriquecidos = []
     
     for match in dados_originais.get('matches', []):
-        home_api = match['homeTeam'].get('shortName', match['homeTeam']['name'])
-        away_api = match['awayTeam'].get('shortName', match['awayTeam']['name'])
+        home_raw = match['homeTeam'].get('shortName', match['homeTeam']['name'])
+        away_raw = match['awayTeam'].get('shortName', match['awayTeam']['name'])
         
-        # Passa pelo corretor para arrumar o Chassi visual
-        home_oficial = correcao_nomes.get(home_api, home_api)
-        away_oficial = correcao_nomes.get(away_api, away_api)
+        # O Chassi HTML vai receber os nomes perfeitos, independentemente da API
+        home_tela, home_elo_name = padronizar_time(home_raw)
+        away_tela, away_elo_name = padronizar_time(away_raw)
         
-        # Devolve o nome purificado para o JSON que o seu HTML vai ler!
-        match['homeTeam']['shortName'] = home_oficial
-        match['awayTeam']['shortName'] = away_oficial
-        match['homeTeam']['name'] = home_oficial
-        match['awayTeam']['name'] = away_oficial
+        match['homeTeam']['shortName'] = home_tela
+        match['homeTeam']['name'] = home_tela
+        match['awayTeam']['shortName'] = away_tela
+        match['awayTeam']['name'] = away_tela
         
-        print(f"Minerando: {home_oficial} vs {away_oficial}...")
+        print(f"Minerando Inteligência: {home_tela} vs {away_tela}...")
         
-        # Injeta a Inteligência
+        # Injeta a Inteligência (Cérebro) sem quebrar o HTML (Chassi)
         match['inteligencia'] = {
             'clubelo': {
-                'home_elo': buscar_elo(home_oficial),
-                'away_elo': buscar_elo(away_oficial)
+                'home_elo': buscar_elo(home_elo_name),
+                'away_elo': buscar_elo(away_elo_name)
             },
             'recent_form': {
-                'home': ['V', 'V', 'E', 'D', 'V'], # Em breve: alimentado pelo SoccerData
+                'home': ['V', 'V', 'E', 'D', 'V'], # Espaço exato que o SoccerData FBref vai preencher a seguir
                 'away': ['D', 'E', 'V', 'D', 'E']
             }
         }
@@ -101,7 +105,7 @@ try:
     with open('jogos_de_hoje.json', 'w', encoding='utf-8') as f:
         json.dump(dados_finais, f, ensure_ascii=False, indent=2)
         
-    print("Tanque Bi-Turbo cheio! Nomes purificados + ClubElo capturado.")
+    print("Tanque Bi-Turbo cheio! Nomes purificados + ClubElo capturado com sucesso.")
 
 except Exception as e:
     print(f"Erro Fatal no motor V12: {e}")

@@ -17,16 +17,16 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Instalar Pecas do Motor V12
+      - name: Instalar Pecas do Motor Bi-Turbo
         run: |
           python -m pip install --upgrade pip
-          pip install requests
-      - name: Ligar o Motor (Puxar API + ClubElo)
+          pip install requests soccerdata pandas
+      - name: Ligar o Motor V12
         run: python abastecer.py
       - name: Guardar no Tanque
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "Mecanico V8"
           git add jogos_de_hoje.json
-          git commit -m "Automático: Abastecendo V12 (API + ClubElo)" || echo "Sem mudanças"
+          git commit -m "Automático: Abastecendo V12 (SoccerData Ready)" || echo "Sem mudanças"
           git push

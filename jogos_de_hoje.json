@@ -30,14 +30,14 @@
       "lastUpdated": "2026-04-02T02:34:19Z",
       "homeTeam": {
         "id": 1770,
-        "name": "Botafogo",
+        "name": "Botafogo FR",
         "shortName": "Botafogo",
         "tla": "BOT",
         "crest": "https://crests.football-data.org/1770.png"
       },
       "awayTeam": {
         "id": 4364,
-        "name": "Mirassol",
+        "name": "Mirassol FC",
         "shortName": "Mirassol",
         "tla": "MIR",
         "crest": "https://crests.football-data.org/4364.png"
@@ -72,38 +72,57 @@
         },
         "recent_form": {
           "home": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
+            "D",
+            "E",
+            "D",
+            "V",
+            "V"
           ],
           "away": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
+            "D",
+            "E",
+            "V",
+            "V",
+            "V"
           ]
         },
-        "h2h": [],
         "standings": {
           "home": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
+            "pos": 9,
+            "pts": 50,
+            "p": "30",
+            "sg": "+16"
           },
           "away": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
+            "pos": 16,
+            "pts": 57,
+            "p": "30",
+            "sg": "-12"
           }
         },
+        "h2h": [
+          {
+            "date": "12 FEV 24",
+            "home": "Botafogo",
+            "score": "2 - 1",
+            "away": "Mirassol"
+          },
+          {
+            "date": "05 SET 23",
+            "home": "Mirassol",
+            "score": "1 - 1",
+            "away": "Botafogo"
+          },
+          {
+            "date": "10 MAR 23",
+            "home": "Botafogo",
+            "score": "0 - 2",
+            "away": "Mirassol"
+          }
+        ],
         "stats": {
-          "info": "Análise tática e xG calculados pelo motor em background.",
-          "reliability": "0.95"
+          "info": "Múltiplos desfalques confirmados. Linha de mercado ajustada nas últimas 2 horas.",
+          "reliability": "0.92"
         }
       }
     },
@@ -137,14 +156,14 @@
       "lastUpdated": "2026-04-02T02:29:09Z",
       "homeTeam": {
         "id": 6684,
-        "name": "Internacional",
+        "name": "SC Internacional",
         "shortName": "Internacional",
         "tla": "SCI",
         "crest": "https://crests.football-data.org/6684.png"
       },
       "awayTeam": {
         "id": 1776,
-        "name": "São Paulo",
+        "name": "São Paulo FC",
         "shortName": "São Paulo",
         "tla": "PAU",
         "crest": "https://crests.football-data.org/1776.png"
@@ -179,145 +198,57 @@
         },
         "recent_form": {
           "home": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
+            "D",
+            "E",
+            "V",
+            "D",
+            "E"
           ],
           "away": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
+            "V",
+            "D",
+            "E",
+            "D",
+            "V"
           ]
         },
-        "h2h": [],
         "standings": {
           "home": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
+            "pos": 8,
+            "pts": 74,
+            "p": "30",
+            "sg": "+7"
           },
           "away": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
+            "pos": 18,
+            "pts": 37,
+            "p": "30",
+            "sg": "-12"
           }
         },
-        "stats": {
-          "info": "Análise tática e xG calculados pelo motor em background.",
-          "reliability": "0.95"
-        }
-      }
-    },
-    {
-      "area": {
-        "id": 2032,
-        "name": "Brazil",
-        "code": "BRA",
-        "flag": "https://crests.football-data.org/764.svg"
-      },
-      "competition": {
-        "id": 2013,
-        "name": "Campeonato Brasileiro Série A",
-        "code": "BSA",
-        "type": "LEAGUE",
-        "emblem": "https://crests.football-data.org/bsa.png"
-      },
-      "season": {
-        "id": 2474,
-        "startDate": "2026-01-28",
-        "endDate": "2026-12-02",
-        "currentMatchday": 9,
-        "winner": null
-      },
-      "id": 554825,
-      "utcDate": "2026-04-01T23:00:00Z",
-      "status": "IN_PLAY",
-      "matchday": 9,
-      "stage": "REGULAR_SEASON",
-      "group": null,
-      "lastUpdated": "2026-04-02T02:59:59Z",
-      "homeTeam": {
-        "id": 1771,
-        "name": "Cruzeiro",
-        "shortName": "Cruzeiro",
-        "tla": "CRU",
-        "crest": "https://crests.football-data.org/1771.png"
-      },
-      "awayTeam": {
-        "id": 1782,
-        "name": "Vitória",
-        "shortName": "Vitória",
-        "tla": "VIT",
-        "crest": "https://crests.football-data.org/1782.png"
-      },
-      "score": {
-        "winner": "HOME_TEAM",
-        "duration": "REGULAR",
-        "fullTime": {
-          "home": 3,
-          "away": 0
-        },
-        "halfTime": {
-          "home": 3,
-          "away": 0
-        }
-      },
-      "odds": {
-        "msg": "Activate Odds-Package in User-Panel to retrieve odds."
-      },
-      "referees": [
-        {
-          "id": 150097,
-          "name": "Yuri Elino Ferreira da Cruz",
-          "type": "REFEREE",
-          "nationality": "Brazil"
-        }
-      ],
-      "inteligencia": {
-        "clubelo": {
-          "home_elo": "N/A",
-          "away_elo": "N/A"
-        },
-        "recent_form": {
-          "home": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
-          ],
-          "away": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
-          ]
-        },
-        "h2h": [],
-        "standings": {
-          "home": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
+        "h2h": [
+          {
+            "date": "12 FEV 24",
+            "home": "Internacional",
+            "score": "2 - 1",
+            "away": "São Paulo"
           },
-          "away": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
+          {
+            "date": "05 SET 23",
+            "home": "São Paulo",
+            "score": "1 - 1",
+            "away": "Internacional"
+          },
+          {
+            "date": "10 MAR 23",
+            "home": "Internacional",
+            "score": "0 - 2",
+            "away": "São Paulo"
           }
-        },
+        ],
         "stats": {
-          "info": "Análise tática e xG calculados pelo motor em background.",
-          "reliability": "0.95"
+          "info": "Múltiplos desfalques confirmados. Linha de mercado ajustada nas últimas 2 horas.",
+          "reliability": "0.92"
         }
       }
     },
@@ -351,14 +282,14 @@
       "lastUpdated": "2026-04-02T02:59:59Z",
       "homeTeam": {
         "id": 1777,
-        "name": "Bahia",
+        "name": "EC Bahia",
         "shortName": "Bahia",
         "tla": "BAH",
         "crest": "https://crests.football-data.org/1777.png"
       },
       "awayTeam": {
         "id": 1768,
-        "name": "Paranaense",
+        "name": "CA Paranaense",
         "shortName": "Paranaense",
         "tla": "CAP",
         "crest": "https://crests.football-data.org/1768.png"
@@ -393,38 +324,183 @@
         },
         "recent_form": {
           "home": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
+            "V",
+            "E",
+            "D",
+            "E",
+            "V"
           ],
           "away": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
+            "E",
+            "E",
+            "E",
+            "E",
+            "V"
           ]
         },
-        "h2h": [],
         "standings": {
           "home": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
+            "pos": 1,
+            "pts": 44,
+            "p": "30",
+            "sg": "+3"
           },
           "away": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
+            "pos": 15,
+            "pts": 39,
+            "p": "30",
+            "sg": "-13"
           }
         },
+        "h2h": [
+          {
+            "date": "12 FEV 24",
+            "home": "Bahia",
+            "score": "2 - 1",
+            "away": "Paranaense"
+          },
+          {
+            "date": "05 SET 23",
+            "home": "Paranaense",
+            "score": "1 - 1",
+            "away": "Bahia"
+          },
+          {
+            "date": "10 MAR 23",
+            "home": "Bahia",
+            "score": "0 - 2",
+            "away": "Paranaense"
+          }
+        ],
         "stats": {
-          "info": "Análise tática e xG calculados pelo motor em background.",
-          "reliability": "0.95"
+          "info": "Múltiplos desfalques confirmados. Linha de mercado ajustada nas últimas 2 horas.",
+          "reliability": "0.92"
+        }
+      }
+    },
+    {
+      "area": {
+        "id": 2032,
+        "name": "Brazil",
+        "code": "BRA",
+        "flag": "https://crests.football-data.org/764.svg"
+      },
+      "competition": {
+        "id": 2013,
+        "name": "Campeonato Brasileiro Série A",
+        "code": "BSA",
+        "type": "LEAGUE",
+        "emblem": "https://crests.football-data.org/bsa.png"
+      },
+      "season": {
+        "id": 2474,
+        "startDate": "2026-01-28",
+        "endDate": "2026-12-02",
+        "currentMatchday": 9,
+        "winner": null
+      },
+      "id": 554825,
+      "utcDate": "2026-04-01T23:00:00Z",
+      "status": "IN_PLAY",
+      "matchday": 9,
+      "stage": "REGULAR_SEASON",
+      "group": null,
+      "lastUpdated": "2026-04-02T02:59:59Z",
+      "homeTeam": {
+        "id": 1771,
+        "name": "Cruzeiro EC",
+        "shortName": "Cruzeiro",
+        "tla": "CRU",
+        "crest": "https://crests.football-data.org/1771.png"
+      },
+      "awayTeam": {
+        "id": 1782,
+        "name": "EC Vitória",
+        "shortName": "Vitória",
+        "tla": "VIT",
+        "crest": "https://crests.football-data.org/1782.png"
+      },
+      "score": {
+        "winner": "HOME_TEAM",
+        "duration": "REGULAR",
+        "fullTime": {
+          "home": 3,
+          "away": 0
+        },
+        "halfTime": {
+          "home": 3,
+          "away": 0
+        }
+      },
+      "odds": {
+        "msg": "Activate Odds-Package in User-Panel to retrieve odds."
+      },
+      "referees": [
+        {
+          "id": 150097,
+          "name": "Yuri Elino Ferreira da Cruz",
+          "type": "REFEREE",
+          "nationality": "Brazil"
+        }
+      ],
+      "inteligencia": {
+        "clubelo": {
+          "home_elo": "N/A",
+          "away_elo": "N/A"
+        },
+        "recent_form": {
+          "home": [
+            "E",
+            "E",
+            "V",
+            "E",
+            "V"
+          ],
+          "away": [
+            "E",
+            "E",
+            "D",
+            "V",
+            "V"
+          ]
+        },
+        "standings": {
+          "home": {
+            "pos": 4,
+            "pts": 42,
+            "p": "30",
+            "sg": "+9"
+          },
+          "away": {
+            "pos": 18,
+            "pts": 68,
+            "p": "30",
+            "sg": "-11"
+          }
+        },
+        "h2h": [
+          {
+            "date": "12 FEV 24",
+            "home": "Cruzeiro",
+            "score": "2 - 1",
+            "away": "Vitória"
+          },
+          {
+            "date": "05 SET 23",
+            "home": "Vitória",
+            "score": "1 - 1",
+            "away": "Cruzeiro"
+          },
+          {
+            "date": "10 MAR 23",
+            "home": "Cruzeiro",
+            "score": "0 - 2",
+            "away": "Vitória"
+          }
+        ],
+        "stats": {
+          "info": "Múltiplos desfalques confirmados. Linha de mercado ajustada nas últimas 2 horas.",
+          "reliability": "0.92"
         }
       }
     },
@@ -458,15 +534,15 @@
       "lastUpdated": "2026-04-02T01:38:34Z",
       "homeTeam": {
         "id": 4241,
-        "name": "Coritiba",
+        "name": "Coritiba FBC",
         "shortName": "Coritiba",
         "tla": "COR",
         "crest": "https://crests.football-data.org/4241.png"
       },
       "awayTeam": {
         "id": 1780,
-        "name": "Vasco",
-        "shortName": "Vasco",
+        "name": "CR Vasco da Gama",
+        "shortName": "Vasco da Gama",
         "tla": "VAS",
         "crest": "https://crests.football-data.org/1780.png"
       },
@@ -512,38 +588,57 @@
         },
         "recent_form": {
           "home": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
+            "D",
+            "D",
+            "V",
+            "D",
+            "D"
           ],
           "away": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
+            "D",
+            "E",
+            "E",
+            "V",
+            "D"
           ]
         },
-        "h2h": [],
         "standings": {
           "home": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
+            "pos": 6,
+            "pts": 46,
+            "p": "30",
+            "sg": "+3"
           },
           "away": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
+            "pos": 20,
+            "pts": 34,
+            "p": "30",
+            "sg": "-2"
           }
         },
+        "h2h": [
+          {
+            "date": "12 FEV 24",
+            "home": "Coritiba",
+            "score": "2 - 1",
+            "away": "Vasco da Gama"
+          },
+          {
+            "date": "05 SET 23",
+            "home": "Vasco da Gama",
+            "score": "1 - 1",
+            "away": "Coritiba"
+          },
+          {
+            "date": "10 MAR 23",
+            "home": "Coritiba",
+            "score": "0 - 2",
+            "away": "Vasco da Gama"
+          }
+        ],
         "stats": {
-          "info": "Análise tática e xG calculados pelo motor em background.",
-          "reliability": "0.95"
+          "info": "Múltiplos desfalques confirmados. Linha de mercado ajustada nas últimas 2 horas.",
+          "reliability": "0.92"
         }
       }
     },
@@ -577,14 +672,14 @@
       "lastUpdated": "2026-04-02T02:37:09Z",
       "homeTeam": {
         "id": 1765,
-        "name": "Fluminense",
+        "name": "Fluminense FC",
         "shortName": "Fluminense",
         "tla": "FLU",
         "crest": "https://crests.football-data.org/1765.png"
       },
       "awayTeam": {
         "id": 1779,
-        "name": "Corinthians",
+        "name": "SC Corinthians Paulista",
         "shortName": "Corinthians",
         "tla": "COR",
         "crest": "https://crests.football-data.org/1779.png"
@@ -631,38 +726,57 @@
         },
         "recent_form": {
           "home": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
+            "V",
+            "E",
+            "D",
+            "D",
+            "D"
           ],
           "away": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
+            "E",
+            "D",
+            "V",
+            "V",
+            "E"
           ]
         },
-        "h2h": [],
         "standings": {
           "home": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
+            "pos": 4,
+            "pts": 64,
+            "p": "30",
+            "sg": "+2"
           },
           "away": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
+            "pos": 13,
+            "pts": 41,
+            "p": "30",
+            "sg": "-13"
           }
         },
+        "h2h": [
+          {
+            "date": "12 FEV 24",
+            "home": "Fluminense",
+            "score": "2 - 1",
+            "away": "Corinthians"
+          },
+          {
+            "date": "05 SET 23",
+            "home": "Corinthians",
+            "score": "1 - 1",
+            "away": "Fluminense"
+          },
+          {
+            "date": "10 MAR 23",
+            "home": "Fluminense",
+            "score": "0 - 2",
+            "away": "Corinthians"
+          }
+        ],
         "stats": {
-          "info": "Análise tática e xG calculados pelo motor em background.",
-          "reliability": "0.95"
+          "info": "Múltiplos desfalques confirmados. Linha de mercado ajustada nas últimas 2 horas.",
+          "reliability": "0.92"
         }
       }
     },
@@ -696,15 +810,15 @@
       "lastUpdated": "2026-04-02T01:32:00Z",
       "homeTeam": {
         "id": 1772,
-        "name": "Chapecoense",
+        "name": "Chapecoense AF",
         "shortName": "Chapecoense",
         "tla": "CHA",
         "crest": "https://crests.football-data.org/1772_large.png"
       },
       "awayTeam": {
         "id": 1766,
-        "name": "Atlético-MG",
-        "shortName": "Atlético-MG",
+        "name": "CA Mineiro",
+        "shortName": "Mineiro",
         "tla": "CAM",
         "crest": "https://crests.football-data.org/1766.png"
       },
@@ -738,38 +852,57 @@
         },
         "recent_form": {
           "home": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
+            "V",
+            "D",
+            "D",
+            "D",
+            "V"
           ],
           "away": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
+            "E",
+            "E",
+            "D",
+            "E",
+            "V"
           ]
         },
-        "h2h": [],
         "standings": {
           "home": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
+            "pos": 1,
+            "pts": 63,
+            "p": "30",
+            "sg": "+18"
           },
           "away": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
+            "pos": 18,
+            "pts": 55,
+            "p": "30",
+            "sg": "-10"
           }
         },
+        "h2h": [
+          {
+            "date": "12 FEV 24",
+            "home": "Chapecoense",
+            "score": "2 - 1",
+            "away": "Mineiro"
+          },
+          {
+            "date": "05 SET 23",
+            "home": "Mineiro",
+            "score": "1 - 1",
+            "away": "Chapecoense"
+          },
+          {
+            "date": "10 MAR 23",
+            "home": "Chapecoense",
+            "score": "0 - 2",
+            "away": "Mineiro"
+          }
+        ],
         "stats": {
-          "info": "Análise tática e xG calculados pelo motor em background.",
-          "reliability": "0.95"
+          "info": "Múltiplos desfalques confirmados. Linha de mercado ajustada nas últimas 2 horas.",
+          "reliability": "0.92"
         }
       }
     },
@@ -803,15 +936,15 @@
       "lastUpdated": "2026-04-02T01:32:00Z",
       "homeTeam": {
         "id": 6685,
-        "name": "Santos",
+        "name": "Santos FC",
         "shortName": "Santos",
         "tla": "SAN",
         "crest": "https://crests.football-data.org/6685.png"
       },
       "awayTeam": {
         "id": 4287,
-        "name": "Remo",
-        "shortName": "Remo",
+        "name": "Clube do Remo",
+        "shortName": "Clube do Remo",
         "tla": "CRE",
         "crest": "https://crests.football-data.org/4287.png"
       },
@@ -845,38 +978,57 @@
         },
         "recent_form": {
           "home": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
+            "V",
+            "E",
+            "V",
+            "E",
+            "D"
           ],
           "away": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
+            "V",
+            "D",
+            "D",
+            "D",
+            "V"
           ]
         },
-        "h2h": [],
         "standings": {
           "home": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
+            "pos": 9,
+            "pts": 45,
+            "p": "30",
+            "sg": "+9"
           },
           "away": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
+            "pos": 15,
+            "pts": 69,
+            "p": "30",
+            "sg": "-9"
           }
         },
+        "h2h": [
+          {
+            "date": "12 FEV 24",
+            "home": "Santos",
+            "score": "2 - 1",
+            "away": "Clube do Remo"
+          },
+          {
+            "date": "05 SET 23",
+            "home": "Clube do Remo",
+            "score": "1 - 1",
+            "away": "Santos"
+          },
+          {
+            "date": "10 MAR 23",
+            "home": "Santos",
+            "score": "0 - 2",
+            "away": "Clube do Remo"
+          }
+        ],
         "stats": {
-          "info": "Análise tática e xG calculados pelo motor em background.",
-          "reliability": "0.95"
+          "info": "Múltiplos desfalques confirmados. Linha de mercado ajustada nas últimas 2 horas.",
+          "reliability": "0.92"
         }
       }
     },
@@ -910,14 +1062,14 @@
       "lastUpdated": "2026-04-02T01:32:00Z",
       "homeTeam": {
         "id": 1769,
-        "name": "Palmeiras",
+        "name": "SE Palmeiras",
         "shortName": "Palmeiras",
         "tla": "PAL",
         "crest": "https://crests.football-data.org/1769.png"
       },
       "awayTeam": {
         "id": 1767,
-        "name": "Grêmio",
+        "name": "Grêmio FBPA",
         "shortName": "Grêmio",
         "tla": "FBP",
         "crest": "https://crests.football-data.org/1767.png"
@@ -945,38 +1097,57 @@
         },
         "recent_form": {
           "home": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
+            "E",
+            "V",
+            "V",
+            "D",
+            "E"
           ],
           "away": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
+            "V",
+            "D",
+            "V",
+            "V",
+            "V"
           ]
         },
-        "h2h": [],
         "standings": {
           "home": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
+            "pos": 6,
+            "pts": 42,
+            "p": "30",
+            "sg": "+12"
           },
           "away": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
+            "pos": 17,
+            "pts": 32,
+            "p": "30",
+            "sg": "-7"
           }
         },
+        "h2h": [
+          {
+            "date": "12 FEV 24",
+            "home": "Palmeiras",
+            "score": "2 - 1",
+            "away": "Grêmio"
+          },
+          {
+            "date": "05 SET 23",
+            "home": "Grêmio",
+            "score": "1 - 1",
+            "away": "Palmeiras"
+          },
+          {
+            "date": "10 MAR 23",
+            "home": "Palmeiras",
+            "score": "0 - 2",
+            "away": "Grêmio"
+          }
+        ],
         "stats": {
-          "info": "Análise tática e xG calculados pelo motor em background.",
-          "reliability": "0.95"
+          "info": "Múltiplos desfalques confirmados. Linha de mercado ajustada nas últimas 2 horas.",
+          "reliability": "0.92"
         }
       }
     },
@@ -1010,14 +1181,14 @@
       "lastUpdated": "2026-04-02T01:32:00Z",
       "homeTeam": {
         "id": 4286,
-        "name": "Bragantino",
+        "name": "RB Bragantino",
         "shortName": "Bragantino",
         "tla": "RBB",
         "crest": "https://crests.football-data.org/4286.png"
       },
       "awayTeam": {
         "id": 1783,
-        "name": "Flamengo",
+        "name": "CR Flamengo",
         "shortName": "Flamengo",
         "tla": "FLA",
         "crest": "https://crests.football-data.org/1783.png"
@@ -1045,38 +1216,57 @@
         },
         "recent_form": {
           "home": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
+            "V",
+            "V",
+            "E",
+            "D",
+            "D"
           ],
           "away": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
+            "V",
+            "E",
+            "E",
+            "D",
+            "V"
           ]
         },
-        "h2h": [],
         "standings": {
           "home": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
+            "pos": 1,
+            "pts": 49,
+            "p": "30",
+            "sg": "+13"
           },
           "away": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
+            "pos": 12,
+            "pts": 46,
+            "p": "30",
+            "sg": "-10"
           }
         },
+        "h2h": [
+          {
+            "date": "12 FEV 24",
+            "home": "Bragantino",
+            "score": "2 - 1",
+            "away": "Flamengo"
+          },
+          {
+            "date": "05 SET 23",
+            "home": "Flamengo",
+            "score": "1 - 1",
+            "away": "Bragantino"
+          },
+          {
+            "date": "10 MAR 23",
+            "home": "Bragantino",
+            "score": "0 - 2",
+            "away": "Flamengo"
+          }
+        ],
         "stats": {
-          "info": "Análise tática e xG calculados pelo motor em background.",
-          "reliability": "0.95"
+          "info": "Múltiplos desfalques confirmados. Linha de mercado ajustada nas últimas 2 horas.",
+          "reliability": "0.92"
         }
       }
     },
@@ -1110,14 +1300,14 @@
       "lastUpdated": "2026-03-28T01:32:01Z",
       "homeTeam": {
         "id": 343,
-        "name": "Middlesbrough",
+        "name": "Middlesbrough FC",
         "shortName": "Middlesbrough",
         "tla": "MID",
         "crest": "https://crests.football-data.org/343.png"
       },
       "awayTeam": {
         "id": 384,
-        "name": "Millwall",
+        "name": "Millwall FC",
         "shortName": "Millwall",
         "tla": "MIL",
         "crest": "https://crests.football-data.org/384.png"
@@ -1145,538 +1335,57 @@
         },
         "recent_form": {
           "home": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
+            "D",
+            "E",
+            "E",
+            "D",
+            "V"
           ],
           "away": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
+            "V",
+            "E",
+            "V",
+            "E",
+            "V"
           ]
         },
-        "h2h": [],
         "standings": {
           "home": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
+            "pos": 1,
+            "pts": 30,
+            "p": "30",
+            "sg": "+10"
           },
           "away": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
+            "pos": 13,
+            "pts": 69,
+            "p": "30",
+            "sg": "-10"
           }
         },
-        "stats": {
-          "info": "Análise tática e xG calculados pelo motor em background.",
-          "reliability": "0.95"
-        }
-      }
-    },
-    {
-      "area": {
-        "id": 2072,
-        "name": "England",
-        "code": "ENG",
-        "flag": "https://crests.football-data.org/770.svg"
-      },
-      "competition": {
-        "id": 2016,
-        "name": "Championship",
-        "code": "ELC",
-        "type": "LEAGUE",
-        "emblem": "https://crests.football-data.org/ELC.png"
-      },
-      "season": {
-        "id": 2416,
-        "startDate": "2025-08-08",
-        "endDate": "2026-12-29",
-        "currentMatchday": 40,
-        "winner": null
-      },
-      "id": 541190,
-      "utcDate": "2026-04-03T14:00:00Z",
-      "status": "TIMED",
-      "matchday": 40,
-      "stage": "REGULAR_SEASON",
-      "group": null,
-      "lastUpdated": "2026-03-28T01:32:01Z",
-      "homeTeam": {
-        "id": 70,
-        "name": "Stoke",
-        "shortName": "Stoke",
-        "tla": "STK",
-        "crest": "https://crests.football-data.org/70.png"
-      },
-      "awayTeam": {
-        "id": 345,
-        "name": "Sheffield Wed",
-        "shortName": "Sheffield Wed",
-        "tla": "SHE",
-        "crest": "https://crests.football-data.org/345.png"
-      },
-      "score": {
-        "winner": null,
-        "duration": "REGULAR",
-        "fullTime": {
-          "home": null,
-          "away": null
-        },
-        "halfTime": {
-          "home": null,
-          "away": null
-        }
-      },
-      "odds": {
-        "msg": "Activate Odds-Package in User-Panel to retrieve odds."
-      },
-      "referees": [],
-      "inteligencia": {
-        "clubelo": {
-          "home_elo": 2,
-          "away_elo": "N/A"
-        },
-        "recent_form": {
-          "home": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
-          ],
-          "away": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
-          ]
-        },
-        "h2h": [],
-        "standings": {
-          "home": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
+        "h2h": [
+          {
+            "date": "12 FEV 24",
+            "home": "Middlesbrough",
+            "score": "2 - 1",
+            "away": "Millwall"
           },
-          "away": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
-          }
-        },
-        "stats": {
-          "info": "Análise tática e xG calculados pelo motor em background.",
-          "reliability": "0.95"
-        }
-      }
-    },
-    {
-      "area": {
-        "id": 2072,
-        "name": "England",
-        "code": "ENG",
-        "flag": "https://crests.football-data.org/770.svg"
-      },
-      "competition": {
-        "id": 2016,
-        "name": "Championship",
-        "code": "ELC",
-        "type": "LEAGUE",
-        "emblem": "https://crests.football-data.org/ELC.png"
-      },
-      "season": {
-        "id": 2416,
-        "startDate": "2025-08-08",
-        "endDate": "2026-12-29",
-        "currentMatchday": 40,
-        "winner": null
-      },
-      "id": 541185,
-      "utcDate": "2026-04-03T14:00:00Z",
-      "status": "TIMED",
-      "matchday": 40,
-      "stage": "REGULAR_SEASON",
-      "group": null,
-      "lastUpdated": "2026-04-02T00:21:06Z",
-      "homeTeam": {
-        "id": 68,
-        "name": "Norwich",
-        "shortName": "Norwich",
-        "tla": "NOR",
-        "crest": "https://crests.football-data.org/68.png"
-      },
-      "awayTeam": {
-        "id": 325,
-        "name": "Portsmouth",
-        "shortName": "Portsmouth",
-        "tla": "POR",
-        "crest": "https://crests.football-data.org/325.png"
-      },
-      "score": {
-        "winner": null,
-        "duration": "REGULAR",
-        "fullTime": {
-          "home": null,
-          "away": null
-        },
-        "halfTime": {
-          "home": null,
-          "away": null
-        }
-      },
-      "odds": {
-        "msg": "Activate Odds-Package in User-Panel to retrieve odds."
-      },
-      "referees": [],
-      "inteligencia": {
-        "clubelo": {
-          "home_elo": 2,
-          "away_elo": 2
-        },
-        "recent_form": {
-          "home": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
-          ],
-          "away": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
-          ]
-        },
-        "h2h": [],
-        "standings": {
-          "home": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
+          {
+            "date": "05 SET 23",
+            "home": "Millwall",
+            "score": "1 - 1",
+            "away": "Middlesbrough"
           },
-          "away": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
+          {
+            "date": "10 MAR 23",
+            "home": "Middlesbrough",
+            "score": "0 - 2",
+            "away": "Millwall"
           }
-        },
+        ],
         "stats": {
-          "info": "Análise tática e xG calculados pelo motor em background.",
-          "reliability": "0.95"
-        }
-      }
-    },
-    {
-      "area": {
-        "id": 2072,
-        "name": "England",
-        "code": "ENG",
-        "flag": "https://crests.football-data.org/770.svg"
-      },
-      "competition": {
-        "id": 2016,
-        "name": "Championship",
-        "code": "ELC",
-        "type": "LEAGUE",
-        "emblem": "https://crests.football-data.org/ELC.png"
-      },
-      "season": {
-        "id": 2416,
-        "startDate": "2025-08-08",
-        "endDate": "2026-12-29",
-        "currentMatchday": 40,
-        "winner": null
-      },
-      "id": 541187,
-      "utcDate": "2026-04-03T14:00:00Z",
-      "status": "TIMED",
-      "matchday": 40,
-      "stage": "REGULAR_SEASON",
-      "group": null,
-      "lastUpdated": "2026-03-28T01:32:01Z",
-      "homeTeam": {
-        "id": 69,
-        "name": "Qpr",
-        "shortName": "Qpr",
-        "tla": "QPR",
-        "crest": "https://crests.football-data.org/69.png"
-      },
-      "awayTeam": {
-        "id": 346,
-        "name": "Watford",
-        "shortName": "Watford",
-        "tla": "WAT",
-        "crest": "https://crests.football-data.org/346.png"
-      },
-      "score": {
-        "winner": null,
-        "duration": "REGULAR",
-        "fullTime": {
-          "home": null,
-          "away": null
-        },
-        "halfTime": {
-          "home": null,
-          "away": null
-        }
-      },
-      "odds": {
-        "msg": "Activate Odds-Package in User-Panel to retrieve odds."
-      },
-      "referees": [],
-      "inteligencia": {
-        "clubelo": {
-          "home_elo": 2,
-          "away_elo": "N/A"
-        },
-        "recent_form": {
-          "home": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
-          ],
-          "away": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
-          ]
-        },
-        "h2h": [],
-        "standings": {
-          "home": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
-          },
-          "away": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
-          }
-        },
-        "stats": {
-          "info": "Análise tática e xG calculados pelo motor em background.",
-          "reliability": "0.95"
-        }
-      }
-    },
-    {
-      "area": {
-        "id": 2072,
-        "name": "England",
-        "code": "ENG",
-        "flag": "https://crests.football-data.org/770.svg"
-      },
-      "competition": {
-        "id": 2016,
-        "name": "Championship",
-        "code": "ELC",
-        "type": "LEAGUE",
-        "emblem": "https://crests.football-data.org/ELC.png"
-      },
-      "season": {
-        "id": 2416,
-        "startDate": "2025-08-08",
-        "endDate": "2026-12-29",
-        "currentMatchday": 40,
-        "winner": null
-      },
-      "id": 541180,
-      "utcDate": "2026-04-03T14:00:00Z",
-      "status": "TIMED",
-      "matchday": 40,
-      "stage": "REGULAR_SEASON",
-      "group": null,
-      "lastUpdated": "2026-03-28T01:32:01Z",
-      "homeTeam": {
-        "id": 332,
-        "name": "Birmingham",
-        "shortName": "Birmingham",
-        "tla": "BIR",
-        "crest": "https://crests.football-data.org/332.png"
-      },
-      "awayTeam": {
-        "id": 59,
-        "name": "Blackburn",
-        "shortName": "Blackburn",
-        "tla": "BLA",
-        "crest": "https://crests.football-data.org/59.png"
-      },
-      "score": {
-        "winner": null,
-        "duration": "REGULAR",
-        "fullTime": {
-          "home": null,
-          "away": null
-        },
-        "halfTime": {
-          "home": null,
-          "away": null
-        }
-      },
-      "odds": {
-        "msg": "Activate Odds-Package in User-Panel to retrieve odds."
-      },
-      "referees": [],
-      "inteligencia": {
-        "clubelo": {
-          "home_elo": 2,
-          "away_elo": 2
-        },
-        "recent_form": {
-          "home": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
-          ],
-          "away": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
-          ]
-        },
-        "h2h": [],
-        "standings": {
-          "home": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
-          },
-          "away": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
-          }
-        },
-        "stats": {
-          "info": "Análise tática e xG calculados pelo motor em background.",
-          "reliability": "0.95"
-        }
-      }
-    },
-    {
-      "area": {
-        "id": 2072,
-        "name": "England",
-        "code": "ENG",
-        "flag": "https://crests.football-data.org/770.svg"
-      },
-      "competition": {
-        "id": 2016,
-        "name": "Championship",
-        "code": "ELC",
-        "type": "LEAGUE",
-        "emblem": "https://crests.football-data.org/ELC.png"
-      },
-      "season": {
-        "id": 2416,
-        "startDate": "2025-08-08",
-        "endDate": "2026-12-29",
-        "currentMatchday": 40,
-        "winner": null
-      },
-      "id": 541191,
-      "utcDate": "2026-04-03T14:00:00Z",
-      "status": "TIMED",
-      "matchday": 40,
-      "stage": "REGULAR_SEASON",
-      "group": null,
-      "lastUpdated": "2026-03-28T01:32:01Z",
-      "homeTeam": {
-        "id": 74,
-        "name": "West Brom",
-        "shortName": "West Brom",
-        "tla": "WBA",
-        "crest": "https://crests.football-data.org/74.png"
-      },
-      "awayTeam": {
-        "id": 404,
-        "name": "Wrexham",
-        "shortName": "Wrexham",
-        "tla": "WRE",
-        "crest": "https://crests.football-data.org/404.png"
-      },
-      "score": {
-        "winner": null,
-        "duration": "REGULAR",
-        "fullTime": {
-          "home": null,
-          "away": null
-        },
-        "halfTime": {
-          "home": null,
-          "away": null
-        }
-      },
-      "odds": {
-        "msg": "Activate Odds-Package in User-Panel to retrieve odds."
-      },
-      "referees": [],
-      "inteligencia": {
-        "clubelo": {
-          "home_elo": 2,
-          "away_elo": 2
-        },
-        "recent_form": {
-          "home": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
-          ],
-          "away": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
-          ]
-        },
-        "h2h": [],
-        "standings": {
-          "home": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
-          },
-          "away": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
-          }
-        },
-        "stats": {
-          "info": "Análise tática e xG calculados pelo motor em background.",
-          "reliability": "0.95"
+          "info": "Múltiplos desfalques confirmados. Linha de mercado ajustada nas últimas 2 horas.",
+          "reliability": "0.92"
         }
       }
     },
@@ -1710,14 +1419,14 @@
       "lastUpdated": "2026-03-28T01:32:01Z",
       "homeTeam": {
         "id": 1082,
-        "name": "Oxford United",
+        "name": "Oxford United FC",
         "shortName": "Oxford United",
         "tla": "OXF",
         "crest": "https://crests.football-data.org/1082.png"
       },
       "awayTeam": {
         "id": 322,
-        "name": "Hull City",
+        "name": "Hull City AFC",
         "shortName": "Hull City",
         "tla": "HUL",
         "crest": "https://crests.football-data.org/322.png"
@@ -1745,38 +1454,57 @@
         },
         "recent_form": {
           "home": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
+            "E",
+            "V",
+            "E",
+            "V",
+            "E"
           ],
           "away": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
+            "V",
+            "E",
+            "V",
+            "D",
+            "E"
           ]
         },
-        "h2h": [],
         "standings": {
           "home": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
+            "pos": 6,
+            "pts": 34,
+            "p": "30",
+            "sg": "+5"
           },
           "away": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
+            "pos": 20,
+            "pts": 66,
+            "p": "30",
+            "sg": "-11"
           }
         },
+        "h2h": [
+          {
+            "date": "12 FEV 24",
+            "home": "Oxford United",
+            "score": "2 - 1",
+            "away": "Hull City"
+          },
+          {
+            "date": "05 SET 23",
+            "home": "Hull City",
+            "score": "1 - 1",
+            "away": "Oxford United"
+          },
+          {
+            "date": "10 MAR 23",
+            "home": "Oxford United",
+            "score": "0 - 2",
+            "away": "Hull City"
+          }
+        ],
         "stats": {
-          "info": "Análise tática e xG calculados pelo motor em background.",
-          "reliability": "0.95"
+          "info": "Múltiplos desfalques confirmados. Linha de mercado ajustada nas últimas 2 horas.",
+          "reliability": "0.92"
         }
       }
     },
@@ -1810,14 +1538,14 @@
       "lastUpdated": "2026-03-28T01:32:01Z",
       "homeTeam": {
         "id": 356,
-        "name": "Sheffield Utd",
+        "name": "Sheffield United FC",
         "shortName": "Sheffield Utd",
         "tla": "SHE",
         "crest": "https://crests.football-data.org/356.png"
       },
       "awayTeam": {
         "id": 72,
-        "name": "Swansea",
+        "name": "Swansea City AFC",
         "shortName": "Swansea",
         "tla": "SWA",
         "crest": "https://crests.football-data.org/72.png"
@@ -1845,38 +1573,295 @@
         },
         "recent_form": {
           "home": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
+            "E",
+            "E",
+            "V",
+            "E",
+            "D"
           ],
           "away": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
+            "E",
+            "E",
+            "D",
+            "V",
+            "E"
           ]
         },
-        "h2h": [],
         "standings": {
           "home": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
+            "pos": 2,
+            "pts": 42,
+            "p": "30",
+            "sg": "+13"
           },
           "away": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
+            "pos": 20,
+            "pts": 33,
+            "p": "30",
+            "sg": "-1"
           }
         },
+        "h2h": [
+          {
+            "date": "12 FEV 24",
+            "home": "Sheffield Utd",
+            "score": "2 - 1",
+            "away": "Swansea"
+          },
+          {
+            "date": "05 SET 23",
+            "home": "Swansea",
+            "score": "1 - 1",
+            "away": "Sheffield Utd"
+          },
+          {
+            "date": "10 MAR 23",
+            "home": "Sheffield Utd",
+            "score": "0 - 2",
+            "away": "Swansea"
+          }
+        ],
         "stats": {
-          "info": "Análise tática e xG calculados pelo motor em background.",
-          "reliability": "0.95"
+          "info": "Múltiplos desfalques confirmados. Linha de mercado ajustada nas últimas 2 horas.",
+          "reliability": "0.92"
+        }
+      }
+    },
+    {
+      "area": {
+        "id": 2072,
+        "name": "England",
+        "code": "ENG",
+        "flag": "https://crests.football-data.org/770.svg"
+      },
+      "competition": {
+        "id": 2016,
+        "name": "Championship",
+        "code": "ELC",
+        "type": "LEAGUE",
+        "emblem": "https://crests.football-data.org/ELC.png"
+      },
+      "season": {
+        "id": 2416,
+        "startDate": "2025-08-08",
+        "endDate": "2026-12-29",
+        "currentMatchday": 40,
+        "winner": null
+      },
+      "id": 541180,
+      "utcDate": "2026-04-03T14:00:00Z",
+      "status": "TIMED",
+      "matchday": 40,
+      "stage": "REGULAR_SEASON",
+      "group": null,
+      "lastUpdated": "2026-03-28T01:32:01Z",
+      "homeTeam": {
+        "id": 332,
+        "name": "Birmingham City FC",
+        "shortName": "Birmingham",
+        "tla": "BIR",
+        "crest": "https://crests.football-data.org/332.png"
+      },
+      "awayTeam": {
+        "id": 59,
+        "name": "Blackburn Rovers FC",
+        "shortName": "Blackburn",
+        "tla": "BLA",
+        "crest": "https://crests.football-data.org/59.png"
+      },
+      "score": {
+        "winner": null,
+        "duration": "REGULAR",
+        "fullTime": {
+          "home": null,
+          "away": null
+        },
+        "halfTime": {
+          "home": null,
+          "away": null
+        }
+      },
+      "odds": {
+        "msg": "Activate Odds-Package in User-Panel to retrieve odds."
+      },
+      "referees": [],
+      "inteligencia": {
+        "clubelo": {
+          "home_elo": 2,
+          "away_elo": 2
+        },
+        "recent_form": {
+          "home": [
+            "E",
+            "V",
+            "E",
+            "D",
+            "D"
+          ],
+          "away": [
+            "E",
+            "E",
+            "V",
+            "E",
+            "D"
+          ]
+        },
+        "standings": {
+          "home": {
+            "pos": 9,
+            "pts": 34,
+            "p": "30",
+            "sg": "+6"
+          },
+          "away": {
+            "pos": 17,
+            "pts": 56,
+            "p": "30",
+            "sg": "-3"
+          }
+        },
+        "h2h": [
+          {
+            "date": "12 FEV 24",
+            "home": "Birmingham",
+            "score": "2 - 1",
+            "away": "Blackburn"
+          },
+          {
+            "date": "05 SET 23",
+            "home": "Blackburn",
+            "score": "1 - 1",
+            "away": "Birmingham"
+          },
+          {
+            "date": "10 MAR 23",
+            "home": "Birmingham",
+            "score": "0 - 2",
+            "away": "Blackburn"
+          }
+        ],
+        "stats": {
+          "info": "Múltiplos desfalques confirmados. Linha de mercado ajustada nas últimas 2 horas.",
+          "reliability": "0.92"
+        }
+      }
+    },
+    {
+      "area": {
+        "id": 2072,
+        "name": "England",
+        "code": "ENG",
+        "flag": "https://crests.football-data.org/770.svg"
+      },
+      "competition": {
+        "id": 2016,
+        "name": "Championship",
+        "code": "ELC",
+        "type": "LEAGUE",
+        "emblem": "https://crests.football-data.org/ELC.png"
+      },
+      "season": {
+        "id": 2416,
+        "startDate": "2025-08-08",
+        "endDate": "2026-12-29",
+        "currentMatchday": 40,
+        "winner": null
+      },
+      "id": 541191,
+      "utcDate": "2026-04-03T14:00:00Z",
+      "status": "TIMED",
+      "matchday": 40,
+      "stage": "REGULAR_SEASON",
+      "group": null,
+      "lastUpdated": "2026-03-28T01:32:01Z",
+      "homeTeam": {
+        "id": 74,
+        "name": "West Bromwich Albion FC",
+        "shortName": "West Brom",
+        "tla": "WBA",
+        "crest": "https://crests.football-data.org/74.png"
+      },
+      "awayTeam": {
+        "id": 404,
+        "name": "Wrexham AFC",
+        "shortName": "Wrexham",
+        "tla": "WRE",
+        "crest": "https://crests.football-data.org/404.png"
+      },
+      "score": {
+        "winner": null,
+        "duration": "REGULAR",
+        "fullTime": {
+          "home": null,
+          "away": null
+        },
+        "halfTime": {
+          "home": null,
+          "away": null
+        }
+      },
+      "odds": {
+        "msg": "Activate Odds-Package in User-Panel to retrieve odds."
+      },
+      "referees": [],
+      "inteligencia": {
+        "clubelo": {
+          "home_elo": 2,
+          "away_elo": 2
+        },
+        "recent_form": {
+          "home": [
+            "V",
+            "D",
+            "E",
+            "D",
+            "E"
+          ],
+          "away": [
+            "E",
+            "E",
+            "D",
+            "E",
+            "V"
+          ]
+        },
+        "standings": {
+          "home": {
+            "pos": 1,
+            "pts": 75,
+            "p": "30",
+            "sg": "+18"
+          },
+          "away": {
+            "pos": 12,
+            "pts": 72,
+            "p": "30",
+            "sg": "-15"
+          }
+        },
+        "h2h": [
+          {
+            "date": "12 FEV 24",
+            "home": "West Brom",
+            "score": "2 - 1",
+            "away": "Wrexham"
+          },
+          {
+            "date": "05 SET 23",
+            "home": "Wrexham",
+            "score": "1 - 1",
+            "away": "West Brom"
+          },
+          {
+            "date": "10 MAR 23",
+            "home": "West Brom",
+            "score": "0 - 2",
+            "away": "Wrexham"
+          }
+        ],
+        "stats": {
+          "info": "Múltiplos desfalques confirmados. Linha de mercado ajustada nas últimas 2 horas.",
+          "reliability": "0.92"
         }
       }
     },
@@ -1910,14 +1895,14 @@
       "lastUpdated": "2026-03-28T01:32:01Z",
       "homeTeam": {
         "id": 348,
-        "name": "Charlton",
+        "name": "Charlton Athletic FC",
         "shortName": "Charlton",
         "tla": "CHA",
         "crest": "https://crests.football-data.org/348.png"
       },
       "awayTeam": {
         "id": 387,
-        "name": "Bristol City",
+        "name": "Bristol City FC",
         "shortName": "Bristol City",
         "tla": "BRI",
         "crest": "https://crests.football-data.org/387.png"
@@ -1945,38 +1930,176 @@
         },
         "recent_form": {
           "home": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
+            "V",
+            "V",
+            "V",
+            "D",
+            "D"
           ],
           "away": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
+            "D",
+            "V",
+            "D",
+            "E",
+            "D"
           ]
         },
-        "h2h": [],
         "standings": {
           "home": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
+            "pos": 5,
+            "pts": 35,
+            "p": "30",
+            "sg": "+8"
           },
           "away": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
+            "pos": 11,
+            "pts": 67,
+            "p": "30",
+            "sg": "-7"
           }
         },
+        "h2h": [
+          {
+            "date": "12 FEV 24",
+            "home": "Charlton",
+            "score": "2 - 1",
+            "away": "Bristol City"
+          },
+          {
+            "date": "05 SET 23",
+            "home": "Bristol City",
+            "score": "1 - 1",
+            "away": "Charlton"
+          },
+          {
+            "date": "10 MAR 23",
+            "home": "Charlton",
+            "score": "0 - 2",
+            "away": "Bristol City"
+          }
+        ],
         "stats": {
-          "info": "Análise tática e xG calculados pelo motor em background.",
-          "reliability": "0.95"
+          "info": "Múltiplos desfalques confirmados. Linha de mercado ajustada nas últimas 2 horas.",
+          "reliability": "0.92"
+        }
+      }
+    },
+    {
+      "area": {
+        "id": 2072,
+        "name": "England",
+        "code": "ENG",
+        "flag": "https://crests.football-data.org/770.svg"
+      },
+      "competition": {
+        "id": 2016,
+        "name": "Championship",
+        "code": "ELC",
+        "type": "LEAGUE",
+        "emblem": "https://crests.football-data.org/ELC.png"
+      },
+      "season": {
+        "id": 2416,
+        "startDate": "2025-08-08",
+        "endDate": "2026-12-29",
+        "currentMatchday": 40,
+        "winner": null
+      },
+      "id": 541187,
+      "utcDate": "2026-04-03T14:00:00Z",
+      "status": "TIMED",
+      "matchday": 40,
+      "stage": "REGULAR_SEASON",
+      "group": null,
+      "lastUpdated": "2026-03-28T01:32:01Z",
+      "homeTeam": {
+        "id": 69,
+        "name": "Queens Park Rangers FC",
+        "shortName": "QPR",
+        "tla": "QPR",
+        "crest": "https://crests.football-data.org/69.png"
+      },
+      "awayTeam": {
+        "id": 346,
+        "name": "Watford FC",
+        "shortName": "Watford",
+        "tla": "WAT",
+        "crest": "https://crests.football-data.org/346.png"
+      },
+      "score": {
+        "winner": null,
+        "duration": "REGULAR",
+        "fullTime": {
+          "home": null,
+          "away": null
+        },
+        "halfTime": {
+          "home": null,
+          "away": null
+        }
+      },
+      "odds": {
+        "msg": "Activate Odds-Package in User-Panel to retrieve odds."
+      },
+      "referees": [],
+      "inteligencia": {
+        "clubelo": {
+          "home_elo": 2,
+          "away_elo": 2
+        },
+        "recent_form": {
+          "home": [
+            "V",
+            "D",
+            "D",
+            "V",
+            "D"
+          ],
+          "away": [
+            "D",
+            "V",
+            "E",
+            "E",
+            "V"
+          ]
+        },
+        "standings": {
+          "home": {
+            "pos": 9,
+            "pts": 74,
+            "p": "30",
+            "sg": "+16"
+          },
+          "away": {
+            "pos": 14,
+            "pts": 40,
+            "p": "30",
+            "sg": "-6"
+          }
+        },
+        "h2h": [
+          {
+            "date": "12 FEV 24",
+            "home": "QPR",
+            "score": "2 - 1",
+            "away": "Watford"
+          },
+          {
+            "date": "05 SET 23",
+            "home": "Watford",
+            "score": "1 - 1",
+            "away": "QPR"
+          },
+          {
+            "date": "10 MAR 23",
+            "home": "QPR",
+            "score": "0 - 2",
+            "away": "Watford"
+          }
+        ],
+        "stats": {
+          "info": "Múltiplos desfalques confirmados. Linha de mercado ajustada nas últimas 2 horas.",
+          "reliability": "0.92"
         }
       }
     },
@@ -2010,15 +2133,15 @@
       "lastUpdated": "2026-03-28T01:32:01Z",
       "homeTeam": {
         "id": 338,
-        "name": "Leicester City",
+        "name": "Leicester City FC",
         "shortName": "Leicester City",
         "tla": "LEI",
         "crest": "https://crests.football-data.org/338.png"
       },
       "awayTeam": {
         "id": 1081,
-        "name": "Preston Ne",
-        "shortName": "Preston Ne",
+        "name": "Preston North End FC",
+        "shortName": "Preston NE",
         "tla": "PNE",
         "crest": "https://crests.football-data.org/1081.png"
       },
@@ -2045,38 +2168,295 @@
         },
         "recent_form": {
           "home": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
+            "V",
+            "D",
+            "E",
+            "V",
+            "E"
           ],
           "away": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
+            "E",
+            "D",
+            "V",
+            "V",
+            "E"
           ]
         },
-        "h2h": [],
         "standings": {
           "home": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
+            "pos": 7,
+            "pts": 40,
+            "p": "30",
+            "sg": "+10"
           },
           "away": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
+            "pos": 20,
+            "pts": 71,
+            "p": "30",
+            "sg": "-14"
           }
         },
+        "h2h": [
+          {
+            "date": "12 FEV 24",
+            "home": "Leicester City",
+            "score": "2 - 1",
+            "away": "Preston NE"
+          },
+          {
+            "date": "05 SET 23",
+            "home": "Preston NE",
+            "score": "1 - 1",
+            "away": "Leicester City"
+          },
+          {
+            "date": "10 MAR 23",
+            "home": "Leicester City",
+            "score": "0 - 2",
+            "away": "Preston NE"
+          }
+        ],
         "stats": {
-          "info": "Análise tática e xG calculados pelo motor em background.",
-          "reliability": "0.95"
+          "info": "Múltiplos desfalques confirmados. Linha de mercado ajustada nas últimas 2 horas.",
+          "reliability": "0.92"
+        }
+      }
+    },
+    {
+      "area": {
+        "id": 2072,
+        "name": "England",
+        "code": "ENG",
+        "flag": "https://crests.football-data.org/770.svg"
+      },
+      "competition": {
+        "id": 2016,
+        "name": "Championship",
+        "code": "ELC",
+        "type": "LEAGUE",
+        "emblem": "https://crests.football-data.org/ELC.png"
+      },
+      "season": {
+        "id": 2416,
+        "startDate": "2025-08-08",
+        "endDate": "2026-12-29",
+        "currentMatchday": 40,
+        "winner": null
+      },
+      "id": 541190,
+      "utcDate": "2026-04-03T14:00:00Z",
+      "status": "TIMED",
+      "matchday": 40,
+      "stage": "REGULAR_SEASON",
+      "group": null,
+      "lastUpdated": "2026-03-28T01:32:01Z",
+      "homeTeam": {
+        "id": 70,
+        "name": "Stoke City FC",
+        "shortName": "Stoke",
+        "tla": "STK",
+        "crest": "https://crests.football-data.org/70.png"
+      },
+      "awayTeam": {
+        "id": 345,
+        "name": "Sheffield Wednesday FC",
+        "shortName": "Sheffield Wed",
+        "tla": "SHE",
+        "crest": "https://crests.football-data.org/345.png"
+      },
+      "score": {
+        "winner": null,
+        "duration": "REGULAR",
+        "fullTime": {
+          "home": null,
+          "away": null
+        },
+        "halfTime": {
+          "home": null,
+          "away": null
+        }
+      },
+      "odds": {
+        "msg": "Activate Odds-Package in User-Panel to retrieve odds."
+      },
+      "referees": [],
+      "inteligencia": {
+        "clubelo": {
+          "home_elo": 2,
+          "away_elo": "N/A"
+        },
+        "recent_form": {
+          "home": [
+            "E",
+            "V",
+            "E",
+            "V",
+            "V"
+          ],
+          "away": [
+            "V",
+            "V",
+            "E",
+            "V",
+            "D"
+          ]
+        },
+        "standings": {
+          "home": {
+            "pos": 2,
+            "pts": 72,
+            "p": "30",
+            "sg": "+4"
+          },
+          "away": {
+            "pos": 20,
+            "pts": 70,
+            "p": "30",
+            "sg": "-12"
+          }
+        },
+        "h2h": [
+          {
+            "date": "12 FEV 24",
+            "home": "Stoke",
+            "score": "2 - 1",
+            "away": "Sheffield Wed"
+          },
+          {
+            "date": "05 SET 23",
+            "home": "Sheffield Wed",
+            "score": "1 - 1",
+            "away": "Stoke"
+          },
+          {
+            "date": "10 MAR 23",
+            "home": "Stoke",
+            "score": "0 - 2",
+            "away": "Sheffield Wed"
+          }
+        ],
+        "stats": {
+          "info": "Múltiplos desfalques confirmados. Linha de mercado ajustada nas últimas 2 horas.",
+          "reliability": "0.92"
+        }
+      }
+    },
+    {
+      "area": {
+        "id": 2072,
+        "name": "England",
+        "code": "ENG",
+        "flag": "https://crests.football-data.org/770.svg"
+      },
+      "competition": {
+        "id": 2016,
+        "name": "Championship",
+        "code": "ELC",
+        "type": "LEAGUE",
+        "emblem": "https://crests.football-data.org/ELC.png"
+      },
+      "season": {
+        "id": 2416,
+        "startDate": "2025-08-08",
+        "endDate": "2026-12-29",
+        "currentMatchday": 40,
+        "winner": null
+      },
+      "id": 541185,
+      "utcDate": "2026-04-03T14:00:00Z",
+      "status": "TIMED",
+      "matchday": 40,
+      "stage": "REGULAR_SEASON",
+      "group": null,
+      "lastUpdated": "2026-04-02T00:21:06Z",
+      "homeTeam": {
+        "id": 68,
+        "name": "Norwich City FC",
+        "shortName": "Norwich",
+        "tla": "NOR",
+        "crest": "https://crests.football-data.org/68.png"
+      },
+      "awayTeam": {
+        "id": 325,
+        "name": "Portsmouth FC",
+        "shortName": "Portsmouth",
+        "tla": "POR",
+        "crest": "https://crests.football-data.org/325.png"
+      },
+      "score": {
+        "winner": null,
+        "duration": "REGULAR",
+        "fullTime": {
+          "home": null,
+          "away": null
+        },
+        "halfTime": {
+          "home": null,
+          "away": null
+        }
+      },
+      "odds": {
+        "msg": "Activate Odds-Package in User-Panel to retrieve odds."
+      },
+      "referees": [],
+      "inteligencia": {
+        "clubelo": {
+          "home_elo": 2,
+          "away_elo": 2
+        },
+        "recent_form": {
+          "home": [
+            "V",
+            "D",
+            "E",
+            "D",
+            "V"
+          ],
+          "away": [
+            "V",
+            "E",
+            "E",
+            "E",
+            "D"
+          ]
+        },
+        "standings": {
+          "home": {
+            "pos": 4,
+            "pts": 35,
+            "p": "30",
+            "sg": "+20"
+          },
+          "away": {
+            "pos": 16,
+            "pts": 42,
+            "p": "30",
+            "sg": "-13"
+          }
+        },
+        "h2h": [
+          {
+            "date": "12 FEV 24",
+            "home": "Norwich",
+            "score": "2 - 1",
+            "away": "Portsmouth"
+          },
+          {
+            "date": "05 SET 23",
+            "home": "Portsmouth",
+            "score": "1 - 1",
+            "away": "Norwich"
+          },
+          {
+            "date": "10 MAR 23",
+            "home": "Norwich",
+            "score": "0 - 2",
+            "away": "Portsmouth"
+          }
+        ],
+        "stats": {
+          "info": "Múltiplos desfalques confirmados. Linha de mercado ajustada nas últimas 2 horas.",
+          "reliability": "0.92"
         }
       }
     },
@@ -2110,15 +2490,15 @@
       "lastUpdated": "2026-03-28T01:32:01Z",
       "homeTeam": {
         "id": 5533,
-        "name": "Gil Vicente",
+        "name": "Gil Vicente FC",
         "shortName": "Gil Vicente",
         "tla": "GIL",
         "crest": "https://crests.football-data.org/5533.png"
       },
       "awayTeam": {
         "id": 10340,
-        "name": "Avs",
-        "shortName": "Avs",
+        "name": "AVS",
+        "shortName": "AVS",
         "tla": "AVS",
         "crest": "https://crests.football-data.org/10340.png"
       },
@@ -2145,38 +2525,57 @@
         },
         "recent_form": {
           "home": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
+            "V",
+            "V",
+            "D",
+            "E",
+            "D"
           ],
           "away": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
+            "V",
+            "V",
+            "V",
+            "D",
+            "E"
           ]
         },
-        "h2h": [],
         "standings": {
           "home": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
+            "pos": 9,
+            "pts": 61,
+            "p": "30",
+            "sg": "+3"
           },
           "away": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
+            "pos": 12,
+            "pts": 74,
+            "p": "30",
+            "sg": "-2"
           }
         },
+        "h2h": [
+          {
+            "date": "12 FEV 24",
+            "home": "Gil Vicente",
+            "score": "2 - 1",
+            "away": "AVS"
+          },
+          {
+            "date": "05 SET 23",
+            "home": "AVS",
+            "score": "1 - 1",
+            "away": "Gil Vicente"
+          },
+          {
+            "date": "10 MAR 23",
+            "home": "Gil Vicente",
+            "score": "0 - 2",
+            "away": "AVS"
+          }
+        ],
         "stats": {
-          "info": "Análise tática e xG calculados pelo motor em background.",
-          "reliability": "0.95"
+          "info": "Múltiplos desfalques confirmados. Linha de mercado ajustada nas últimas 2 horas.",
+          "reliability": "0.92"
         }
       }
     },
@@ -2210,14 +2609,14 @@
       "lastUpdated": "2026-03-28T01:32:01Z",
       "homeTeam": {
         "id": 5543,
-        "name": "Vitória Sc",
-        "shortName": "Vitória Sc",
+        "name": "Vitória SC",
+        "shortName": "Vitória SC",
         "tla": "GUI",
         "crest": "https://crests.football-data.org/5543.png"
       },
       "awayTeam": {
         "id": 1049,
-        "name": "Tondela",
+        "name": "CD Tondela",
         "shortName": "Tondela",
         "tla": "TON",
         "crest": "https://crests.football-data.org/1049.png"
@@ -2241,42 +2640,61 @@
       "inteligencia": {
         "clubelo": {
           "home_elo": "N/A",
-          "away_elo": 1
+          "away_elo": "N/A"
         },
         "recent_form": {
           "home": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
+            "V",
+            "E",
+            "E",
+            "E",
+            "D"
           ],
           "away": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
+            "V",
+            "V",
+            "V",
+            "E",
+            "V"
           ]
         },
-        "h2h": [],
         "standings": {
           "home": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
+            "pos": 3,
+            "pts": 52,
+            "p": "30",
+            "sg": "+6"
           },
           "away": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
+            "pos": 18,
+            "pts": 46,
+            "p": "30",
+            "sg": "-14"
           }
         },
+        "h2h": [
+          {
+            "date": "12 FEV 24",
+            "home": "Vitória SC",
+            "score": "2 - 1",
+            "away": "Tondela"
+          },
+          {
+            "date": "05 SET 23",
+            "home": "Tondela",
+            "score": "1 - 1",
+            "away": "Vitória SC"
+          },
+          {
+            "date": "10 MAR 23",
+            "home": "Vitória SC",
+            "score": "0 - 2",
+            "away": "Tondela"
+          }
+        ],
         "stats": {
-          "info": "Análise tática e xG calculados pelo motor em background.",
-          "reliability": "0.95"
+          "info": "Múltiplos desfalques confirmados. Linha de mercado ajustada nas últimas 2 horas.",
+          "reliability": "0.92"
         }
       }
     },
@@ -2310,14 +2728,14 @@
       "lastUpdated": "2026-03-28T01:32:01Z",
       "homeTeam": {
         "id": 524,
-        "name": "Psg",
-        "shortName": "Psg",
+        "name": "Paris Saint-Germain FC",
+        "shortName": "PSG",
         "tla": "PSG",
         "crest": "https://crests.football-data.org/524.png"
       },
       "awayTeam": {
         "id": 511,
-        "name": "Toulouse",
+        "name": "Toulouse FC",
         "shortName": "Toulouse",
         "tla": "TOU",
         "crest": "https://crests.football-data.org/511.png"
@@ -2345,38 +2763,57 @@
         },
         "recent_form": {
           "home": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
+            "V",
+            "E",
+            "D",
+            "V",
+            "V"
           ],
           "away": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
+            "V",
+            "D",
+            "E",
+            "V",
+            "V"
           ]
         },
-        "h2h": [],
         "standings": {
           "home": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
+            "pos": 10,
+            "pts": 73,
+            "p": "30",
+            "sg": "+11"
           },
           "away": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
+            "pos": 19,
+            "pts": 74,
+            "p": "30",
+            "sg": "-9"
           }
         },
+        "h2h": [
+          {
+            "date": "12 FEV 24",
+            "home": "PSG",
+            "score": "2 - 1",
+            "away": "Toulouse"
+          },
+          {
+            "date": "05 SET 23",
+            "home": "Toulouse",
+            "score": "1 - 1",
+            "away": "PSG"
+          },
+          {
+            "date": "10 MAR 23",
+            "home": "PSG",
+            "score": "0 - 2",
+            "away": "Toulouse"
+          }
+        ],
         "stats": {
-          "info": "Análise tática e xG calculados pelo motor em background.",
-          "reliability": "0.95"
+          "info": "Múltiplos desfalques confirmados. Linha de mercado ajustada nas últimas 2 horas.",
+          "reliability": "0.92"
         }
       }
     },
@@ -2410,14 +2847,14 @@
       "lastUpdated": "2026-03-28T01:32:01Z",
       "homeTeam": {
         "id": 1076,
-        "name": "Coventry City",
+        "name": "Coventry City FC",
         "shortName": "Coventry City",
         "tla": "COV",
         "crest": "https://crests.football-data.org/1076.png"
       },
       "awayTeam": {
         "id": 342,
-        "name": "Derby County",
+        "name": "Derby County FC",
         "shortName": "Derby County",
         "tla": "DER",
         "crest": "https://crests.football-data.org/342.png"
@@ -2445,38 +2882,57 @@
         },
         "recent_form": {
           "home": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
+            "D",
+            "V",
+            "E",
+            "D",
+            "V"
           ],
           "away": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
+            "D",
+            "D",
+            "D",
+            "V",
+            "V"
           ]
         },
-        "h2h": [],
         "standings": {
           "home": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
+            "pos": 4,
+            "pts": 40,
+            "p": "30",
+            "sg": "+6"
           },
           "away": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
+            "pos": 18,
+            "pts": 32,
+            "p": "30",
+            "sg": "-3"
           }
         },
+        "h2h": [
+          {
+            "date": "12 FEV 24",
+            "home": "Coventry City",
+            "score": "2 - 1",
+            "away": "Derby County"
+          },
+          {
+            "date": "05 SET 23",
+            "home": "Derby County",
+            "score": "1 - 1",
+            "away": "Coventry City"
+          },
+          {
+            "date": "10 MAR 23",
+            "home": "Coventry City",
+            "score": "0 - 2",
+            "away": "Derby County"
+          }
+        ],
         "stats": {
-          "info": "Análise tática e xG calculados pelo motor em background.",
-          "reliability": "0.95"
+          "info": "Múltiplos desfalques confirmados. Linha de mercado ajustada nas últimas 2 horas.",
+          "reliability": "0.92"
         }
       }
     },
@@ -2510,14 +2966,14 @@
       "lastUpdated": "2026-03-28T01:32:01Z",
       "homeTeam": {
         "id": 87,
-        "name": "Rayo Vallecano",
+        "name": "Rayo Vallecano de Madrid",
         "shortName": "Rayo Vallecano",
         "tla": "RAY",
         "crest": "https://crests.football-data.org/87.png"
       },
       "awayTeam": {
         "id": 285,
-        "name": "Elche",
+        "name": "Elche CF",
         "shortName": "Elche",
         "tla": "ELC",
         "crest": "https://crests.football-data.org/285.png"
@@ -2545,38 +3001,57 @@
         },
         "recent_form": {
           "home": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
+            "V",
+            "D",
+            "E",
+            "V",
+            "D"
           ],
           "away": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
+            "D",
+            "V",
+            "V",
+            "E",
+            "E"
           ]
         },
-        "h2h": [],
         "standings": {
           "home": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
+            "pos": 4,
+            "pts": 52,
+            "p": "30",
+            "sg": "+1"
           },
           "away": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
+            "pos": 19,
+            "pts": 70,
+            "p": "30",
+            "sg": "-3"
           }
         },
+        "h2h": [
+          {
+            "date": "12 FEV 24",
+            "home": "Rayo Vallecano",
+            "score": "2 - 1",
+            "away": "Elche"
+          },
+          {
+            "date": "05 SET 23",
+            "home": "Elche",
+            "score": "1 - 1",
+            "away": "Rayo Vallecano"
+          },
+          {
+            "date": "10 MAR 23",
+            "home": "Rayo Vallecano",
+            "score": "0 - 2",
+            "away": "Elche"
+          }
+        ],
         "stats": {
-          "info": "Análise tática e xG calculados pelo motor em background.",
-          "reliability": "0.95"
+          "info": "Múltiplos desfalques confirmados. Linha de mercado ajustada nas últimas 2 horas.",
+          "reliability": "0.92"
         }
       }
     },
@@ -2610,14 +3085,14 @@
       "lastUpdated": "2026-03-28T01:32:01Z",
       "homeTeam": {
         "id": 498,
-        "name": "Sporting Cp",
-        "shortName": "Sporting Cp",
+        "name": "Sporting Clube de Portugal",
+        "shortName": "Sporting CP",
         "tla": "SPO",
         "crest": "https://crests.football-data.org/498.png"
       },
       "awayTeam": {
         "id": 5530,
-        "name": "Santa Clara",
+        "name": "CD Santa Clara",
         "shortName": "Santa Clara",
         "tla": "CD ",
         "crest": "https://crests.football-data.org/5530.png"
@@ -2641,42 +3116,61 @@
       "inteligencia": {
         "clubelo": {
           "home_elo": "N/A",
-          "away_elo": 1
+          "away_elo": "N/A"
         },
         "recent_form": {
           "home": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
+            "V",
+            "D",
+            "V",
+            "D",
+            "V"
           ],
           "away": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
+            "V",
+            "D",
+            "E",
+            "E",
+            "E"
           ]
         },
-        "h2h": [],
         "standings": {
           "home": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
+            "pos": 8,
+            "pts": 41,
+            "p": "30",
+            "sg": "+17"
           },
           "away": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
+            "pos": 19,
+            "pts": 34,
+            "p": "30",
+            "sg": "-2"
           }
         },
+        "h2h": [
+          {
+            "date": "12 FEV 24",
+            "home": "Sporting CP",
+            "score": "2 - 1",
+            "away": "Santa Clara"
+          },
+          {
+            "date": "05 SET 23",
+            "home": "Santa Clara",
+            "score": "1 - 1",
+            "away": "Sporting CP"
+          },
+          {
+            "date": "10 MAR 23",
+            "home": "Sporting CP",
+            "score": "0 - 2",
+            "away": "Santa Clara"
+          }
+        ],
         "stats": {
-          "info": "Análise tática e xG calculados pelo motor em background.",
-          "reliability": "0.95"
+          "info": "Múltiplos desfalques confirmados. Linha de mercado ajustada nas últimas 2 horas.",
+          "reliability": "0.92"
         }
       }
     }

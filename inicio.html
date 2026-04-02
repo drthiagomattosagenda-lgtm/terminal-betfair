@@ -100,14 +100,26 @@
                 const dados = await resposta.json();
                 const ligasAgrupadas = {};
 
+                // Pega a data EXATA de hoje no fuso do Brasil
+                const dataHojeBR = new Date().toLocaleDateString("pt-BR", { timeZone: "America/Sao_Paulo" });
+
                 dados.matches.forEach(match => {
+                    // Descobre a data do jogo no fuso do Brasil
+                    const dataJogoBR = new Date(match.utcDate).toLocaleDateString("pt-BR", { timeZone: "America/Sao_Paulo" });
+
+                    // O FILTRO CIRÚRGICO: Se o jogo não for de hoje, pula e ignora!
+                    if (dataJogoBR !== dataHojeBR) {
+                        return; 
+                    }
+
                     const nomeLiga = match.competition.name.toUpperCase();
                     
                     if (!ligasAgrupadas[nomeLiga]) {
                         ligasAgrupadas[nomeLiga] = { name: nomeLiga, games: [] };
                     }
 
-                    let horarioStr = new Date(match.utcDate).toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
+                    // Força o horário a renderizar no fuso brasileiro também
+                    let horarioStr = new Date(match.utcDate).toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit", timeZone: "America/Sao_Paulo" });
                     let statusClass = "text-gray-400";
                     let alerta = "";
                     

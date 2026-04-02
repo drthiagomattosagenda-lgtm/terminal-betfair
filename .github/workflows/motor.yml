@@ -2,8 +2,8 @@ name: Motor V8 - Buscar Partidas
 
 on:
   schedule:
-    - cron: '*/30 * * * *' # Abastece sozinho a cada 30 minutos
-  workflow_dispatch: # Botão para abastecer manualmente
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -17,12 +17,16 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Ligar o Motor (Puxar API)
+      - name: Instalar Pecas do Motor V12
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
+      - name: Ligar o Motor (Puxar API + ClubElo)
         run: python abastecer.py
       - name: Guardar no Tanque
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "Mecanico V8"
           git add jogos_de_hoje.json
-          git commit -m "Automático: Abastecendo jogos de hoje" || echo "Sem mudanças"
+          git commit -m "Automático: Abastecendo V12 (API + ClubElo)" || echo "Sem mudanças"
           git push

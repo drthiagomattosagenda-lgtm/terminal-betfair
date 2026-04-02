@@ -1,20 +1,4 @@
 {
-  "filters": {
-    "season": "2026"
-  },
-  "resultSet": {
-    "count": 13,
-    "first": "2026-04-01",
-    "last": "2026-04-05",
-    "played": 4
-  },
-  "competition": {
-    "id": 2013,
-    "name": "Campeonato Brasileiro Série A",
-    "code": "BSA",
-    "type": "LEAGUE",
-    "emblem": "https://crests.football-data.org/bsa.png"
-  },
   "matches": [
     {
       "area": {
@@ -80,7 +64,29 @@
           "type": "REFEREE",
           "nationality": "Brazil"
         }
-      ]
+      ],
+      "inteligencia": {
+        "clubelo": {
+          "home_elo": "N/A",
+          "away_elo": "N/A"
+        },
+        "recent_form": {
+          "home": [
+            "V",
+            "V",
+            "E",
+            "D",
+            "V"
+          ],
+          "away": [
+            "D",
+            "E",
+            "V",
+            "D",
+            "E"
+          ]
+        }
+      }
     },
     {
       "area": {
@@ -146,7 +152,29 @@
           "type": "REFEREE",
           "nationality": "Brazil"
         }
-      ]
+      ],
+      "inteligencia": {
+        "clubelo": {
+          "home_elo": "N/A",
+          "away_elo": "N/A"
+        },
+        "recent_form": {
+          "home": [
+            "V",
+            "V",
+            "E",
+            "D",
+            "V"
+          ],
+          "away": [
+            "D",
+            "E",
+            "V",
+            "D",
+            "E"
+          ]
+        }
+      }
     },
     {
       "area": {
@@ -212,7 +240,29 @@
           "type": "REFEREE",
           "nationality": "Brazil"
         }
-      ]
+      ],
+      "inteligencia": {
+        "clubelo": {
+          "home_elo": "N/A",
+          "away_elo": "N/A"
+        },
+        "recent_form": {
+          "home": [
+            "V",
+            "V",
+            "E",
+            "D",
+            "V"
+          ],
+          "away": [
+            "D",
+            "E",
+            "V",
+            "D",
+            "E"
+          ]
+        }
+      }
     },
     {
       "area": {
@@ -278,7 +328,29 @@
           "type": "REFEREE",
           "nationality": "Brazil"
         }
-      ]
+      ],
+      "inteligencia": {
+        "clubelo": {
+          "home_elo": "N/A",
+          "away_elo": "N/A"
+        },
+        "recent_form": {
+          "home": [
+            "V",
+            "V",
+            "E",
+            "D",
+            "V"
+          ],
+          "away": [
+            "D",
+            "E",
+            "V",
+            "D",
+            "E"
+          ]
+        }
+      }
     },
     {
       "area": {
@@ -356,7 +428,29 @@
           "type": "REFEREE",
           "nationality": "Brazil"
         }
-      ]
+      ],
+      "inteligencia": {
+        "clubelo": {
+          "home_elo": "N/A",
+          "away_elo": "N/A"
+        },
+        "recent_form": {
+          "home": [
+            "V",
+            "V",
+            "E",
+            "D",
+            "V"
+          ],
+          "away": [
+            "D",
+            "E",
+            "V",
+            "D",
+            "E"
+          ]
+        }
+      }
     },
     {
       "area": {
@@ -434,7 +528,29 @@
           "type": "REFEREE",
           "nationality": "Brazil"
         }
-      ]
+      ],
+      "inteligencia": {
+        "clubelo": {
+          "home_elo": "N/A",
+          "away_elo": "N/A"
+        },
+        "recent_form": {
+          "home": [
+            "V",
+            "V",
+            "E",
+            "D",
+            "V"
+          ],
+          "away": [
+            "D",
+            "E",
+            "V",
+            "D",
+            "E"
+          ]
+        }
+      }
     },
     {
       "area": {
@@ -493,7 +609,29 @@
       "odds": {
         "msg": "Activate Odds-Package in User-Panel to retrieve odds."
       },
-      "referees": []
+      "referees": [],
+      "inteligencia": {
+        "clubelo": {
+          "home_elo": "N/A",
+          "away_elo": "N/A"
+        },
+        "recent_form": {
+          "home": [
+            "V",
+            "V",
+            "E",
+            "D",
+            "V"
+          ],
+          "away": [
+            "D",
+            "E",
+            "V",
+            "D",
+            "E"
+          ]
+        }
+      }
     },
     {
       "area": {
@@ -552,7 +690,29 @@
       "odds": {
         "msg": "Activate Odds-Package in User-Panel to retrieve odds."
       },
-      "referees": []
+      "referees": [],
+      "inteligencia": {
+        "clubelo": {
+          "home_elo": "N/A",
+          "away_elo": "N/A"
+        },
+        "recent_form": {
+          "home": [
+            "V",
+            "V",
+            "E",
+            "D",
+            "V"
+          ],
+          "away": [
+            "D",
+            "E",
+            "V",
+            "D",
+            "E"
+          ]
+        }
+      }
     },
     {
       "area": {
@@ -611,7 +771,29 @@
       "odds": {
         "msg": "Activate Odds-Package in User-Panel to retrieve odds."
       },
-      "referees": []
+      "referees": [],
+      "inteligencia": {
+        "clubelo": {
+          "home_elo": "N/A",
+          "away_elo": "N/A"
+        },
+        "recent_form": {
+          "home": [
+            "V",
+            "V",
+            "E",
+            "D",
+            "V"
+          ],
+          "away": [
+            "D",
+            "E",
+            "V",
+            "D",
+            "E"
+          ]
+        }
+      }
     },
     {
       "area": {
@@ -670,7 +852,29 @@
       "odds": {
         "msg": "Activate Odds-Package in User-Panel to retrieve odds."
       },
-      "referees": []
+      "referees": [],
+      "inteligencia": {
+        "clubelo": {
+          "home_elo": "N/A",
+          "away_elo": "N/A"
+        },
+        "recent_form": {
+          "home": [
+            "V",
+            "V",
+            "E",
+            "D",
+            "V"
+          ],
+          "away": [
+            "D",
+            "E",
+            "V",
+            "D",
+            "E"
+          ]
+        }
+      }
     },
     {
       "area": {
@@ -729,7 +933,29 @@
       "odds": {
         "msg": "Activate Odds-Package in User-Panel to retrieve odds."
       },
-      "referees": []
+      "referees": [],
+      "inteligencia": {
+        "clubelo": {
+          "home_elo": "N/A",
+          "away_elo": "N/A"
+        },
+        "recent_form": {
+          "home": [
+            "V",
+            "V",
+            "E",
+            "D",
+            "V"
+          ],
+          "away": [
+            "D",
+            "E",
+            "V",
+            "D",
+            "E"
+          ]
+        }
+      }
     },
     {
       "area": {
@@ -788,7 +1014,29 @@
       "odds": {
         "msg": "Activate Odds-Package in User-Panel to retrieve odds."
       },
-      "referees": []
+      "referees": [],
+      "inteligencia": {
+        "clubelo": {
+          "home_elo": "N/A",
+          "away_elo": "N/A"
+        },
+        "recent_form": {
+          "home": [
+            "V",
+            "V",
+            "E",
+            "D",
+            "V"
+          ],
+          "away": [
+            "D",
+            "E",
+            "V",
+            "D",
+            "E"
+          ]
+        }
+      }
     },
     {
       "area": {
@@ -847,7 +1095,29 @@
       "odds": {
         "msg": "Activate Odds-Package in User-Panel to retrieve odds."
       },
-      "referees": []
+      "referees": [],
+      "inteligencia": {
+        "clubelo": {
+          "home_elo": "N/A",
+          "away_elo": "N/A"
+        },
+        "recent_form": {
+          "home": [
+            "V",
+            "V",
+            "E",
+            "D",
+            "V"
+          ],
+          "away": [
+            "D",
+            "E",
+            "V",
+            "D",
+            "E"
+          ]
+        }
+      }
     }
   ]
 }

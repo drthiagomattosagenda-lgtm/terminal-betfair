@@ -1,11 +1,11 @@
-name: ⛽ Motor ETL — Atualizar Jogos do Dia
+name: "Motor ETL v3 — Atualizar Jogos do Dia"
 
 on:
   # Dispara automaticamente a cada hora (cobertura total do dia)
   schedule:
     - cron: '0 * * * *'
 
-  # Dispara também a cada push no repositório (útil para testar)
+  # Dispara também a cada push no repositório
   push:
     branches: [ main, master ]
 
@@ -17,34 +17,34 @@ permissions:
 
 jobs:
   gerar-combustivel:
-    name: ⛽ Gerar jogos_de_hoje.json
+    name: "Gerar jogos_de_hoje.json"
     runs-on: ubuntu-latest
 
     steps:
-      - name: 📥 Checkout
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: 🐍 Python 3.11
+      - name: Python 3.11
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      - name: 📦 Instalar requests
+      - name: Instalar dependências
         run: pip install requests
 
-      - name: 🚀 Executar Motor ETL
+      - name: Executar Motor ETL v3
         env:
           FOOTBALL_DATA_API_KEY: ${{ secrets.FOOTBALL_DATA_API_KEY }}
         run: python gerar_jogos.py
 
-      - name: 💾 Commit e Push do JSON
+      - name: Commit e Push do JSON
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add jogos_de_hoje.json
           if git diff --staged --quiet; then
-            echo "ℹ️  Sem mudanças no JSON."
+            echo "Sem mudanças no JSON."
           else
-            git commit -m "⛽ Combustível injetado — $(date -u '+%d/%m %H:%M UTC')"
+            git commit -m "Combustivel injetado — $(date -u '+%d/%m %H:%M UTC')"
             git push
           fi

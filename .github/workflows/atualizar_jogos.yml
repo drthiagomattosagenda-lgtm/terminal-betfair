@@ -1,4 +1,4 @@
-name: "Motor ETL v3 — Atualizar Jogos do Dia"
+name: "Motor ETL v4 — Atualizar Jogos do Dia"
 
 on:
   # Dispara automaticamente a cada hora (cobertura total do dia)
@@ -32,7 +32,7 @@ jobs:
       - name: Instalar dependências
         run: pip install requests
 
-      - name: Executar Motor ETL v3
+      - name: Executar Motor ETL v4
         env:
           FOOTBALL_DATA_API_KEY: ${{ secrets.FOOTBALL_DATA_API_KEY }}
         run: python gerar_jogos.py

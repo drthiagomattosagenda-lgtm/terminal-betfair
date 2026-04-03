@@ -1,15 +1,13 @@
-name: "Motor ETL v4 — Atualizar Jogos do Dia"
+name: "Motor ETL v5 — Sofascore + Playwright"
 
 on:
-  # Dispara automaticamente a cada hora (cobertura total do dia)
+  # A cada 15 minutos para placares frescos
   schedule:
-    - cron: '0 * * * *'
+    - cron: '*/15 * * * *'
 
-  # Dispara também a cada push no repositório
   push:
     branches: [ main, master ]
 
-  # Permite disparo manual via painel do GitHub
   workflow_dispatch:
 
 permissions:
@@ -19,6 +17,7 @@ jobs:
   gerar-combustivel:
     name: "Gerar jogos_de_hoje.json"
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     steps:
       - name: Checkout
@@ -30,9 +29,11 @@ jobs:
           python-version: '3.11'
 
       - name: Instalar dependências
-        run: pip install requests
+        run: |
+          pip install requests playwright
+          python -m playwright install chromium --with-deps
 
-      - name: Executar Motor ETL v4
+      - name: Executar Motor ETL v5
         env:
           FOOTBALL_DATA_API_KEY: ${{ secrets.FOOTBALL_DATA_API_KEY }}
         run: python gerar_jogos.py

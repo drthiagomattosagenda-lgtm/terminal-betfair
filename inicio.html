@@ -71,16 +71,27 @@
 
 <script>
 // ═══════════════════════════════════════════════════════════════
-//  QG FUT TRADER — Motor de Combustível v3
-//  Engine com enriquecimento progressivo via TheSportsDB
-//  Form + Standings + Auto-Refresh + Fallback blindado
+//  QG FUT TRADER — Motor de Combustível v4 (CORRIGIDO)
+//
+//  BUG CORRIGIDO: eventsday.php retornava dados de 2014
+//  FIX: usa eventsnextleague.php + eventspastleague.php
+//       com filtro de data + validação anti-lixo
+//
+//  Cascata: jogos_de_hoje.json → TheSportsDB (multi-liga) → Fallback
 // ═══════════════════════════════════════════════════════════════
 
 const TSDB_BASE  = "https://www.thesportsdb.com/api/v1/json/3";
-const REFRESH_MS = 120000; // auto-refresh a cada 2 minutos
+const REFRESH_MS = 90000;
+
+// Ligas TheSportsDB para consultar (próximos + passados do dia)
+const TSDB_LEAGUE_IDS = [
+    4328, 4329, 4330, 4331, 4332, 4334, 4335, 4336, 4337, 4338,
+    4340, 4344, 4346, 4347, 4351, 4355, 4356, 4358, 4359, 4396,
+    4480, 4482, 4484, 4485, 4497, 4501, 4504, 4505, 4506, 4507
+];
 
 // ═══════════════════════════════════════════════════
-//  DADOS EMBUTIDOS — fallback garantido (sempre funciona)
+//  DADOS EMBUTIDOS — fallback garantido
 // ═══════════════════════════════════════════════════
 const FALLBACK_MATCHES = [
     { id:"fb1", home:"Arsenal", away:"Liverpool",     league:"PREMIER LEAGUE",  time:"16:00", statusClass:"text-gray-400", scoreHome:"", scoreAway:"", venue:"EMIRATES STADIUM",    alert:"", eloHome:"1842", eloAway:"1876", formHome:["V","V","E","V","D"], formAway:["V","V","V","E","V"], standings:{home:{pos:2,pts:68,p:30,sg:34},away:{pos:1,pts:72,p:30,sg:42}}, h2h:[{date:"2025-12-21",home:"Liverpool",score:"2-0",away:"Arsenal"},{date:"2025-08-17",home:"Arsenal",score:"1-1",away:"Liverpool"},{date:"2025-04-04",home:"Liverpool",score:"3-1",away:"Arsenal"}], stats:{info:"Liverpool chega com toda a força — apenas 1 derrota nos últimos 15 jogos. Arsenal em casa tem 87% de aproveitamento.",reliability:"9.0"} },
@@ -95,6 +106,7 @@ const FALLBACK_MATCHES = [
 
 // ═══════════════════════════════════════════════════
 let liveGamesData = [];
+let allTodayEvents = []; // referência global para refresh
 let favorites = [];
 let enrichmentCache = { form: {}, standings: {} };
 let refreshTimer = null;
@@ -117,6 +129,48 @@ async function tsdbFetch(endpoint) {
         if (!r.ok) return null;
         return await r.json();
     } catch(e) { return null; }
+}
+
+// ───────────────────────────────────────────────────
+//  THESPORTSDB — BUSCA DE JOGOS DO DIA (CORRIGIDO)
+//  Usa eventsnextleague + eventspastleague por liga
+//  Filtra por data de hoje + remove duplicatas
+// ───────────────────────────────────────────────────
+async function buscarJogosTheSportsDB() {
+    const hoje = todayBR();
+    const seen = new Set();
+    const allEvents = [];
+
+    console.log(`[TSDB] Buscando jogos de ${hoje} em ${TSDB_LEAGUE_IDS.length} ligas...`);
+
+    // Busca em batches de 5 ligas para não sobrecarregar
+    for (let i = 0; i < TSDB_LEAGUE_IDS.length; i += 5) {
+        const batch = TSDB_LEAGUE_IDS.slice(i, i + 5);
+        const promises = batch.flatMap(lid => [
+            tsdbFetch(`/eventsnextleague.php?id=${lid}`),
+            tsdbFetch(`/eventspastleague.php?id=${lid}`)
+        ]);
+        const results = await Promise.allSettled(promises);
+
+        for (const r of results) {
+            if (r.status !== "fulfilled" || !r.value) continue;
+            const events = r.value.events || [];
+            for (const ev of events) {
+                const evDate = ev.dateEvent || "";
+                const evId = String(ev.idEvent || "");
+                // FILTRO CRÍTICO: só aceita eventos de HOJE e não duplicados
+                if (evDate === hoje && evId && !seen.has(evId)) {
+                    seen.add(evId);
+                    allEvents.push(ev);
+                }
+            }
+        }
+        // Delay entre batches
+        if (i + 5 < TSDB_LEAGUE_IDS.length) await delay(300);
+    }
+
+    console.log(`[TSDB] ${allEvents.length} jogos encontrados para ${hoje}`);
+    return allEvents;
 }
 
 // ───────────────────────────────────────────────────
@@ -216,7 +270,7 @@ async function enrichirJogos(jogos) {
         if (jogo._meta.idAwayTeam) teamIds.add(String(jogo._meta.idAwayTeam));
     });
 
-    // Fase 1: Classificações por liga (poucas chamadas)
+    // Fase 1: Classificações por liga
     console.log(`[ETL] Buscando classificação de ${leagues.size} liga(s)...`);
     for (const [lid, season] of leagues) {
         await getStandingsTSDB(lid, season);
@@ -232,7 +286,7 @@ async function enrichirJogos(jogos) {
         await delay(400);
     }
 
-    // Fase 3: Merge enrichment
+    // Fase 3: Merge enrichment nos jogos
     jogos.forEach(jogo => {
         if (!jogo._meta) return;
         const htid = String(jogo._meta.idHomeTeam || "");
@@ -266,20 +320,24 @@ function fromSportsDB(ev) {
     const timeStr = utc.toLocaleTimeString("pt-BR", { hour:"2-digit", minute:"2-digit", timeZone:"America/Sao_Paulo" });
 
     let statusClass = "text-gray-400", alert = "", displayTime = timeStr;
-    const st = (ev.strStatus || "").toLowerCase();
+    const st = (ev.strStatus || "Not Started").toLowerCase();
 
-    if (st === "in progress" || st === "1h" || st === "2h" || st === "ht") {
-        displayTime = "AO VIVO"; statusClass = "text-trading-highlight animate-pulse"; alert = st === "ht" ? "INTERVALO" : "AO VIVO";
+    if (st === "in progress" || st === "1h" || st === "2h") {
+        displayTime = "AO VIVO"; statusClass = "text-trading-highlight animate-pulse"; alert = "AO VIVO";
+    } else if (st === "ht") {
+        displayTime = "INTERVALO"; statusClass = "text-trading-highlight animate-pulse"; alert = "INTERVALO";
     } else if (st === "ft" || st === "finished" || st === "aet" || st === "pen" || st === "match finished") {
         displayTime = "ENCERRADO"; statusClass = "text-gray-500";
     } else if (st === "postponed") {
         displayTime = "ADIADO"; statusClass = "text-red-500";
     } else if (st === "cancelled") {
         displayTime = "CANCELADO"; statusClass = "text-red-500";
+    } else if (st === "not started" || st === "ns" || st === "") {
+        // Agendado — manter horário
     }
 
-    const sh = ev.intHomeScore !== null && ev.intHomeScore !== "" ? String(ev.intHomeScore) : "";
-    const sa = ev.intAwayScore !== null && ev.intAwayScore !== "" ? String(ev.intAwayScore) : "";
+    const sh = ev.intHomeScore !== null && ev.intHomeScore !== "" && ev.intHomeScore !== undefined ? String(ev.intHomeScore) : "";
+    const sa = ev.intAwayScore !== null && ev.intAwayScore !== "" && ev.intAwayScore !== undefined ? String(ev.intAwayScore) : "";
 
     return {
         id:         String(ev.idEvent),
@@ -321,11 +379,11 @@ function agruparPorLiga(jogos) {
 }
 
 // ───────────────────────────────────────────────────
-//  AUTO-REFRESH — Atualiza placares a cada 2 min
+//  AUTO-REFRESH (atualiza placares)
 // ───────────────────────────────────────────────────
 async function refreshScores() {
     try {
-        // Tentar JSON local primeiro (pode ter sido atualizado pelo ETL)
+        // Tentar JSON local primeiro
         try {
             const rj = await fetch("jogos_de_hoje.json?v=" + Date.now());
             if (rj.ok) {
@@ -334,25 +392,19 @@ async function refreshScores() {
                     const parsed = JSON.parse(txt);
                     if (parsed.matches && parsed.matches.length > 0) {
                         processarDadosCompletos(parsed.matches);
-                        const badge = document.getElementById('fonte-badge');
-                        if (badge) badge.innerHTML = `<span class="bg-green-900/50 text-green-400 text-[8px] font-black px-2 py-0.5 rounded uppercase border border-green-500/30">● DADOS ENRIQUECIDOS</span>`;
                         return;
                     }
                 }
             }
         } catch(e) {}
 
-        // Fallback: TheSportsDB
-        const hoje = todayBR();
-        const r = await fetch(`${TSDB_BASE}/eventsday.php?d=${hoje}&s=Soccer`);
-        if (!r.ok) return;
-        const data = await r.json();
-        const eventos = data.events || [];
-        if (!eventos.length) return;
+        // Refresh via TheSportsDB (busca rápida nas mesmas ligas)
+        const events = await buscarJogosTheSportsDB();
+        if (!events.length) return;
 
-        const jogos = eventos.map(fromSportsDB);
+        const jogos = events.map(fromSportsDB);
 
-        // Aplicar cache de enriquecimento
+        // Aplicar cache de enriquecimento existente
         jogos.forEach(jogo => {
             if (!jogo._meta) return;
             const htid = String(jogo._meta.idHomeTeam || "");
@@ -404,30 +456,25 @@ async function carregarCombustivel() {
         }
     } catch(e) { /* sem JSON local */ }
 
-    // ── TENTATIVA 2: TheSportsDB com enriquecimento progressivo ──
+    // ── TENTATIVA 2: TheSportsDB (multi-liga, endpoint correto) ──
     try {
-        const hoje = todayBR();
-        const url  = `${TSDB_BASE}/eventsday.php?d=${hoje}&s=Soccer`;
-        const r    = await fetch(url);
-        if (r.ok) {
-            const data = await r.json();
-            const eventos = data.events || [];
-            if (eventos.length > 0) {
-                // FASE 1: Mostra partidas imediatamente com dados básicos
-                const jogos = eventos.map(fromSportsDB);
-                liveGamesData = agruparPorLiga(jogos);
-                document.getElementById('game-count').innerText = jogos.length;
-                document.getElementById('loading-ferrari')?.remove();
-                badge.innerHTML = `<span class="bg-blue-900/50 text-blue-400 text-[8px] font-black px-2 py-0.5 rounded uppercase border border-blue-500/30 animate-pulse">● CARREGANDO INTELIGÊNCIA...</span>`;
-                renderAgenda();
+        badge.innerHTML = `<span class="bg-blue-900/50 text-blue-400 text-[8px] font-black px-2 py-0.5 rounded uppercase border border-blue-500/30 animate-pulse">● BUSCANDO JOGOS...</span>`;
 
-                // FASE 2: Enriquecimento em background (form + standings)
-                enrichirJogos(jogos).catch(e => console.warn("Enrichment:", e));
+        const events = await buscarJogosTheSportsDB();
 
-                // FASE 3: Auto-refresh para placares ao vivo
-                startAutoRefresh();
-                return;
-            }
+        if (events.length > 0) {
+            const jogos = events.map(fromSportsDB);
+            allTodayEvents = jogos;
+            liveGamesData = agruparPorLiga(jogos);
+            document.getElementById('game-count').innerText = jogos.length;
+            document.getElementById('loading-ferrari')?.remove();
+            badge.innerHTML = `<span class="bg-blue-900/50 text-blue-400 text-[8px] font-black px-2 py-0.5 rounded uppercase border border-blue-500/30 animate-pulse">● CARREGANDO INTELIGÊNCIA...</span>`;
+            renderAgenda();
+
+            // Enriquecimento em background
+            enrichirJogos(jogos).catch(e => console.warn("Enrichment:", e));
+            startAutoRefresh();
+            return;
         }
     } catch(e) { console.warn("TheSportsDB falhou:", e); }
 
@@ -727,7 +774,7 @@ function renderAgenda() {
         list.innerHTML += html;
     });
 
-    // Restaurar painéis que estavam abertos antes do re-render
+    // Restaurar painéis abertos
     for (const [gid, tab] of Object.entries(openPanels)) {
         const el = document.getElementById(`details-${gid}`);
         if (el) {

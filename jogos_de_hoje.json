@@ -8798,7 +8798,7 @@
       "score": {
         "fullTime": {
           "home": 0,
-          "away": 0
+          "away": 1
         }
       },
       "inteligencia": {
@@ -27601,7 +27601,7 @@
       }
     }
   ],
-  "_gerado_em": "2026-04-03T22:31:34.979158Z",
+  "_gerado_em": "2026-04-03T22:33:13.076778Z",
   "_total": 368,
   "_fonte": "sofascore.com"
 }

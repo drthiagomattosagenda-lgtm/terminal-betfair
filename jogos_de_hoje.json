@@ -1522,7 +1522,7 @@
       },
       "score": {
         "fullTime": {
-          "home": 0,
+          "home": 1,
           "away": 0
         }
       },
@@ -6229,7 +6229,7 @@
       "id": 15362605,
       "utcDate": "2026-04-03T21:30:00+00:00",
       "status": "IN_PLAY",
-      "minute": "Halftime",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 231,
@@ -8798,7 +8798,7 @@
       "score": {
         "fullTime": {
           "home": 0,
-          "away": 1
+          "away": 2
         }
       },
       "inteligencia": {
@@ -27601,7 +27601,7 @@
       }
     }
   ],
-  "_gerado_em": "2026-04-03T22:33:13.076778Z",
+  "_gerado_em": "2026-04-03T22:53:53.170100Z",
   "_total": 368,
   "_fonte": "sofascore.com"
 }

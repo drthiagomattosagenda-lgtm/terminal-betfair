@@ -1,1 +1,75 @@
-{"matches": [], "_gerado_em": "2026-04-03T11:42:55.377357Z"}
+{
+  "matches": [
+    {
+      "id": 441043,
+      "utcDate": "2014-10-10T09:40:00",
+      "status": "SCHEDULED",
+      "minute": null,
+      "venue": "ESTÁDIO",
+      "competition": {
+        "id": "4356",
+        "name": "Australian A-League"
+      },
+      "homeTeam": {
+        "id": "134477",
+        "name": "Melbourne Victory",
+        "shortName": "Melbourne Victory"
+      },
+      "awayTeam": {
+        "id": "134480",
+        "name": "Western Sydney Wanderers FC",
+        "shortName": "Western Sydney Wanderers FC"
+      },
+      "score": {
+        "fullTime": {
+          "home": 4,
+          "away": 1
+        }
+      },
+      "inteligencia": {
+        "clubelo": {
+          "home_elo": "N/A",
+          "away_elo": "N/A"
+        },
+        "recent_form": {
+          "home": [
+            "V",
+            "-",
+            "-",
+            "-",
+            "-"
+          ],
+          "away": [
+            "D",
+            "-",
+            "-",
+            "-",
+            "-"
+          ]
+        },
+        "standings": {
+          "home": {
+            "pos": "-",
+            "pts": "-",
+            "p": "-",
+            "sg": "-"
+          },
+          "away": {
+            "pos": "-",
+            "pts": "-",
+            "p": "-",
+            "sg": "-"
+          }
+        },
+        "h2h": [],
+        "stats": {
+          "info": "Dados coletados às 11:44 UTC.",
+          "reliability": "7.5"
+        }
+      }
+    }
+  ],
+  "_gerado_em": "2026-04-03T11:44:07.680233Z",
+  "_total": 1,
+  "_fonte": "thesportsdb.com"
+}

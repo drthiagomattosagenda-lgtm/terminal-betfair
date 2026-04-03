@@ -71,302 +71,41 @@
 
 <script>
 // ═══════════════════════════════════════════════════════════════
-//  QG FUT TRADER — Motor de Combustível v4 (CORRIGIDO)
-//
-//  BUG CORRIGIDO: eventsday.php retornava dados de 2014
-//  FIX: usa eventsnextleague.php + eventspastleague.php
-//       com filtro de data + validação anti-lixo
-//
-//  Cascata: jogos_de_hoje.json → TheSportsDB (multi-liga) → Fallback
+//  QG FUT TRADER — Motor v5 (Sofascore Engine)
+//  Fonte: jogos_de_hoje.json (gerado pelo ETL Sofascore/Playwright)
+//  200-400 jogos/dia com standings e form enriquecidos
+//  Auto-refresh a cada 2 min | Fallback demonstração
 // ═══════════════════════════════════════════════════════════════
 
-const TSDB_BASE  = "https://www.thesportsdb.com/api/v1/json/3";
-const REFRESH_MS = 90000;
-
-// Ligas TheSportsDB para consultar (próximos + passados do dia)
-const TSDB_LEAGUE_IDS = [
-    4328, 4329, 4330, 4331, 4332, 4334, 4335, 4336, 4337, 4338,
-    4340, 4344, 4346, 4347, 4351, 4355, 4356, 4358, 4359, 4396,
-    4480, 4482, 4484, 4485, 4497, 4501, 4504, 4505, 4506, 4507
-];
+const REFRESH_MS = 120000;
 
 // ═══════════════════════════════════════════════════
-//  DADOS EMBUTIDOS — fallback garantido
+//  FALLBACK — demonstração (quando JSON indisponível)
 // ═══════════════════════════════════════════════════
 const FALLBACK_MATCHES = [
-    { id:"fb1", home:"Arsenal", away:"Liverpool",     league:"PREMIER LEAGUE",  time:"16:00", statusClass:"text-gray-400", scoreHome:"", scoreAway:"", venue:"EMIRATES STADIUM",    alert:"", eloHome:"1842", eloAway:"1876", formHome:["V","V","E","V","D"], formAway:["V","V","V","E","V"], standings:{home:{pos:2,pts:68,p:30,sg:34},away:{pos:1,pts:72,p:30,sg:42}}, h2h:[{date:"2025-12-21",home:"Liverpool",score:"2-0",away:"Arsenal"},{date:"2025-08-17",home:"Arsenal",score:"1-1",away:"Liverpool"},{date:"2025-04-04",home:"Liverpool",score:"3-1",away:"Arsenal"}], stats:{info:"Liverpool chega com toda a força — apenas 1 derrota nos últimos 15 jogos. Arsenal em casa tem 87% de aproveitamento.",reliability:"9.0"} },
-    { id:"fb2", home:"Real Madrid", away:"Barcelona",  league:"LA LIGA",         time:"17:00", statusClass:"text-gray-400", scoreHome:"", scoreAway:"", venue:"BERNABÉU",             alert:"", eloHome:"1930", eloAway:"1885", formHome:["V","V","V","D","V"], formAway:["V","E","V","V","V"], standings:{home:{pos:1,pts:74,p:29,sg:48},away:{pos:2,pts:68,p:29,sg:39}}, h2h:[{date:"2025-10-26",home:"Barcelona",score:"1-4",away:"Real Madrid"},{date:"2025-03-30",home:"Real Madrid",score:"3-2",away:"Barcelona"},{date:"2024-10-27",home:"Barcelona",score:"0-1",away:"Real Madrid"}], stats:{info:"El Clásico com Madrid líder. Domínio histórico recente: 4V nos últimos 5 H2H. Barcelona vem de vitória fora.",reliability:"9.2"} },
-    { id:"fb3", home:"Bayern",     away:"Dortmund",    league:"BUNDESLIGA",      time:"15:30", statusClass:"text-gray-500", scoreHome:"3", scoreAway:"1", venue:"ALLIANZ ARENA",       alert:"", eloHome:"1912", eloAway:"1780", formHome:["V","V","V","V","E"], formAway:["D","V","E","V","D"], standings:{home:{pos:1,pts:71,p:28,sg:54},away:{pos:3,pts:52,p:28,sg:18}}, h2h:[{date:"2025-11-30",home:"Dortmund",score:"1-3",away:"Bayern"},{date:"2025-04-05",home:"Bayern",score:"4-0",away:"Dortmund"},{date:"2024-11-02",home:"Dortmund",score:"1-1",away:"Bayern"}], stats:{info:"Bayern dominou Der Klassiker: 3-1. Dois gols de Musiala e uma pintura de Kane. Dortmund chegou a descontar.",reliability:"8.8"} },
-    { id:"fb4", home:"Juventus",   away:"Inter",       league:"SERIE A",         time:"15:45", statusClass:"text-trading-highlight animate-pulse", scoreHome:"1", scoreAway:"1", venue:"ALLIANZ STADIUM", alert:"AO VIVO", eloHome:"1788", eloAway:"1850", formHome:["E","V","D","V","E"], formAway:["V","V","V","E","V"], standings:{home:{pos:4,pts:54,p:29,sg:12},away:{pos:1,pts:70,p:29,sg:40}}, h2h:[{date:"2025-10-19",home:"Inter",score:"1-0",away:"Juventus"},{date:"2025-02-16",home:"Juventus",score:"1-1",away:"Inter"},{date:"2024-11-24",home:"Juventus",score:"0-1",away:"Inter"}], stats:{info:"Jogo equilibrado, 1-1. Inter pressionando. Juve apostando no contra-ataque.",reliability:"8.5"} },
-    { id:"fb5", home:"Flamengo",   away:"Palmeiras",   league:"BRASILEIRÃO SÉRIE A", time:"19:00", statusClass:"text-gray-400", scoreHome:"", scoreAway:"", venue:"MARACANÃ",          alert:"", eloHome:"1705", eloAway:"1720", formHome:["V","E","V","V","D"], formAway:["V","V","V","D","V"], standings:{home:{pos:3,pts:12,p:5,sg:5},away:{pos:1,pts:15,p:5,sg:8}}, h2h:[{date:"2025-10-05",home:"Flamengo",score:"2-1",away:"Palmeiras"},{date:"2025-06-22",home:"Palmeiras",score:"1-0",away:"Flamengo"},{date:"2025-04-13",home:"Flamengo",score:"0-0",away:"Palmeiras"}], stats:{info:"Clássico nacional no Maracanã. Palmeiras lidera o Brasileirão. Flamengo com força total disponível.",reliability:"8.7"} },
-    { id:"fb6", home:"Corinthians",away:"São Paulo",   league:"BRASILEIRÃO SÉRIE A", time:"16:00", statusClass:"text-gray-400", scoreHome:"", scoreAway:"", venue:"NEO QUÍMICA ARENA",  alert:"", eloHome:"1640", eloAway:"1660", formHome:["D","V","E","D","V"], formAway:["V","V","D","V","E"], standings:{home:{pos:9,pts:8,p:5,sg:0},away:{pos:5,pts:10,p:5,sg:3}}, h2h:[{date:"2025-09-14",home:"São Paulo",score:"0-1",away:"Corinthians"},{date:"2025-06-01",home:"Corinthians",score:"1-1",away:"São Paulo"},{date:"2025-03-16",home:"São Paulo",score:"2-0",away:"Corinthians"}], stats:{info:"Derby paulista. São Paulo em melhor fase. Corinthians em casa com necessidade de resultado.",reliability:"8.2"} },
-    { id:"fb7", home:"Atlético MG",away:"Cruzeiro",    league:"BRASILEIRÃO SÉRIE A", time:"18:00", statusClass:"text-gray-400", scoreHome:"", scoreAway:"", venue:"ARENA MRV",          alert:"", eloHome:"1682", eloAway:"1648", formHome:["V","V","E","V","V"], formAway:["D","E","V","D","V"], standings:{home:{pos:4,pts:11,p:5,sg:4},away:{pos:8,pts:9,p:5,sg:1}}, h2h:[{date:"2025-10-12",home:"Cruzeiro",score:"0-2",away:"Atletico MG"},{date:"2025-04-20",home:"Atletico MG",score:"1-1",away:"Cruzeiro"},{date:"2024-10-06",home:"Cruzeiro",score:"1-3",away:"Atletico MG"}], stats:{info:"Clássico mineiro na Arena MRV. Galo em casa invicto há 6 jogos. Cruzeiro sem vencer fora há 4 rodadas.",reliability:"8.4"} },
-    { id:"fb8", home:"Atlético Mad",away:"Sevilla",    league:"LA LIGA",         time:"16:00", statusClass:"text-gray-400", scoreHome:"", scoreAway:"", venue:"CÍVITAS METROPOLITANO", alert:"", eloHome:"1860", eloAway:"1730", formHome:["V","V","V","E","V"], formAway:["D","E","V","D","V"], standings:{home:{pos:3,pts:62,p:29,sg:24},away:{pos:11,pts:35,p:29,sg:-4}}, h2h:[{date:"2025-11-22",home:"Sevilla",score:"0-2",away:"Atletico"},{date:"2025-03-09",home:"Atletico",score:"2-0",away:"Sevilla"},{date:"2024-11-10",home:"Sevilla",score:"1-1",away:"Atletico"}], stats:{info:"Atlético invicto há 8 jogos em casa. Sevilla em campanha modesta, sem vencer fora há 4 rodadas.",reliability:"8.6"} }
+    { id:"fb1", home:"Arsenal", away:"Liverpool", league:"PREMIER LEAGUE", time:"16:00", statusClass:"text-gray-400", scoreHome:"", scoreAway:"", venue:"EMIRATES STADIUM", alert:"", eloHome:"1842", eloAway:"1876", formHome:["V","V","E","V","D"], formAway:["V","V","V","E","V"], standings:{home:{pos:2,pts:68,p:30,sg:34},away:{pos:1,pts:72,p:30,sg:42}}, h2h:[{date:"2025-12-21",home:"Liverpool",score:"2-0",away:"Arsenal"},{date:"2025-08-17",home:"Arsenal",score:"1-1",away:"Liverpool"}], stats:{info:"Liverpool apenas 1 derrota nos últimos 15 jogos. Arsenal em casa com 87% aproveitamento.",reliability:"9.0"} },
+    { id:"fb2", home:"Real Madrid", away:"Barcelona", league:"LA LIGA", time:"17:00", statusClass:"text-gray-400", scoreHome:"", scoreAway:"", venue:"BERNABÉU", alert:"", eloHome:"1930", eloAway:"1885", formHome:["V","V","V","D","V"], formAway:["V","E","V","V","V"], standings:{home:{pos:1,pts:74,p:29,sg:48},away:{pos:2,pts:68,p:29,sg:39}}, h2h:[{date:"2025-10-26",home:"Barcelona",score:"1-4",away:"Real Madrid"},{date:"2025-03-30",home:"Real Madrid",score:"3-2",away:"Barcelona"}], stats:{info:"El Clásico com Madrid líder. Domínio recente: 4V nos últimos 5 H2H.",reliability:"9.2"} },
+    { id:"fb3", home:"Bayern", away:"Dortmund", league:"BUNDESLIGA", time:"15:30", statusClass:"text-gray-500", scoreHome:"3", scoreAway:"1", venue:"ALLIANZ ARENA", alert:"", eloHome:"1912", eloAway:"1780", formHome:["V","V","V","V","E"], formAway:["D","V","E","V","D"], standings:{home:{pos:1,pts:71,p:28,sg:54},away:{pos:3,pts:52,p:28,sg:18}}, h2h:[{date:"2025-11-30",home:"Dortmund",score:"1-3",away:"Bayern"}], stats:{info:"Bayern dominou Der Klassiker: 3-1.",reliability:"8.8"} },
+    { id:"fb4", home:"Flamengo", away:"Palmeiras", league:"BRASILEIRÃO SÉRIE A", time:"19:00", statusClass:"text-gray-400", scoreHome:"", scoreAway:"", venue:"MARACANÃ", alert:"", eloHome:"1705", eloAway:"1720", formHome:["V","E","V","V","D"], formAway:["V","V","V","D","V"], standings:{home:{pos:3,pts:12,p:5,sg:5},away:{pos:1,pts:15,p:5,sg:8}}, h2h:[{date:"2025-10-05",home:"Flamengo",score:"2-1",away:"Palmeiras"}], stats:{info:"Clássico nacional no Maracanã. Palmeiras lidera o Brasileirão.",reliability:"8.7"} },
+    { id:"fb5", home:"Corinthians", away:"São Paulo", league:"BRASILEIRÃO SÉRIE A", time:"16:00", statusClass:"text-gray-400", scoreHome:"", scoreAway:"", venue:"NEO QUÍMICA ARENA", alert:"", eloHome:"1640", eloAway:"1660", formHome:["D","V","E","D","V"], formAway:["V","V","D","V","E"], standings:{home:{pos:9,pts:8,p:5,sg:0},away:{pos:5,pts:10,p:5,sg:3}}, h2h:[{date:"2025-09-14",home:"São Paulo",score:"0-1",away:"Corinthians"}], stats:{info:"Derby paulista. São Paulo em melhor fase.",reliability:"8.2"} },
+    { id:"fb6", home:"PSG", away:"Toulouse", league:"LIGUE 1", time:"16:00", statusClass:"text-gray-400", scoreHome:"", scoreAway:"", venue:"PARC DES PRINCES", alert:"", eloHome:"1880", eloAway:"1620", formHome:["V","V","V","E","V"], formAway:["D","E","V","D","V"], standings:{home:{pos:1,pts:70,p:28,sg:52},away:{pos:12,pts:34,p:28,sg:-5}}, h2h:[], stats:{info:"PSG líder isolado da Ligue 1.",reliability:"8.6"} }
 ];
 
 // ═══════════════════════════════════════════════════
 let liveGamesData = [];
-let allTodayEvents = []; // referência global para refresh
 let favorites = [];
-let enrichmentCache = { form: {}, standings: {} };
 let refreshTimer = null;
 try { favorites = JSON.parse(localStorage.getItem('futTraderFavs')) || []; } catch(e) { favorites = []; }
 
 // ───────────────────────────────────────────────────
 //  HELPERS
 // ───────────────────────────────────────────────────
-function todayBR() {
-    return new Date().toLocaleDateString("en-CA", { timeZone: "America/Sao_Paulo" });
-}
 function todayBRDisplay() {
     return new Date().toLocaleDateString("pt-BR", { timeZone: "America/Sao_Paulo" });
 }
-function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
-
-async function tsdbFetch(endpoint) {
-    try {
-        const r = await fetch(`${TSDB_BASE}${endpoint}`);
-        if (!r.ok) return null;
-        return await r.json();
-    } catch(e) { return null; }
-}
 
 // ───────────────────────────────────────────────────
-//  THESPORTSDB — BUSCA DE JOGOS DO DIA (CORRIGIDO)
-//  Usa eventsnextleague + eventspastleague por liga
-//  Filtra por data de hoje + remove duplicatas
-// ───────────────────────────────────────────────────
-async function buscarJogosTheSportsDB() {
-    const hoje = todayBR();
-    const seen = new Set();
-    const allEvents = [];
-
-    console.log(`[TSDB] Buscando jogos de ${hoje} em ${TSDB_LEAGUE_IDS.length} ligas...`);
-
-    // Busca em batches de 5 ligas para não sobrecarregar
-    for (let i = 0; i < TSDB_LEAGUE_IDS.length; i += 5) {
-        const batch = TSDB_LEAGUE_IDS.slice(i, i + 5);
-        const promises = batch.flatMap(lid => [
-            tsdbFetch(`/eventsnextleague.php?id=${lid}`),
-            tsdbFetch(`/eventspastleague.php?id=${lid}`)
-        ]);
-        const results = await Promise.allSettled(promises);
-
-        for (const r of results) {
-            if (r.status !== "fulfilled" || !r.value) continue;
-            const events = r.value.events || [];
-            for (const ev of events) {
-                const evDate = ev.dateEvent || "";
-                const evId = String(ev.idEvent || "");
-                // FILTRO CRÍTICO: só aceita eventos de HOJE e não duplicados
-                if (evDate === hoje && evId && !seen.has(evId)) {
-                    seen.add(evId);
-                    allEvents.push(ev);
-                }
-            }
-        }
-        // Delay entre batches
-        if (i + 5 < TSDB_LEAGUE_IDS.length) await delay(300);
-    }
-
-    console.log(`[TSDB] ${allEvents.length} jogos encontrados para ${hoje}`);
-    return allEvents;
-}
-
-// ───────────────────────────────────────────────────
-//  THESPORTSDB — ENRICHMENT ENGINE
-// ───────────────────────────────────────────────────
-async function getTeamFormTSDB(teamId) {
-    if (!teamId) return ["-","-","-","-","-"];
-    const tid = String(teamId);
-    if (enrichmentCache.form[tid]) return enrichmentCache.form[tid];
-    try {
-        const data = await tsdbFetch(`/eventslast.php?id=${tid}`);
-        if (!data || !data.results) return ["-","-","-","-","-"];
-        const form = [];
-        for (const ev of data.results) {
-            if (form.length >= 5) break;
-            const sh = parseInt(ev.intHomeScore);
-            const sa = parseInt(ev.intAwayScore);
-            if (isNaN(sh) || isNaN(sa)) continue;
-            const isHome = String(ev.idHomeTeam) === tid;
-            if (isHome) form.push(sh > sa ? "V" : sh < sa ? "D" : "E");
-            else        form.push(sa > sh ? "V" : sa < sh ? "D" : "E");
-        }
-        while (form.length < 5) form.push("-");
-        enrichmentCache.form[tid] = form.slice(0, 5);
-        return enrichmentCache.form[tid];
-    } catch(e) { return ["-","-","-","-","-"]; }
-}
-
-async function getStandingsTSDB(leagueId, season) {
-    if (!leagueId || !season) return [];
-    const key = `${leagueId}_${season}`;
-    if (enrichmentCache.standings[key]) return enrichmentCache.standings[key];
-    try {
-        const data = await tsdbFetch(`/lookuptable.php?l=${leagueId}&s=${season}`);
-        if (!data || !data.table) return [];
-        enrichmentCache.standings[key] = data.table;
-        return data.table;
-    } catch(e) { return []; }
-}
-
-function findInStandings(table, teamName, teamId) {
-    const empty = {pos:"-",pts:"-",p:"-",sg:"-"};
-    if (!table || !table.length) return empty;
-    const tid = String(teamId);
-    let row = table.find(r => String(r.idTeam) === tid);
-    if (!row) {
-        const lower = (teamName || "").toLowerCase();
-        row = table.find(r => {
-            const n = (r.strTeam || "").toLowerCase();
-            return n.includes(lower) || lower.includes(n);
-        });
-    }
-    if (!row) return empty;
-    const gf = parseInt(row.intGoalsFor || "0") || 0;
-    const ga = parseInt(row.intGoalsAgainst || "0") || 0;
-    return {
-        pos: row.intRank || "-",
-        pts: row.intPoints || "-",
-        p:   row.intPlayed || "-",
-        sg:  row.intGoalDifference != null && row.intGoalDifference !== "" ? row.intGoalDifference : String(gf - ga)
-    };
-}
-
-function generateStatsText(jogo) {
-    const sh = jogo.standings?.home || {};
-    const sa = jogo.standings?.away || {};
-    const parts = [];
-    if (sh.pos !== "-" && sa.pos !== "-") {
-        parts.push(`${jogo.home} em ${sh.pos}° (${sh.pts}pts) vs ${jogo.away} em ${sa.pos}° (${sa.pts}pts).`);
-    }
-    const fh = (jogo.formHome || []).filter(x => x !== "-");
-    const fa = (jogo.formAway || []).filter(x => x !== "-");
-    if (fh.length >= 3) {
-        const w = fh.filter(x => x === "V").length;
-        parts.push(`${jogo.home}: ${Math.round((w/fh.length)*100)}% vitórias recentes.`);
-    }
-    if (fa.length >= 3) {
-        const w = fa.filter(x => x === "V").length;
-        parts.push(`${jogo.away}: ${Math.round((w/fa.length)*100)}% vitórias recentes.`);
-    }
-    return parts.length ? parts.join(" ") : "Dados via TheSportsDB.";
-}
-
-// ───────────────────────────────────────────────────
-//  ENRICHMENT PIPELINE (background, progressivo)
-// ───────────────────────────────────────────────────
-async function enrichirJogos(jogos) {
-    console.log("[ETL] Iniciando enriquecimento...");
-    const leagues = new Map();
-    const teamIds = new Set();
-
-    jogos.forEach(jogo => {
-        if (!jogo._meta) return;
-        if (jogo._meta.idLeague && jogo._meta.strSeason)
-            leagues.set(String(jogo._meta.idLeague), jogo._meta.strSeason);
-        if (jogo._meta.idHomeTeam) teamIds.add(String(jogo._meta.idHomeTeam));
-        if (jogo._meta.idAwayTeam) teamIds.add(String(jogo._meta.idAwayTeam));
-    });
-
-    // Fase 1: Classificações por liga
-    console.log(`[ETL] Buscando classificação de ${leagues.size} liga(s)...`);
-    for (const [lid, season] of leagues) {
-        await getStandingsTSDB(lid, season);
-        await delay(350);
-    }
-
-    // Fase 2: Forma dos times (batch de 3)
-    const teamArr = [...teamIds];
-    console.log(`[ETL] Buscando forma de ${teamArr.length} time(s)...`);
-    for (let i = 0; i < teamArr.length; i += 3) {
-        const batch = teamArr.slice(i, i + 3);
-        await Promise.allSettled(batch.map(tid => getTeamFormTSDB(tid)));
-        await delay(400);
-    }
-
-    // Fase 3: Merge enrichment nos jogos
-    jogos.forEach(jogo => {
-        if (!jogo._meta) return;
-        const htid = String(jogo._meta.idHomeTeam || "");
-        const atid = String(jogo._meta.idAwayTeam || "");
-        if (enrichmentCache.form[htid]) jogo.formHome = enrichmentCache.form[htid];
-        if (enrichmentCache.form[atid]) jogo.formAway = enrichmentCache.form[atid];
-        const sKey = `${jogo._meta.idLeague}_${jogo._meta.strSeason}`;
-        const table = enrichmentCache.standings[sKey];
-        if (table && table.length) {
-            jogo.standings = {
-                home: findInStandings(table, jogo.home, htid),
-                away: findInStandings(table, jogo.away, atid)
-            };
-        }
-        jogo.stats = { info: generateStatsText(jogo), reliability: "7.5" };
-    });
-
-    liveGamesData = agruparPorLiga(jogos);
-    renderAgenda();
-    const badge = document.getElementById('fonte-badge');
-    if (badge) badge.innerHTML = `<span class="bg-green-900/50 text-green-400 text-[8px] font-black px-2 py-0.5 rounded uppercase border border-green-500/30">● THESPORTSDB ENRIQUECIDO</span>`;
-    console.log("[ETL] Enriquecimento concluído!");
-}
-
-// ───────────────────────────────────────────────────
-//  CONVERTE formato TheSportsDB → formato interno
-// ───────────────────────────────────────────────────
-function fromSportsDB(ev) {
-    const ts = ev.strTimestamp || ev.dateEvent + "T" + (ev.strTime || "12:00:00") + "+00:00";
-    const utc = new Date(ts);
-    const timeStr = utc.toLocaleTimeString("pt-BR", { hour:"2-digit", minute:"2-digit", timeZone:"America/Sao_Paulo" });
-
-    let statusClass = "text-gray-400", alert = "", displayTime = timeStr;
-    const st = (ev.strStatus || "Not Started").toLowerCase();
-
-    if (st === "in progress" || st === "1h" || st === "2h") {
-        displayTime = "AO VIVO"; statusClass = "text-trading-highlight animate-pulse"; alert = "AO VIVO";
-    } else if (st === "ht") {
-        displayTime = "INTERVALO"; statusClass = "text-trading-highlight animate-pulse"; alert = "INTERVALO";
-    } else if (st === "ft" || st === "finished" || st === "aet" || st === "pen" || st === "match finished") {
-        displayTime = "ENCERRADO"; statusClass = "text-gray-500";
-    } else if (st === "postponed") {
-        displayTime = "ADIADO"; statusClass = "text-red-500";
-    } else if (st === "cancelled") {
-        displayTime = "CANCELADO"; statusClass = "text-red-500";
-    } else if (st === "not started" || st === "ns" || st === "") {
-        // Agendado — manter horário
-    }
-
-    const sh = ev.intHomeScore !== null && ev.intHomeScore !== "" && ev.intHomeScore !== undefined ? String(ev.intHomeScore) : "";
-    const sa = ev.intAwayScore !== null && ev.intAwayScore !== "" && ev.intAwayScore !== undefined ? String(ev.intAwayScore) : "";
-
-    return {
-        id:         String(ev.idEvent),
-        home:       ev.strHomeTeam || "?",
-        away:       ev.strAwayTeam || "?",
-        league:     (ev.strLeague || ev.strSport || "FUTEBOL").toUpperCase(),
-        time:       displayTime,
-        statusClass,
-        scoreHome:  sh,
-        scoreAway:  sa,
-        venue:      (ev.strVenue || "ESTÁDIO").toUpperCase(),
-        alert,
-        eloHome:    "N/A", eloAway: "N/A",
-        formHome:   ["-","-","-","-","-"],
-        formAway:   ["-","-","-","-","-"],
-        standings:  { home:{pos:"-",pts:"-",p:"-",sg:"-"}, away:{pos:"-",pts:"-",p:"-",sg:"-"} },
-        h2h:        [],
-        stats:      { info:"Carregando dados...", reliability:"N/A" },
-        _meta: {
-            idHomeTeam: ev.idHomeTeam,
-            idAwayTeam: ev.idAwayTeam,
-            idLeague:   ev.idLeague,
-            strSeason:  ev.strSeason
-        }
-    };
-}
-
-// ───────────────────────────────────────────────────
-//  AGRUPA lista de jogos por liga
+//  AGRUPA jogos por liga, ordena: AO VIVO primeiro
 // ───────────────────────────────────────────────────
 function agruparPorLiga(jogos) {
     const mapa = {};
@@ -375,138 +114,35 @@ function agruparPorLiga(jogos) {
         if (!mapa[k]) mapa[k] = { name: k, games: [] };
         mapa[k].games.push(g);
     });
-    return Object.values(mapa).sort((a,b) => b.games.length - a.games.length);
+    // Ligas com jogos ao vivo primeiro, depois por quantidade
+    return Object.values(mapa).sort((a, b) => {
+        const aLive = a.games.some(g => g.alert);
+        const bLive = b.games.some(g => g.alert);
+        if (aLive && !bLive) return -1;
+        if (!aLive && bLive) return 1;
+        return b.games.length - a.games.length;
+    });
 }
 
 // ───────────────────────────────────────────────────
-//  AUTO-REFRESH (atualiza placares)
-// ───────────────────────────────────────────────────
-async function refreshScores() {
-    try {
-        // Tentar JSON local primeiro
-        try {
-            const rj = await fetch("jogos_de_hoje.json?v=" + Date.now());
-            if (rj.ok) {
-                const txt = await rj.text();
-                if (txt && txt.trim() && !txt.trim().startsWith("<!")) {
-                    const parsed = JSON.parse(txt);
-                    if (parsed.matches && parsed.matches.length > 0) {
-                        processarDadosCompletos(parsed.matches);
-                        return;
-                    }
-                }
-            }
-        } catch(e) {}
-
-        // Refresh via TheSportsDB (busca rápida nas mesmas ligas)
-        const events = await buscarJogosTheSportsDB();
-        if (!events.length) return;
-
-        const jogos = events.map(fromSportsDB);
-
-        // Aplicar cache de enriquecimento existente
-        jogos.forEach(jogo => {
-            if (!jogo._meta) return;
-            const htid = String(jogo._meta.idHomeTeam || "");
-            const atid = String(jogo._meta.idAwayTeam || "");
-            if (enrichmentCache.form[htid]) jogo.formHome = enrichmentCache.form[htid];
-            if (enrichmentCache.form[atid]) jogo.formAway = enrichmentCache.form[atid];
-            const sKey = `${jogo._meta.idLeague}_${jogo._meta.strSeason}`;
-            const table = enrichmentCache.standings[sKey];
-            if (table && table.length) {
-                jogo.standings = {
-                    home: findInStandings(table, jogo.home, htid),
-                    away: findInStandings(table, jogo.away, atid)
-                };
-            }
-            jogo.stats = { info: generateStatsText(jogo), reliability: "7.5" };
-        });
-
-        liveGamesData = agruparPorLiga(jogos);
-        document.getElementById('game-count').innerText = jogos.length;
-        renderAgenda();
-    } catch(e) { console.warn("Refresh falhou:", e); }
-}
-
-function startAutoRefresh() {
-    if (refreshTimer) clearInterval(refreshTimer);
-    refreshTimer = setInterval(refreshScores, REFRESH_MS);
-}
-
-// ───────────────────────────────────────────────────
-//  MOTOR PRINCIPAL — 3 tentativas em cascata
-// ───────────────────────────────────────────────────
-async function carregarCombustivel() {
-    const badge = document.getElementById('fonte-badge');
-
-    // ── TENTATIVA 1: JSON local (GitHub Actions) ──────
-    try {
-        const r = await fetch("jogos_de_hoje.json?v=" + Date.now());
-        if (r.ok) {
-            const txt = await r.text();
-            if (txt && txt.trim() && !txt.trim().startsWith("<!")) {
-                const parsed = JSON.parse(txt);
-                if (parsed.matches && parsed.matches.length > 0) {
-                    processarDadosCompletos(parsed.matches);
-                    badge.innerHTML = `<span class="bg-green-900/50 text-green-400 text-[8px] font-black px-2 py-0.5 rounded uppercase border border-green-500/30">● DADOS ENRIQUECIDOS</span>`;
-                    startAutoRefresh();
-                    return;
-                }
-            }
-        }
-    } catch(e) { /* sem JSON local */ }
-
-    // ── TENTATIVA 2: TheSportsDB (multi-liga, endpoint correto) ──
-    try {
-        badge.innerHTML = `<span class="bg-blue-900/50 text-blue-400 text-[8px] font-black px-2 py-0.5 rounded uppercase border border-blue-500/30 animate-pulse">● BUSCANDO JOGOS...</span>`;
-
-        const events = await buscarJogosTheSportsDB();
-
-        if (events.length > 0) {
-            const jogos = events.map(fromSportsDB);
-            allTodayEvents = jogos;
-            liveGamesData = agruparPorLiga(jogos);
-            document.getElementById('game-count').innerText = jogos.length;
-            document.getElementById('loading-ferrari')?.remove();
-            badge.innerHTML = `<span class="bg-blue-900/50 text-blue-400 text-[8px] font-black px-2 py-0.5 rounded uppercase border border-blue-500/30 animate-pulse">● CARREGANDO INTELIGÊNCIA...</span>`;
-            renderAgenda();
-
-            // Enriquecimento em background
-            enrichirJogos(jogos).catch(e => console.warn("Enrichment:", e));
-            startAutoRefresh();
-            return;
-        }
-    } catch(e) { console.warn("TheSportsDB falhou:", e); }
-
-    // ── TENTATIVA 3: Dados embutidos (sempre funciona) ──
-    console.info("Usando dados embutidos de fallback.");
-    liveGamesData = agruparPorLiga(FALLBACK_MATCHES);
-    document.getElementById('game-count').innerText = FALLBACK_MATCHES.length;
-    document.getElementById('loading-ferrari')?.remove();
-    badge.innerHTML = `<span class="bg-yellow-900/50 text-yellow-400 text-[8px] font-black px-2 py-0.5 rounded uppercase border border-yellow-500/30">● MODO DEMONSTRAÇÃO</span>`;
-    renderAgenda();
-}
-
-// ───────────────────────────────────────────────────
-//  PROCESSA dados completos do JSON local
+//  PROCESSA JSON do ETL (Sofascore ou football-data)
 // ───────────────────────────────────────────────────
 function processarDadosCompletos(matches) {
     const fusoBR = { timeZone: "America/Sao_Paulo" };
     const hojeDisplay = todayBRDisplay();
-    const ligasAgrupadas = {};
+    const jogos = [];
 
     matches.forEach(match => {
         const utc = new Date(match.utcDate);
         if (utc.toLocaleDateString("pt-BR", fusoBR) !== hojeDisplay) return;
 
         const liga = match.competition.name.toUpperCase();
-        if (!ligasAgrupadas[liga]) ligasAgrupadas[liga] = { name: liga, games: [] };
 
         let horario = utc.toLocaleTimeString("pt-BR", { hour:"2-digit", minute:"2-digit", timeZone:"America/Sao_Paulo" });
         let statusClass = "text-gray-400", alert = "";
 
         if (match.status === "IN_PLAY" || match.status === "PAUSED") {
-            horario = match.minute ? `${match.minute}'` : "AO VIVO";
+            horario = match.minute ? `${match.minute}` : "AO VIVO";
             statusClass = "text-trading-highlight animate-pulse";
             alert = match.status === "PAUSED" ? "INTERVALO" : "AO VIVO";
         } else if (match.status === "FINISHED") {
@@ -515,8 +151,8 @@ function processarDadosCompletos(matches) {
             horario = match.status === "POSTPONED" ? "ADIADO" : "CANCELADO"; statusClass = "text-red-500";
         }
 
-        const gh = match.score?.fullTime?.home ?? "";
-        const ga = match.score?.fullTime?.away ?? "";
+        const gh = match.score?.fullTime?.home;
+        const ga = match.score?.fullTime?.away;
         const intl = match.inteligencia || {
             clubelo:{ home_elo:"N/A", away_elo:"N/A" },
             recent_form:{ home:["-","-","-","-","-"], away:["-","-","-","-","-"] },
@@ -524,21 +160,84 @@ function processarDadosCompletos(matches) {
             h2h:[], stats:{ info:"Sem dados.", reliability:"N/A" }
         };
 
-        ligasAgrupadas[liga].games.push({
-            id: String(match.id), home: match.homeTeam.shortName || match.homeTeam.name,
-            away: match.awayTeam.shortName || match.awayTeam.name, league: liga,
-            time: horario, statusClass, scoreHome: gh !== null ? String(gh) : "", scoreAway: ga !== null ? String(ga) : "",
-            venue: match.venue || "ESTÁDIO", alert,
-            eloHome: intl.clubelo.home_elo, eloAway: intl.clubelo.away_elo,
-            formHome: Array.isArray(intl.recent_form.home) ? intl.recent_form.home : ["-","-","-","-","-"],
-            formAway: Array.isArray(intl.recent_form.away) ? intl.recent_form.away : ["-","-","-","-","-"],
-            standings: intl.standings, h2h: intl.h2h, stats: intl.stats
+        jogos.push({
+            id: String(match.id),
+            home: match.homeTeam.shortName || match.homeTeam.name,
+            away: match.awayTeam.shortName || match.awayTeam.name,
+            league: liga,
+            time: horario, statusClass,
+            scoreHome: gh != null ? String(gh) : "",
+            scoreAway: ga != null ? String(ga) : "",
+            venue: (match.venue || "").toUpperCase(),
+            alert,
+            eloHome: intl.clubelo?.home_elo || "N/A",
+            eloAway: intl.clubelo?.away_elo || "N/A",
+            formHome: Array.isArray(intl.recent_form?.home) ? intl.recent_form.home : ["-","-","-","-","-"],
+            formAway: Array.isArray(intl.recent_form?.away) ? intl.recent_form.away : ["-","-","-","-","-"],
+            standings: intl.standings || { home:{pos:"-",pts:"-",p:"-",sg:"-"}, away:{pos:"-",pts:"-",p:"-",sg:"-"} },
+            h2h: intl.h2h || [],
+            stats: intl.stats || { info:"Sem dados.", reliability:"N/A" }
         });
     });
 
-    liveGamesData = Object.values(ligasAgrupadas);
-    document.getElementById('game-count').innerText = liveGamesData.reduce((a,l) => a + l.games.length, 0);
+    liveGamesData = agruparPorLiga(jogos);
+    document.getElementById('game-count').innerText = jogos.length;
     document.getElementById('loading-ferrari')?.remove();
+    renderAgenda();
+    return jogos.length;
+}
+
+// ───────────────────────────────────────────────────
+//  AUTO-REFRESH
+// ───────────────────────────────────────────────────
+async function refreshScores() {
+    try {
+        const r = await fetch("jogos_de_hoje.json?v=" + Date.now());
+        if (!r.ok) return;
+        const txt = await r.text();
+        if (!txt || txt.trim().startsWith("<!")) return;
+        const parsed = JSON.parse(txt);
+        if (parsed.matches && parsed.matches.length > 0) {
+            processarDadosCompletos(parsed.matches);
+        }
+    } catch(e) { console.warn("Refresh:", e); }
+}
+
+function startAutoRefresh() {
+    if (refreshTimer) clearInterval(refreshTimer);
+    refreshTimer = setInterval(refreshScores, REFRESH_MS);
+}
+
+// ───────────────────────────────────────────────────
+//  MOTOR PRINCIPAL — JSON Sofascore → Fallback
+// ───────────────────────────────────────────────────
+async function carregarCombustivel() {
+    const badge = document.getElementById('fonte-badge');
+
+    // ── TENTATIVA 1: JSON gerado pelo ETL Sofascore ──
+    try {
+        const r = await fetch("jogos_de_hoje.json?v=" + Date.now());
+        if (r.ok) {
+            const txt = await r.text();
+            if (txt && txt.trim() && !txt.trim().startsWith("<!")) {
+                const parsed = JSON.parse(txt);
+                if (parsed.matches && parsed.matches.length > 0) {
+                    const count = processarDadosCompletos(parsed.matches);
+                    const fonte = parsed._fonte || "ETL";
+                    badge.innerHTML = `<span class="bg-green-900/50 text-green-400 text-[8px] font-black px-2 py-0.5 rounded uppercase border border-green-500/30">● ${count} JOGOS — ${fonte.toUpperCase()}</span>`;
+                    startAutoRefresh();
+                    return;
+                }
+            }
+        }
+    } catch(e) { /* JSON indisponível */ }
+
+    // ── TENTATIVA 2: Fallback demonstração ──
+    console.info("JSON indisponível. Usando dados de demonstração.");
+    liveGamesData = agruparPorLiga(FALLBACK_MATCHES);
+    document.getElementById('game-count').innerText = FALLBACK_MATCHES.length;
+    document.getElementById('loading-ferrari')?.remove();
+    badge.innerHTML = `<span class="bg-yellow-900/50 text-yellow-400 text-[8px] font-black px-2 py-0.5 rounded uppercase border border-yellow-500/30">● MODO DEMONSTRAÇÃO</span>`;
     renderAgenda();
 }
 
@@ -583,7 +282,7 @@ function renderAgenda() {
     const list = document.getElementById('agenda-list');
     const search = document.getElementById('agendaSearch').value.toUpperCase();
 
-    // Preservar painéis abertos durante re-render
+    // Preservar painéis abertos
     const openPanels = {};
     document.querySelectorAll('[id^="details-"]').forEach(el => {
         if (!el.classList.contains('hidden')) {
@@ -627,6 +326,7 @@ function renderAgenda() {
                 <div class="flex items-center gap-3 mb-3 px-2">
                     <div class="w-1 h-4 bg-trading-highlight rounded-full ${league.isFavSection?'animate-pulse':''}"></div>
                     <span class="text-[11px] font-black ${hc} uppercase tracking-[2px]">${league.name}</span>
+                    <span class="text-[9px] text-gray-600 font-bold">${league.games.length} jogo${league.games.length>1?'s':''}</span>
                 </div>
                 <div class="bg-trading-panel rounded-xl border ${league.isFavSection?'border-trading-highlight/30':'border-trading-border'} overflow-hidden divide-y divide-white/5 shadow-xl">`;
 
@@ -660,7 +360,7 @@ function renderAgenda() {
                     </div>
                 </div>`;
 
-            const h2hLinhas = game.h2h.map(h => `
+            const h2hLinhas = (game.h2h||[]).map(h => `
                 <div class="flex justify-between items-center bg-black/30 p-2.5 rounded-lg border border-white/5 text-xs hover:bg-black/50 transition">
                     <span class="text-gray-500 w-16 text-[9px] font-bold">${h.date}</span>
                     <div class="flex-1 text-right text-gray-400 font-bold pr-3">${h.home}</div>
@@ -722,7 +422,7 @@ function renderAgenda() {
                                     <span class="text-sm md:text-base font-black text-white uppercase tracking-tight">${game.away}</span>
                                     ${alertHtml}
                                 </div>
-                                <span class="text-[9px] text-gray-500 uppercase mt-2 tracking-wider truncate max-w-xs"><i class="fas fa-map-marker-alt mr-1 text-gray-600"></i>${game.venue}</span>
+                                <span class="text-[9px] text-gray-500 uppercase mt-2 tracking-wider truncate max-w-xs">${game.venue ? '<i class="fas fa-map-marker-alt mr-1 text-gray-600"></i>' + game.venue : ''}</span>
                             </div>
                         </div>
                         <div class="flex items-center pl-2">
@@ -751,7 +451,7 @@ function renderAgenda() {
                                 <div class="space-y-3 bg-white/[0.02] p-4 rounded-xl border border-white/5">
                                     <h4 class="text-[9px] text-gray-500 font-black uppercase tracking-widest">Status da Partida</h4>
                                     <p class="text-[11px] text-white/70">Horário: <span class="text-white font-bold ml-1">${game.time}</span></p>
-                                    <p class="text-[11px] text-white/70 truncate">Local: <span class="text-white font-bold ml-1">${game.venue}</span></p>
+                                    <p class="text-[11px] text-white/70 truncate">Local: <span class="text-white font-bold ml-1">${game.venue || 'N/A'}</span></p>
                                 </div>
                                 <div class="bg-trading-highlight/10 p-4 rounded-xl border-l-4 border-trading-highlight flex flex-col justify-center">
                                     <h4 class="text-[9px] text-trading-highlight font-black uppercase mb-1 tracking-widest">Análise ClubElo</h4>

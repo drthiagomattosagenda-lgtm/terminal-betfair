@@ -70,9 +70,17 @@
 </main>
 
 <script>
+// ═══════════════════════════════════════════════════════════════
+//  QG FUT TRADER — Motor de Combustível v3
+//  Engine com enriquecimento progressivo via TheSportsDB
+//  Form + Standings + Auto-Refresh + Fallback blindado
+// ═══════════════════════════════════════════════════════════════
+
+const TSDB_BASE  = "https://www.thesportsdb.com/api/v1/json/3";
+const REFRESH_MS = 120000; // auto-refresh a cada 2 minutos
+
 // ═══════════════════════════════════════════════════
 //  DADOS EMBUTIDOS — fallback garantido (sempre funciona)
-//  Atualizado com jogos reais da semana
 // ═══════════════════════════════════════════════════
 const FALLBACK_MATCHES = [
     { id:"fb1", home:"Arsenal", away:"Liverpool",     league:"PREMIER LEAGUE",  time:"16:00", statusClass:"text-gray-400", scoreHome:"", scoreAway:"", venue:"EMIRATES STADIUM",    alert:"", eloHome:"1842", eloAway:"1876", formHome:["V","V","E","V","D"], formAway:["V","V","V","E","V"], standings:{home:{pos:2,pts:68,p:30,sg:34},away:{pos:1,pts:72,p:30,sg:42}}, h2h:[{date:"2025-12-21",home:"Liverpool",score:"2-0",away:"Arsenal"},{date:"2025-08-17",home:"Arsenal",score:"1-1",away:"Liverpool"},{date:"2025-04-04",home:"Liverpool",score:"3-1",away:"Arsenal"}], stats:{info:"Liverpool chega com toda a força — apenas 1 derrota nos últimos 15 jogos. Arsenal em casa tem 87% de aproveitamento.",reliability:"9.0"} },
@@ -88,16 +96,165 @@ const FALLBACK_MATCHES = [
 // ═══════════════════════════════════════════════════
 let liveGamesData = [];
 let favorites = [];
+let enrichmentCache = { form: {}, standings: {} };
+let refreshTimer = null;
 try { favorites = JSON.parse(localStorage.getItem('futTraderFavs')) || []; } catch(e) { favorites = []; }
 
 // ───────────────────────────────────────────────────
-//  HELPERS DE DATA
+//  HELPERS
 // ───────────────────────────────────────────────────
 function todayBR() {
-    return new Date().toLocaleDateString("en-CA", { timeZone: "America/Sao_Paulo" }); // YYYY-MM-DD
+    return new Date().toLocaleDateString("en-CA", { timeZone: "America/Sao_Paulo" });
 }
 function todayBRDisplay() {
     return new Date().toLocaleDateString("pt-BR", { timeZone: "America/Sao_Paulo" });
+}
+function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+async function tsdbFetch(endpoint) {
+    try {
+        const r = await fetch(`${TSDB_BASE}${endpoint}`);
+        if (!r.ok) return null;
+        return await r.json();
+    } catch(e) { return null; }
+}
+
+// ───────────────────────────────────────────────────
+//  THESPORTSDB — ENRICHMENT ENGINE
+// ───────────────────────────────────────────────────
+async function getTeamFormTSDB(teamId) {
+    if (!teamId) return ["-","-","-","-","-"];
+    const tid = String(teamId);
+    if (enrichmentCache.form[tid]) return enrichmentCache.form[tid];
+    try {
+        const data = await tsdbFetch(`/eventslast.php?id=${tid}`);
+        if (!data || !data.results) return ["-","-","-","-","-"];
+        const form = [];
+        for (const ev of data.results) {
+            if (form.length >= 5) break;
+            const sh = parseInt(ev.intHomeScore);
+            const sa = parseInt(ev.intAwayScore);
+            if (isNaN(sh) || isNaN(sa)) continue;
+            const isHome = String(ev.idHomeTeam) === tid;
+            if (isHome) form.push(sh > sa ? "V" : sh < sa ? "D" : "E");
+            else        form.push(sa > sh ? "V" : sa < sh ? "D" : "E");
+        }
+        while (form.length < 5) form.push("-");
+        enrichmentCache.form[tid] = form.slice(0, 5);
+        return enrichmentCache.form[tid];
+    } catch(e) { return ["-","-","-","-","-"]; }
+}
+
+async function getStandingsTSDB(leagueId, season) {
+    if (!leagueId || !season) return [];
+    const key = `${leagueId}_${season}`;
+    if (enrichmentCache.standings[key]) return enrichmentCache.standings[key];
+    try {
+        const data = await tsdbFetch(`/lookuptable.php?l=${leagueId}&s=${season}`);
+        if (!data || !data.table) return [];
+        enrichmentCache.standings[key] = data.table;
+        return data.table;
+    } catch(e) { return []; }
+}
+
+function findInStandings(table, teamName, teamId) {
+    const empty = {pos:"-",pts:"-",p:"-",sg:"-"};
+    if (!table || !table.length) return empty;
+    const tid = String(teamId);
+    let row = table.find(r => String(r.idTeam) === tid);
+    if (!row) {
+        const lower = (teamName || "").toLowerCase();
+        row = table.find(r => {
+            const n = (r.strTeam || "").toLowerCase();
+            return n.includes(lower) || lower.includes(n);
+        });
+    }
+    if (!row) return empty;
+    const gf = parseInt(row.intGoalsFor || "0") || 0;
+    const ga = parseInt(row.intGoalsAgainst || "0") || 0;
+    return {
+        pos: row.intRank || "-",
+        pts: row.intPoints || "-",
+        p:   row.intPlayed || "-",
+        sg:  row.intGoalDifference != null && row.intGoalDifference !== "" ? row.intGoalDifference : String(gf - ga)
+    };
+}
+
+function generateStatsText(jogo) {
+    const sh = jogo.standings?.home || {};
+    const sa = jogo.standings?.away || {};
+    const parts = [];
+    if (sh.pos !== "-" && sa.pos !== "-") {
+        parts.push(`${jogo.home} em ${sh.pos}° (${sh.pts}pts) vs ${jogo.away} em ${sa.pos}° (${sa.pts}pts).`);
+    }
+    const fh = (jogo.formHome || []).filter(x => x !== "-");
+    const fa = (jogo.formAway || []).filter(x => x !== "-");
+    if (fh.length >= 3) {
+        const w = fh.filter(x => x === "V").length;
+        parts.push(`${jogo.home}: ${Math.round((w/fh.length)*100)}% vitórias recentes.`);
+    }
+    if (fa.length >= 3) {
+        const w = fa.filter(x => x === "V").length;
+        parts.push(`${jogo.away}: ${Math.round((w/fa.length)*100)}% vitórias recentes.`);
+    }
+    return parts.length ? parts.join(" ") : "Dados via TheSportsDB.";
+}
+
+// ───────────────────────────────────────────────────
+//  ENRICHMENT PIPELINE (background, progressivo)
+// ───────────────────────────────────────────────────
+async function enrichirJogos(jogos) {
+    console.log("[ETL] Iniciando enriquecimento...");
+    const leagues = new Map();
+    const teamIds = new Set();
+
+    jogos.forEach(jogo => {
+        if (!jogo._meta) return;
+        if (jogo._meta.idLeague && jogo._meta.strSeason)
+            leagues.set(String(jogo._meta.idLeague), jogo._meta.strSeason);
+        if (jogo._meta.idHomeTeam) teamIds.add(String(jogo._meta.idHomeTeam));
+        if (jogo._meta.idAwayTeam) teamIds.add(String(jogo._meta.idAwayTeam));
+    });
+
+    // Fase 1: Classificações por liga (poucas chamadas)
+    console.log(`[ETL] Buscando classificação de ${leagues.size} liga(s)...`);
+    for (const [lid, season] of leagues) {
+        await getStandingsTSDB(lid, season);
+        await delay(350);
+    }
+
+    // Fase 2: Forma dos times (batch de 3)
+    const teamArr = [...teamIds];
+    console.log(`[ETL] Buscando forma de ${teamArr.length} time(s)...`);
+    for (let i = 0; i < teamArr.length; i += 3) {
+        const batch = teamArr.slice(i, i + 3);
+        await Promise.allSettled(batch.map(tid => getTeamFormTSDB(tid)));
+        await delay(400);
+    }
+
+    // Fase 3: Merge enrichment
+    jogos.forEach(jogo => {
+        if (!jogo._meta) return;
+        const htid = String(jogo._meta.idHomeTeam || "");
+        const atid = String(jogo._meta.idAwayTeam || "");
+        if (enrichmentCache.form[htid]) jogo.formHome = enrichmentCache.form[htid];
+        if (enrichmentCache.form[atid]) jogo.formAway = enrichmentCache.form[atid];
+        const sKey = `${jogo._meta.idLeague}_${jogo._meta.strSeason}`;
+        const table = enrichmentCache.standings[sKey];
+        if (table && table.length) {
+            jogo.standings = {
+                home: findInStandings(table, jogo.home, htid),
+                away: findInStandings(table, jogo.away, atid)
+            };
+        }
+        jogo.stats = { info: generateStatsText(jogo), reliability: "7.5" };
+    });
+
+    liveGamesData = agruparPorLiga(jogos);
+    renderAgenda();
+    const badge = document.getElementById('fonte-badge');
+    if (badge) badge.innerHTML = `<span class="bg-green-900/50 text-green-400 text-[8px] font-black px-2 py-0.5 rounded uppercase border border-green-500/30">● THESPORTSDB ENRIQUECIDO</span>`;
+    console.log("[ETL] Enriquecimento concluído!");
 }
 
 // ───────────────────────────────────────────────────
@@ -113,10 +270,12 @@ function fromSportsDB(ev) {
 
     if (st === "in progress" || st === "1h" || st === "2h" || st === "ht") {
         displayTime = "AO VIVO"; statusClass = "text-trading-highlight animate-pulse"; alert = st === "ht" ? "INTERVALO" : "AO VIVO";
-    } else if (st === "ft" || st === "finished" || st === "aet" || st === "pen") {
+    } else if (st === "ft" || st === "finished" || st === "aet" || st === "pen" || st === "match finished") {
         displayTime = "ENCERRADO"; statusClass = "text-gray-500";
     } else if (st === "postponed") {
         displayTime = "ADIADO"; statusClass = "text-red-500";
+    } else if (st === "cancelled") {
+        displayTime = "CANCELADO"; statusClass = "text-red-500";
     }
 
     const sh = ev.intHomeScore !== null && ev.intHomeScore !== "" ? String(ev.intHomeScore) : "";
@@ -131,14 +290,20 @@ function fromSportsDB(ev) {
         statusClass,
         scoreHome:  sh,
         scoreAway:  sa,
-        venue:      ev.strVenue || "ESTÁDIO",
+        venue:      (ev.strVenue || "ESTÁDIO").toUpperCase(),
         alert,
         eloHome:    "N/A", eloAway: "N/A",
         formHome:   ["-","-","-","-","-"],
         formAway:   ["-","-","-","-","-"],
         standings:  { home:{pos:"-",pts:"-",p:"-",sg:"-"}, away:{pos:"-",pts:"-",p:"-",sg:"-"} },
         h2h:        [],
-        stats:      { info:"Dados via TheSportsDB. Para dados enriquecidos, configure o GitHub Actions.", reliability:"N/A" }
+        stats:      { info:"Carregando dados...", reliability:"N/A" },
+        _meta: {
+            idHomeTeam: ev.idHomeTeam,
+            idAwayTeam: ev.idAwayTeam,
+            idLeague:   ev.idLeague,
+            strSeason:  ev.strSeason
+        }
     };
 }
 
@@ -152,8 +317,68 @@ function agruparPorLiga(jogos) {
         if (!mapa[k]) mapa[k] = { name: k, games: [] };
         mapa[k].games.push(g);
     });
-    // ordena ligas por número de jogos
     return Object.values(mapa).sort((a,b) => b.games.length - a.games.length);
+}
+
+// ───────────────────────────────────────────────────
+//  AUTO-REFRESH — Atualiza placares a cada 2 min
+// ───────────────────────────────────────────────────
+async function refreshScores() {
+    try {
+        // Tentar JSON local primeiro (pode ter sido atualizado pelo ETL)
+        try {
+            const rj = await fetch("jogos_de_hoje.json?v=" + Date.now());
+            if (rj.ok) {
+                const txt = await rj.text();
+                if (txt && txt.trim() && !txt.trim().startsWith("<!")) {
+                    const parsed = JSON.parse(txt);
+                    if (parsed.matches && parsed.matches.length > 0) {
+                        processarDadosCompletos(parsed.matches);
+                        const badge = document.getElementById('fonte-badge');
+                        if (badge) badge.innerHTML = `<span class="bg-green-900/50 text-green-400 text-[8px] font-black px-2 py-0.5 rounded uppercase border border-green-500/30">● DADOS ENRIQUECIDOS</span>`;
+                        return;
+                    }
+                }
+            }
+        } catch(e) {}
+
+        // Fallback: TheSportsDB
+        const hoje = todayBR();
+        const r = await fetch(`${TSDB_BASE}/eventsday.php?d=${hoje}&s=Soccer`);
+        if (!r.ok) return;
+        const data = await r.json();
+        const eventos = data.events || [];
+        if (!eventos.length) return;
+
+        const jogos = eventos.map(fromSportsDB);
+
+        // Aplicar cache de enriquecimento
+        jogos.forEach(jogo => {
+            if (!jogo._meta) return;
+            const htid = String(jogo._meta.idHomeTeam || "");
+            const atid = String(jogo._meta.idAwayTeam || "");
+            if (enrichmentCache.form[htid]) jogo.formHome = enrichmentCache.form[htid];
+            if (enrichmentCache.form[atid]) jogo.formAway = enrichmentCache.form[atid];
+            const sKey = `${jogo._meta.idLeague}_${jogo._meta.strSeason}`;
+            const table = enrichmentCache.standings[sKey];
+            if (table && table.length) {
+                jogo.standings = {
+                    home: findInStandings(table, jogo.home, htid),
+                    away: findInStandings(table, jogo.away, atid)
+                };
+            }
+            jogo.stats = { info: generateStatsText(jogo), reliability: "7.5" };
+        });
+
+        liveGamesData = agruparPorLiga(jogos);
+        document.getElementById('game-count').innerText = jogos.length;
+        renderAgenda();
+    } catch(e) { console.warn("Refresh falhou:", e); }
+}
+
+function startAutoRefresh() {
+    if (refreshTimer) clearInterval(refreshTimer);
+    refreshTimer = setInterval(refreshScores, REFRESH_MS);
 }
 
 // ───────────────────────────────────────────────────
@@ -172,27 +397,35 @@ async function carregarCombustivel() {
                 if (parsed.matches && parsed.matches.length > 0) {
                     processarDadosCompletos(parsed.matches);
                     badge.innerHTML = `<span class="bg-green-900/50 text-green-400 text-[8px] font-black px-2 py-0.5 rounded uppercase border border-green-500/30">● DADOS ENRIQUECIDOS</span>`;
+                    startAutoRefresh();
                     return;
                 }
             }
         }
     } catch(e) { /* sem JSON local */ }
 
-    // ── TENTATIVA 2: TheSportsDB (gratuito, CORS nativo) ─
+    // ── TENTATIVA 2: TheSportsDB com enriquecimento progressivo ──
     try {
         const hoje = todayBR();
-        const url  = `https://www.thesportsdb.com/api/v1/json/3/eventsday.php?d=${hoje}&s=Soccer`;
+        const url  = `${TSDB_BASE}/eventsday.php?d=${hoje}&s=Soccer`;
         const r    = await fetch(url);
         if (r.ok) {
             const data = await r.json();
             const eventos = data.events || [];
             if (eventos.length > 0) {
+                // FASE 1: Mostra partidas imediatamente com dados básicos
                 const jogos = eventos.map(fromSportsDB);
                 liveGamesData = agruparPorLiga(jogos);
                 document.getElementById('game-count').innerText = jogos.length;
                 document.getElementById('loading-ferrari')?.remove();
-                badge.innerHTML = `<span class="bg-blue-900/50 text-blue-400 text-[8px] font-black px-2 py-0.5 rounded uppercase border border-blue-500/30">● THESPORTSDB AO VIVO</span>`;
+                badge.innerHTML = `<span class="bg-blue-900/50 text-blue-400 text-[8px] font-black px-2 py-0.5 rounded uppercase border border-blue-500/30 animate-pulse">● CARREGANDO INTELIGÊNCIA...</span>`;
                 renderAgenda();
+
+                // FASE 2: Enriquecimento em background (form + standings)
+                enrichirJogos(jogos).catch(e => console.warn("Enrichment:", e));
+
+                // FASE 3: Auto-refresh para placares ao vivo
+                startAutoRefresh();
                 return;
             }
         }
@@ -302,6 +535,22 @@ function renderFormDots(arr) {
 function renderAgenda() {
     const list = document.getElementById('agenda-list');
     const search = document.getElementById('agendaSearch').value.toUpperCase();
+
+    // Preservar painéis abertos durante re-render
+    const openPanels = {};
+    document.querySelectorAll('[id^="details-"]').forEach(el => {
+        if (!el.classList.contains('hidden')) {
+            const gid = el.id.replace('details-', '');
+            const activeBtn = el.querySelector('.tab-btn.active');
+            let tab = 'resumo';
+            if (activeBtn) {
+                const m = activeBtn.id.match(/^tab-(\w+)-/);
+                if (m) tab = m[1];
+            }
+            openPanels[gid] = tab;
+        }
+    });
+
     list.innerHTML = '';
 
     let copy = JSON.parse(JSON.stringify(liveGamesData));
@@ -477,6 +726,15 @@ function renderAgenda() {
         html += `</div></div>`;
         list.innerHTML += html;
     });
+
+    // Restaurar painéis que estavam abertos antes do re-render
+    for (const [gid, tab] of Object.entries(openPanels)) {
+        const el = document.getElementById(`details-${gid}`);
+        if (el) {
+            el.classList.remove('hidden');
+            switchTab(gid, tab);
+        }
+    }
 }
 
 // ───────────────────────────────────────────────────

@@ -1,46 +1,46 @@
 {
   "matches": [
     {
-      "id": 441043,
-      "utcDate": "2014-10-10T09:40:00",
+      "id": 2275114,
+      "utcDate": "2026-04-03T14:00:00",
       "status": "SCHEDULED",
       "minute": null,
-      "venue": "ESTÁDIO",
+      "venue": "BLOOMFIELD ROAD",
       "competition": {
-        "id": "4356",
-        "name": "Australian A-League"
+        "id": "4396",
+        "name": "English League 1"
       },
       "homeTeam": {
-        "id": "134477",
-        "name": "Melbourne Victory",
-        "shortName": "Melbourne Victory"
+        "id": "133618",
+        "name": "Blackpool",
+        "shortName": "Blackpool"
       },
       "awayTeam": {
-        "id": "134480",
-        "name": "Western Sydney Wanderers FC",
-        "shortName": "Western Sydney Wanderers FC"
+        "id": "134365",
+        "name": "Exeter City",
+        "shortName": "Exeter City"
       },
       "score": {
         "fullTime": {
-          "home": 4,
-          "away": 1
+          "home": 1,
+          "away": 0
         }
       },
       "inteligencia": {
         "clubelo": {
-          "home_elo": "N/A",
+          "home_elo": "1418",
           "away_elo": "N/A"
         },
         "recent_form": {
           "home": [
-            "V",
+            "-",
             "-",
             "-",
             "-",
             "-"
           ],
           "away": [
-            "D",
+            "-",
             "-",
             "-",
             "-",
@@ -63,13 +63,625 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Dados coletados às 15:29 UTC.",
+          "info": "Dados coletados às 17:32 UTC.",
+          "reliability": "7.5"
+        }
+      }
+    },
+    {
+      "id": 2275115,
+      "utcDate": "2026-04-03T14:00:00",
+      "status": "SCHEDULED",
+      "minute": null,
+      "venue": "UNIVERSITY OF BRADFORD STADIUM",
+      "competition": {
+        "id": "4396",
+        "name": "English League 1"
+      },
+      "homeTeam": {
+        "id": "134189",
+        "name": "Bradford City",
+        "shortName": "Bradford City"
+      },
+      "awayTeam": {
+        "id": "134370",
+        "name": "Northampton Town",
+        "shortName": "Northampton Town"
+      },
+      "score": {
+        "fullTime": {
+          "home": 1,
+          "away": 0
+        }
+      },
+      "inteligencia": {
+        "clubelo": {
+          "home_elo": "N/A",
+          "away_elo": "N/A"
+        },
+        "recent_form": {
+          "home": [
+            "-",
+            "-",
+            "-",
+            "-",
+            "-"
+          ],
+          "away": [
+            "-",
+            "-",
+            "-",
+            "-",
+            "-"
+          ]
+        },
+        "standings": {
+          "home": {
+            "pos": "-",
+            "pts": "-",
+            "p": "-",
+            "sg": "-"
+          },
+          "away": {
+            "pos": "-",
+            "pts": "-",
+            "p": "-",
+            "sg": "-"
+          }
+        },
+        "h2h": [],
+        "stats": {
+          "info": "Dados coletados às 17:32 UTC.",
+          "reliability": "7.5"
+        }
+      }
+    },
+    {
+      "id": 2275116,
+      "utcDate": "2026-04-03T14:00:00",
+      "status": "SCHEDULED",
+      "minute": null,
+      "venue": "PIRELLI STADIUM",
+      "competition": {
+        "id": "4396",
+        "name": "English League 1"
+      },
+      "homeTeam": {
+        "id": "134376",
+        "name": "Burton Albion",
+        "shortName": "Burton Albion"
+      },
+      "awayTeam": {
+        "id": "133630",
+        "name": "Barnsley",
+        "shortName": "Barnsley"
+      },
+      "score": {
+        "fullTime": {
+          "home": 1,
+          "away": 1
+        }
+      },
+      "inteligencia": {
+        "clubelo": {
+          "home_elo": "N/A",
+          "away_elo": "1374"
+        },
+        "recent_form": {
+          "home": [
+            "-",
+            "-",
+            "-",
+            "-",
+            "-"
+          ],
+          "away": [
+            "-",
+            "-",
+            "-",
+            "-",
+            "-"
+          ]
+        },
+        "standings": {
+          "home": {
+            "pos": "-",
+            "pts": "-",
+            "p": "-",
+            "sg": "-"
+          },
+          "away": {
+            "pos": "-",
+            "pts": "-",
+            "p": "-",
+            "sg": "-"
+          }
+        },
+        "h2h": [],
+        "stats": {
+          "info": "Dados coletados às 17:32 UTC.",
+          "reliability": "7.5"
+        }
+      }
+    },
+    {
+      "id": 2275117,
+      "utcDate": "2026-04-03T11:30:00",
+      "status": "SCHEDULED",
+      "minute": null,
+      "venue": "THE ECO-POWER STADIUM",
+      "competition": {
+        "id": "4396",
+        "name": "English League 1"
+      },
+      "homeTeam": {
+        "id": "133620",
+        "name": "Doncaster Rovers",
+        "shortName": "Doncaster Rovers"
+      },
+      "awayTeam": {
+        "id": "134381",
+        "name": "Mansfield Town",
+        "shortName": "Mansfield Town"
+      },
+      "score": {
+        "fullTime": {
+          "home": 0,
+          "away": 2
+        }
+      },
+      "inteligencia": {
+        "clubelo": {
+          "home_elo": "N/A",
+          "away_elo": "N/A"
+        },
+        "recent_form": {
+          "home": [
+            "-",
+            "-",
+            "-",
+            "-",
+            "-"
+          ],
+          "away": [
+            "-",
+            "-",
+            "-",
+            "-",
+            "-"
+          ]
+        },
+        "standings": {
+          "home": {
+            "pos": "-",
+            "pts": "-",
+            "p": "-",
+            "sg": "-"
+          },
+          "away": {
+            "pos": "-",
+            "pts": "-",
+            "p": "-",
+            "sg": "-"
+          }
+        },
+        "h2h": [],
+        "stats": {
+          "info": "Dados coletados às 17:32 UTC.",
+          "reliability": "7.5"
+        }
+      }
+    },
+    {
+      "id": 2275118,
+      "utcDate": "2026-04-03T14:00:00",
+      "status": "SCHEDULED",
+      "minute": null,
+      "venue": "ACCU STADIUM",
+      "competition": {
+        "id": "4396",
+        "name": "English League 1"
+      },
+      "homeTeam": {
+        "id": "133932",
+        "name": "Huddersfield Town",
+        "shortName": "Huddersfield Town"
+      },
+      "awayTeam": {
+        "id": "133633",
+        "name": "Reading",
+        "shortName": "Reading"
+      },
+      "score": {
+        "fullTime": {
+          "home": 1,
+          "away": 1
+        }
+      },
+      "inteligencia": {
+        "clubelo": {
+          "home_elo": "N/A",
+          "away_elo": "1427"
+        },
+        "recent_form": {
+          "home": [
+            "-",
+            "-",
+            "-",
+            "-",
+            "-"
+          ],
+          "away": [
+            "-",
+            "-",
+            "-",
+            "-",
+            "-"
+          ]
+        },
+        "standings": {
+          "home": {
+            "pos": "-",
+            "pts": "-",
+            "p": "-",
+            "sg": "-"
+          },
+          "away": {
+            "pos": "-",
+            "pts": "-",
+            "p": "-",
+            "sg": "-"
+          }
+        },
+        "h2h": [],
+        "stats": {
+          "info": "Dados coletados às 17:32 UTC.",
+          "reliability": "7.5"
+        }
+      }
+    },
+    {
+      "id": 2275119,
+      "utcDate": "2026-04-03T14:00:00",
+      "status": "SCHEDULED",
+      "minute": null,
+      "venue": "LNER STADIUM",
+      "competition": {
+        "id": "4396",
+        "name": "English League 1"
+      },
+      "homeTeam": {
+        "id": "135900",
+        "name": "Lincoln City",
+        "shortName": "Lincoln City"
+      },
+      "awayTeam": {
+        "id": "134241",
+        "name": "AFC Wimbledon",
+        "shortName": "AFC Wimbledon"
+      },
+      "score": {
+        "fullTime": {
+          "home": 1,
+          "away": 0
+        }
+      },
+      "inteligencia": {
+        "clubelo": {
+          "home_elo": "1321",
+          "away_elo": "N/A"
+        },
+        "recent_form": {
+          "home": [
+            "-",
+            "-",
+            "-",
+            "-",
+            "-"
+          ],
+          "away": [
+            "-",
+            "-",
+            "-",
+            "-",
+            "-"
+          ]
+        },
+        "standings": {
+          "home": {
+            "pos": "-",
+            "pts": "-",
+            "p": "-",
+            "sg": "-"
+          },
+          "away": {
+            "pos": "-",
+            "pts": "-",
+            "p": "-",
+            "sg": "-"
+          }
+        },
+        "h2h": [],
+        "stats": {
+          "info": "Dados coletados às 17:32 UTC.",
+          "reliability": "7.5"
+        }
+      }
+    },
+    {
+      "id": 2275120,
+      "utcDate": "2026-04-03T14:00:00",
+      "status": "SCHEDULED",
+      "minute": null,
+      "venue": "KENILWORTH ROAD",
+      "competition": {
+        "id": "4396",
+        "name": "English League 1"
+      },
+      "homeTeam": {
+        "id": "133888",
+        "name": "Luton Town",
+        "shortName": "Luton Town"
+      },
+      "awayTeam": {
+        "id": "133631",
+        "name": "Peterborough United",
+        "shortName": "Peterborough United"
+      },
+      "score": {
+        "fullTime": {
+          "home": 2,
+          "away": 1
+        }
+      },
+      "inteligencia": {
+        "clubelo": {
+          "home_elo": "N/A",
+          "away_elo": "N/A"
+        },
+        "recent_form": {
+          "home": [
+            "-",
+            "-",
+            "-",
+            "-",
+            "-"
+          ],
+          "away": [
+            "-",
+            "-",
+            "-",
+            "-",
+            "-"
+          ]
+        },
+        "standings": {
+          "home": {
+            "pos": "-",
+            "pts": "-",
+            "p": "-",
+            "sg": "-"
+          },
+          "away": {
+            "pos": "-",
+            "pts": "-",
+            "p": "-",
+            "sg": "-"
+          }
+        },
+        "h2h": [],
+        "stats": {
+          "info": "Dados coletados às 17:32 UTC.",
+          "reliability": "7.5"
+        }
+      }
+    },
+    {
+      "id": 2275121,
+      "utcDate": "2026-04-03T14:00:00",
+      "status": "SCHEDULED",
+      "minute": null,
+      "venue": "HOME PARK",
+      "competition": {
+        "id": "4396",
+        "name": "English League 1"
+      },
+      "homeTeam": {
+        "id": "133836",
+        "name": "Plymouth Argyle",
+        "shortName": "Plymouth Argyle"
+      },
+      "awayTeam": {
+        "id": "133606",
+        "name": "Bolton Wanderers",
+        "shortName": "Bolton Wanderers"
+      },
+      "score": {
+        "fullTime": {
+          "home": 1,
+          "away": 2
+        }
+      },
+      "inteligencia": {
+        "clubelo": {
+          "home_elo": "1382",
+          "away_elo": "N/A"
+        },
+        "recent_form": {
+          "home": [
+            "-",
+            "-",
+            "-",
+            "-",
+            "-"
+          ],
+          "away": [
+            "-",
+            "-",
+            "-",
+            "-",
+            "-"
+          ]
+        },
+        "standings": {
+          "home": {
+            "pos": "-",
+            "pts": "-",
+            "p": "-",
+            "sg": "-"
+          },
+          "away": {
+            "pos": "-",
+            "pts": "-",
+            "p": "-",
+            "sg": "-"
+          }
+        },
+        "h2h": [],
+        "stats": {
+          "info": "Dados coletados às 17:32 UTC.",
+          "reliability": "7.5"
+        }
+      }
+    },
+    {
+      "id": 2275122,
+      "utcDate": "2026-04-03T14:00:00",
+      "status": "SCHEDULED",
+      "minute": null,
+      "venue": "AESSEAL NEW YORK STADIUM",
+      "competition": {
+        "id": "4396",
+        "name": "English League 1"
+      },
+      "homeTeam": {
+        "id": "134231",
+        "name": "Rotherham United",
+        "shortName": "Rotherham United"
+      },
+      "awayTeam": {
+        "id": "134378",
+        "name": "Stevenage",
+        "shortName": "Stevenage"
+      },
+      "score": {
+        "fullTime": {
+          "home": 0,
+          "away": 0
+        }
+      },
+      "inteligencia": {
+        "clubelo": {
+          "home_elo": "N/A",
+          "away_elo": "N/A"
+        },
+        "recent_form": {
+          "home": [
+            "-",
+            "-",
+            "-",
+            "-",
+            "-"
+          ],
+          "away": [
+            "-",
+            "-",
+            "-",
+            "-",
+            "-"
+          ]
+        },
+        "standings": {
+          "home": {
+            "pos": "-",
+            "pts": "-",
+            "p": "-",
+            "sg": "-"
+          },
+          "away": {
+            "pos": "-",
+            "pts": "-",
+            "p": "-",
+            "sg": "-"
+          }
+        },
+        "h2h": [],
+        "stats": {
+          "info": "Dados coletados às 17:32 UTC.",
+          "reliability": "7.5"
+        }
+      }
+    },
+    {
+      "id": 2275123,
+      "utcDate": "2026-04-03T14:00:00",
+      "status": "SCHEDULED",
+      "minute": null,
+      "venue": "EDGELEY PARK",
+      "competition": {
+        "id": "4396",
+        "name": "English League 1"
+      },
+      "homeTeam": {
+        "id": "134258",
+        "name": "Stockport County",
+        "shortName": "Stockport County"
+      },
+      "awayTeam": {
+        "id": "134382",
+        "name": "Wycombe Wanderers",
+        "shortName": "Wycombe Wanderers"
+      },
+      "score": {
+        "fullTime": {
+          "home": 3,
+          "away": 0
+        }
+      },
+      "inteligencia": {
+        "clubelo": {
+          "home_elo": "N/A",
+          "away_elo": "N/A"
+        },
+        "recent_form": {
+          "home": [
+            "-",
+            "-",
+            "-",
+            "-",
+            "-"
+          ],
+          "away": [
+            "-",
+            "-",
+            "-",
+            "-",
+            "-"
+          ]
+        },
+        "standings": {
+          "home": {
+            "pos": "-",
+            "pts": "-",
+            "p": "-",
+            "sg": "-"
+          },
+          "away": {
+            "pos": "-",
+            "pts": "-",
+            "p": "-",
+            "sg": "-"
+          }
+        },
+        "h2h": [],
+        "stats": {
+          "info": "Dados coletados às 17:32 UTC.",
           "reliability": "7.5"
         }
       }
     }
   ],
-  "_gerado_em": "2026-04-03T15:29:22.355542Z",
-  "_total": 1,
+  "_gerado_em": "2026-04-03T17:32:40.215278Z",
+  "_total": 10,
   "_fonte": "thesportsdb.com"
 }

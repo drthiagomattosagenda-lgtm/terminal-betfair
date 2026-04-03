@@ -1,13 +1,19 @@
 #!/usr/bin/env python3
 """
 ============================================================
- QG FUT TRADER — Motor ETL v2  (blindado contra erros)
+ QG FUT TRADER — Motor ETL v3  (multi-source, blindado)
 
- Correções v2:
-  - Melhor tratamento de rate limit
-  - Fallback robusto para cada chamada
-  - Logs detalhados para debug no GitHub Actions
-  - Salva arquivo mesmo com 0 partidas (JSON vazio válido)
+ Fontes em cascata:
+  1. football-data.org (se API key configurada)
+  2. TheSportsDB (gratuito, sem key, cobertura global)
+
+ Enriquecimento:
+  - Form (últimos 5 jogos de cada time)
+  - Classificação da liga
+  - H2H (últimos 5 confrontos diretos)
+  - ClubElo ratings
+
+ Nunca falha — sempre gera JSON válido.
 ============================================================
 """
 
@@ -17,8 +23,10 @@ import requests
 
 FOOTBALL_API_KEY  = os.environ.get("FOOTBALL_DATA_API_KEY", "").strip()
 FOOTBALL_API_BASE = "https://api.football-data.org/v4"
+TSDB_BASE         = "https://www.thesportsdb.com/api/v1/json/3"
 OUTPUT_FILE       = "jogos_de_hoje.json"
-RATE_DELAY        = 7  # segundos (free tier = max 10 req/min)
+RATE_DELAY        = 7   # football-data.org free tier
+TSDB_DELAY        = 0.5 # TheSportsDB é mais permissivo
 
 
 def log(msg):
@@ -27,7 +35,22 @@ def log(msg):
 def today_brazil():
     return datetime.now(timezone(timedelta(hours=-3))).strftime("%Y-%m-%d")
 
-def api_get(endpoint, params=None):
+def save_output(matches, source="unknown"):
+    output = {
+        "matches": matches,
+        "_gerado_em": datetime.utcnow().isoformat() + "Z",
+        "_total": len(matches),
+        "_fonte": source
+    }
+    with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
+        json.dump(output, f, ensure_ascii=False, indent=2)
+    log(f"💾 {OUTPUT_FILE} salvo — {len(matches)} partida(s) via {source}")
+
+
+# ═══════════════════════════════════════════════════
+#  FOOTBALL-DATA.ORG (fonte primária)
+# ═══════════════════════════════════════════════════
+def fd_api_get(endpoint, params=None):
     url = f"{FOOTBALL_API_BASE}{endpoint}"
     for attempt in range(3):
         try:
@@ -50,8 +73,8 @@ def api_get(endpoint, params=None):
             time.sleep(5)
     return {}
 
-def get_recent_form(team_id):
-    data = api_get(f"/teams/{team_id}/matches", {"limit": 10, "status": "FINISHED"})
+def fd_get_recent_form(team_id):
+    data = fd_api_get(f"/teams/{team_id}/matches", {"limit": 10, "status": "FINISHED"})
     time.sleep(RATE_DELAY)
     form = []
     for m in reversed(data.get("matches", [])):
@@ -60,14 +83,14 @@ def get_recent_form(team_id):
         sh, sa = ft.get("home"), ft.get("away")
         if sh is None or sa is None: continue
         is_home = (m.get("homeTeam") or {}).get("id") == team_id
-        if is_home: form.append("V" if sh>sa else "D" if sh<sa else "E")
-        else:       form.append("V" if sa>sh else "D" if sa<sh else "E")
+        if is_home: form.append("V" if sh > sa else "D" if sh < sa else "E")
+        else:       form.append("V" if sa > sh else "D" if sa < sh else "E")
     while len(form) < 5: form.insert(0, "-")
     return form[-5:]
 
-def get_standings(comp_id, home_id, away_id):
-    empty = {"pos":"-","pts":"-","p":"-","sg":"-"}
-    data  = api_get(f"/competitions/{comp_id}/standings")
+def fd_get_standings(comp_id, home_id, away_id):
+    empty = {"pos": "-", "pts": "-", "p": "-", "sg": "-"}
+    data = fd_api_get(f"/competitions/{comp_id}/standings")
     time.sleep(RATE_DELAY)
     table = []
     for s in data.get("standings", []):
@@ -77,23 +100,23 @@ def get_standings(comp_id, home_id, away_id):
     h, a = dict(empty), dict(empty)
     for row in table:
         tid = (row.get("team") or {}).get("id")
-        e = {"pos":row.get("position","-"),"pts":row.get("points","-"),
-             "p":row.get("playedGames","-"),"sg":row.get("goalDifference","-")}
+        e = {"pos": row.get("position", "-"), "pts": row.get("points", "-"),
+             "p": row.get("playedGames", "-"), "sg": row.get("goalDifference", "-")}
         if tid == home_id: h = e
         if tid == away_id: a = e
     return {"home": h, "away": a}
 
-def get_h2h(match_id):
-    data = api_get(f"/matches/{match_id}/head2head", {"limit": 5})
+def fd_get_h2h(match_id):
+    data = fd_api_get(f"/matches/{match_id}/head2head", {"limit": 5})
     time.sleep(RATE_DELAY)
     h2h = []
     for m in data.get("matches", []):
-        mh = (m.get("homeTeam") or {}).get("shortName") or (m.get("homeTeam") or {}).get("name","?")
-        ma = (m.get("awayTeam") or {}).get("shortName") or (m.get("awayTeam") or {}).get("name","?")
+        mh = (m.get("homeTeam") or {}).get("shortName") or (m.get("homeTeam") or {}).get("name", "?")
+        ma = (m.get("awayTeam") or {}).get("shortName") or (m.get("awayTeam") or {}).get("name", "?")
         ft = (m.get("score") or {}).get("fullTime", {})
         sh, sa = ft.get("home"), ft.get("away")
-        h2h.append({"date":m.get("utcDate","")[:10],"home":mh,
-                    "score":f"{sh}-{sa}" if sh is not None else "?-?","away":ma})
+        h2h.append({"date": m.get("utcDate", "")[:10], "home": mh,
+                     "score": f"{sh}-{sa}" if sh is not None else "?-?", "away": ma})
     return h2h
 
 def get_clubelo(name):
@@ -106,32 +129,33 @@ def get_clubelo(name):
                 parts = lines[-1].split(",")
                 if len(parts) >= 5:
                     return str(round(float(parts[4])))
-    except Exception: pass
+    except Exception:
+        pass
     return "N/A"
 
-def enrich(match):
+def fd_enrich(match):
     hid = match["homeTeam"]["id"]
     aid = match["awayTeam"]["id"]
     cid = match["competition"]["id"]
     mid = match["id"]
-    hn  = match["homeTeam"].get("shortName") or match["homeTeam"]["name"]
-    an  = match["awayTeam"].get("shortName") or match["awayTeam"]["name"]
-    st  = match.get("status","SCHEDULED")
+    hn = match["homeTeam"].get("shortName") or match["homeTeam"]["name"]
+    an = match["awayTeam"].get("shortName") or match["awayTeam"]["name"]
+    st = match.get("status", "SCHEDULED")
 
-    log(f"    ↳ Forma: {hn}..."); fh = get_recent_form(hid)
-    log(f"    ↳ Forma: {an}..."); fa = get_recent_form(aid)
-    log(f"    ↳ Classificação..."); standings = get_standings(cid, hid, aid)
-    log(f"    ↳ H2H..."); h2h = get_h2h(mid)
+    log(f"    ↳ Forma: {hn}..."); fh = fd_get_recent_form(hid)
+    log(f"    ↳ Forma: {an}..."); fa = fd_get_recent_form(aid)
+    log(f"    ↳ Classificação..."); standings = fd_get_standings(cid, hid, aid)
+    log(f"    ↳ H2H..."); h2h = fd_get_h2h(mid)
     log(f"    ↳ ClubElo...")
     eh, ea = get_clubelo(hn), get_clubelo(an)
     time.sleep(2)
 
     if st == "FINISHED":
-        sh = match["score"]["fullTime"].get("home","?")
-        sa = match["score"]["fullTime"].get("away","?")
+        sh = match["score"]["fullTime"].get("home", "?")
+        sa = match["score"]["fullTime"].get("away", "?")
         info = f"Partida encerrada. Placar final: {sh}-{sa}."
-    elif st in ("IN_PLAY","PAUSED"):
-        info = f"Partida em andamento ({match.get('minute','?')}')."
+    elif st in ("IN_PLAY", "PAUSED"):
+        info = f"Partida em andamento ({match.get('minute', '?')}')."
     else:
         info = f"Dados coletados às {datetime.utcnow().strftime('%H:%M UTC')}."
 
@@ -144,58 +168,305 @@ def enrich(match):
     }
     return match
 
-def main():
-    log("=" * 50)
-    log("🔥 QG FUT TRADER — Motor ETL v2")
-    log(f"📅 Data BR: {today_brazil()}")
-    log("=" * 50)
-
+def run_football_data(today):
+    """Fonte 1: football-data.org — retorna lista de matches enriquecidos ou None."""
     if not FOOTBALL_API_KEY:
-        log("❌ FOOTBALL_DATA_API_KEY não encontrada!")
-        log("   GitHub: Settings → Secrets and variables → Actions")
-        log("   Crie: FOOTBALL_DATA_API_KEY = <sua_chave>")
-        sys.exit(1)
+        log("⚠️  FOOTBALL_DATA_API_KEY não configurada. Pulando football-data.org.")
+        return None
 
-    log(f"🔑 Key: {'*'*20}{FOOTBALL_API_KEY[-4:]}")
-
-    today = today_brazil()
-    log(f"\n📡 Buscando partidas de {today}...")
-    data    = api_get("/matches", {"dateFrom": today, "dateTo": today})
+    log(f"🔑 Key: {'*' * 20}{FOOTBALL_API_KEY[-4:]}")
+    log(f"📡 [football-data.org] Buscando partidas de {today}...")
+    data = fd_api_get("/matches", {"dateFrom": today, "dateTo": today})
     matches = data.get("matches", [])
-    log(f"✅ {len(matches)} partida(s) encontrada(s)")
+    log(f"✅ {len(matches)} partida(s) encontrada(s) via football-data.org")
 
     if not matches:
-        log("ℹ️  Nenhuma partida hoje. Salvando JSON vazio válido.")
-        with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
-            json.dump({"matches":[], "_gerado_em": datetime.utcnow().isoformat()+"Z"}, f)
-        return
+        return None
 
     enriched = []
     for i, match in enumerate(matches):
         hn = match["homeTeam"].get("shortName") or match["homeTeam"]["name"]
         an = match["awayTeam"].get("shortName") or match["awayTeam"]["name"]
-        log(f"\n  [{i+1}/{len(matches)}] {match['competition']['name']}: {hn} x {an}")
+        log(f"\n  [{i + 1}/{len(matches)}] {match['competition']['name']}: {hn} x {an}")
         try:
-            enriched.append(enrich(match))
+            enriched.append(fd_enrich(match))
         except Exception as e:
-            log(f"  ⚠️  Falha: {e}")
+            log(f"  ⚠️  Falha no enriquecimento: {e}")
             match.setdefault("inteligencia", {
-                "clubelo":     {"home_elo":"N/A","away_elo":"N/A"},
-                "recent_form": {"home":["-","-","-","-","-"],"away":["-","-","-","-","-"]},
-                "standings":   {"home":{"pos":"-","pts":"-","p":"-","sg":"-"},
-                                "away":{"pos":"-","pts":"-","p":"-","sg":"-"}},
+                "clubelo":     {"home_elo": "N/A", "away_elo": "N/A"},
+                "recent_form": {"home": ["-"] * 5, "away": ["-"] * 5},
+                "standings":   {"home": {"pos": "-", "pts": "-", "p": "-", "sg": "-"},
+                                "away": {"pos": "-", "pts": "-", "p": "-", "sg": "-"}},
                 "h2h":  [],
-                "stats": {"info":"Dados indisponíveis.","reliability":"0.0"}
+                "stats": {"info": "Dados indisponíveis.", "reliability": "0.0"}
             })
             enriched.append(match)
+    return enriched
 
-    output = {"matches": enriched, "_gerado_em": datetime.utcnow().isoformat()+"Z",
-              "_total": len(enriched)}
-    with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
-        json.dump(output, f, ensure_ascii=False, indent=2)
 
-    log(f"\n✅ {OUTPUT_FILE} gerado — {len(enriched)} partida(s)!")
-    log("🏁 A Ferrari está abastecida.")
+# ═══════════════════════════════════════════════════
+#  THESPORTSDB (fonte secundária — gratuita, sem key)
+# ═══════════════════════════════════════════════════
+def tsdb_get(endpoint):
+    url = f"{TSDB_BASE}{endpoint}"
+    for attempt in range(3):
+        try:
+            r = requests.get(url, timeout=15)
+            if r.status_code == 200:
+                return r.json()
+            log(f"  ⚠️  TheSportsDB HTTP {r.status_code}")
+            return {}
+        except Exception as e:
+            log(f"  ⚠️  TheSportsDB tentativa {attempt + 1}/3: {e}")
+            time.sleep(3)
+    return {}
+
+def tsdb_get_team_form(team_id):
+    """Últimos 5 resultados de um time via TheSportsDB."""
+    if not team_id:
+        return ["-"] * 5
+    data = tsdb_get(f"/eventslast.php?id={team_id}")
+    time.sleep(TSDB_DELAY)
+    results = data.get("results") or []
+    form = []
+    tid = str(team_id)
+    for ev in results:
+        if len(form) >= 5:
+            break
+        try:
+            sh = int(ev.get("intHomeScore", ""))
+            sa = int(ev.get("intAwayScore", ""))
+        except (ValueError, TypeError):
+            continue
+        is_home = str(ev.get("idHomeTeam", "")) == tid
+        if is_home:
+            form.append("V" if sh > sa else "D" if sh < sa else "E")
+        else:
+            form.append("V" if sa > sh else "D" if sa < sh else "E")
+    while len(form) < 5:
+        form.append("-")
+    return form[:5]
+
+def tsdb_get_standings(league_id, season):
+    """Classificação da liga via TheSportsDB."""
+    if not league_id or not season:
+        return {}
+    data = tsdb_get(f"/lookuptable.php?l={league_id}&s={season}")
+    time.sleep(TSDB_DELAY)
+    table = data.get("table") or []
+    standings = {}
+    for row in table:
+        tid = str(row.get("idTeam", ""))
+        gf = int(row.get("intGoalsFor", 0) or 0)
+        ga = int(row.get("intGoalsAgainst", 0) or 0)
+        gd = row.get("intGoalDifference")
+        if gd is None or gd == "":
+            gd = str(gf - ga)
+        standings[tid] = {
+            "pos": row.get("intRank", "-"),
+            "pts": row.get("intPoints", "-"),
+            "p":   row.get("intPlayed", "-"),
+            "sg":  gd
+        }
+    return standings
+
+def tsdb_convert_match(ev, standings_cache, form_cache):
+    """Converte um evento TheSportsDB para o formato interno do inicio.html."""
+    ts = ev.get("strTimestamp") or (ev.get("dateEvent", "") + "T" + (ev.get("strTime") or "12:00:00") + "+00:00")
+
+    status_raw = (ev.get("strStatus") or "").strip()
+    status_lower = status_raw.lower()
+    fd_status = "SCHEDULED"
+    minute = None
+
+    if status_lower in ("in progress", "1h", "2h"):
+        fd_status = "IN_PLAY"
+    elif status_lower == "ht":
+        fd_status = "PAUSED"
+    elif status_lower in ("ft", "finished", "match finished", "aet", "pen"):
+        fd_status = "FINISHED"
+    elif status_lower == "postponed":
+        fd_status = "POSTPONED"
+    elif status_lower == "cancelled":
+        fd_status = "CANCELLED"
+
+    sh = ev.get("intHomeScore")
+    sa = ev.get("intAwayScore")
+    sh_int = None if sh is None or sh == "" else int(sh)
+    sa_int = None if sa is None or sa == "" else int(sa)
+
+    htid = str(ev.get("idHomeTeam", ""))
+    atid = str(ev.get("idAwayTeam", ""))
+    lid  = str(ev.get("idLeague", ""))
+
+    # Form
+    fh = form_cache.get(htid, ["-"] * 5)
+    fa = form_cache.get(atid, ["-"] * 5)
+
+    # Standings
+    empty_std = {"pos": "-", "pts": "-", "p": "-", "sg": "-"}
+    std_table = standings_cache.get(lid, {})
+    std_home = std_table.get(htid, empty_std)
+    std_away = std_table.get(atid, empty_std)
+
+    # ClubElo
+    elo_home = form_cache.get(f"elo_{htid}", "N/A")
+    elo_away = form_cache.get(f"elo_{atid}", "N/A")
+
+    home_name = ev.get("strHomeTeam", "?")
+    away_name = ev.get("strAwayTeam", "?")
+
+    # Info text
+    info_parts = []
+    if std_home.get("pos") != "-" and std_away.get("pos") != "-":
+        info_parts.append(f"{home_name} em {std_home['pos']}° ({std_home['pts']}pts) vs {away_name} em {std_away['pos']}° ({std_away['pts']}pts).")
+    fh_valid = [x for x in fh if x != "-"]
+    fa_valid = [x for x in fa if x != "-"]
+    if len(fh_valid) >= 3:
+        pct = round((fh_valid.count("V") / len(fh_valid)) * 100)
+        info_parts.append(f"{home_name}: {pct}% vitórias recentes.")
+    if len(fa_valid) >= 3:
+        pct = round((fa_valid.count("V") / len(fa_valid)) * 100)
+        info_parts.append(f"{away_name}: {pct}% vitórias recentes.")
+    info = " ".join(info_parts) if info_parts else f"Dados coletados às {datetime.utcnow().strftime('%H:%M UTC')}."
+
+    return {
+        "id":          int(ev.get("idEvent", 0)),
+        "utcDate":     ts,
+        "status":      fd_status,
+        "minute":      minute,
+        "venue":       (ev.get("strVenue") or "ESTÁDIO").upper(),
+        "competition": {
+            "id":   ev.get("idLeague", ""),
+            "name": ev.get("strLeague") or "Futebol"
+        },
+        "homeTeam": {
+            "id":        ev.get("idHomeTeam", ""),
+            "name":      home_name,
+            "shortName": home_name
+        },
+        "awayTeam": {
+            "id":        ev.get("idAwayTeam", ""),
+            "name":      away_name,
+            "shortName": away_name
+        },
+        "score": {
+            "fullTime": {
+                "home": sh_int,
+                "away": sa_int
+            }
+        },
+        "inteligencia": {
+            "clubelo":     {"home_elo": elo_home, "away_elo": elo_away},
+            "recent_form": {"home": fh, "away": fa},
+            "standings":   {"home": std_home, "away": std_away},
+            "h2h":         [],
+            "stats":       {"info": info, "reliability": "7.5"}
+        }
+    }
+
+def run_thesportsdb(today):
+    """Fonte 2: TheSportsDB — gratuita, cobertura global."""
+    log(f"\n📡 [TheSportsDB] Buscando partidas de {today}...")
+    data = tsdb_get(f"/eventsday.php?d={today}&s=Soccer")
+    events = data.get("events") or []
+    log(f"✅ {len(events)} partida(s) encontrada(s) via TheSportsDB")
+
+    if not events:
+        return None
+
+    # Fase 1: Coletar IDs únicos de times e ligas
+    team_ids = set()
+    league_seasons = {}
+    for ev in events:
+        htid = ev.get("idHomeTeam")
+        atid = ev.get("idAwayTeam")
+        lid  = ev.get("idLeague")
+        ssn  = ev.get("strSeason")
+        if htid: team_ids.add(str(htid))
+        if atid: team_ids.add(str(atid))
+        if lid and ssn: league_seasons[str(lid)] = ssn
+
+    # Fase 2: Buscar classificações por liga
+    log(f"\n📊 Buscando classificação de {len(league_seasons)} liga(s)...")
+    standings_cache = {}
+    for lid, ssn in league_seasons.items():
+        log(f"    ↳ Liga {lid} (temporada {ssn})...")
+        standings_cache[lid] = tsdb_get_standings(lid, ssn)
+
+    # Fase 3: Buscar forma de cada time
+    log(f"\n📈 Buscando forma de {len(team_ids)} time(s)...")
+    form_cache = {}
+    team_list = list(team_ids)
+    for i, tid in enumerate(team_list):
+        if (i + 1) % 10 == 0 or i == 0:
+            log(f"    ↳ Time {i + 1}/{len(team_list)}...")
+        form_cache[tid] = tsdb_get_team_form(tid)
+
+    # Fase 4: ClubElo para times (nomes únicos)
+    log(f"\n🏆 Buscando ClubElo ratings...")
+    team_names = {}
+    for ev in events:
+        htid = str(ev.get("idHomeTeam", ""))
+        atid = str(ev.get("idAwayTeam", ""))
+        if htid and htid not in team_names:
+            team_names[htid] = ev.get("strHomeTeam", "")
+        if atid and atid not in team_names:
+            team_names[atid] = ev.get("strAwayTeam", "")
+
+    elo_done = set()
+    for tid, name in team_names.items():
+        if tid in elo_done or not name:
+            continue
+        elo = get_clubelo(name)
+        form_cache[f"elo_{tid}"] = elo
+        elo_done.add(tid)
+        if elo != "N/A":
+            log(f"    ↳ {name}: ELO {elo}")
+        time.sleep(0.3)
+
+    # Fase 5: Converter para formato interno
+    log(f"\n🔧 Convertendo {len(events)} evento(s)...")
+    matches = []
+    for ev in events:
+        try:
+            matches.append(tsdb_convert_match(ev, standings_cache, form_cache))
+        except Exception as e:
+            log(f"  ⚠️  Erro convertendo {ev.get('strEvent', '?')}: {e}")
+            continue
+
+    return matches
+
+
+# ═══════════════════════════════════════════════════
+#  MAIN — Cascata de fontes
+# ═══════════════════════════════════════════════════
+def main():
+    log("=" * 55)
+    log("🔥 QG FUT TRADER — Motor ETL v3 (multi-source)")
+    today = today_brazil()
+    log(f"📅 Data BR: {today}")
+    log("=" * 55)
+
+    # ── FONTE 1: football-data.org ──
+    matches = run_football_data(today)
+    if matches:
+        save_output(matches, source="football-data.org")
+        log("🏁 A Ferrari está abastecida (football-data.org)!")
+        return
+
+    # ── FONTE 2: TheSportsDB ──
+    log("\n🔄 Tentando fonte alternativa: TheSportsDB...")
+    matches = run_thesportsdb(today)
+    if matches:
+        save_output(matches, source="thesportsdb.com")
+        log("🏁 A Ferrari está abastecida (TheSportsDB)!")
+        return
+
+    # ── Nenhuma fonte retornou dados ──
+    log("ℹ️  Nenhuma partida encontrada em nenhuma fonte hoje.")
+    save_output([], source="empty")
+    log("🏁 JSON vazio salvo. O frontend usará fallback.")
 
 if __name__ == "__main__":
     main()

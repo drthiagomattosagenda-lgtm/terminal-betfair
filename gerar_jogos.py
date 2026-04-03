@@ -1,19 +1,18 @@
 #!/usr/bin/env python3
 """
 ============================================================
- QG FUT TRADER — Motor ETL v3  (multi-source, blindado)
+ QG FUT TRADER — Motor ETL v4  (multi-source, corrigido)
+
+ FIX: eventsday.php retornava dados de 2014 (bug TheSportsDB)
+      Substituido por eventsnextleague + eventspastleague
+      com filtro por data e deduplicacao
 
  Fontes em cascata:
   1. football-data.org (se API key configurada)
-  2. TheSportsDB (gratuito, sem key, cobertura global)
+  2. TheSportsDB (gratuito, sem key, multi-liga)
 
- Enriquecimento:
-  - Form (últimos 5 jogos de cada time)
-  - Classificação da liga
-  - H2H (últimos 5 confrontos diretos)
-  - ClubElo ratings
-
- Nunca falha — sempre gera JSON válido.
+ Enriquecimento: Form, Classificacao, H2H, ClubElo
+ Nunca falha — sempre gera JSON valido.
 ============================================================
 """
 
@@ -365,11 +364,38 @@ def tsdb_convert_match(ev, standings_cache, form_cache):
         }
     }
 
+TSDB_LEAGUE_IDS = [
+    4328, 4329, 4330, 4331, 4332, 4334, 4335, 4336, 4337, 4338,
+    4340, 4344, 4346, 4347, 4351, 4355, 4356, 4358, 4359, 4396,
+    4480, 4482, 4484, 4485, 4497, 4501, 4504, 4505, 4506, 4507
+]
+
+def tsdb_fetch_todays_events(today):
+    """
+    Busca eventos do dia usando eventsnextleague + eventspastleague
+    por liga, filtrando por data. eventsday.php retorna dados de 2014.
+    """
+    seen = set()
+    all_events = []
+
+    for lid in TSDB_LEAGUE_IDS:
+        for endpoint in [f"/eventsnextleague.php?id={lid}", f"/eventspastleague.php?id={lid}"]:
+            data = tsdb_get(endpoint)
+            events = data.get("events") or []
+            for ev in events:
+                ev_date = ev.get("dateEvent", "")
+                ev_id = str(ev.get("idEvent", ""))
+                if ev_date == today and ev_id and ev_id not in seen:
+                    seen.add(ev_id)
+                    all_events.append(ev)
+            time.sleep(TSDB_DELAY)
+
+    return all_events
+
 def run_thesportsdb(today):
-    """Fonte 2: TheSportsDB — gratuita, cobertura global."""
-    log(f"\n📡 [TheSportsDB] Buscando partidas de {today}...")
-    data = tsdb_get(f"/eventsday.php?d={today}&s=Soccer")
-    events = data.get("events") or []
+    """Fonte 2: TheSportsDB — gratuita. Usa eventsnextleague + eventspastleague."""
+    log(f"\n📡 [TheSportsDB] Buscando partidas de {today} em {len(TSDB_LEAGUE_IDS)} ligas...")
+    events = tsdb_fetch_todays_events(today)
     log(f"✅ {len(events)} partida(s) encontrada(s) via TheSportsDB")
 
     if not events:
@@ -443,7 +469,7 @@ def run_thesportsdb(today):
 # ═══════════════════════════════════════════════════
 def main():
     log("=" * 55)
-    log("🔥 QG FUT TRADER — Motor ETL v3 (multi-source)")
+    log("🔥 QG FUT TRADER — Motor ETL v4 (multi-source, corrigido)")
     today = today_brazil()
     log(f"📅 Data BR: {today}")
     log("=" * 55)

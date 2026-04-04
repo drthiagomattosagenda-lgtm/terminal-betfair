@@ -55,7 +55,7 @@
             "sg": -3
           },
           "away": {
-            "pos": 15,
+            "pos": 16,
             "pts": 30,
             "p": 31,
             "sg": -12
@@ -63,7 +63,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Sassuolo em 10o (42pts) vs Cagliari em 15o (30pts).",
+          "info": "Sassuolo em 10o (42pts) vs Cagliari em 16o (30pts).",
           "reliability": "8.5"
         }
       },
@@ -78,8 +78,8 @@
     {
       "id": 13981732,
       "utcDate": "2026-04-04T16:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 23,
@@ -97,8 +97,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -125,20 +125,20 @@
         "standings": {
           "home": {
             "pos": 19,
-            "pts": 18,
-            "p": 30,
+            "pts": 19,
+            "p": 31,
             "sg": -30
           },
           "away": {
-            "pos": 16,
-            "pts": 29,
-            "p": 30,
+            "pos": 15,
+            "pts": 30,
+            "p": 31,
             "sg": -9
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Verona em 19o (18pts) vs Fiorentina em 16o (29pts).",
+          "info": "Verona em 19o (19pts) vs Fiorentina em 15o (30pts).",
           "reliability": "8.5"
         }
       },
@@ -378,8 +378,8 @@
     {
       "id": 14081816,
       "utcDate": "2026-04-04T14:15:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 8,
@@ -397,8 +397,8 @@
       },
       "score": {
         "fullTime": {
-          "home": 1,
-          "away": 0
+          "home": 2,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -453,8 +453,8 @@
     {
       "id": 14081811,
       "utcDate": "2026-04-04T16:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 8,
@@ -472,8 +472,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -500,20 +500,20 @@
         "standings": {
           "home": {
             "pos": 5,
-            "pts": 44,
-            "p": 29,
+            "pts": 45,
+            "p": 30,
             "sg": 7
           },
           "away": {
-            "pos": 11,
-            "pts": 37,
-            "p": 29,
+            "pos": 9,
+            "pts": 38,
+            "p": 30,
             "sg": -8
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Real Betis em 5o (44pts) vs Espanyol em 11o (37pts).",
+          "info": "Real Betis em 5o (45pts) vs Espanyol em 9o (38pts).",
           "reliability": "8.5"
         }
       },
@@ -655,7 +655,7 @@
             "sg": 38
           },
           "away": {
-            "pos": 9,
+            "pos": 10,
             "pts": 37,
             "p": 28,
             "sg": 4
@@ -663,7 +663,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "PSG em 1o (63pts) vs Toulouse em 9o (37pts).",
+          "info": "PSG em 1o (63pts) vs Toulouse em 10o (37pts).",
           "reliability": "8.5"
         }
       },
@@ -678,8 +678,8 @@
     {
       "id": 14167956,
       "utcDate": "2026-04-04T15:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "Halftime",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 34,
@@ -698,7 +698,7 @@
       "score": {
         "fullTime": {
           "home": 3,
-          "away": 0
+          "away": 1
         }
       },
       "inteligencia": {
@@ -727,13 +727,13 @@
             "pos": 8,
             "pts": 43,
             "p": 28,
-            "sg": 13
+            "sg": 12
           },
           "away": {
             "pos": 15,
             "pts": 27,
             "p": 28,
-            "sg": -23
+            "sg": -22
           }
         },
         "h2h": [],
@@ -753,8 +753,8 @@
     {
       "id": 14167949,
       "utcDate": "2026-04-04T17:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 34,
@@ -772,8 +772,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -799,21 +799,21 @@
         },
         "standings": {
           "home": {
-            "pos": 11,
-            "pts": 36,
-            "p": 27,
-            "sg": -5
+            "pos": 9,
+            "pts": 39,
+            "p": 28,
+            "sg": -4
           },
           "away": {
             "pos": 7,
             "pts": 44,
-            "p": 27,
-            "sg": 6
+            "p": 28,
+            "sg": 5
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Brest em 11o (36pts) vs Rennes em 7o (44pts).",
+          "info": "Brest em 9o (39pts) vs Rennes em 7o (44pts).",
           "reliability": "8.5"
         }
       },
@@ -1353,8 +1353,8 @@
     {
       "id": 14065207,
       "utcDate": "2026-04-04T16:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "Halftime",
       "venue": "",
       "competition": {
         "id": 35,
@@ -1372,8 +1372,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -1400,20 +1400,20 @@
         "standings": {
           "home": {
             "pos": 3,
-            "pts": 53,
-            "p": 27,
+            "pts": 54,
+            "p": 28,
             "sg": 20
           },
           "away": {
             "pos": 2,
-            "pts": 61,
-            "p": 27,
+            "pts": 62,
+            "p": 28,
             "sg": 30
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Stuttgart em 3o (53pts) vs Dortmund em 2o (61pts).",
+          "info": "Stuttgart em 3o (54pts) vs Dortmund em 2o (62pts).",
           "reliability": "8.5"
         }
       },
@@ -1774,7 +1774,7 @@
         },
         "standings": {
           "home": {
-            "pos": 8,
+            "pos": 9,
             "pts": 35,
             "p": 28,
             "sg": -8
@@ -1788,7 +1788,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Vitória em 8o (35pts) vs Tondela em 17o (20pts).",
+          "info": "Vitória em 9o (35pts) vs Tondela em 17o (20pts).",
           "reliability": "8.5"
         }
       },
@@ -1878,8 +1878,8 @@
     {
       "id": 14288843,
       "utcDate": "2026-04-04T14:30:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 238,
@@ -1897,7 +1897,7 @@
       },
       "score": {
         "fullTime": {
-          "home": 1,
+          "home": 2,
           "away": 0
         }
       },
@@ -1927,13 +1927,13 @@
             "pos": 15,
             "pts": 25,
             "p": 28,
-            "sg": -9
+            "sg": -8
           },
           "away": {
             "pos": 14,
             "pts": 28,
             "p": 28,
-            "sg": -13
+            "sg": -14
           }
         },
         "h2h": [],
@@ -1953,8 +1953,8 @@
     {
       "id": 14288847,
       "utcDate": "2026-04-04T17:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 238,
@@ -1972,8 +1972,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -1999,21 +1999,21 @@
         },
         "standings": {
           "home": {
-            "pos": 9,
-            "pts": 35,
-            "p": 27,
+            "pos": 8,
+            "pts": 36,
+            "p": 28,
             "sg": -8
           },
           "away": {
             "pos": 4,
-            "pts": 46,
-            "p": 26,
+            "pts": 47,
+            "p": 27,
             "sg": 26
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Moreirense em 9o (35pts) vs Braga em 4o (46pts).",
+          "info": "Moreirense em 8o (36pts) vs Braga em 4o (47pts).",
           "reliability": "8.5"
         }
       },
@@ -2028,8 +2028,8 @@
     {
       "id": 14288844,
       "utcDate": "2026-04-04T17:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 238,
@@ -2047,8 +2047,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -2074,21 +2074,21 @@
         },
         "standings": {
           "home": {
-            "pos": 10,
+            "pos": 11,
             "pts": 30,
-            "p": 27,
-            "sg": -18
+            "p": 28,
+            "sg": -19
           },
           "away": {
-            "pos": 11,
-            "pts": 29,
-            "p": 27,
-            "sg": -18
+            "pos": 10,
+            "pts": 32,
+            "p": 28,
+            "sg": -17
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Rio Ave em 10o (30pts) vs Alverca em 11o (29pts).",
+          "info": "Rio Ave em 11o (30pts) vs Alverca em 10o (32pts).",
           "reliability": "8.5"
         }
       },
@@ -2178,8 +2178,8 @@
     {
       "id": 14053764,
       "utcDate": "2026-04-04T14:30:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 37,
@@ -2197,8 +2197,8 @@
       },
       "score": {
         "fullTime": {
-          "home": 3,
-          "away": 2
+          "home": 4,
+          "away": 3
         }
       },
       "inteligencia": {
@@ -2251,85 +2251,10 @@
       }
     },
     {
-      "id": 14053758,
-      "utcDate": "2026-04-04T16:45:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
-      "venue": "",
-      "competition": {
-        "id": 37,
-        "name": "VriendenLoterij Eredivisie"
-      },
-      "homeTeam": {
-        "id": 2950,
-        "name": "AZ Alkmaar",
-        "shortName": "AZ"
-      },
-      "awayTeam": {
-        "id": 2957,
-        "name": "Fortuna Sittard",
-        "shortName": "Fortuna"
-      },
-      "score": {
-        "fullTime": {
-          "home": null,
-          "away": null
-        }
-      },
-      "inteligencia": {
-        "clubelo": {
-          "home_elo": "N/A",
-          "away_elo": "N/A"
-        },
-        "recent_form": {
-          "home": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
-          ],
-          "away": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
-          ]
-        },
-        "standings": {
-          "home": {
-            "pos": 6,
-            "pts": 42,
-            "p": 28,
-            "sg": 2
-          },
-          "away": {
-            "pos": 11,
-            "pts": 35,
-            "p": 28,
-            "sg": -9
-          }
-        },
-        "h2h": [],
-        "stats": {
-          "info": "AZ em 6o (42pts) vs Fortuna em 11o (35pts).",
-          "reliability": "8.5"
-        }
-      },
-      "_sofascore": {
-        "homeTeamId": 2950,
-        "awayTeamId": 2957,
-        "tournamentId": 37,
-        "seasonYear": "25/26",
-        "slug": "fortuna-sittard-az-alkmaar"
-      }
-    },
-    {
       "id": 14053770,
       "utcDate": "2026-04-04T16:45:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 37,
@@ -2347,8 +2272,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -2375,20 +2300,20 @@
         "standings": {
           "home": {
             "pos": 14,
-            "pts": 27,
-            "p": 28,
+            "pts": 28,
+            "p": 29,
             "sg": -8
           },
           "away": {
             "pos": 10,
-            "pts": 38,
-            "p": 28,
+            "pts": 39,
+            "p": 29,
             "sg": 3
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Telstar em 14o (27pts) vs Groningen em 10o (38pts).",
+          "info": "Telstar em 14o (28pts) vs Groningen em 10o (39pts).",
           "reliability": "8.5"
         }
       },
@@ -2398,6 +2323,81 @@
         "tournamentId": 37,
         "seasonYear": "25/26",
         "slug": "sc-telstar-fc-groningen"
+      }
+    },
+    {
+      "id": 14053758,
+      "utcDate": "2026-04-04T17:00:00+00:00",
+      "status": "IN_PLAY",
+      "minute": "1st half",
+      "venue": "",
+      "competition": {
+        "id": 37,
+        "name": "VriendenLoterij Eredivisie"
+      },
+      "homeTeam": {
+        "id": 2950,
+        "name": "AZ Alkmaar",
+        "shortName": "AZ"
+      },
+      "awayTeam": {
+        "id": 2957,
+        "name": "Fortuna Sittard",
+        "shortName": "Fortuna"
+      },
+      "score": {
+        "fullTime": {
+          "home": 2,
+          "away": 0
+        }
+      },
+      "inteligencia": {
+        "clubelo": {
+          "home_elo": "N/A",
+          "away_elo": "N/A"
+        },
+        "recent_form": {
+          "home": [
+            "-",
+            "-",
+            "-",
+            "-",
+            "-"
+          ],
+          "away": [
+            "-",
+            "-",
+            "-",
+            "-",
+            "-"
+          ]
+        },
+        "standings": {
+          "home": {
+            "pos": 6,
+            "pts": 45,
+            "p": 29,
+            "sg": 4
+          },
+          "away": {
+            "pos": 11,
+            "pts": 35,
+            "p": 29,
+            "sg": -11
+          }
+        },
+        "h2h": [],
+        "stats": {
+          "info": "AZ em 6o (45pts) vs Fortuna em 11o (35pts).",
+          "reliability": "8.5"
+        }
+      },
+      "_sofascore": {
+        "homeTeamId": 2950,
+        "awayTeamId": 2957,
+        "tournamentId": 37,
+        "seasonYear": "25/26",
+        "slug": "fortuna-sittard-az-alkmaar"
       }
     },
     {
@@ -2778,8 +2778,8 @@
     {
       "id": 14109863,
       "utcDate": "2026-04-04T14:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 52,
@@ -2853,8 +2853,8 @@
     {
       "id": 14109867,
       "utcDate": "2026-04-04T17:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 52,
@@ -2872,8 +2872,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -2899,21 +2899,21 @@
         },
         "standings": {
           "home": {
-            "pos": 3,
-            "pts": 60,
-            "p": 27,
-            "sg": 24
+            "pos": 2,
+            "pts": 63,
+            "p": 28,
+            "sg": 25
           },
           "away": {
             "pos": 1,
             "pts": 64,
-            "p": 26,
-            "sg": 44
+            "p": 27,
+            "sg": 43
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Trabzonspor em 3o (60pts) vs Galatasaray em 1o (64pts).",
+          "info": "Trabzonspor em 2o (63pts) vs Galatasaray em 1o (64pts).",
           "reliability": "8.5"
         }
       },
@@ -3199,21 +3199,21 @@
         },
         "standings": {
           "home": {
-            "pos": 4,
-            "pts": 18,
-            "p": 31,
-            "sg": -2
+            "pos": 6,
+            "pts": 0,
+            "p": 1,
+            "sg": -1
           },
           "away": {
             "pos": 1,
-            "pts": 24,
-            "p": 31,
-            "sg": 0
+            "pts": 3,
+            "p": 1,
+            "sg": 1
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Royal Antwerp em 4o (18pts) vs Genk em 1o (24pts).",
+          "info": "Royal Antwerp em 6o (0pts) vs Genk em 1o (3pts).",
           "reliability": "8.5"
         }
       },
@@ -3228,8 +3228,8 @@
     {
       "id": 15858613,
       "utcDate": "2026-04-04T16:15:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 38,
@@ -3247,8 +3247,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -3274,21 +3274,21 @@
         },
         "standings": {
           "home": {
-            "pos": 6,
-            "pts": 17,
-            "p": 30,
-            "sg": -11
+            "pos": 3,
+            "pts": 1,
+            "p": 1,
+            "sg": 0
           },
           "away": {
             "pos": 2,
-            "pts": 20,
-            "p": 30,
-            "sg": -8
+            "pts": 1,
+            "p": 1,
+            "sg": 0
           }
         },
         "h2h": [],
         "stats": {
-          "info": "OH Leuven em 6o (17pts) vs Standard Liège em 2o (20pts).",
+          "info": "OH Leuven em 3o (1pts) vs Standard Liège em 2o (1pts).",
           "reliability": "8.5"
         }
       },
@@ -3303,8 +3303,8 @@
     {
       "id": 15858629,
       "utcDate": "2026-04-04T14:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 38,
@@ -3424,21 +3424,21 @@
         },
         "standings": {
           "home": {
-            "pos": 10,
+            "pos": 2,
             "pts": 27,
-            "p": 26,
-            "sg": -10
+            "p": 27,
+            "sg": -11
           },
           "away": {
-            "pos": 13,
-            "pts": 17,
-            "p": 26,
-            "sg": -39
+            "pos": 6,
+            "pts": 20,
+            "p": 27,
+            "sg": -38
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Kifisia em 10o (27pts) vs Panserraikos em 13o (17pts).",
+          "info": "Kifisia em 2o (27pts) vs Panserraikos em 6o (20pts).",
           "reliability": "8.5"
         }
       },
@@ -3453,8 +3453,8 @@
     {
       "id": 15866560,
       "utcDate": "2026-04-04T15:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "Halftime",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 185,
@@ -3469,6 +3469,81 @@
         "id": 3265,
         "name": "AEL Novibet",
         "shortName": "AEL Novibet"
+      },
+      "score": {
+        "fullTime": {
+          "home": 3,
+          "away": 1
+        }
+      },
+      "inteligencia": {
+        "clubelo": {
+          "home_elo": "N/A",
+          "away_elo": "N/A"
+        },
+        "recent_form": {
+          "home": [
+            "-",
+            "-",
+            "-",
+            "-",
+            "-"
+          ],
+          "away": [
+            "-",
+            "-",
+            "-",
+            "-",
+            "-"
+          ]
+        },
+        "standings": {
+          "home": {
+            "pos": 5,
+            "pts": 20,
+            "p": 27,
+            "sg": -17
+          },
+          "away": {
+            "pos": 4,
+            "pts": 23,
+            "p": 27,
+            "sg": -19
+          }
+        },
+        "h2h": [],
+        "stats": {
+          "info": "Asteras em 5o (20pts) vs AEL Novibet em 4o (23pts).",
+          "reliability": "8.5"
+        }
+      },
+      "_sofascore": {
+        "homeTeamId": 6342,
+        "awayTeamId": 3265,
+        "tournamentId": 185,
+        "seasonYear": "25/26",
+        "slug": "asteras-aktor-ael-novibet"
+      }
+    },
+    {
+      "id": 15866564,
+      "utcDate": "2026-04-04T17:00:00+00:00",
+      "status": "IN_PLAY",
+      "minute": "1st half",
+      "venue": "",
+      "competition": {
+        "id": 185,
+        "name": "Stoiximan Super League, Relegation Round"
+      },
+      "homeTeam": {
+        "id": 7004,
+        "name": "GFS Panetolikos",
+        "shortName": "Panetolikos"
+      },
+      "awayTeam": {
+        "id": 5062,
+        "name": "APS Atromitos Athinon",
+        "shortName": "Atromitos"
       },
       "score": {
         "fullTime": {
@@ -3499,88 +3574,13 @@
         },
         "standings": {
           "home": {
-            "pos": 14,
-            "pts": 17,
-            "p": 26,
-            "sg": -19
-          },
-          "away": {
-            "pos": 12,
-            "pts": 23,
-            "p": 26,
-            "sg": -17
-          }
-        },
-        "h2h": [],
-        "stats": {
-          "info": "Asteras em 14o (17pts) vs AEL Novibet em 12o (23pts).",
-          "reliability": "8.5"
-        }
-      },
-      "_sofascore": {
-        "homeTeamId": 6342,
-        "awayTeamId": 3265,
-        "tournamentId": 185,
-        "seasonYear": "25/26",
-        "slug": "asteras-aktor-ael-novibet"
-      }
-    },
-    {
-      "id": 15866564,
-      "utcDate": "2026-04-04T17:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
-      "venue": "",
-      "competition": {
-        "id": 185,
-        "name": "Stoiximan Super League, Relegation Round"
-      },
-      "homeTeam": {
-        "id": 7004,
-        "name": "GFS Panetolikos",
-        "shortName": "Panetolikos"
-      },
-      "awayTeam": {
-        "id": 5062,
-        "name": "APS Atromitos Athinon",
-        "shortName": "Atromitos"
-      },
-      "score": {
-        "fullTime": {
-          "home": null,
-          "away": null
-        }
-      },
-      "inteligencia": {
-        "clubelo": {
-          "home_elo": "N/A",
-          "away_elo": "N/A"
-        },
-        "recent_form": {
-          "home": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
-          ],
-          "away": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
-          ]
-        },
-        "standings": {
-          "home": {
-            "pos": 11,
+            "pos": 3,
             "pts": 26,
             "p": 26,
             "sg": -14
           },
           "away": {
-            "pos": 9,
+            "pos": 1,
             "pts": 29,
             "p": 26,
             "sg": -4
@@ -3588,7 +3588,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Panetolikos em 11o (26pts) vs Atromitos em 9o (29pts).",
+          "info": "Panetolikos em 3o (26pts) vs Atromitos em 1o (29pts).",
           "reliability": "8.5"
         }
       },
@@ -3603,8 +3603,8 @@
     {
       "id": 14035305,
       "utcDate": "2026-04-04T14:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 36,
@@ -3622,7 +3622,7 @@
       },
       "score": {
         "fullTime": {
-          "home": 2,
+          "home": 3,
           "away": 0
         }
       },
@@ -3652,13 +3652,13 @@
             "pos": 5,
             "pts": 51,
             "p": 32,
-            "sg": 15
+            "sg": 16
           },
           "away": {
             "pos": 11,
             "pts": 27,
             "p": 32,
-            "sg": -27
+            "sg": -28
           }
         },
         "h2h": [],
@@ -3678,8 +3678,8 @@
     {
       "id": 14035306,
       "utcDate": "2026-04-04T14:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 36,
@@ -3697,7 +3697,7 @@
       },
       "score": {
         "fullTime": {
-          "home": 1,
+          "home": 2,
           "away": 3
         }
       },
@@ -3727,13 +3727,13 @@
             "pos": 4,
             "pts": 54,
             "p": 32,
-            "sg": 24
+            "sg": 25
           },
           "away": {
             "pos": 6,
             "pts": 46,
             "p": 32,
-            "sg": 1
+            "sg": 0
           }
         },
         "h2h": [],
@@ -3753,8 +3753,8 @@
     {
       "id": 14035309,
       "utcDate": "2026-04-04T14:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 36,
@@ -3828,8 +3828,8 @@
     {
       "id": 14035308,
       "utcDate": "2026-04-04T14:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 36,
@@ -3978,8 +3978,8 @@
     {
       "id": 15697199,
       "utcDate": "2026-04-04T16:15:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 19,
@@ -3997,8 +3997,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 3,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -4353,8 +4353,8 @@
     {
       "id": 15270055,
       "utcDate": "2026-04-04T16:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "Halftime",
       "venue": "",
       "competition": {
         "id": 155,
@@ -4372,8 +4372,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -5329,7 +5329,7 @@
       "id": 14023523,
       "utcDate": "2026-04-04T15:45:00+00:00",
       "status": "IN_PLAY",
-      "minute": "1st half",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 170,
@@ -5348,7 +5348,7 @@
       "score": {
         "fullTime": {
           "home": 0,
-          "away": 1
+          "away": 2
         }
       },
       "inteligencia": {
@@ -5377,13 +5377,13 @@
             "pos": 6,
             "pts": 36,
             "p": 28,
-            "sg": -6
+            "sg": -7
           },
           "away": {
             "pos": 3,
             "pts": 41,
             "p": 28,
-            "sg": 7
+            "sg": 8
           }
         },
         "h2h": [],
@@ -5553,8 +5553,8 @@
     {
       "id": 14015639,
       "utcDate": "2026-04-04T14:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 210,
@@ -5628,8 +5628,8 @@
     {
       "id": 14015637,
       "utcDate": "2026-04-04T16:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 210,
@@ -5647,8 +5647,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -5675,20 +5675,20 @@
         "standings": {
           "home": {
             "pos": 9,
-            "pts": 34,
-            "p": 28,
+            "pts": 35,
+            "p": 29,
             "sg": -5
           },
           "away": {
             "pos": 14,
-            "pts": 28,
-            "p": 28,
+            "pts": 29,
+            "p": 29,
             "sg": -25
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Radnički 1923 em 9o (34pts) vs Mladost em 14o (28pts).",
+          "info": "Radnički 1923 em 9o (35pts) vs Mladost em 14o (29pts).",
           "reliability": "8.5"
         }
       },
@@ -5703,8 +5703,8 @@
     {
       "id": 14015631,
       "utcDate": "2026-04-04T16:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 210,
@@ -5722,8 +5722,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -5750,20 +5750,20 @@
         "standings": {
           "home": {
             "pos": 15,
-            "pts": 21,
-            "p": 28,
-            "sg": -19
+            "pts": 24,
+            "p": 29,
+            "sg": -18
           },
           "away": {
             "pos": 13,
             "pts": 31,
-            "p": 28,
-            "sg": -10
+            "p": 29,
+            "sg": -11
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Spartak em 15o (21pts) vs Javor em 13o (31pts).",
+          "info": "Spartak em 15o (24pts) vs Javor em 13o (31pts).",
           "reliability": "8.5"
         }
       },
@@ -5853,8 +5853,8 @@
     {
       "id": 15171465,
       "utcDate": "2026-04-04T17:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 242,
@@ -5872,8 +5872,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -5899,21 +5899,21 @@
         },
         "standings": {
           "home": {
-            "pos": 7,
-            "pts": 7,
-            "p": 5,
+            "pos": 5,
+            "pts": 8,
+            "p": 6,
             "sg": -2
           },
           "away": {
             "pos": 7,
-            "pts": 9,
-            "p": 5,
+            "pts": 10,
+            "p": 6,
             "sg": 4
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Toronto em 7o (7pts) vs Colorado em 7o (9pts).",
+          "info": "Toronto em 5o (8pts) vs Colorado em 7o (10pts).",
           "reliability": "8.5"
         }
       },
@@ -6049,13 +6049,13 @@
         },
         "standings": {
           "home": {
-            "pos": 6,
+            "pos": 9,
             "pts": 10,
             "p": 5,
             "sg": 2
           },
           "away": {
-            "pos": 15,
+            "pos": 25,
             "pts": 4,
             "p": 5,
             "sg": -6
@@ -6063,7 +6063,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Salt Lake em 6o (10pts) vs Kansas City em 15o (4pts).",
+          "info": "Salt Lake em 9o (10pts) vs Kansas City em 25o (4pts).",
           "reliability": "8.5"
         }
       },
@@ -6274,13 +6274,13 @@
         },
         "standings": {
           "home": {
-            "pos": 6,
+            "pos": 7,
             "pts": 7,
             "p": 5,
             "sg": 0
           },
           "away": {
-            "pos": 8,
+            "pos": 12,
             "pts": 8,
             "p": 5,
             "sg": 1
@@ -6288,7 +6288,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "DC United em 6o (7pts) vs Dallas em 8o (8pts).",
+          "info": "DC United em 7o (7pts) vs Dallas em 12o (8pts).",
           "reliability": "8.5"
         }
       },
@@ -6355,7 +6355,7 @@
             "sg": 1
           },
           "away": {
-            "pos": 11,
+            "pos": 20,
             "pts": 5,
             "p": 5,
             "sg": -2
@@ -6363,7 +6363,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Inter Miami em 3o (10pts) vs Austin em 11o (5pts).",
+          "info": "Inter Miami em 3o (10pts) vs Austin em 20o (5pts).",
           "reliability": "8.5"
         }
       },
@@ -6430,7 +6430,7 @@
             "sg": 7
           },
           "away": {
-            "pos": 13,
+            "pos": 23,
             "pts": 4,
             "p": 5,
             "sg": -3
@@ -6438,7 +6438,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "NY City em 2o (10pts) vs St. Louis em 13o (4pts).",
+          "info": "NY City em 2o (10pts) vs St. Louis em 23o (4pts).",
           "reliability": "8.5"
         }
       },
@@ -6574,7 +6574,7 @@
         },
         "standings": {
           "home": {
-            "pos": 5,
+            "pos": 6,
             "pts": 7,
             "p": 5,
             "sg": 2
@@ -6588,7 +6588,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Chicago em 5o (7pts) vs Nashville em 1o (13pts).",
+          "info": "Chicago em 6o (7pts) vs Nashville em 1o (13pts).",
           "reliability": "8.5"
         }
       },
@@ -6649,13 +6649,13 @@
         },
         "standings": {
           "home": {
-            "pos": 9,
+            "pos": 17,
             "pts": 6,
             "p": 4,
             "sg": -1
           },
           "away": {
-            "pos": 5,
+            "pos": 8,
             "pts": 10,
             "p": 5,
             "sg": 3
@@ -6663,7 +6663,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Houston em 9o (6pts) vs Seattle em 5o (10pts).",
+          "info": "Houston em 17o (6pts) vs Seattle em 8o (10pts).",
           "reliability": "8.5"
         }
       },
@@ -6724,7 +6724,7 @@
         },
         "standings": {
           "home": {
-            "pos": 1,
+            "pos": 2,
             "pts": 13,
             "p": 5,
             "sg": 8
@@ -6738,7 +6738,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Los Angeles em 1o (13pts) vs Orlando em 13o (3pts).",
+          "info": "Los Angeles em 2o (13pts) vs Orlando em 13o (3pts).",
           "reliability": "8.5"
         }
       },
@@ -6799,13 +6799,13 @@
         },
         "standings": {
           "home": {
-            "pos": 10,
+            "pos": 19,
             "pts": 5,
             "p": 5,
             "sg": -1
           },
           "away": {
-            "pos": 12,
+            "pos": 21,
             "pts": 5,
             "p": 5,
             "sg": -7
@@ -6813,7 +6813,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "LA Galaxy em 10o (5pts) vs Minnesota em 12o (5pts).",
+          "info": "LA Galaxy em 19o (5pts) vs Minnesota em 21o (5pts).",
           "reliability": "8.5"
         }
       },
@@ -6874,13 +6874,13 @@
         },
         "standings": {
           "home": {
-            "pos": 3,
+            "pos": 4,
             "pts": 12,
             "p": 5,
             "sg": 6
           },
           "away": {
-            "pos": 4,
+            "pos": 5,
             "pts": 11,
             "p": 5,
             "sg": 8
@@ -6888,7 +6888,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "San Jose em 3o (12pts) vs San Diego FC em 4o (11pts).",
+          "info": "San Jose em 4o (12pts) vs San Diego FC em 5o (11pts).",
           "reliability": "8.5"
         }
       },
@@ -6949,13 +6949,13 @@
         },
         "standings": {
           "home": {
-            "pos": 2,
+            "pos": 3,
             "pts": 12,
             "p": 5,
             "sg": 12
           },
           "away": {
-            "pos": 14,
+            "pos": 24,
             "pts": 4,
             "p": 5,
             "sg": -5
@@ -6963,7 +6963,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Vancouver em 2o (12pts) vs Portland em 14o (4pts).",
+          "info": "Vancouver em 3o (12pts) vs Portland em 24o (4pts).",
           "reliability": "8.5"
         }
       },
@@ -7953,8 +7953,8 @@
     {
       "id": 14083521,
       "utcDate": "2026-04-04T14:15:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 54,
@@ -7973,7 +7973,7 @@
       "score": {
         "fullTime": {
           "home": 2,
-          "away": 2
+          "away": 3
         }
       },
       "inteligencia": {
@@ -8005,7 +8005,7 @@
             "sg": -2
           },
           "away": {
-            "pos": 4,
+            "pos": 5,
             "pts": 57,
             "p": 34,
             "sg": 12
@@ -8013,7 +8013,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Albacete em 12o (44pts) vs Burgos em 4o (57pts).",
+          "info": "Albacete em 12o (44pts) vs Burgos em 5o (57pts).",
           "reliability": "8.5"
         }
       },
@@ -8028,8 +8028,8 @@
     {
       "id": 14083527,
       "utcDate": "2026-04-04T16:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 54,
@@ -8047,8 +8047,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -8074,21 +8074,21 @@
         },
         "standings": {
           "home": {
-            "pos": 22,
-            "pts": 29,
-            "p": 33,
-            "sg": -25
+            "pos": 21,
+            "pts": 32,
+            "p": 34,
+            "sg": -24
           },
           "away": {
             "pos": 17,
             "pts": 39,
-            "p": 33,
-            "sg": -7
+            "p": 34,
+            "sg": -8
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Cultural Leonesa em 22o (29pts) vs Real Valladolid em 17o (39pts).",
+          "info": "Cultural Leonesa em 21o (32pts) vs Real Valladolid em 17o (39pts).",
           "reliability": "8.5"
         }
       },
@@ -8103,8 +8103,8 @@
     {
       "id": 14083525,
       "utcDate": "2026-04-04T16:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "Halftime",
       "venue": "",
       "competition": {
         "id": 54,
@@ -8122,8 +8122,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -8150,20 +8150,20 @@
         "standings": {
           "home": {
             "pos": 2,
-            "pts": 59,
-            "p": 33,
+            "pts": 60,
+            "p": 34,
             "sg": 15
           },
           "away": {
-            "pos": 5,
-            "pts": 56,
-            "p": 33,
+            "pos": 4,
+            "pts": 57,
+            "p": 34,
             "sg": 15
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Deportivo em 2o (59pts) vs Málaga em 5o (56pts).",
+          "info": "Deportivo em 2o (60pts) vs Málaga em 4o (57pts).",
           "reliability": "8.5"
         }
       },
@@ -11178,8 +11178,8 @@
     {
       "id": 14138596,
       "utcDate": "2026-04-04T16:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 98,
@@ -11197,8 +11197,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 2
         }
       },
       "inteligencia": {
@@ -11553,8 +11553,8 @@
     {
       "id": 15690647,
       "utcDate": "2026-04-04T15:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "1st half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 45,
@@ -11572,8 +11572,8 @@
       },
       "score": {
         "fullTime": {
-          "home": 1,
-          "away": 0
+          "home": 2,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -11628,8 +11628,8 @@
     {
       "id": 15690646,
       "utcDate": "2026-04-04T15:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "Halftime",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 45,
@@ -11647,7 +11647,7 @@
       },
       "score": {
         "fullTime": {
-          "home": 0,
+          "home": 3,
           "away": 1
         }
       },
@@ -11703,8 +11703,8 @@
     {
       "id": 15851134,
       "utcDate": "2026-04-04T16:45:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 266,
@@ -11722,8 +11722,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -11778,8 +11778,8 @@
     {
       "id": 15851135,
       "utcDate": "2026-04-04T17:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 266,
@@ -11797,8 +11797,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -11853,8 +11853,8 @@
     {
       "id": 15851143,
       "utcDate": "2026-04-04T17:15:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 266,
@@ -11872,8 +11872,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -13803,8 +13803,8 @@
     {
       "id": 14036471,
       "utcDate": "2026-04-04T16:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 172,
@@ -13822,8 +13822,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -14104,7 +14104,7 @@
       "id": 13981983,
       "utcDate": "2026-04-04T15:30:00+00:00",
       "status": "IN_PLAY",
-      "minute": "1st half",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 202,
@@ -14122,7 +14122,7 @@
       },
       "score": {
         "fullTime": {
-          "home": 1,
+          "home": 3,
           "away": 0
         }
       },
@@ -14253,8 +14253,8 @@
     {
       "id": 15676226,
       "utcDate": "2026-04-04T16:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 39,
@@ -14272,8 +14272,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 2,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -16878,8 +16878,8 @@
     {
       "id": 15728190,
       "utcDate": "2026-04-04T15:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "Halftime",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 808,
@@ -16898,7 +16898,7 @@
       "score": {
         "fullTime": {
           "home": 1,
-          "away": 0
+          "away": 1
         }
       },
       "inteligencia": {
@@ -17253,8 +17253,8 @@
     {
       "id": 15508341,
       "utcDate": "2026-04-04T14:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 1900,
@@ -17273,7 +17273,7 @@
       "score": {
         "fullTime": {
           "home": 0,
-          "away": 1
+          "away": 2
         }
       },
       "inteligencia": {
@@ -18453,8 +18453,8 @@
     {
       "id": 14773768,
       "utcDate": "2026-04-04T16:15:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "Halftime",
       "venue": "",
       "competition": {
         "id": 955,
@@ -18472,8 +18472,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 2,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -18528,8 +18528,8 @@
     {
       "id": 14773777,
       "utcDate": "2026-04-04T16:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "Halftime",
       "venue": "",
       "competition": {
         "id": 955,
@@ -18547,8 +18547,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -18678,8 +18678,8 @@
     {
       "id": 15698591,
       "utcDate": "2026-04-04T16:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 152,
@@ -18697,8 +18697,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -19053,8 +19053,8 @@
     {
       "id": 15362716,
       "utcDate": "2026-04-04T16:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 215,
@@ -19072,8 +19072,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -19128,8 +19128,8 @@
     {
       "id": 15362717,
       "utcDate": "2026-04-04T16:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 215,
@@ -19147,8 +19147,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -19353,8 +19353,8 @@
     {
       "id": 15502790,
       "utcDate": "2026-04-04T16:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 13470,
@@ -19372,8 +19372,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -21378,8 +21378,8 @@
     {
       "id": 14167196,
       "utcDate": "2026-04-04T14:30:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 203,
@@ -21397,8 +21397,8 @@
       },
       "score": {
         "fullTime": {
-          "home": 2,
-          "away": 2
+          "home": 3,
+          "away": 3
         }
       },
       "inteligencia": {
@@ -21453,8 +21453,8 @@
     {
       "id": 14038638,
       "utcDate": "2026-04-04T16:45:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 203,
@@ -21472,8 +21472,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -23479,7 +23479,7 @@
       "id": 15603912,
       "utcDate": "2026-04-04T15:30:00+00:00",
       "status": "IN_PLAY",
-      "minute": "1st half",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 825,
@@ -23497,7 +23497,7 @@
       },
       "score": {
         "fullTime": {
-          "home": 1,
+          "home": 3,
           "away": 1
         }
       },
@@ -23554,7 +23554,7 @@
       "id": 15603910,
       "utcDate": "2026-04-04T15:30:00+00:00",
       "status": "IN_PLAY",
-      "minute": "1st half",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 825,
@@ -23573,7 +23573,7 @@
       "score": {
         "fullTime": {
           "home": 0,
-          "away": 0
+          "away": 1
         }
       },
       "inteligencia": {
@@ -24303,8 +24303,8 @@
     {
       "id": 15820478,
       "utcDate": "2026-04-04T13:50:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 971,
@@ -24322,7 +24322,7 @@
       },
       "score": {
         "fullTime": {
-          "home": 1,
+          "home": 2,
           "away": 2
         }
       },
@@ -24378,8 +24378,8 @@
     {
       "id": 15820477,
       "utcDate": "2026-04-04T16:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 971,
@@ -24397,8 +24397,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -25278,8 +25278,8 @@
     {
       "id": 14287065,
       "utcDate": "2026-04-04T14:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 10640,
@@ -25878,8 +25878,8 @@
     {
       "id": 14019537,
       "utcDate": "2026-04-04T15:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "Halftime",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 187,
@@ -25897,8 +25897,8 @@
       },
       "score": {
         "fullTime": {
-          "home": 1,
-          "away": 0
+          "home": 5,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -27978,8 +27978,8 @@
     {
       "id": 15827089,
       "utcDate": "2026-04-04T14:15:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 846,
@@ -27997,7 +27997,7 @@
       },
       "score": {
         "fullTime": {
-          "home": 1,
+          "home": 2,
           "away": 1
         }
       },
@@ -28053,8 +28053,8 @@
     {
       "id": 15827096,
       "utcDate": "2026-04-04T16:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 846,
@@ -28072,8 +28072,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -28428,8 +28428,8 @@
     {
       "id": 15835257,
       "utcDate": "2026-04-04T15:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "1st half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 169,
@@ -28447,7 +28447,7 @@
       },
       "score": {
         "fullTime": {
-          "home": 0,
+          "home": 2,
           "away": 0
         }
       },
@@ -28803,8 +28803,8 @@
     {
       "id": 14115554,
       "utcDate": "2026-04-04T16:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "Halftime",
       "venue": "",
       "competition": {
         "id": 222,
@@ -28822,8 +28822,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -30453,8 +30453,8 @@
     {
       "id": 14598744,
       "utcDate": "2026-04-04T14:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 247,
@@ -30528,8 +30528,8 @@
     {
       "id": 14598738,
       "utcDate": "2026-04-04T16:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "Halftime",
       "venue": "",
       "competition": {
         "id": 247,
@@ -30547,8 +30547,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -31278,8 +31278,8 @@
     {
       "id": 15866840,
       "utcDate": "2026-04-04T16:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 171,
@@ -31297,8 +31297,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 2,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -31428,8 +31428,8 @@
     {
       "id": 15866830,
       "utcDate": "2026-04-04T16:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 171,
@@ -31447,8 +31447,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -31878,8 +31878,8 @@
     {
       "id": 14225246,
       "utcDate": "2026-04-04T14:30:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 205,
@@ -33753,8 +33753,8 @@
     {
       "id": 15432288,
       "utcDate": "2026-04-04T14:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 178,
@@ -33978,8 +33978,8 @@
     {
       "id": 15272699,
       "utcDate": "2026-04-04T14:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 41,
@@ -34053,8 +34053,8 @@
     {
       "id": 15272700,
       "utcDate": "2026-04-04T14:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 41,
@@ -34128,8 +34128,8 @@
     {
       "id": 15272701,
       "utcDate": "2026-04-04T14:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 41,
@@ -34147,7 +34147,7 @@
       },
       "score": {
         "fullTime": {
-          "home": 0,
+          "home": 1,
           "away": 3
         }
       },
@@ -34203,8 +34203,8 @@
     {
       "id": 15272702,
       "utcDate": "2026-04-04T16:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 41,
@@ -34222,8 +34222,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 3
         }
       },
       "inteligencia": {
@@ -36003,8 +36003,8 @@
     {
       "id": 14108290,
       "utcDate": "2026-04-04T14:30:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 491,
@@ -36078,8 +36078,8 @@
     {
       "id": 14108277,
       "utcDate": "2026-04-04T14:30:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 491,
@@ -36097,8 +36097,8 @@
       },
       "score": {
         "fullTime": {
-          "home": 0,
-          "away": 0
+          "home": 3,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -36528,8 +36528,8 @@
     {
       "id": 14103875,
       "utcDate": "2026-04-04T14:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 1083,
@@ -37728,8 +37728,8 @@
     {
       "id": 14489955,
       "utcDate": "2026-04-04T15:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "1st half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 1191,
@@ -37747,8 +37747,8 @@
       },
       "score": {
         "fullTime": {
-          "home": 0,
-          "away": 0
+          "home": 1,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -37765,11 +37765,11 @@
             "-"
           ],
           "away": [
+            "E",
             "V",
             "D",
             "E",
-            "D",
-            "E"
+            "D"
           ]
         },
         "standings": {
@@ -38028,8 +38028,8 @@
     {
       "id": 15336054,
       "utcDate": "2026-04-04T17:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 11615,
@@ -38047,8 +38047,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -39154,7 +39154,7 @@
       "id": 14302837,
       "utcDate": "2026-04-04T15:30:00+00:00",
       "status": "IN_PLAY",
-      "minute": "1st half",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 11445,
@@ -39172,7 +39172,7 @@
       },
       "score": {
         "fullTime": {
-          "home": 0,
+          "home": 1,
           "away": 0
         }
       },
@@ -39529,7 +39529,7 @@
       "id": 14303211,
       "utcDate": "2026-04-04T15:30:00+00:00",
       "status": "IN_PLAY",
-      "minute": "1st half",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 11447,
@@ -39547,7 +39547,7 @@
       },
       "score": {
         "fullTime": {
-          "home": 0,
+          "home": 2,
           "away": 1
         }
       },
@@ -39604,7 +39604,7 @@
       "id": 14303213,
       "utcDate": "2026-04-04T15:30:00+00:00",
       "status": "IN_PLAY",
-      "minute": "1st half",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 11447,
@@ -39622,8 +39622,8 @@
       },
       "score": {
         "fullTime": {
-          "home": 0,
-          "away": 0
+          "home": 1,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -39679,7 +39679,7 @@
       "id": 14303215,
       "utcDate": "2026-04-04T15:30:00+00:00",
       "status": "IN_PLAY",
-      "minute": "1st half",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 11447,
@@ -39697,8 +39697,8 @@
       },
       "score": {
         "fullTime": {
-          "home": 0,
-          "away": 1
+          "home": 2,
+          "away": 2
         }
       },
       "inteligencia": {
@@ -39754,7 +39754,7 @@
       "id": 14303217,
       "utcDate": "2026-04-04T15:30:00+00:00",
       "status": "IN_PLAY",
-      "minute": "1st half",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 11447,
@@ -39772,7 +39772,7 @@
       },
       "score": {
         "fullTime": {
-          "home": 0,
+          "home": 1,
           "away": 0
         }
       },
@@ -43203,8 +43203,8 @@
     {
       "id": 15635548,
       "utcDate": "2026-04-04T14:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 682,
@@ -43222,8 +43222,8 @@
       },
       "score": {
         "fullTime": {
-          "home": 0,
-          "away": 2
+          "home": 1,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -44403,8 +44403,8 @@
     {
       "id": 15525807,
       "utcDate": "2026-04-04T15:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "Halftime",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 685,
@@ -44422,7 +44422,7 @@
       },
       "score": {
         "fullTime": {
-          "home": 0,
+          "home": 1,
           "away": 0
         }
       },
@@ -45003,8 +45003,8 @@
     {
       "id": 15853541,
       "utcDate": "2026-04-04T14:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 200,
@@ -45828,8 +45828,8 @@
     {
       "id": 14336409,
       "utcDate": "2026-04-04T17:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 239,
@@ -45847,8 +45847,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -46128,8 +46128,8 @@
     {
       "id": 15444325,
       "utcDate": "2026-04-04T14:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 17101,
@@ -46278,8 +46278,8 @@
     {
       "id": 14263536,
       "utcDate": "2026-04-04T14:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 10093,
@@ -46353,8 +46353,8 @@
     {
       "id": 14263533,
       "utcDate": "2026-04-04T14:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 10093,
@@ -46428,8 +46428,8 @@
     {
       "id": 14263534,
       "utcDate": "2026-04-04T15:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "1st half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 10093,
@@ -46503,8 +46503,8 @@
     {
       "id": 14263538,
       "utcDate": "2026-04-04T15:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "1st half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 10093,
@@ -46522,7 +46522,7 @@
       },
       "score": {
         "fullTime": {
-          "home": 2,
+          "home": 3,
           "away": 0
         }
       },
@@ -46578,8 +46578,8 @@
     {
       "id": 14263529,
       "utcDate": "2026-04-04T15:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "Halftime",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 10093,
@@ -46653,8 +46653,8 @@
     {
       "id": 14263551,
       "utcDate": "2026-04-04T15:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "1st half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 10093,
@@ -46728,8 +46728,8 @@
     {
       "id": 14263541,
       "utcDate": "2026-04-04T15:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "1st half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 10093,
@@ -46747,8 +46747,8 @@
       },
       "score": {
         "fullTime": {
-          "home": 1,
-          "away": 0
+          "home": 3,
+          "away": 2
         }
       },
       "inteligencia": {
@@ -46803,8 +46803,8 @@
     {
       "id": 14263547,
       "utcDate": "2026-04-04T15:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "1st half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 10093,
@@ -46878,8 +46878,8 @@
     {
       "id": 14263539,
       "utcDate": "2026-04-04T15:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "1st half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 10093,
@@ -46898,7 +46898,7 @@
       "score": {
         "fullTime": {
           "home": 0,
-          "away": 0
+          "away": 1
         }
       },
       "inteligencia": {
@@ -46953,8 +46953,8 @@
     {
       "id": 14263545,
       "utcDate": "2026-04-04T15:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "1st half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 10093,
@@ -47028,8 +47028,8 @@
     {
       "id": 14263542,
       "utcDate": "2026-04-04T15:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "1st half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 10093,
@@ -47048,7 +47048,7 @@
       "score": {
         "fullTime": {
           "home": 5,
-          "away": 0
+          "away": 1
         }
       },
       "inteligencia": {
@@ -47104,7 +47104,7 @@
       "id": 14263550,
       "utcDate": "2026-04-04T15:00:00+00:00",
       "status": "IN_PLAY",
-      "minute": "1st half",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 10093,
@@ -47253,8 +47253,8 @@
     {
       "id": 14263557,
       "utcDate": "2026-04-04T15:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "1st half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 10093,
@@ -47272,8 +47272,8 @@
       },
       "score": {
         "fullTime": {
-          "home": 0,
-          "away": 0
+          "home": 1,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -47328,8 +47328,8 @@
     {
       "id": 14263564,
       "utcDate": "2026-04-04T15:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "1st half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 10093,
@@ -47347,8 +47347,8 @@
       },
       "score": {
         "fullTime": {
-          "home": 1,
-          "away": 1
+          "home": 2,
+          "away": 2
         }
       },
       "inteligencia": {
@@ -47403,8 +47403,8 @@
     {
       "id": 14263553,
       "utcDate": "2026-04-04T15:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "1st half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 10093,
@@ -47423,7 +47423,7 @@
       "score": {
         "fullTime": {
           "home": 0,
-          "away": 1
+          "away": 2
         }
       },
       "inteligencia": {
@@ -47478,8 +47478,8 @@
     {
       "id": 14263561,
       "utcDate": "2026-04-04T15:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "1st half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 10093,
@@ -47497,7 +47497,7 @@
       },
       "score": {
         "fullTime": {
-          "home": 0,
+          "home": 2,
           "away": 1
         }
       },
@@ -47553,8 +47553,8 @@
     {
       "id": 14263555,
       "utcDate": "2026-04-04T15:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "Halftime",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 10093,
@@ -47573,7 +47573,7 @@
       "score": {
         "fullTime": {
           "home": 0,
-          "away": 1
+          "away": 2
         }
       },
       "inteligencia": {
@@ -47628,8 +47628,8 @@
     {
       "id": 14263563,
       "utcDate": "2026-04-04T15:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "1st half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 10093,
@@ -47647,7 +47647,7 @@
       },
       "score": {
         "fullTime": {
-          "home": 0,
+          "home": 2,
           "away": 0
         }
       },
@@ -47703,8 +47703,8 @@
     {
       "id": 14263568,
       "utcDate": "2026-04-04T15:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "1st half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 10093,
@@ -47723,7 +47723,7 @@
       "score": {
         "fullTime": {
           "home": 0,
-          "away": 1
+          "away": 2
         }
       },
       "inteligencia": {
@@ -47778,8 +47778,8 @@
     {
       "id": 14288787,
       "utcDate": "2026-04-04T15:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "1st half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 10093,
@@ -47853,8 +47853,8 @@
     {
       "id": 14263567,
       "utcDate": "2026-04-04T15:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "Halftime",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 10093,
@@ -47873,7 +47873,7 @@
       "score": {
         "fullTime": {
           "home": 1,
-          "away": 0
+          "away": 1
         }
       },
       "inteligencia": {
@@ -47928,8 +47928,8 @@
     {
       "id": 14263566,
       "utcDate": "2026-04-04T15:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "1st half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 10093,
@@ -47947,7 +47947,7 @@
       },
       "score": {
         "fullTime": {
-          "home": 0,
+          "home": 1,
           "away": 0
         }
       },
@@ -48003,8 +48003,8 @@
     {
       "id": 14263569,
       "utcDate": "2026-04-04T15:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "1st half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 10093,
@@ -48022,8 +48022,8 @@
       },
       "score": {
         "fullTime": {
-          "home": 1,
-          "away": 1
+          "home": 3,
+          "away": 2
         }
       },
       "inteligencia": {
@@ -48078,8 +48078,8 @@
     {
       "id": 14349104,
       "utcDate": "2026-04-04T15:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "1st half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 10093,
@@ -48098,7 +48098,7 @@
       "score": {
         "fullTime": {
           "home": 0,
-          "away": 1
+          "away": 3
         }
       },
       "inteligencia": {
@@ -48153,8 +48153,8 @@
     {
       "id": 14263570,
       "utcDate": "2026-04-04T15:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "Halftime",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 10093,
@@ -48172,7 +48172,7 @@
       },
       "score": {
         "fullTime": {
-          "home": 3,
+          "home": 4,
           "away": 0
         }
       },
@@ -48303,8 +48303,8 @@
     {
       "id": 14591717,
       "utcDate": "2026-04-04T14:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 10527,
@@ -48378,8 +48378,8 @@
     {
       "id": 14591712,
       "utcDate": "2026-04-04T16:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 10527,
@@ -48397,8 +48397,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 2,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -48828,8 +48828,8 @@
     {
       "id": 15820465,
       "utcDate": "2026-04-04T15:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "Halftime",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 204,
@@ -48847,8 +48847,8 @@
       },
       "score": {
         "fullTime": {
-          "home": 0,
-          "away": 0
+          "home": 2,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -49353,8 +49353,8 @@
     {
       "id": 15393604,
       "utcDate": "2026-04-04T15:55:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 2120,
@@ -49372,8 +49372,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -49428,8 +49428,8 @@
     {
       "id": 15393603,
       "utcDate": "2026-04-04T16:10:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "Halftime",
       "venue": "",
       "competition": {
         "id": 2120,
@@ -49447,8 +49447,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -49503,8 +49503,8 @@
     {
       "id": 15393605,
       "utcDate": "2026-04-04T16:15:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "Halftime",
       "venue": "",
       "competition": {
         "id": 2120,
@@ -49522,8 +49522,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -49578,8 +49578,8 @@
     {
       "id": 14035474,
       "utcDate": "2026-04-04T14:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 206,
@@ -49653,8 +49653,8 @@
     {
       "id": 14035472,
       "utcDate": "2026-04-04T14:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 206,
@@ -49728,8 +49728,8 @@
     {
       "id": 14035476,
       "utcDate": "2026-04-04T14:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 206,
@@ -49878,8 +49878,8 @@
     {
       "id": 14035473,
       "utcDate": "2026-04-04T14:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 206,
@@ -49953,8 +49953,8 @@
     {
       "id": 14035636,
       "utcDate": "2026-04-04T14:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 207,
@@ -50028,8 +50028,8 @@
     {
       "id": 14035634,
       "utcDate": "2026-04-04T14:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 207,
@@ -50103,8 +50103,8 @@
     {
       "id": 14035645,
       "utcDate": "2026-04-04T14:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 207,
@@ -50253,8 +50253,8 @@
     {
       "id": 14035638,
       "utcDate": "2026-04-04T14:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 207,
@@ -50328,8 +50328,8 @@
     {
       "id": 14035817,
       "utcDate": "2026-04-04T14:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 209,
@@ -50403,8 +50403,8 @@
     {
       "id": 14035818,
       "utcDate": "2026-04-04T14:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 209,
@@ -50478,8 +50478,8 @@
     {
       "id": 14035819,
       "utcDate": "2026-04-04T14:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 209,
@@ -50553,8 +50553,8 @@
     {
       "id": 14035827,
       "utcDate": "2026-04-04T14:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 209,
@@ -50628,8 +50628,8 @@
     {
       "id": 14035820,
       "utcDate": "2026-04-04T14:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 209,
@@ -50647,7 +50647,7 @@
       },
       "score": {
         "fullTime": {
-          "home": 0,
+          "home": 1,
           "away": 1
         }
       },
@@ -51003,8 +51003,8 @@
     {
       "id": 15642580,
       "utcDate": "2026-04-04T16:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 211,
@@ -51022,8 +51022,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -51454,7 +51454,7 @@
       "id": 14074233,
       "utcDate": "2026-04-04T15:30:00+00:00",
       "status": "IN_PLAY",
-      "minute": "1st half",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 212,
@@ -52278,8 +52278,8 @@
     {
       "id": 15458209,
       "utcDate": "2026-04-04T14:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 11617,
@@ -52353,8 +52353,8 @@
     {
       "id": 15458210,
       "utcDate": "2026-04-04T14:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 11617,
@@ -53328,8 +53328,8 @@
     {
       "id": 15204351,
       "utcDate": "2026-04-04T16:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 216,
@@ -53347,8 +53347,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 3,
+          "away": 4
         }
       },
       "inteligencia": {
@@ -54078,8 +54078,8 @@
     {
       "id": 14090600,
       "utcDate": "2026-04-04T15:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "1st half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 218,
@@ -55576,7 +55576,7 @@
       }
     }
   ],
-  "_gerado_em": "2026-04-04T15:50:20.901778Z",
+  "_gerado_em": "2026-04-04T17:20:30.167363Z",
   "_total": 741,
   "_fonte": "sofascore.com"
 }

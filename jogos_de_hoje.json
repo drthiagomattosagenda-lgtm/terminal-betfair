@@ -1373,7 +1373,7 @@
       "score": {
         "fullTime": {
           "home": 0,
-          "away": 0
+          "away": 1
         }
       },
       "inteligencia": {
@@ -5873,7 +5873,7 @@
       "score": {
         "fullTime": {
           "home": 0,
-          "away": 0
+          "away": 1
         }
       },
       "inteligencia": {
@@ -5899,21 +5899,21 @@
         },
         "standings": {
           "home": {
-            "pos": 5,
-            "pts": 8,
+            "pos": 7,
+            "pts": 7,
             "p": 6,
-            "sg": -2
+            "sg": -3
           },
           "away": {
-            "pos": 7,
-            "pts": 10,
+            "pos": 5,
+            "pts": 12,
             "p": 6,
-            "sg": 4
+            "sg": 5
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Toronto em 5o (8pts) vs Colorado em 7o (10pts).",
+          "info": "Toronto em 7o (7pts) vs Colorado em 5o (12pts).",
           "reliability": "8.5"
         }
       },
@@ -6274,7 +6274,7 @@
         },
         "standings": {
           "home": {
-            "pos": 7,
+            "pos": 6,
             "pts": 7,
             "p": 5,
             "sg": 0
@@ -6288,7 +6288,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "DC United em 7o (7pts) vs Dallas em 12o (8pts).",
+          "info": "DC United em 6o (7pts) vs Dallas em 12o (8pts).",
           "reliability": "8.5"
         }
       },
@@ -6574,7 +6574,7 @@
         },
         "standings": {
           "home": {
-            "pos": 6,
+            "pos": 5,
             "pts": 7,
             "p": 5,
             "sg": 2
@@ -6588,7 +6588,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Chicago em 6o (7pts) vs Nashville em 1o (13pts).",
+          "info": "Chicago em 5o (7pts) vs Nashville em 1o (13pts).",
           "reliability": "8.5"
         }
       },
@@ -6880,7 +6880,7 @@
             "sg": 6
           },
           "away": {
-            "pos": 5,
+            "pos": 6,
             "pts": 11,
             "p": 5,
             "sg": 8
@@ -6888,7 +6888,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "San Jose em 4o (12pts) vs San Diego FC em 5o (11pts).",
+          "info": "San Jose em 4o (12pts) vs San Diego FC em 6o (11pts).",
           "reliability": "8.5"
         }
       },
@@ -8103,8 +8103,8 @@
     {
       "id": 14083525,
       "utcDate": "2026-04-04T16:30:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 54,
@@ -55576,7 +55576,7 @@
       }
     }
   ],
-  "_gerado_em": "2026-04-04T18:23:58.006182Z",
+  "_gerado_em": "2026-04-04T18:25:27.325633Z",
   "_total": 741,
   "_fonte": "sofascore.com"
 }

@@ -3006,8 +3006,8 @@
     {
       "id": 14109868,
       "utcDate": "2026-04-05T11:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 52,
@@ -3025,8 +3025,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -3053,20 +3053,20 @@
         "standings": {
           "home": {
             "pos": 18,
-            "pts": 17,
-            "p": 27,
+            "pts": 18,
+            "p": 28,
             "sg": -23
           },
           "away": {
             "pos": 11,
-            "pts": 30,
-            "p": 26,
+            "pts": 31,
+            "p": 27,
             "sg": -4
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Karagümrük em 18o (17pts) vs Rizespor em 11o (30pts).",
+          "info": "Karagümrük em 18o (18pts) vs Rizespor em 11o (31pts).",
           "reliability": "8.5"
         }
       },
@@ -3083,8 +3083,8 @@
     {
       "id": 14109861,
       "utcDate": "2026-04-05T11:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 52,
@@ -3102,8 +3102,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -3130,20 +3130,20 @@
         "standings": {
           "home": {
             "pos": 7,
-            "pts": 35,
-            "p": 26,
+            "pts": 36,
+            "p": 27,
             "sg": -2
           },
           "away": {
             "pos": 12,
-            "pts": 30,
-            "p": 27,
+            "pts": 31,
+            "p": 28,
             "sg": -8
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Samsunspor em 7o (35pts) vs Konyaspor em 12o (30pts).",
+          "info": "Samsunspor em 7o (36pts) vs Konyaspor em 12o (31pts).",
           "reliability": "8.5"
         }
       },
@@ -8673,7 +8673,7 @@
         },
         "standings": {
           "home": {
-            "pos": 14,
+            "pos": 15,
             "pts": 29,
             "p": 28,
             "sg": -2
@@ -8687,7 +8687,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Dresden em 14o (29pts) vs Hertha em 6o (47pts).",
+          "info": "Dresden em 15o (29pts) vs Hertha em 6o (47pts).",
           "reliability": "8.5"
         }
       },
@@ -8704,8 +8704,8 @@
     {
       "id": 14065501,
       "utcDate": "2026-04-05T11:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 44,
@@ -8723,239 +8723,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
-        }
-      },
-      "inteligencia": {
-        "clubelo": {
-          "home_elo": "N/A",
-          "away_elo": "N/A"
-        },
-        "recent_form": {
-          "home": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
-          ],
-          "away": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
-          ]
-        },
-        "standings": {
-          "home": {
-            "pos": 15,
-            "pts": 29,
-            "p": 27,
-            "sg": -15
-          },
-          "away": {
-            "pos": 9,
-            "pts": 36,
-            "p": 27,
-            "sg": 0
-          }
-        },
-        "h2h": [],
-        "stats": {
-          "info": "Braunschweig em 15o (29pts) vs Nürnberg em 9o (36pts).",
-          "reliability": "8.5"
-        }
-      },
-      "_sofascore": {
-        "homeTeamId": 2557,
-        "awayTeamId": 2523,
-        "tournamentId": 44,
-        "seasonYear": "25/26",
-        "slug": "eintracht-braunschweig-1-fc-nurnberg",
-        "eventId": 14065501,
-        "customId": "yabshbb"
-      }
-    },
-    {
-      "id": 14065500,
-      "utcDate": "2026-04-05T11:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
-      "venue": "",
-      "competition": {
-        "id": 44,
-        "name": "2. Bundesliga"
-      },
-      "homeTeam": {
-        "id": 2530,
-        "name": "FC Schalke 04",
-        "shortName": "Schalke"
-      },
-      "awayTeam": {
-        "id": 2553,
-        "name": "Karlsruher SC",
-        "shortName": "Karlsruhe"
-      },
-      "score": {
-        "fullTime": {
-          "home": null,
-          "away": null
-        }
-      },
-      "inteligencia": {
-        "clubelo": {
-          "home_elo": "N/A",
-          "away_elo": "N/A"
-        },
-        "recent_form": {
-          "home": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
-          ],
-          "away": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
-          ]
-        },
-        "standings": {
-          "home": {
-            "pos": 1,
-            "pts": 52,
-            "p": 27,
-            "sg": 14
-          },
-          "away": {
-            "pos": 8,
-            "pts": 37,
-            "p": 27,
-            "sg": -8
-          }
-        },
-        "h2h": [],
-        "stats": {
-          "info": "Schalke em 1o (52pts) vs Karlsruhe em 8o (37pts).",
-          "reliability": "8.5"
-        }
-      },
-      "_sofascore": {
-        "homeTeamId": 2530,
-        "awayTeamId": 2553,
-        "tournamentId": 44,
-        "seasonYear": "25/26",
-        "slug": "karlsruher-sc-fc-schalke-04",
-        "eventId": 14065500,
-        "customId": "Fabsdbb"
-      }
-    },
-    {
-      "id": 14065495,
-      "utcDate": "2026-04-05T11:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
-      "venue": "",
-      "competition": {
-        "id": 44,
-        "name": "2. Bundesliga"
-      },
-      "homeTeam": {
-        "id": 2541,
-        "name": "Hannover 96",
-        "shortName": "Hannover"
-      },
-      "awayTeam": {
-        "id": 2598,
-        "name": "SV 07 Elversberg",
-        "shortName": "Elversberg"
-      },
-      "score": {
-        "fullTime": {
-          "home": null,
-          "away": null
-        }
-      },
-      "inteligencia": {
-        "clubelo": {
-          "home_elo": "N/A",
-          "away_elo": "N/A"
-        },
-        "recent_form": {
-          "home": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
-          ],
-          "away": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
-          ]
-        },
-        "standings": {
-          "home": {
-            "pos": 5,
-            "pts": 49,
-            "p": 27,
-            "sg": 12
-          },
-          "away": {
-            "pos": 2,
-            "pts": 51,
-            "p": 27,
-            "sg": 18
-          }
-        },
-        "h2h": [],
-        "stats": {
-          "info": "Hannover em 5o (49pts) vs Elversberg em 2o (51pts).",
-          "reliability": "8.5"
-        }
-      },
-      "_sofascore": {
-        "homeTeamId": 2541,
-        "awayTeamId": 2598,
-        "tournamentId": 44,
-        "seasonYear": "25/26",
-        "slug": "sv-07-elversberg-hannover-96",
-        "eventId": 14065495,
-        "customId": "QabsYbb"
-      }
-    },
-    {
-      "id": 14065491,
-      "utcDate": "2026-04-05T11:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
-      "venue": "",
-      "competition": {
-        "id": 44,
-        "name": "2. Bundesliga"
-      },
-      "homeTeam": {
-        "id": 2573,
-        "name": "Holstein Kiel",
-        "shortName": "Kiel"
-      },
-      "awayTeam": {
-        "id": 2590,
-        "name": "Preußen Münster",
-        "shortName": "Münster"
-      },
-      "score": {
-        "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -8982,57 +8751,211 @@
         "standings": {
           "home": {
             "pos": 17,
-            "pts": 28,
-            "p": 27,
-            "sg": -8
+            "pts": 29,
+            "p": 28,
+            "sg": -16
           },
           "away": {
-            "pos": 18,
-            "pts": 26,
-            "p": 27,
-            "sg": -16
+            "pos": 8,
+            "pts": 39,
+            "p": 28,
+            "sg": 1
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Kiel em 17o (28pts) vs Münster em 18o (26pts).",
+          "info": "Braunschweig em 17o (29pts) vs Nürnberg em 8o (39pts).",
           "reliability": "8.5"
         }
       },
       "_sofascore": {
-        "homeTeamId": 2573,
-        "awayTeamId": 2590,
+        "homeTeamId": 2557,
+        "awayTeamId": 2523,
         "tournamentId": 44,
         "seasonYear": "25/26",
-        "slug": "preussen-munster-holstein-kiel",
-        "eventId": 14065491,
-        "customId": "ybbsPbb"
+        "slug": "eintracht-braunschweig-1-fc-nurnberg",
+        "eventId": 14065501,
+        "customId": "yabshbb"
       }
     },
     {
-      "id": 14065497,
+      "id": 14065500,
       "utcDate": "2026-04-05T11:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 44,
         "name": "2. Bundesliga"
       },
       "homeTeam": {
-        "id": 2551,
-        "name": "SpVgg Greuther Fürth",
-        "shortName": "Fürth"
+        "id": 2530,
+        "name": "FC Schalke 04",
+        "shortName": "Schalke"
       },
       "awayTeam": {
-        "id": 2561,
-        "name": "SC Paderborn 07",
-        "shortName": "Paderborn"
+        "id": 2553,
+        "name": "Karlsruher SC",
+        "shortName": "Karlsruhe"
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
+        }
+      },
+      "inteligencia": {
+        "clubelo": {
+          "home_elo": "N/A",
+          "away_elo": "N/A"
+        },
+        "recent_form": {
+          "home": [
+            "-",
+            "-",
+            "-",
+            "-",
+            "-"
+          ],
+          "away": [
+            "-",
+            "-",
+            "-",
+            "-",
+            "-"
+          ]
+        },
+        "standings": {
+          "home": {
+            "pos": 1,
+            "pts": 55,
+            "p": 28,
+            "sg": 15
+          },
+          "away": {
+            "pos": 9,
+            "pts": 37,
+            "p": 28,
+            "sg": -9
+          }
+        },
+        "h2h": [],
+        "stats": {
+          "info": "Schalke em 1o (55pts) vs Karlsruhe em 9o (37pts).",
+          "reliability": "8.5"
+        }
+      },
+      "_sofascore": {
+        "homeTeamId": 2530,
+        "awayTeamId": 2553,
+        "tournamentId": 44,
+        "seasonYear": "25/26",
+        "slug": "karlsruher-sc-fc-schalke-04",
+        "eventId": 14065500,
+        "customId": "Fabsdbb"
+      }
+    },
+    {
+      "id": 14065495,
+      "utcDate": "2026-04-05T11:30:00+00:00",
+      "status": "IN_PLAY",
+      "minute": "1st half",
+      "venue": "",
+      "competition": {
+        "id": 44,
+        "name": "2. Bundesliga"
+      },
+      "homeTeam": {
+        "id": 2541,
+        "name": "Hannover 96",
+        "shortName": "Hannover"
+      },
+      "awayTeam": {
+        "id": 2598,
+        "name": "SV 07 Elversberg",
+        "shortName": "Elversberg"
+      },
+      "score": {
+        "fullTime": {
+          "home": 0,
+          "away": 0
+        }
+      },
+      "inteligencia": {
+        "clubelo": {
+          "home_elo": "N/A",
+          "away_elo": "N/A"
+        },
+        "recent_form": {
+          "home": [
+            "-",
+            "-",
+            "-",
+            "-",
+            "-"
+          ],
+          "away": [
+            "-",
+            "-",
+            "-",
+            "-",
+            "-"
+          ]
+        },
+        "standings": {
+          "home": {
+            "pos": 5,
+            "pts": 50,
+            "p": 28,
+            "sg": 12
+          },
+          "away": {
+            "pos": 2,
+            "pts": 52,
+            "p": 28,
+            "sg": 18
+          }
+        },
+        "h2h": [],
+        "stats": {
+          "info": "Hannover em 5o (50pts) vs Elversberg em 2o (52pts).",
+          "reliability": "8.5"
+        }
+      },
+      "_sofascore": {
+        "homeTeamId": 2541,
+        "awayTeamId": 2598,
+        "tournamentId": 44,
+        "seasonYear": "25/26",
+        "slug": "sv-07-elversberg-hannover-96",
+        "eventId": 14065495,
+        "customId": "QabsYbb"
+      }
+    },
+    {
+      "id": 14065491,
+      "utcDate": "2026-04-05T11:30:00+00:00",
+      "status": "IN_PLAY",
+      "minute": "1st half",
+      "venue": "",
+      "competition": {
+        "id": 44,
+        "name": "2. Bundesliga"
+      },
+      "homeTeam": {
+        "id": 2573,
+        "name": "Holstein Kiel",
+        "shortName": "Kiel"
+      },
+      "awayTeam": {
+        "id": 2590,
+        "name": "Preußen Münster",
+        "shortName": "Münster"
+      },
+      "score": {
+        "fullTime": {
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -9060,19 +8983,96 @@
           "home": {
             "pos": 16,
             "pts": 29,
-            "p": 27,
+            "p": 28,
+            "sg": -8
+          },
+          "away": {
+            "pos": 18,
+            "pts": 27,
+            "p": 28,
+            "sg": -16
+          }
+        },
+        "h2h": [],
+        "stats": {
+          "info": "Kiel em 16o (29pts) vs Münster em 18o (27pts).",
+          "reliability": "8.5"
+        }
+      },
+      "_sofascore": {
+        "homeTeamId": 2573,
+        "awayTeamId": 2590,
+        "tournamentId": 44,
+        "seasonYear": "25/26",
+        "slug": "preussen-munster-holstein-kiel",
+        "eventId": 14065491,
+        "customId": "ybbsPbb"
+      }
+    },
+    {
+      "id": 14065497,
+      "utcDate": "2026-04-05T11:30:00+00:00",
+      "status": "IN_PLAY",
+      "minute": "1st half",
+      "venue": "",
+      "competition": {
+        "id": 44,
+        "name": "2. Bundesliga"
+      },
+      "homeTeam": {
+        "id": 2551,
+        "name": "SpVgg Greuther Fürth",
+        "shortName": "Fürth"
+      },
+      "awayTeam": {
+        "id": 2561,
+        "name": "SC Paderborn 07",
+        "shortName": "Paderborn"
+      },
+      "score": {
+        "fullTime": {
+          "home": 0,
+          "away": 0
+        }
+      },
+      "inteligencia": {
+        "clubelo": {
+          "home_elo": "N/A",
+          "away_elo": "N/A"
+        },
+        "recent_form": {
+          "home": [
+            "-",
+            "-",
+            "-",
+            "-",
+            "-"
+          ],
+          "away": [
+            "-",
+            "-",
+            "-",
+            "-",
+            "-"
+          ]
+        },
+        "standings": {
+          "home": {
+            "pos": 14,
+            "pts": 30,
+            "p": 28,
             "sg": -19
           },
           "away": {
             "pos": 3,
-            "pts": 51,
-            "p": 27,
+            "pts": 52,
+            "p": 28,
             "sg": 14
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Fürth em 16o (29pts) vs Paderborn em 3o (51pts).",
+          "info": "Fürth em 14o (30pts) vs Paderborn em 3o (52pts).",
           "reliability": "8.5"
         }
       },
@@ -12452,7 +12452,7 @@
             "sg": 0
           },
           "away": {
-            "pos": 13,
+            "pos": 12,
             "pts": -1,
             "p": 4,
             "sg": 0
@@ -12460,7 +12460,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Tieren em 4o (6pts) vs Guoan em 13o (-1pts). Tieren: 60% vitorias recentes.",
+          "info": "Tieren em 4o (6pts) vs Guoan em 12o (-1pts). Tieren: 60% vitorias recentes.",
           "reliability": "8.5"
         }
       },
@@ -12523,7 +12523,7 @@
         },
         "standings": {
           "home": {
-            "pos": 14,
+            "pos": 15,
             "pts": -4,
             "p": 4,
             "sg": -5
@@ -12537,7 +12537,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Hainiu em 14o (-4pts) vs Henan em 10o (1pts).",
+          "info": "Hainiu em 15o (-4pts) vs Henan em 10o (1pts).",
           "reliability": "8.5"
         }
       },
@@ -12606,7 +12606,7 @@
             "sg": -1
           },
           "away": {
-            "pos": 5,
+            "pos": 6,
             "pts": 6,
             "p": 4,
             "sg": -3
@@ -12614,7 +12614,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Taishan em 11o (0pts) vs Dalian Yingbo em 5o (6pts).",
+          "info": "Taishan em 11o (0pts) vs Dalian Yingbo em 6o (6pts).",
           "reliability": "8.5"
         }
       },
@@ -12785,8 +12785,8 @@
     {
       "id": 15552482,
       "utcDate": "2026-04-05T11:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 649,
@@ -12804,8 +12804,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 3,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -12831,21 +12831,21 @@
         },
         "standings": {
           "home": {
-            "pos": 6,
-            "pts": 3,
-            "p": 3,
-            "sg": -4
+            "pos": 5,
+            "pts": 6,
+            "p": 4,
+            "sg": -1
           },
           "away": {
-            "pos": 12,
+            "pos": 13,
             "pts": -1,
-            "p": 3,
-            "sg": 1
+            "p": 4,
+            "sg": -2
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Shenzhen em 6o (3pts) vs Three Towns em 12o (-1pts). Three Towns: 20% vitorias recentes.",
+          "info": "Shenzhen em 5o (6pts) vs Three Towns em 13o (-1pts). Three Towns: 20% vitorias recentes.",
           "reliability": "8.5"
         }
       },
@@ -12862,8 +12862,8 @@
     {
       "id": 15552480,
       "utcDate": "2026-04-05T11:35:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 649,
@@ -12881,8 +12881,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -12909,20 +12909,20 @@
         "standings": {
           "home": {
             "pos": 16,
-            "pts": -9,
-            "p": 3,
+            "pts": -8,
+            "p": 4,
             "sg": -4
           },
           "away": {
-            "pos": 15,
-            "pts": -5,
-            "p": 3,
+            "pos": 14,
+            "pts": -4,
+            "p": 4,
             "sg": 2
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Jinmen Tiger em 16o (-9pts) vs Shenhua em 15o (-5pts).",
+          "info": "Jinmen Tiger em 16o (-8pts) vs Shenhua em 14o (-4pts).",
           "reliability": "8.5"
         }
       },
@@ -14140,7 +14140,7 @@
         },
         "standings": {
           "home": {
-            "pos": 6,
+            "pos": 7,
             "pts": 40,
             "p": 27,
             "sg": 1
@@ -14154,7 +14154,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Sigma Olomouc em 6o (40pts) vs Mladá Boleslav em 11o (30pts).",
+          "info": "Sigma Olomouc em 7o (40pts) vs Mladá Boleslav em 11o (30pts).",
           "reliability": "8.5"
         }
       },
@@ -14248,8 +14248,8 @@
     {
       "id": 14036472,
       "utcDate": "2026-04-05T11:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 172,
@@ -14267,8 +14267,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -14294,21 +14294,21 @@
         },
         "standings": {
           "home": {
-            "pos": 7,
-            "pts": 37,
-            "p": 26,
-            "sg": 3
+            "pos": 6,
+            "pts": 40,
+            "p": 27,
+            "sg": 4
           },
           "away": {
             "pos": 13,
             "pts": 27,
-            "p": 26,
-            "sg": -12
+            "p": 27,
+            "sg": -13
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Hradec Králové em 7o (37pts) vs Bohemians em 13o (27pts).",
+          "info": "Hradec Králové em 6o (40pts) vs Bohemians em 13o (27pts).",
           "reliability": "8.5"
         }
       },
@@ -17765,7 +17765,7 @@
             "sg": 1
           },
           "away": {
-            "pos": 4,
+            "pos": 2,
             "pts": 14,
             "p": 7,
             "sg": 5
@@ -17773,7 +17773,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Goa em 7o (10pts) vs Bengaluru em 4o (14pts).",
+          "info": "Goa em 7o (10pts) vs Bengaluru em 2o (14pts).",
           "reliability": "8.5"
         }
       },
@@ -17790,8 +17790,8 @@
     {
       "id": 15508345,
       "utcDate": "2026-04-05T11:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 1900,
@@ -17809,8 +17809,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -17837,20 +17837,20 @@
         "standings": {
           "home": {
             "pos": 12,
-            "pts": 2,
-            "p": 5,
+            "pts": 3,
+            "p": 6,
             "sg": -6
           },
           "away": {
             "pos": 13,
-            "pts": 1,
-            "p": 6,
+            "pts": 2,
+            "p": 7,
             "sg": -7
           }
         },
         "h2h": [],
         "stats": {
-          "info": "SC Delhi em 12o (2pts) vs Kerala em 13o (1pts).",
+          "info": "SC Delhi em 12o (3pts) vs Kerala em 13o (2pts).",
           "reliability": "8.5"
         }
       },
@@ -21846,7 +21846,7 @@
             "sg": -12
           },
           "away": {
-            "pos": 4,
+            "pos": 5,
             "pts": 42,
             "p": 23,
             "sg": 11
@@ -21854,7 +21854,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Akron  em 11o (22pts) vs CSKA em 4o (42pts).",
+          "info": "Akron  em 11o (22pts) vs CSKA em 5o (42pts).",
           "reliability": "8.5"
         }
       },
@@ -22071,7 +22071,7 @@
         },
         "standings": {
           "home": {
-            "pos": 9,
+            "pos": 8,
             "pts": 30,
             "p": 23,
             "sg": -2
@@ -22085,7 +22085,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Akhmat em 9o (30pts) vs Krasnodar em 1o (52pts).",
+          "info": "Akhmat em 8o (30pts) vs Krasnodar em 1o (52pts).",
           "reliability": "8.5"
         }
       },
@@ -22102,8 +22102,8 @@
     {
       "id": 14038639,
       "utcDate": "2026-04-05T11:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 203,
@@ -22121,8 +22121,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -22150,19 +22150,19 @@
           "home": {
             "pos": 14,
             "pts": 20,
-            "p": 22,
-            "sg": -18
+            "p": 23,
+            "sg": -19
           },
           "away": {
             "pos": 10,
-            "pts": 22,
-            "p": 22,
-            "sg": -8
+            "pts": 25,
+            "p": 23,
+            "sg": -7
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Pari NN em 14o (20pts) vs Rostov em 10o (22pts).",
+          "info": "Pari NN em 14o (20pts) vs Rostov em 10o (25pts).",
           "reliability": "8.5"
         }
       },
@@ -23226,7 +23226,7 @@
         },
         "standings": {
           "home": {
-            "pos": 4,
+            "pos": 5,
             "pts": 10,
             "p": 6,
             "sg": 4
@@ -23240,7 +23240,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Seoul E-Land FC em 4o (10pts) vs Suwon FC em 3o (12pts). Suwon FC: 80% vitorias recentes.",
+          "info": "Seoul E-Land FC em 5o (10pts) vs Suwon FC em 3o (12pts). Suwon FC: 80% vitorias recentes.",
           "reliability": "8.5"
         }
       },
@@ -23463,7 +23463,7 @@
             "sg": -2
           },
           "away": {
-            "pos": 6,
+            "pos": 8,
             "pts": 9,
             "p": 5,
             "sg": 3
@@ -23471,7 +23471,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Hwaseong FC em 12o (5pts) vs Seongnam em 6o (9pts).",
+          "info": "Hwaseong FC em 12o (5pts) vs Seongnam em 8o (9pts).",
           "reliability": "8.5"
         }
       },
@@ -23534,7 +23534,7 @@
         },
         "standings": {
           "home": {
-            "pos": 5,
+            "pos": 4,
             "pts": 10,
             "p": 6,
             "sg": 0
@@ -23548,7 +23548,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Daegu FC em 5o (10pts) vs Gimpo FC em 9o (8pts).",
+          "info": "Daegu FC em 4o (10pts) vs Gimpo FC em 9o (8pts).",
           "reliability": "8.5"
         }
       },
@@ -23661,7 +23661,7 @@
       },
       "score": {
         "fullTime": {
-          "home": 2,
+          "home": 1,
           "away": 3
         }
       },
@@ -23694,7 +23694,7 @@
             "sg": -2
           },
           "away": {
-            "pos": 7,
+            "pos": 6,
             "pts": 9,
             "p": 5,
             "sg": 2
@@ -23702,7 +23702,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Ansan Greeners FC em 11o (5pts) vs Chungnam Asan em 7o (9pts).",
+          "info": "Ansan Greeners FC em 11o (5pts) vs Chungnam Asan em 6o (9pts).",
           "reliability": "8.5"
         }
       },
@@ -23765,7 +23765,7 @@
         },
         "standings": {
           "home": {
-            "pos": 8,
+            "pos": 7,
             "pts": 9,
             "p": 6,
             "sg": 2
@@ -23779,7 +23779,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Paju Frontier FC em 8o (9pts) vs Gimhae City em 17o (0pts). Gimhae City: 0% vitorias recentes.",
+          "info": "Paju Frontier FC em 7o (9pts) vs Gimhae City em 17o (0pts). Gimhae City: 0% vitorias recentes.",
           "reliability": "8.5"
         }
       },
@@ -24387,7 +24387,7 @@
             "sg": 14
           },
           "away": {
-            "pos": 12,
+            "pos": 13,
             "pts": 24,
             "p": 26,
             "sg": -20
@@ -24395,7 +24395,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Bangkok Utd em 3o (45pts) vs Sukhothai em 12o (24pts).",
+          "info": "Bangkok Utd em 3o (45pts) vs Sukhothai em 13o (24pts).",
           "reliability": "8.5"
         }
       },
@@ -24643,8 +24643,8 @@
     {
       "id": 15217132,
       "utcDate": "2026-04-05T11:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 1032,
@@ -24662,8 +24662,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -24691,19 +24691,19 @@
           "home": {
             "pos": 15,
             "pts": 18,
-            "p": 25,
-            "sg": -24
+            "p": 26,
+            "sg": -25
           },
           "away": {
-            "pos": 10,
-            "pts": 29,
-            "p": 24,
-            "sg": -4
+            "pos": 9,
+            "pts": 32,
+            "p": 25,
+            "sg": -3
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Muang Thong Utd em 15o (18pts) vs Chiangrai Utd em 10o (29pts).",
+          "info": "Muang Thong Utd em 15o (18pts) vs Chiangrai Utd em 9o (32pts).",
           "reliability": "8.5"
         }
       },
@@ -24720,8 +24720,8 @@
     {
       "id": 15217130,
       "utcDate": "2026-04-05T11:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 1032,
@@ -24739,8 +24739,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -24766,21 +24766,21 @@
         },
         "standings": {
           "home": {
-            "pos": 9,
+            "pos": 10,
             "pts": 31,
-            "p": 25,
-            "sg": -5
+            "p": 26,
+            "sg": -6
           },
           "away": {
             "pos": 7,
-            "pts": 32,
-            "p": 24,
-            "sg": 3
+            "pts": 35,
+            "p": 25,
+            "sg": 4
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Chonburi em 9o (31pts) vs Rayong FC em 7o (32pts).",
+          "info": "Chonburi em 10o (31pts) vs Rayong FC em 7o (35pts).",
           "reliability": "8.5"
         }
       },
@@ -24797,8 +24797,8 @@
     {
       "id": 15217129,
       "utcDate": "2026-04-05T11:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 1032,
@@ -24816,8 +24816,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -24843,21 +24843,21 @@
         },
         "standings": {
           "home": {
-            "pos": 13,
-            "pts": 23,
-            "p": 25,
+            "pos": 12,
+            "pts": 24,
+            "p": 26,
             "sg": -13
           },
           "away": {
             "pos": 8,
-            "pts": 32,
-            "p": 25,
+            "pts": 33,
+            "p": 26,
             "sg": -4
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Lamphun Warrior em 13o (23pts) vs Ayutthaya United em 8o (32pts).",
+          "info": "Lamphun Warrior em 12o (24pts) vs Ayutthaya United em 8o (33pts).",
           "reliability": "8.5"
         }
       },
@@ -26338,7 +26338,7 @@
       "id": 14605949,
       "utcDate": "2026-04-05T10:00:00+00:00",
       "status": "IN_PLAY",
-      "minute": "1st half",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 1127,
@@ -26356,7 +26356,7 @@
       },
       "score": {
         "fullTime": {
-          "home": 1,
+          "home": 2,
           "away": 0
         }
       },
@@ -26386,13 +26386,13 @@
             "pos": 5,
             "pts": 44,
             "p": 25,
-            "sg": 20
+            "sg": 21
           },
           "away": {
             "pos": 12,
             "pts": 26,
             "p": 25,
-            "sg": -17
+            "sg": -18
           }
         },
         "h2h": [],
@@ -26415,7 +26415,7 @@
       "id": 14605953,
       "utcDate": "2026-04-05T10:00:00+00:00",
       "status": "IN_PLAY",
-      "minute": "1st half",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 1127,
@@ -27800,8 +27800,8 @@
     {
       "id": 15038440,
       "utcDate": "2026-04-05T09:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "Halftime",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 21791,
@@ -27819,7 +27819,7 @@
       },
       "score": {
         "fullTime": {
-          "home": 0,
+          "home": 1,
           "away": 2
         }
       },
@@ -27833,8 +27833,8 @@
             "D",
             "D",
             "D",
-            "V",
-            "D"
+            "D",
+            "V"
           ],
           "away": [
             "-",
@@ -27849,13 +27849,13 @@
             "pos": 4,
             "pts": 0,
             "p": 2,
-            "sg": -10
+            "sg": -9
           },
           "away": {
             "pos": 1,
             "pts": 6,
             "p": 2,
-            "sg": 4
+            "sg": 3
           }
         },
         "h2h": [],
@@ -27877,8 +27877,8 @@
     {
       "id": 15038441,
       "utcDate": "2026-04-05T09:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "Halftime",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 21791,
@@ -27897,7 +27897,7 @@
       "score": {
         "fullTime": {
           "home": 0,
-          "away": 2
+          "away": 5
         }
       },
       "inteligencia": {
@@ -27926,13 +27926,13 @@
             "pos": 4,
             "pts": 0,
             "p": 2,
-            "sg": -8
+            "sg": -11
           },
           "away": {
             "pos": 1,
             "pts": 6,
             "p": 2,
-            "sg": 7
+            "sg": 10
           }
         },
         "h2h": [],
@@ -28493,8 +28493,8 @@
     {
       "id": 14530101,
       "utcDate": "2026-04-05T11:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 709,
@@ -28512,8 +28512,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -28540,20 +28540,20 @@
         "standings": {
           "home": {
             "pos": 10,
-            "pts": 21,
-            "p": 25,
+            "pts": 22,
+            "p": 26,
             "sg": -27
           },
           "away": {
             "pos": 11,
-            "pts": 16,
-            "p": 25,
+            "pts": 17,
+            "p": 26,
             "sg": -19
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Kəpəz em 10o (21pts) vs Qəbələ em 11o (16pts).",
+          "info": "Kəpəz em 10o (22pts) vs Qəbələ em 11o (17pts).",
           "reliability": "8.5"
         }
       },
@@ -28924,13 +28924,13 @@
         },
         "standings": {
           "home": {
-            "pos": 4,
+            "pos": 3,
             "pts": 4,
             "p": 2,
             "sg": 2
           },
           "away": {
-            "pos": 11,
+            "pos": 13,
             "pts": 1,
             "p": 2,
             "sg": -2
@@ -28938,7 +28938,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Arsenal  em 4o (4pts) vs Naftan em 11o (1pts).",
+          "info": "Arsenal  em 3o (4pts) vs Naftan em 13o (1pts).",
           "reliability": "8.5"
         }
       },
@@ -29007,7 +29007,7 @@
             "sg": -3
           },
           "away": {
-            "pos": 6,
+            "pos": 7,
             "pts": 3,
             "p": 2,
             "sg": 1
@@ -29015,7 +29015,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Dynamo Brest em 16o (0pts) vs Torpedo-BelAZ em 6o (3pts).",
+          "info": "Dynamo Brest em 16o (0pts) vs Torpedo-BelAZ em 7o (3pts).",
           "reliability": "8.5"
         }
       },
@@ -29084,7 +29084,7 @@
             "sg": 2
           },
           "away": {
-            "pos": 9,
+            "pos": 12,
             "pts": 1,
             "p": 2,
             "sg": -2
@@ -29092,7 +29092,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Neman em 5o (4pts) vs Vitebsk em 9o (1pts).",
+          "info": "Neman em 5o (4pts) vs Vitebsk em 12o (1pts).",
           "reliability": "8.5"
         }
       },
@@ -29155,7 +29155,7 @@
         },
         "standings": {
           "home": {
-            "pos": 3,
+            "pos": 6,
             "pts": 4,
             "p": 2,
             "sg": 1
@@ -29169,7 +29169,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "ML Vitebsk em 3o (4pts) vs Isloch em 2o (4pts).",
+          "info": "ML Vitebsk em 6o (4pts) vs Isloch em 2o (4pts).",
           "reliability": "8.5"
         }
       },
@@ -29238,7 +29238,7 @@
             "sg": 3
           },
           "away": {
-            "pos": 7,
+            "pos": 8,
             "pts": 3,
             "p": 2,
             "sg": -1
@@ -29246,7 +29246,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Dinamo Minsk em 1o (6pts) vs Belshina Bobruisk em 7o (3pts).",
+          "info": "Dinamo Minsk em 1o (6pts) vs Belshina Bobruisk em 8o (3pts).",
           "reliability": "8.5"
         }
       },
@@ -29263,8 +29263,8 @@
     {
       "id": 15835254,
       "utcDate": "2026-04-05T10:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 169,
@@ -29282,8 +29282,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 2,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -29309,21 +29309,21 @@
         },
         "standings": {
           "home": {
-            "pos": 12,
-            "pts": 1,
-            "p": 1,
-            "sg": 0
+            "pos": 4,
+            "pts": 4,
+            "p": 2,
+            "sg": 2
           },
           "away": {
-            "pos": 8,
+            "pos": 11,
             "pts": 1,
-            "p": 1,
-            "sg": 0
+            "p": 2,
+            "sg": -2
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Minsk em 12o (1pts) vs Gomel em 8o (1pts).",
+          "info": "Minsk em 4o (4pts) vs Gomel em 11o (1pts).",
           "reliability": "8.5"
         }
       },
@@ -31163,7 +31163,7 @@
             "sg": -3
           },
           "away": {
-            "pos": 11,
+            "pos": 10,
             "pts": 34,
             "p": 28,
             "sg": 1
@@ -31171,7 +31171,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Lokomotiv Plovdiv em 5o (44pts) vs Lokomotiv Sofia em 11o (34pts).",
+          "info": "Lokomotiv Plovdiv em 5o (44pts) vs Lokomotiv Sofia em 10o (34pts).",
           "reliability": "8.5"
         }
       },
@@ -31311,7 +31311,7 @@
         },
         "standings": {
           "home": {
-            "pos": 8,
+            "pos": 9,
             "pts": 36,
             "p": 28,
             "sg": 0
@@ -31325,7 +31325,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Botev Plovdiv em 8o (36pts) vs Spartak Varna em 13o (23pts).",
+          "info": "Botev Plovdiv em 9o (36pts) vs Spartak Varna em 13o (23pts).",
           "reliability": "8.5"
         }
       },
@@ -31419,8 +31419,8 @@
     {
       "id": 14598745,
       "utcDate": "2026-04-05T11:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 247,
@@ -31438,8 +31438,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -31467,19 +31467,19 @@
           "home": {
             "pos": 6,
             "pts": 43,
-            "p": 27,
-            "sg": 13
+            "p": 28,
+            "sg": 12
           },
           "away": {
-            "pos": 9,
-            "pts": 35,
-            "p": 27,
-            "sg": 2
+            "pos": 8,
+            "pts": 38,
+            "p": 28,
+            "sg": 3
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Cherno More em 6o (43pts) vs Slavia em 9o (35pts).",
+          "info": "Cherno More em 6o (43pts) vs Slavia em 8o (38pts).",
           "reliability": "8.5"
         }
       },
@@ -32805,8 +32805,8 @@
     {
       "id": 14225241,
       "utcDate": "2026-04-05T08:15:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 205,
@@ -32882,8 +32882,8 @@
     {
       "id": 14225247,
       "utcDate": "2026-04-05T08:30:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 205,
@@ -37117,8 +37117,8 @@
     {
       "id": 14108278,
       "utcDate": "2026-04-05T11:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 491,
@@ -37136,8 +37136,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -37194,8 +37194,8 @@
     {
       "id": 15754718,
       "utcDate": "2026-04-05T11:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 42,
@@ -37213,8 +37213,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -39427,8 +39427,8 @@
     {
       "id": 14215006,
       "utcDate": "2026-04-05T08:30:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 1015,
@@ -39446,7 +39446,7 @@
       },
       "score": {
         "fullTime": {
-          "home": 1,
+          "home": 3,
           "away": 2
         }
       },
@@ -41737,8 +41737,8 @@
     {
       "id": 14068723,
       "utcDate": "2026-04-05T09:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 2292,
@@ -41756,8 +41756,8 @@
       },
       "score": {
         "fullTime": {
-          "home": 0,
-          "away": 1
+          "home": 1,
+          "away": 2
         }
       },
       "inteligencia": {
@@ -41814,8 +41814,8 @@
     {
       "id": 14068728,
       "utcDate": "2026-04-05T11:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 2292,
@@ -41833,8 +41833,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -44510,7 +44510,7 @@
       "id": 15635546,
       "utcDate": "2026-04-05T10:00:00+00:00",
       "status": "IN_PLAY",
-      "minute": "1st half",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 682,
@@ -44528,8 +44528,8 @@
       },
       "score": {
         "fullTime": {
-          "home": 0,
-          "away": 0
+          "home": 1,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -44586,8 +44586,8 @@
     {
       "id": 15635529,
       "utcDate": "2026-04-05T11:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 682,
@@ -44605,8 +44605,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -50362,7 +50362,7 @@
       "id": 15820475,
       "utcDate": "2026-04-05T10:00:00+00:00",
       "status": "IN_PLAY",
-      "minute": "1st half",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 204,
@@ -50381,7 +50381,7 @@
       "score": {
         "fullTime": {
           "home": 0,
-          "away": 0
+          "away": 3
         }
       },
       "inteligencia": {
@@ -50438,8 +50438,8 @@
     {
       "id": 15820484,
       "utcDate": "2026-04-05T11:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 204,
@@ -50457,8 +50457,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 2,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -55675,7 +55675,7 @@
       "id": 14090598,
       "utcDate": "2026-04-05T10:00:00+00:00",
       "status": "IN_PLAY",
-      "minute": "1st half",
+      "minute": "Halftime",
       "venue": "",
       "competition": {
         "id": 218,
@@ -56368,7 +56368,7 @@
       "id": 15485523,
       "utcDate": "2026-04-05T10:00:00+00:00",
       "status": "IN_PLAY",
-      "minute": "1st half",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 626,
@@ -56386,8 +56386,8 @@
       },
       "score": {
         "fullTime": {
-          "home": 0,
-          "away": 0
+          "home": 1,
+          "away": 2
         }
       },
       "inteligencia": {
@@ -56444,8 +56444,8 @@
     {
       "id": 15485529,
       "utcDate": "2026-04-05T11:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 626,
@@ -56463,8 +56463,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -56521,8 +56521,8 @@
     {
       "id": 15485520,
       "utcDate": "2026-04-05T11:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 626,
@@ -56540,8 +56540,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -56598,8 +56598,8 @@
     {
       "id": 15485532,
       "utcDate": "2026-04-05T11:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 626,
@@ -56617,8 +56617,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 2,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -61680,8 +61680,8 @@
     {
       "id": 14109868,
       "utcDate": "2026-04-05T11:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 52,
@@ -61699,8 +61699,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -61727,20 +61727,20 @@
         "standings": {
           "home": {
             "pos": 18,
-            "pts": 17,
-            "p": 27,
+            "pts": 18,
+            "p": 28,
             "sg": -23
           },
           "away": {
             "pos": 11,
-            "pts": 30,
-            "p": 26,
+            "pts": 31,
+            "p": 27,
             "sg": -4
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Karagümrük em 18o (17pts) vs Rizespor em 11o (30pts).",
+          "info": "Karagümrük em 18o (18pts) vs Rizespor em 11o (31pts).",
           "reliability": "8.5"
         }
       },
@@ -61757,8 +61757,8 @@
     {
       "id": 14109861,
       "utcDate": "2026-04-05T11:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 52,
@@ -61776,8 +61776,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -61804,20 +61804,20 @@
         "standings": {
           "home": {
             "pos": 7,
-            "pts": 35,
-            "p": 26,
+            "pts": 36,
+            "p": 27,
             "sg": -2
           },
           "away": {
             "pos": 12,
-            "pts": 30,
-            "p": 27,
+            "pts": 31,
+            "p": 28,
             "sg": -8
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Samsunspor em 7o (35pts) vs Konyaspor em 12o (30pts).",
+          "info": "Samsunspor em 7o (36pts) vs Konyaspor em 12o (31pts).",
           "reliability": "8.5"
         }
       },
@@ -67270,7 +67270,7 @@
         },
         "standings": {
           "home": {
-            "pos": 14,
+            "pos": 15,
             "pts": 29,
             "p": 28,
             "sg": -2
@@ -67284,7 +67284,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Dresden em 14o (29pts) vs Hertha em 6o (47pts).",
+          "info": "Dresden em 15o (29pts) vs Hertha em 6o (47pts).",
           "reliability": "8.5"
         }
       },
@@ -67301,8 +67301,8 @@
     {
       "id": 14065501,
       "utcDate": "2026-04-05T11:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 44,
@@ -67320,239 +67320,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
-        }
-      },
-      "inteligencia": {
-        "clubelo": {
-          "home_elo": "N/A",
-          "away_elo": "N/A"
-        },
-        "recent_form": {
-          "home": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
-          ],
-          "away": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
-          ]
-        },
-        "standings": {
-          "home": {
-            "pos": 15,
-            "pts": 29,
-            "p": 27,
-            "sg": -15
-          },
-          "away": {
-            "pos": 9,
-            "pts": 36,
-            "p": 27,
-            "sg": 0
-          }
-        },
-        "h2h": [],
-        "stats": {
-          "info": "Braunschweig em 15o (29pts) vs Nürnberg em 9o (36pts).",
-          "reliability": "8.5"
-        }
-      },
-      "_sofascore": {
-        "homeTeamId": 2557,
-        "awayTeamId": 2523,
-        "tournamentId": 44,
-        "seasonYear": "25/26",
-        "slug": "eintracht-braunschweig-1-fc-nurnberg",
-        "eventId": 14065501,
-        "customId": "yabshbb"
-      }
-    },
-    {
-      "id": 14065500,
-      "utcDate": "2026-04-05T11:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
-      "venue": "",
-      "competition": {
-        "id": 44,
-        "name": "2. Bundesliga"
-      },
-      "homeTeam": {
-        "id": 2530,
-        "name": "FC Schalke 04",
-        "shortName": "Schalke"
-      },
-      "awayTeam": {
-        "id": 2553,
-        "name": "Karlsruher SC",
-        "shortName": "Karlsruhe"
-      },
-      "score": {
-        "fullTime": {
-          "home": null,
-          "away": null
-        }
-      },
-      "inteligencia": {
-        "clubelo": {
-          "home_elo": "N/A",
-          "away_elo": "N/A"
-        },
-        "recent_form": {
-          "home": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
-          ],
-          "away": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
-          ]
-        },
-        "standings": {
-          "home": {
-            "pos": 1,
-            "pts": 52,
-            "p": 27,
-            "sg": 14
-          },
-          "away": {
-            "pos": 8,
-            "pts": 37,
-            "p": 27,
-            "sg": -8
-          }
-        },
-        "h2h": [],
-        "stats": {
-          "info": "Schalke em 1o (52pts) vs Karlsruhe em 8o (37pts).",
-          "reliability": "8.5"
-        }
-      },
-      "_sofascore": {
-        "homeTeamId": 2530,
-        "awayTeamId": 2553,
-        "tournamentId": 44,
-        "seasonYear": "25/26",
-        "slug": "karlsruher-sc-fc-schalke-04",
-        "eventId": 14065500,
-        "customId": "Fabsdbb"
-      }
-    },
-    {
-      "id": 14065495,
-      "utcDate": "2026-04-05T11:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
-      "venue": "",
-      "competition": {
-        "id": 44,
-        "name": "2. Bundesliga"
-      },
-      "homeTeam": {
-        "id": 2541,
-        "name": "Hannover 96",
-        "shortName": "Hannover"
-      },
-      "awayTeam": {
-        "id": 2598,
-        "name": "SV 07 Elversberg",
-        "shortName": "Elversberg"
-      },
-      "score": {
-        "fullTime": {
-          "home": null,
-          "away": null
-        }
-      },
-      "inteligencia": {
-        "clubelo": {
-          "home_elo": "N/A",
-          "away_elo": "N/A"
-        },
-        "recent_form": {
-          "home": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
-          ],
-          "away": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
-          ]
-        },
-        "standings": {
-          "home": {
-            "pos": 5,
-            "pts": 49,
-            "p": 27,
-            "sg": 12
-          },
-          "away": {
-            "pos": 2,
-            "pts": 51,
-            "p": 27,
-            "sg": 18
-          }
-        },
-        "h2h": [],
-        "stats": {
-          "info": "Hannover em 5o (49pts) vs Elversberg em 2o (51pts).",
-          "reliability": "8.5"
-        }
-      },
-      "_sofascore": {
-        "homeTeamId": 2541,
-        "awayTeamId": 2598,
-        "tournamentId": 44,
-        "seasonYear": "25/26",
-        "slug": "sv-07-elversberg-hannover-96",
-        "eventId": 14065495,
-        "customId": "QabsYbb"
-      }
-    },
-    {
-      "id": 14065491,
-      "utcDate": "2026-04-05T11:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
-      "venue": "",
-      "competition": {
-        "id": 44,
-        "name": "2. Bundesliga"
-      },
-      "homeTeam": {
-        "id": 2573,
-        "name": "Holstein Kiel",
-        "shortName": "Kiel"
-      },
-      "awayTeam": {
-        "id": 2590,
-        "name": "Preußen Münster",
-        "shortName": "Münster"
-      },
-      "score": {
-        "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -67579,57 +67348,211 @@
         "standings": {
           "home": {
             "pos": 17,
-            "pts": 28,
-            "p": 27,
-            "sg": -8
+            "pts": 29,
+            "p": 28,
+            "sg": -16
           },
           "away": {
-            "pos": 18,
-            "pts": 26,
-            "p": 27,
-            "sg": -16
+            "pos": 8,
+            "pts": 39,
+            "p": 28,
+            "sg": 1
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Kiel em 17o (28pts) vs Münster em 18o (26pts).",
+          "info": "Braunschweig em 17o (29pts) vs Nürnberg em 8o (39pts).",
           "reliability": "8.5"
         }
       },
       "_sofascore": {
-        "homeTeamId": 2573,
-        "awayTeamId": 2590,
+        "homeTeamId": 2557,
+        "awayTeamId": 2523,
         "tournamentId": 44,
         "seasonYear": "25/26",
-        "slug": "preussen-munster-holstein-kiel",
-        "eventId": 14065491,
-        "customId": "ybbsPbb"
+        "slug": "eintracht-braunschweig-1-fc-nurnberg",
+        "eventId": 14065501,
+        "customId": "yabshbb"
       }
     },
     {
-      "id": 14065497,
+      "id": 14065500,
       "utcDate": "2026-04-05T11:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 44,
         "name": "2. Bundesliga"
       },
       "homeTeam": {
-        "id": 2551,
-        "name": "SpVgg Greuther Fürth",
-        "shortName": "Fürth"
+        "id": 2530,
+        "name": "FC Schalke 04",
+        "shortName": "Schalke"
       },
       "awayTeam": {
-        "id": 2561,
-        "name": "SC Paderborn 07",
-        "shortName": "Paderborn"
+        "id": 2553,
+        "name": "Karlsruher SC",
+        "shortName": "Karlsruhe"
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
+        }
+      },
+      "inteligencia": {
+        "clubelo": {
+          "home_elo": "N/A",
+          "away_elo": "N/A"
+        },
+        "recent_form": {
+          "home": [
+            "-",
+            "-",
+            "-",
+            "-",
+            "-"
+          ],
+          "away": [
+            "-",
+            "-",
+            "-",
+            "-",
+            "-"
+          ]
+        },
+        "standings": {
+          "home": {
+            "pos": 1,
+            "pts": 55,
+            "p": 28,
+            "sg": 15
+          },
+          "away": {
+            "pos": 9,
+            "pts": 37,
+            "p": 28,
+            "sg": -9
+          }
+        },
+        "h2h": [],
+        "stats": {
+          "info": "Schalke em 1o (55pts) vs Karlsruhe em 9o (37pts).",
+          "reliability": "8.5"
+        }
+      },
+      "_sofascore": {
+        "homeTeamId": 2530,
+        "awayTeamId": 2553,
+        "tournamentId": 44,
+        "seasonYear": "25/26",
+        "slug": "karlsruher-sc-fc-schalke-04",
+        "eventId": 14065500,
+        "customId": "Fabsdbb"
+      }
+    },
+    {
+      "id": 14065495,
+      "utcDate": "2026-04-05T11:30:00+00:00",
+      "status": "IN_PLAY",
+      "minute": "1st half",
+      "venue": "",
+      "competition": {
+        "id": 44,
+        "name": "2. Bundesliga"
+      },
+      "homeTeam": {
+        "id": 2541,
+        "name": "Hannover 96",
+        "shortName": "Hannover"
+      },
+      "awayTeam": {
+        "id": 2598,
+        "name": "SV 07 Elversberg",
+        "shortName": "Elversberg"
+      },
+      "score": {
+        "fullTime": {
+          "home": 0,
+          "away": 0
+        }
+      },
+      "inteligencia": {
+        "clubelo": {
+          "home_elo": "N/A",
+          "away_elo": "N/A"
+        },
+        "recent_form": {
+          "home": [
+            "-",
+            "-",
+            "-",
+            "-",
+            "-"
+          ],
+          "away": [
+            "-",
+            "-",
+            "-",
+            "-",
+            "-"
+          ]
+        },
+        "standings": {
+          "home": {
+            "pos": 5,
+            "pts": 50,
+            "p": 28,
+            "sg": 12
+          },
+          "away": {
+            "pos": 2,
+            "pts": 52,
+            "p": 28,
+            "sg": 18
+          }
+        },
+        "h2h": [],
+        "stats": {
+          "info": "Hannover em 5o (50pts) vs Elversberg em 2o (52pts).",
+          "reliability": "8.5"
+        }
+      },
+      "_sofascore": {
+        "homeTeamId": 2541,
+        "awayTeamId": 2598,
+        "tournamentId": 44,
+        "seasonYear": "25/26",
+        "slug": "sv-07-elversberg-hannover-96",
+        "eventId": 14065495,
+        "customId": "QabsYbb"
+      }
+    },
+    {
+      "id": 14065491,
+      "utcDate": "2026-04-05T11:30:00+00:00",
+      "status": "IN_PLAY",
+      "minute": "1st half",
+      "venue": "",
+      "competition": {
+        "id": 44,
+        "name": "2. Bundesliga"
+      },
+      "homeTeam": {
+        "id": 2573,
+        "name": "Holstein Kiel",
+        "shortName": "Kiel"
+      },
+      "awayTeam": {
+        "id": 2590,
+        "name": "Preußen Münster",
+        "shortName": "Münster"
+      },
+      "score": {
+        "fullTime": {
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -67657,19 +67580,96 @@
           "home": {
             "pos": 16,
             "pts": 29,
-            "p": 27,
+            "p": 28,
+            "sg": -8
+          },
+          "away": {
+            "pos": 18,
+            "pts": 27,
+            "p": 28,
+            "sg": -16
+          }
+        },
+        "h2h": [],
+        "stats": {
+          "info": "Kiel em 16o (29pts) vs Münster em 18o (27pts).",
+          "reliability": "8.5"
+        }
+      },
+      "_sofascore": {
+        "homeTeamId": 2573,
+        "awayTeamId": 2590,
+        "tournamentId": 44,
+        "seasonYear": "25/26",
+        "slug": "preussen-munster-holstein-kiel",
+        "eventId": 14065491,
+        "customId": "ybbsPbb"
+      }
+    },
+    {
+      "id": 14065497,
+      "utcDate": "2026-04-05T11:30:00+00:00",
+      "status": "IN_PLAY",
+      "minute": "1st half",
+      "venue": "",
+      "competition": {
+        "id": 44,
+        "name": "2. Bundesliga"
+      },
+      "homeTeam": {
+        "id": 2551,
+        "name": "SpVgg Greuther Fürth",
+        "shortName": "Fürth"
+      },
+      "awayTeam": {
+        "id": 2561,
+        "name": "SC Paderborn 07",
+        "shortName": "Paderborn"
+      },
+      "score": {
+        "fullTime": {
+          "home": 0,
+          "away": 0
+        }
+      },
+      "inteligencia": {
+        "clubelo": {
+          "home_elo": "N/A",
+          "away_elo": "N/A"
+        },
+        "recent_form": {
+          "home": [
+            "-",
+            "-",
+            "-",
+            "-",
+            "-"
+          ],
+          "away": [
+            "-",
+            "-",
+            "-",
+            "-",
+            "-"
+          ]
+        },
+        "standings": {
+          "home": {
+            "pos": 14,
+            "pts": 30,
+            "p": 28,
             "sg": -19
           },
           "away": {
             "pos": 3,
-            "pts": 51,
-            "p": 27,
+            "pts": 52,
+            "p": 28,
             "sg": 14
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Fürth em 16o (29pts) vs Paderborn em 3o (51pts).",
+          "info": "Fürth em 14o (30pts) vs Paderborn em 3o (52pts).",
           "reliability": "8.5"
         }
       },
@@ -70356,7 +70356,7 @@
             "sg": -1
           },
           "away": {
-            "pos": 5,
+            "pos": 6,
             "pts": 6,
             "p": 4,
             "sg": -3
@@ -70364,7 +70364,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Taishan em 11o (0pts) vs Dalian Yingbo em 5o (6pts).",
+          "info": "Taishan em 11o (0pts) vs Dalian Yingbo em 6o (6pts).",
           "reliability": "8.5"
         }
       },
@@ -70535,8 +70535,8 @@
     {
       "id": 15552482,
       "utcDate": "2026-04-05T11:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 649,
@@ -70554,8 +70554,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 3,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -70581,21 +70581,21 @@
         },
         "standings": {
           "home": {
-            "pos": 6,
-            "pts": 3,
-            "p": 3,
-            "sg": -4
+            "pos": 5,
+            "pts": 6,
+            "p": 4,
+            "sg": -1
           },
           "away": {
-            "pos": 12,
+            "pos": 13,
             "pts": -1,
-            "p": 3,
-            "sg": 1
+            "p": 4,
+            "sg": -2
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Shenzhen em 6o (3pts) vs Three Towns em 12o (-1pts). Three Towns: 20% vitorias recentes.",
+          "info": "Shenzhen em 5o (6pts) vs Three Towns em 13o (-1pts). Three Towns: 20% vitorias recentes.",
           "reliability": "8.5"
         }
       },
@@ -70612,8 +70612,8 @@
     {
       "id": 15552480,
       "utcDate": "2026-04-05T11:35:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 649,
@@ -70631,8 +70631,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -70659,20 +70659,20 @@
         "standings": {
           "home": {
             "pos": 16,
-            "pts": -9,
-            "p": 3,
+            "pts": -8,
+            "p": 4,
             "sg": -4
           },
           "away": {
-            "pos": 15,
-            "pts": -5,
-            "p": 3,
+            "pos": 14,
+            "pts": -4,
+            "p": 4,
             "sg": 2
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Jinmen Tiger em 16o (-9pts) vs Shenhua em 15o (-5pts).",
+          "info": "Jinmen Tiger em 16o (-8pts) vs Shenhua em 14o (-4pts).",
           "reliability": "8.5"
         }
       },
@@ -71813,7 +71813,7 @@
         },
         "standings": {
           "home": {
-            "pos": 6,
+            "pos": 7,
             "pts": 40,
             "p": 27,
             "sg": 1
@@ -71827,7 +71827,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Sigma Olomouc em 6o (40pts) vs Mladá Boleslav em 11o (30pts).",
+          "info": "Sigma Olomouc em 7o (40pts) vs Mladá Boleslav em 11o (30pts).",
           "reliability": "8.5"
         }
       },
@@ -71921,8 +71921,8 @@
     {
       "id": 14036472,
       "utcDate": "2026-04-05T11:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 172,
@@ -71940,8 +71940,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -71967,21 +71967,21 @@
         },
         "standings": {
           "home": {
-            "pos": 7,
-            "pts": 37,
-            "p": 26,
-            "sg": 3
+            "pos": 6,
+            "pts": 40,
+            "p": 27,
+            "sg": 4
           },
           "away": {
             "pos": 13,
             "pts": 27,
-            "p": 26,
-            "sg": -12
+            "p": 27,
+            "sg": -13
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Hradec Králové em 7o (37pts) vs Bohemians em 13o (27pts).",
+          "info": "Hradec Králové em 6o (40pts) vs Bohemians em 13o (27pts).",
           "reliability": "8.5"
         }
       },
@@ -74129,7 +74129,7 @@
             "sg": 1
           },
           "away": {
-            "pos": 4,
+            "pos": 2,
             "pts": 14,
             "p": 7,
             "sg": 5
@@ -74137,7 +74137,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Goa em 7o (10pts) vs Bengaluru em 4o (14pts).",
+          "info": "Goa em 7o (10pts) vs Bengaluru em 2o (14pts).",
           "reliability": "8.5"
         }
       },
@@ -74154,8 +74154,8 @@
     {
       "id": 15508345,
       "utcDate": "2026-04-05T11:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 1900,
@@ -74173,8 +74173,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -74201,20 +74201,20 @@
         "standings": {
           "home": {
             "pos": 12,
-            "pts": 2,
-            "p": 5,
+            "pts": 3,
+            "p": 6,
             "sg": -6
           },
           "away": {
             "pos": 13,
-            "pts": 1,
-            "p": 6,
+            "pts": 2,
+            "p": 7,
             "sg": -7
           }
         },
         "h2h": [],
         "stats": {
-          "info": "SC Delhi em 12o (2pts) vs Kerala em 13o (1pts).",
+          "info": "SC Delhi em 12o (3pts) vs Kerala em 13o (2pts).",
           "reliability": "8.5"
         }
       },
@@ -77902,7 +77902,7 @@
             "sg": -12
           },
           "away": {
-            "pos": 4,
+            "pos": 5,
             "pts": 42,
             "p": 23,
             "sg": 11
@@ -77910,7 +77910,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Akron  em 11o (22pts) vs CSKA em 4o (42pts).",
+          "info": "Akron  em 11o (22pts) vs CSKA em 5o (42pts).",
           "reliability": "8.5"
         }
       },
@@ -78127,7 +78127,7 @@
         },
         "standings": {
           "home": {
-            "pos": 9,
+            "pos": 8,
             "pts": 30,
             "p": 23,
             "sg": -2
@@ -78141,7 +78141,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Akhmat em 9o (30pts) vs Krasnodar em 1o (52pts).",
+          "info": "Akhmat em 8o (30pts) vs Krasnodar em 1o (52pts).",
           "reliability": "8.5"
         }
       },
@@ -78158,8 +78158,8 @@
     {
       "id": 14038639,
       "utcDate": "2026-04-05T11:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 203,
@@ -78177,8 +78177,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -78206,19 +78206,19 @@
           "home": {
             "pos": 14,
             "pts": 20,
-            "p": 22,
-            "sg": -18
+            "p": 23,
+            "sg": -19
           },
           "away": {
             "pos": 10,
-            "pts": 22,
-            "p": 22,
-            "sg": -8
+            "pts": 25,
+            "p": 23,
+            "sg": -7
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Pari NN em 14o (20pts) vs Rostov em 10o (22pts).",
+          "info": "Pari NN em 14o (20pts) vs Rostov em 10o (25pts).",
           "reliability": "8.5"
         }
       },
@@ -78287,7 +78287,7 @@
             "sg": -15
           },
           "away": {
-            "pos": 5,
+            "pos": 4,
             "pts": 42,
             "p": 22,
             "sg": 21
@@ -78295,7 +78295,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Dinamo Makhachkala em 12o (21pts) vs Baltika em 5o (42pts).",
+          "info": "Dinamo Makhachkala em 12o (21pts) vs Baltika em 4o (42pts).",
           "reliability": "8.5"
         }
       },
@@ -78897,7 +78897,7 @@
         },
         "standings": {
           "home": {
-            "pos": 5,
+            "pos": 4,
             "pts": 10,
             "p": 6,
             "sg": 0
@@ -78911,7 +78911,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Daegu FC em 5o (10pts) vs Gimpo FC em 9o (8pts).",
+          "info": "Daegu FC em 4o (10pts) vs Gimpo FC em 9o (8pts).",
           "reliability": "8.5"
         }
       },
@@ -79024,7 +79024,7 @@
       },
       "score": {
         "fullTime": {
-          "home": 2,
+          "home": 1,
           "away": 3
         }
       },
@@ -79057,7 +79057,7 @@
             "sg": -2
           },
           "away": {
-            "pos": 7,
+            "pos": 6,
             "pts": 9,
             "p": 5,
             "sg": 2
@@ -79065,7 +79065,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Ansan Greeners FC em 11o (5pts) vs Chungnam Asan em 7o (9pts).",
+          "info": "Ansan Greeners FC em 11o (5pts) vs Chungnam Asan em 6o (9pts).",
           "reliability": "8.5"
         }
       },
@@ -79128,7 +79128,7 @@
         },
         "standings": {
           "home": {
-            "pos": 8,
+            "pos": 7,
             "pts": 9,
             "p": 6,
             "sg": 2
@@ -79142,7 +79142,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Paju Frontier FC em 8o (9pts) vs Gimhae City em 17o (0pts). Gimhae City: 0% vitorias recentes.",
+          "info": "Paju Frontier FC em 7o (9pts) vs Gimhae City em 17o (0pts). Gimhae City: 0% vitorias recentes.",
           "reliability": "8.5"
         }
       },
@@ -79621,8 +79621,8 @@
     {
       "id": 15217132,
       "utcDate": "2026-04-05T11:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 1032,
@@ -79640,8 +79640,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -79669,19 +79669,19 @@
           "home": {
             "pos": 15,
             "pts": 18,
-            "p": 25,
-            "sg": -24
+            "p": 26,
+            "sg": -25
           },
           "away": {
-            "pos": 10,
-            "pts": 29,
-            "p": 24,
-            "sg": -4
+            "pos": 9,
+            "pts": 32,
+            "p": 25,
+            "sg": -3
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Muang Thong Utd em 15o (18pts) vs Chiangrai Utd em 10o (29pts).",
+          "info": "Muang Thong Utd em 15o (18pts) vs Chiangrai Utd em 9o (32pts).",
           "reliability": "8.5"
         }
       },
@@ -79698,8 +79698,8 @@
     {
       "id": 15217130,
       "utcDate": "2026-04-05T11:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 1032,
@@ -79717,8 +79717,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -79744,21 +79744,21 @@
         },
         "standings": {
           "home": {
-            "pos": 9,
+            "pos": 10,
             "pts": 31,
-            "p": 25,
-            "sg": -5
+            "p": 26,
+            "sg": -6
           },
           "away": {
             "pos": 7,
-            "pts": 32,
-            "p": 24,
-            "sg": 3
+            "pts": 35,
+            "p": 25,
+            "sg": 4
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Chonburi em 9o (31pts) vs Rayong FC em 7o (32pts).",
+          "info": "Chonburi em 10o (31pts) vs Rayong FC em 7o (35pts).",
           "reliability": "8.5"
         }
       },
@@ -79775,8 +79775,8 @@
     {
       "id": 15217129,
       "utcDate": "2026-04-05T11:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 1032,
@@ -79794,8 +79794,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -79821,21 +79821,21 @@
         },
         "standings": {
           "home": {
-            "pos": 13,
-            "pts": 23,
-            "p": 25,
+            "pos": 12,
+            "pts": 24,
+            "p": 26,
             "sg": -13
           },
           "away": {
             "pos": 8,
-            "pts": 32,
-            "p": 25,
+            "pts": 33,
+            "p": 26,
             "sg": -4
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Lamphun Warrior em 13o (23pts) vs Ayutthaya United em 8o (32pts).",
+          "info": "Lamphun Warrior em 12o (24pts) vs Ayutthaya United em 8o (33pts).",
           "reliability": "8.5"
         }
       },
@@ -81470,7 +81470,7 @@
       "id": 14605949,
       "utcDate": "2026-04-05T10:00:00+00:00",
       "status": "IN_PLAY",
-      "minute": "1st half",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 1127,
@@ -81488,7 +81488,7 @@
       },
       "score": {
         "fullTime": {
-          "home": 1,
+          "home": 2,
           "away": 0
         }
       },
@@ -81518,13 +81518,13 @@
             "pos": 5,
             "pts": 44,
             "p": 25,
-            "sg": 20
+            "sg": 21
           },
           "away": {
             "pos": 12,
             "pts": 26,
             "p": 25,
-            "sg": -17
+            "sg": -18
           }
         },
         "h2h": [],
@@ -81547,7 +81547,7 @@
       "id": 14605953,
       "utcDate": "2026-04-05T10:00:00+00:00",
       "status": "IN_PLAY",
-      "minute": "1st half",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 1127,
@@ -84010,8 +84010,8 @@
     {
       "id": 15038440,
       "utcDate": "2026-04-05T09:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "Halftime",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 21791,
@@ -84029,7 +84029,7 @@
       },
       "score": {
         "fullTime": {
-          "home": 0,
+          "home": 1,
           "away": 2
         }
       },
@@ -84043,8 +84043,8 @@
             "D",
             "D",
             "D",
-            "V",
-            "D"
+            "D",
+            "V"
           ],
           "away": [
             "-",
@@ -84059,13 +84059,13 @@
             "pos": 4,
             "pts": 0,
             "p": 2,
-            "sg": -10
+            "sg": -9
           },
           "away": {
             "pos": 1,
             "pts": 6,
             "p": 2,
-            "sg": 4
+            "sg": 3
           }
         },
         "h2h": [],
@@ -84164,8 +84164,8 @@
     {
       "id": 15038441,
       "utcDate": "2026-04-05T09:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "Halftime",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 21791,
@@ -84184,7 +84184,7 @@
       "score": {
         "fullTime": {
           "home": 0,
-          "away": 2
+          "away": 5
         }
       },
       "inteligencia": {
@@ -84213,13 +84213,13 @@
             "pos": 4,
             "pts": 0,
             "p": 2,
-            "sg": -8
+            "sg": -11
           },
           "away": {
             "pos": 1,
             "pts": 6,
             "p": 2,
-            "sg": 7
+            "sg": 10
           }
         },
         "h2h": [],
@@ -84318,8 +84318,8 @@
     {
       "id": 14530101,
       "utcDate": "2026-04-05T11:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 709,
@@ -84337,8 +84337,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -84365,20 +84365,20 @@
         "standings": {
           "home": {
             "pos": 10,
-            "pts": 21,
-            "p": 25,
+            "pts": 22,
+            "p": 26,
             "sg": -27
           },
           "away": {
             "pos": 11,
-            "pts": 16,
-            "p": 25,
+            "pts": 17,
+            "p": 26,
             "sg": -19
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Kəpəz em 10o (21pts) vs Qəbələ em 11o (16pts).",
+          "info": "Kəpəz em 10o (22pts) vs Qəbələ em 11o (17pts).",
           "reliability": "8.5"
         }
       },
@@ -84678,7 +84678,7 @@
             "sg": 2
           },
           "away": {
-            "pos": 9,
+            "pos": 12,
             "pts": 1,
             "p": 2,
             "sg": -2
@@ -84686,7 +84686,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Neman em 5o (4pts) vs Vitebsk em 9o (1pts).",
+          "info": "Neman em 5o (4pts) vs Vitebsk em 12o (1pts).",
           "reliability": "8.5"
         }
       },
@@ -84749,7 +84749,7 @@
         },
         "standings": {
           "home": {
-            "pos": 3,
+            "pos": 6,
             "pts": 4,
             "p": 2,
             "sg": 1
@@ -84763,7 +84763,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "ML Vitebsk em 3o (4pts) vs Isloch em 2o (4pts).",
+          "info": "ML Vitebsk em 6o (4pts) vs Isloch em 2o (4pts).",
           "reliability": "8.5"
         }
       },
@@ -84832,7 +84832,7 @@
             "sg": 3
           },
           "away": {
-            "pos": 7,
+            "pos": 8,
             "pts": 3,
             "p": 2,
             "sg": -1
@@ -84840,7 +84840,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Dinamo Minsk em 1o (6pts) vs Belshina Bobruisk em 7o (3pts).",
+          "info": "Dinamo Minsk em 1o (6pts) vs Belshina Bobruisk em 8o (3pts).",
           "reliability": "8.5"
         }
       },
@@ -84857,8 +84857,8 @@
     {
       "id": 15835254,
       "utcDate": "2026-04-05T10:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 169,
@@ -84876,8 +84876,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 2,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -84903,21 +84903,21 @@
         },
         "standings": {
           "home": {
-            "pos": 12,
-            "pts": 1,
-            "p": 1,
-            "sg": 0
+            "pos": 4,
+            "pts": 4,
+            "p": 2,
+            "sg": 2
           },
           "away": {
-            "pos": 8,
+            "pos": 11,
             "pts": 1,
-            "p": 1,
-            "sg": 0
+            "p": 2,
+            "sg": -2
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Minsk em 12o (1pts) vs Gomel em 8o (1pts).",
+          "info": "Minsk em 4o (4pts) vs Gomel em 11o (1pts).",
           "reliability": "8.5"
         }
       },
@@ -84980,7 +84980,7 @@
         },
         "standings": {
           "home": {
-            "pos": 13,
+            "pos": 10,
             "pts": 1,
             "p": 1,
             "sg": 0
@@ -84994,7 +84994,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "BATE  em 13o (1pts) vs Baranovichi em 15o (0pts).",
+          "info": "BATE  em 10o (1pts) vs Baranovichi em 15o (0pts).",
           "reliability": "8.5"
         }
       },
@@ -85057,7 +85057,7 @@
         },
         "standings": {
           "home": {
-            "pos": 11,
+            "pos": 9,
             "pts": 1,
             "p": 1,
             "sg": 0
@@ -85071,7 +85071,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Dnepr Mogilev em 11o (1pts) vs Slavia em 14o (0pts).",
+          "info": "Dnepr Mogilev em 9o (1pts) vs Slavia em 14o (0pts).",
           "reliability": "8.5"
         }
       },
@@ -87829,7 +87829,7 @@
         },
         "standings": {
           "home": {
-            "pos": 8,
+            "pos": 9,
             "pts": 36,
             "p": 28,
             "sg": 0
@@ -87843,7 +87843,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Botev Plovdiv em 8o (36pts) vs Spartak Varna em 13o (23pts).",
+          "info": "Botev Plovdiv em 9o (36pts) vs Spartak Varna em 13o (23pts).",
           "reliability": "8.5"
         }
       },
@@ -87937,8 +87937,8 @@
     {
       "id": 14598745,
       "utcDate": "2026-04-05T11:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 247,
@@ -87956,8 +87956,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -87985,19 +87985,19 @@
           "home": {
             "pos": 6,
             "pts": 43,
-            "p": 27,
-            "sg": 13
+            "p": 28,
+            "sg": 12
           },
           "away": {
-            "pos": 9,
-            "pts": 35,
-            "p": 27,
-            "sg": 2
+            "pos": 8,
+            "pts": 38,
+            "p": 28,
+            "sg": 3
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Cherno More em 6o (43pts) vs Slavia em 9o (35pts).",
+          "info": "Cherno More em 6o (43pts) vs Slavia em 8o (38pts).",
           "reliability": "8.5"
         }
       },
@@ -89477,8 +89477,8 @@
     {
       "id": 14225241,
       "utcDate": "2026-04-05T08:15:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 205,
@@ -89554,8 +89554,8 @@
     {
       "id": 14225247,
       "utcDate": "2026-04-05T08:30:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 205,
@@ -91017,8 +91017,8 @@
     {
       "id": 14108278,
       "utcDate": "2026-04-05T11:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 491,
@@ -91036,8 +91036,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -91325,8 +91325,8 @@
     {
       "id": 15754718,
       "utcDate": "2026-04-05T11:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 42,
@@ -91344,8 +91344,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -94944,8 +94944,8 @@
     {
       "id": 14215006,
       "utcDate": "2026-04-05T08:30:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 1015,
@@ -94963,7 +94963,7 @@
       },
       "score": {
         "fullTime": {
-          "home": 1,
+          "home": 3,
           "away": 2
         }
       },
@@ -96638,8 +96638,8 @@
     {
       "id": 14068723,
       "utcDate": "2026-04-05T09:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 2292,
@@ -96657,8 +96657,8 @@
       },
       "score": {
         "fullTime": {
-          "home": 0,
-          "away": 1
+          "home": 1,
+          "away": 2
         }
       },
       "inteligencia": {
@@ -96715,8 +96715,8 @@
     {
       "id": 14068728,
       "utcDate": "2026-04-05T11:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 2292,
@@ -96734,8 +96734,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -98410,7 +98410,7 @@
       "id": 15635546,
       "utcDate": "2026-04-05T10:00:00+00:00",
       "status": "IN_PLAY",
-      "minute": "1st half",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 682,
@@ -98428,8 +98428,8 @@
       },
       "score": {
         "fullTime": {
-          "home": 0,
-          "away": 0
+          "home": 1,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -98486,8 +98486,8 @@
     {
       "id": 15635529,
       "utcDate": "2026-04-05T11:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 682,
@@ -98505,8 +98505,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -104570,7 +104570,7 @@
       "id": 15820475,
       "utcDate": "2026-04-05T10:00:00+00:00",
       "status": "IN_PLAY",
-      "minute": "1st half",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 204,
@@ -104589,7 +104589,7 @@
       "score": {
         "fullTime": {
           "home": 0,
-          "away": 0
+          "away": 3
         }
       },
       "inteligencia": {
@@ -104646,8 +104646,8 @@
     {
       "id": 15820484,
       "utcDate": "2026-04-05T11:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 204,
@@ -104665,8 +104665,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 2,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -109883,7 +109883,7 @@
       "id": 14090598,
       "utcDate": "2026-04-05T10:00:00+00:00",
       "status": "IN_PLAY",
-      "minute": "1st half",
+      "minute": "Halftime",
       "venue": "",
       "competition": {
         "id": 218,
@@ -110884,7 +110884,7 @@
       "id": 15485523,
       "utcDate": "2026-04-05T10:00:00+00:00",
       "status": "IN_PLAY",
-      "minute": "1st half",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 626,
@@ -110902,8 +110902,8 @@
       },
       "score": {
         "fullTime": {
-          "home": 0,
-          "away": 0
+          "home": 1,
+          "away": 2
         }
       },
       "inteligencia": {
@@ -110960,8 +110960,8 @@
     {
       "id": 15485529,
       "utcDate": "2026-04-05T11:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 626,
@@ -110979,8 +110979,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -111037,8 +111037,8 @@
     {
       "id": 15485520,
       "utcDate": "2026-04-05T11:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 626,
@@ -111056,8 +111056,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -111114,8 +111114,8 @@
     {
       "id": 15485532,
       "utcDate": "2026-04-05T11:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 626,
@@ -111133,8 +111133,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 2,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -113655,8 +113655,8 @@
     {
       "id": 14109868,
       "utcDate": "2026-04-05T11:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 52,
@@ -113674,8 +113674,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -113702,20 +113702,20 @@
         "standings": {
           "home": {
             "pos": 18,
-            "pts": 17,
-            "p": 27,
+            "pts": 18,
+            "p": 28,
             "sg": -23
           },
           "away": {
             "pos": 11,
-            "pts": 30,
-            "p": 26,
+            "pts": 31,
+            "p": 27,
             "sg": -4
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Karagümrük em 18o (17pts) vs Rizespor em 11o (30pts).",
+          "info": "Karagümrük em 18o (18pts) vs Rizespor em 11o (31pts).",
           "reliability": "8.5"
         }
       },
@@ -113732,8 +113732,8 @@
     {
       "id": 14109861,
       "utcDate": "2026-04-05T11:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 52,
@@ -113751,8 +113751,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -113779,20 +113779,20 @@
         "standings": {
           "home": {
             "pos": 7,
-            "pts": 35,
-            "p": 26,
+            "pts": 36,
+            "p": 27,
             "sg": -2
           },
           "away": {
             "pos": 12,
-            "pts": 30,
-            "p": 27,
+            "pts": 31,
+            "p": 28,
             "sg": -8
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Samsunspor em 7o (35pts) vs Konyaspor em 12o (30pts).",
+          "info": "Samsunspor em 7o (36pts) vs Konyaspor em 12o (31pts).",
           "reliability": "8.5"
         }
       },
@@ -116735,8 +116735,8 @@
     {
       "id": 14065501,
       "utcDate": "2026-04-05T11:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 44,
@@ -116754,239 +116754,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
-        }
-      },
-      "inteligencia": {
-        "clubelo": {
-          "home_elo": "N/A",
-          "away_elo": "N/A"
-        },
-        "recent_form": {
-          "home": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
-          ],
-          "away": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
-          ]
-        },
-        "standings": {
-          "home": {
-            "pos": 15,
-            "pts": 29,
-            "p": 27,
-            "sg": -15
-          },
-          "away": {
-            "pos": 9,
-            "pts": 36,
-            "p": 27,
-            "sg": 0
-          }
-        },
-        "h2h": [],
-        "stats": {
-          "info": "Braunschweig em 15o (29pts) vs Nürnberg em 9o (36pts).",
-          "reliability": "8.5"
-        }
-      },
-      "_sofascore": {
-        "homeTeamId": 2557,
-        "awayTeamId": 2523,
-        "tournamentId": 44,
-        "seasonYear": "25/26",
-        "slug": "eintracht-braunschweig-1-fc-nurnberg",
-        "eventId": 14065501,
-        "customId": "yabshbb"
-      }
-    },
-    {
-      "id": 14065500,
-      "utcDate": "2026-04-05T11:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
-      "venue": "",
-      "competition": {
-        "id": 44,
-        "name": "2. Bundesliga"
-      },
-      "homeTeam": {
-        "id": 2530,
-        "name": "FC Schalke 04",
-        "shortName": "Schalke"
-      },
-      "awayTeam": {
-        "id": 2553,
-        "name": "Karlsruher SC",
-        "shortName": "Karlsruhe"
-      },
-      "score": {
-        "fullTime": {
-          "home": null,
-          "away": null
-        }
-      },
-      "inteligencia": {
-        "clubelo": {
-          "home_elo": "N/A",
-          "away_elo": "N/A"
-        },
-        "recent_form": {
-          "home": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
-          ],
-          "away": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
-          ]
-        },
-        "standings": {
-          "home": {
-            "pos": 1,
-            "pts": 52,
-            "p": 27,
-            "sg": 14
-          },
-          "away": {
-            "pos": 8,
-            "pts": 37,
-            "p": 27,
-            "sg": -8
-          }
-        },
-        "h2h": [],
-        "stats": {
-          "info": "Schalke em 1o (52pts) vs Karlsruhe em 8o (37pts).",
-          "reliability": "8.5"
-        }
-      },
-      "_sofascore": {
-        "homeTeamId": 2530,
-        "awayTeamId": 2553,
-        "tournamentId": 44,
-        "seasonYear": "25/26",
-        "slug": "karlsruher-sc-fc-schalke-04",
-        "eventId": 14065500,
-        "customId": "Fabsdbb"
-      }
-    },
-    {
-      "id": 14065495,
-      "utcDate": "2026-04-05T11:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
-      "venue": "",
-      "competition": {
-        "id": 44,
-        "name": "2. Bundesliga"
-      },
-      "homeTeam": {
-        "id": 2541,
-        "name": "Hannover 96",
-        "shortName": "Hannover"
-      },
-      "awayTeam": {
-        "id": 2598,
-        "name": "SV 07 Elversberg",
-        "shortName": "Elversberg"
-      },
-      "score": {
-        "fullTime": {
-          "home": null,
-          "away": null
-        }
-      },
-      "inteligencia": {
-        "clubelo": {
-          "home_elo": "N/A",
-          "away_elo": "N/A"
-        },
-        "recent_form": {
-          "home": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
-          ],
-          "away": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
-          ]
-        },
-        "standings": {
-          "home": {
-            "pos": 5,
-            "pts": 49,
-            "p": 27,
-            "sg": 12
-          },
-          "away": {
-            "pos": 2,
-            "pts": 51,
-            "p": 27,
-            "sg": 18
-          }
-        },
-        "h2h": [],
-        "stats": {
-          "info": "Hannover em 5o (49pts) vs Elversberg em 2o (51pts).",
-          "reliability": "8.5"
-        }
-      },
-      "_sofascore": {
-        "homeTeamId": 2541,
-        "awayTeamId": 2598,
-        "tournamentId": 44,
-        "seasonYear": "25/26",
-        "slug": "sv-07-elversberg-hannover-96",
-        "eventId": 14065495,
-        "customId": "QabsYbb"
-      }
-    },
-    {
-      "id": 14065491,
-      "utcDate": "2026-04-05T11:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
-      "venue": "",
-      "competition": {
-        "id": 44,
-        "name": "2. Bundesliga"
-      },
-      "homeTeam": {
-        "id": 2573,
-        "name": "Holstein Kiel",
-        "shortName": "Kiel"
-      },
-      "awayTeam": {
-        "id": 2590,
-        "name": "Preußen Münster",
-        "shortName": "Münster"
-      },
-      "score": {
-        "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -117013,57 +116782,211 @@
         "standings": {
           "home": {
             "pos": 17,
-            "pts": 28,
-            "p": 27,
-            "sg": -8
+            "pts": 29,
+            "p": 28,
+            "sg": -16
           },
           "away": {
-            "pos": 18,
-            "pts": 26,
-            "p": 27,
-            "sg": -16
+            "pos": 8,
+            "pts": 39,
+            "p": 28,
+            "sg": 1
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Kiel em 17o (28pts) vs Münster em 18o (26pts).",
+          "info": "Braunschweig em 17o (29pts) vs Nürnberg em 8o (39pts).",
           "reliability": "8.5"
         }
       },
       "_sofascore": {
-        "homeTeamId": 2573,
-        "awayTeamId": 2590,
+        "homeTeamId": 2557,
+        "awayTeamId": 2523,
         "tournamentId": 44,
         "seasonYear": "25/26",
-        "slug": "preussen-munster-holstein-kiel",
-        "eventId": 14065491,
-        "customId": "ybbsPbb"
+        "slug": "eintracht-braunschweig-1-fc-nurnberg",
+        "eventId": 14065501,
+        "customId": "yabshbb"
       }
     },
     {
-      "id": 14065497,
+      "id": 14065500,
       "utcDate": "2026-04-05T11:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 44,
         "name": "2. Bundesliga"
       },
       "homeTeam": {
-        "id": 2551,
-        "name": "SpVgg Greuther Fürth",
-        "shortName": "Fürth"
+        "id": 2530,
+        "name": "FC Schalke 04",
+        "shortName": "Schalke"
       },
       "awayTeam": {
-        "id": 2561,
-        "name": "SC Paderborn 07",
-        "shortName": "Paderborn"
+        "id": 2553,
+        "name": "Karlsruher SC",
+        "shortName": "Karlsruhe"
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 0
+        }
+      },
+      "inteligencia": {
+        "clubelo": {
+          "home_elo": "N/A",
+          "away_elo": "N/A"
+        },
+        "recent_form": {
+          "home": [
+            "-",
+            "-",
+            "-",
+            "-",
+            "-"
+          ],
+          "away": [
+            "-",
+            "-",
+            "-",
+            "-",
+            "-"
+          ]
+        },
+        "standings": {
+          "home": {
+            "pos": 1,
+            "pts": 55,
+            "p": 28,
+            "sg": 15
+          },
+          "away": {
+            "pos": 9,
+            "pts": 37,
+            "p": 28,
+            "sg": -9
+          }
+        },
+        "h2h": [],
+        "stats": {
+          "info": "Schalke em 1o (55pts) vs Karlsruhe em 9o (37pts).",
+          "reliability": "8.5"
+        }
+      },
+      "_sofascore": {
+        "homeTeamId": 2530,
+        "awayTeamId": 2553,
+        "tournamentId": 44,
+        "seasonYear": "25/26",
+        "slug": "karlsruher-sc-fc-schalke-04",
+        "eventId": 14065500,
+        "customId": "Fabsdbb"
+      }
+    },
+    {
+      "id": 14065495,
+      "utcDate": "2026-04-05T11:30:00+00:00",
+      "status": "IN_PLAY",
+      "minute": "1st half",
+      "venue": "",
+      "competition": {
+        "id": 44,
+        "name": "2. Bundesliga"
+      },
+      "homeTeam": {
+        "id": 2541,
+        "name": "Hannover 96",
+        "shortName": "Hannover"
+      },
+      "awayTeam": {
+        "id": 2598,
+        "name": "SV 07 Elversberg",
+        "shortName": "Elversberg"
+      },
+      "score": {
+        "fullTime": {
+          "home": 0,
+          "away": 0
+        }
+      },
+      "inteligencia": {
+        "clubelo": {
+          "home_elo": "N/A",
+          "away_elo": "N/A"
+        },
+        "recent_form": {
+          "home": [
+            "-",
+            "-",
+            "-",
+            "-",
+            "-"
+          ],
+          "away": [
+            "-",
+            "-",
+            "-",
+            "-",
+            "-"
+          ]
+        },
+        "standings": {
+          "home": {
+            "pos": 5,
+            "pts": 50,
+            "p": 28,
+            "sg": 12
+          },
+          "away": {
+            "pos": 2,
+            "pts": 52,
+            "p": 28,
+            "sg": 18
+          }
+        },
+        "h2h": [],
+        "stats": {
+          "info": "Hannover em 5o (50pts) vs Elversberg em 2o (52pts).",
+          "reliability": "8.5"
+        }
+      },
+      "_sofascore": {
+        "homeTeamId": 2541,
+        "awayTeamId": 2598,
+        "tournamentId": 44,
+        "seasonYear": "25/26",
+        "slug": "sv-07-elversberg-hannover-96",
+        "eventId": 14065495,
+        "customId": "QabsYbb"
+      }
+    },
+    {
+      "id": 14065491,
+      "utcDate": "2026-04-05T11:30:00+00:00",
+      "status": "IN_PLAY",
+      "minute": "1st half",
+      "venue": "",
+      "competition": {
+        "id": 44,
+        "name": "2. Bundesliga"
+      },
+      "homeTeam": {
+        "id": 2573,
+        "name": "Holstein Kiel",
+        "shortName": "Kiel"
+      },
+      "awayTeam": {
+        "id": 2590,
+        "name": "Preußen Münster",
+        "shortName": "Münster"
+      },
+      "score": {
+        "fullTime": {
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -117091,19 +117014,96 @@
           "home": {
             "pos": 16,
             "pts": 29,
-            "p": 27,
+            "p": 28,
+            "sg": -8
+          },
+          "away": {
+            "pos": 18,
+            "pts": 27,
+            "p": 28,
+            "sg": -16
+          }
+        },
+        "h2h": [],
+        "stats": {
+          "info": "Kiel em 16o (29pts) vs Münster em 18o (27pts).",
+          "reliability": "8.5"
+        }
+      },
+      "_sofascore": {
+        "homeTeamId": 2573,
+        "awayTeamId": 2590,
+        "tournamentId": 44,
+        "seasonYear": "25/26",
+        "slug": "preussen-munster-holstein-kiel",
+        "eventId": 14065491,
+        "customId": "ybbsPbb"
+      }
+    },
+    {
+      "id": 14065497,
+      "utcDate": "2026-04-05T11:30:00+00:00",
+      "status": "IN_PLAY",
+      "minute": "1st half",
+      "venue": "",
+      "competition": {
+        "id": 44,
+        "name": "2. Bundesliga"
+      },
+      "homeTeam": {
+        "id": 2551,
+        "name": "SpVgg Greuther Fürth",
+        "shortName": "Fürth"
+      },
+      "awayTeam": {
+        "id": 2561,
+        "name": "SC Paderborn 07",
+        "shortName": "Paderborn"
+      },
+      "score": {
+        "fullTime": {
+          "home": 0,
+          "away": 0
+        }
+      },
+      "inteligencia": {
+        "clubelo": {
+          "home_elo": "N/A",
+          "away_elo": "N/A"
+        },
+        "recent_form": {
+          "home": [
+            "-",
+            "-",
+            "-",
+            "-",
+            "-"
+          ],
+          "away": [
+            "-",
+            "-",
+            "-",
+            "-",
+            "-"
+          ]
+        },
+        "standings": {
+          "home": {
+            "pos": 14,
+            "pts": 30,
+            "p": 28,
             "sg": -19
           },
           "away": {
             "pos": 3,
-            "pts": 51,
-            "p": 27,
+            "pts": 52,
+            "p": 28,
             "sg": 14
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Fürth em 16o (29pts) vs Paderborn em 3o (51pts).",
+          "info": "Fürth em 14o (30pts) vs Paderborn em 3o (52pts).",
           "reliability": "8.5"
         }
       },
@@ -119969,8 +119969,8 @@
     {
       "id": 15552482,
       "utcDate": "2026-04-05T11:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 649,
@@ -119988,8 +119988,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 3,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -120015,21 +120015,21 @@
         },
         "standings": {
           "home": {
-            "pos": 6,
-            "pts": 3,
-            "p": 3,
-            "sg": -4
+            "pos": 5,
+            "pts": 6,
+            "p": 4,
+            "sg": -1
           },
           "away": {
-            "pos": 12,
+            "pos": 13,
             "pts": -1,
-            "p": 3,
-            "sg": 1
+            "p": 4,
+            "sg": -2
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Shenzhen em 6o (3pts) vs Three Towns em 12o (-1pts). Three Towns: 20% vitorias recentes.",
+          "info": "Shenzhen em 5o (6pts) vs Three Towns em 13o (-1pts). Three Towns: 20% vitorias recentes.",
           "reliability": "8.5"
         }
       },
@@ -120046,8 +120046,8 @@
     {
       "id": 15552480,
       "utcDate": "2026-04-05T11:35:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 649,
@@ -120065,8 +120065,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -120093,20 +120093,20 @@
         "standings": {
           "home": {
             "pos": 16,
-            "pts": -9,
-            "p": 3,
+            "pts": -8,
+            "p": 4,
             "sg": -4
           },
           "away": {
-            "pos": 15,
-            "pts": -5,
-            "p": 3,
+            "pos": 14,
+            "pts": -4,
+            "p": 4,
             "sg": 2
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Jinmen Tiger em 16o (-9pts) vs Shenhua em 15o (-5pts).",
+          "info": "Jinmen Tiger em 16o (-8pts) vs Shenhua em 14o (-4pts).",
           "reliability": "8.5"
         }
       },
@@ -120739,8 +120739,8 @@
     {
       "id": 14036472,
       "utcDate": "2026-04-05T11:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 172,
@@ -120758,8 +120758,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -120785,21 +120785,21 @@
         },
         "standings": {
           "home": {
-            "pos": 7,
-            "pts": 37,
-            "p": 26,
-            "sg": 3
+            "pos": 6,
+            "pts": 40,
+            "p": 27,
+            "sg": 4
           },
           "away": {
             "pos": 13,
             "pts": 27,
-            "p": 26,
-            "sg": -12
+            "p": 27,
+            "sg": -13
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Hradec Králové em 7o (37pts) vs Bohemians em 13o (27pts).",
+          "info": "Hradec Králové em 6o (40pts) vs Bohemians em 13o (27pts).",
           "reliability": "8.5"
         }
       },
@@ -124127,8 +124127,8 @@
     {
       "id": 15508345,
       "utcDate": "2026-04-05T11:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 1900,
@@ -124146,8 +124146,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -124174,20 +124174,20 @@
         "standings": {
           "home": {
             "pos": 12,
-            "pts": 2,
-            "p": 5,
+            "pts": 3,
+            "p": 6,
             "sg": -6
           },
           "away": {
             "pos": 13,
-            "pts": 1,
-            "p": 6,
+            "pts": 2,
+            "p": 7,
             "sg": -7
           }
         },
         "h2h": [],
         "stats": {
-          "info": "SC Delhi em 12o (2pts) vs Kerala em 13o (1pts).",
+          "info": "SC Delhi em 12o (3pts) vs Kerala em 13o (2pts).",
           "reliability": "8.5"
         }
       },
@@ -126899,8 +126899,8 @@
     {
       "id": 14038639,
       "utcDate": "2026-04-05T11:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 203,
@@ -126918,8 +126918,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -126947,19 +126947,19 @@
           "home": {
             "pos": 14,
             "pts": 20,
-            "p": 22,
-            "sg": -18
+            "p": 23,
+            "sg": -19
           },
           "away": {
             "pos": 10,
-            "pts": 22,
-            "p": 22,
-            "sg": -8
+            "pts": 25,
+            "p": 23,
+            "sg": -7
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Pari NN em 14o (20pts) vs Rostov em 10o (22pts).",
+          "info": "Pari NN em 14o (20pts) vs Rostov em 10o (25pts).",
           "reliability": "8.5"
         }
       },
@@ -127028,7 +127028,7 @@
             "sg": -15
           },
           "away": {
-            "pos": 5,
+            "pos": 4,
             "pts": 42,
             "p": 22,
             "sg": 21
@@ -127036,7 +127036,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Dinamo Makhachkala em 12o (21pts) vs Baltika em 5o (42pts).",
+          "info": "Dinamo Makhachkala em 12o (21pts) vs Baltika em 4o (42pts).",
           "reliability": "8.5"
         }
       },
@@ -127182,7 +127182,7 @@
             "sg": -32
           },
           "away": {
-            "pos": 8,
+            "pos": 9,
             "pts": 30,
             "p": 22,
             "sg": -3
@@ -127190,7 +127190,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Sochi em 16o (9pts) vs Rubin em 8o (30pts).",
+          "info": "Sochi em 16o (9pts) vs Rubin em 9o (30pts).",
           "reliability": "8.5"
         }
       },
@@ -127284,8 +127284,8 @@
     {
       "id": 15217132,
       "utcDate": "2026-04-05T11:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 1032,
@@ -127303,8 +127303,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -127332,19 +127332,19 @@
           "home": {
             "pos": 15,
             "pts": 18,
-            "p": 25,
-            "sg": -24
+            "p": 26,
+            "sg": -25
           },
           "away": {
-            "pos": 10,
-            "pts": 29,
-            "p": 24,
-            "sg": -4
+            "pos": 9,
+            "pts": 32,
+            "p": 25,
+            "sg": -3
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Muang Thong Utd em 15o (18pts) vs Chiangrai Utd em 10o (29pts).",
+          "info": "Muang Thong Utd em 15o (18pts) vs Chiangrai Utd em 9o (32pts).",
           "reliability": "8.5"
         }
       },
@@ -127361,8 +127361,8 @@
     {
       "id": 15217130,
       "utcDate": "2026-04-05T11:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 1032,
@@ -127380,8 +127380,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -127407,21 +127407,21 @@
         },
         "standings": {
           "home": {
-            "pos": 9,
+            "pos": 10,
             "pts": 31,
-            "p": 25,
-            "sg": -5
+            "p": 26,
+            "sg": -6
           },
           "away": {
             "pos": 7,
-            "pts": 32,
-            "p": 24,
-            "sg": 3
+            "pts": 35,
+            "p": 25,
+            "sg": 4
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Chonburi em 9o (31pts) vs Rayong FC em 7o (32pts).",
+          "info": "Chonburi em 10o (31pts) vs Rayong FC em 7o (35pts).",
           "reliability": "8.5"
         }
       },
@@ -127438,8 +127438,8 @@
     {
       "id": 15217129,
       "utcDate": "2026-04-05T11:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 1032,
@@ -127457,8 +127457,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -127484,21 +127484,21 @@
         },
         "standings": {
           "home": {
-            "pos": 13,
-            "pts": 23,
-            "p": 25,
+            "pos": 12,
+            "pts": 24,
+            "p": 26,
             "sg": -13
           },
           "away": {
             "pos": 8,
-            "pts": 32,
-            "p": 25,
+            "pts": 33,
+            "p": 26,
             "sg": -4
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Lamphun Warrior em 13o (23pts) vs Ayutthaya United em 8o (32pts).",
+          "info": "Lamphun Warrior em 12o (24pts) vs Ayutthaya United em 8o (33pts).",
           "reliability": "8.5"
         }
       },
@@ -128055,7 +128055,7 @@
       "id": 14605949,
       "utcDate": "2026-04-05T10:00:00+00:00",
       "status": "IN_PLAY",
-      "minute": "1st half",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 1127,
@@ -128073,7 +128073,7 @@
       },
       "score": {
         "fullTime": {
-          "home": 1,
+          "home": 2,
           "away": 0
         }
       },
@@ -128103,13 +128103,13 @@
             "pos": 5,
             "pts": 44,
             "p": 25,
-            "sg": 20
+            "sg": 21
           },
           "away": {
             "pos": 12,
             "pts": 26,
             "p": 25,
-            "sg": -17
+            "sg": -18
           }
         },
         "h2h": [],
@@ -128132,7 +128132,7 @@
       "id": 14605953,
       "utcDate": "2026-04-05T10:00:00+00:00",
       "status": "IN_PLAY",
-      "minute": "1st half",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 1127,
@@ -130518,8 +130518,8 @@
     {
       "id": 14530101,
       "utcDate": "2026-04-05T11:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 709,
@@ -130537,8 +130537,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -130565,20 +130565,20 @@
         "standings": {
           "home": {
             "pos": 10,
-            "pts": 21,
-            "p": 25,
+            "pts": 22,
+            "p": 26,
             "sg": -27
           },
           "away": {
             "pos": 11,
-            "pts": 16,
-            "p": 25,
+            "pts": 17,
+            "p": 26,
             "sg": -19
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Kəpəz em 10o (21pts) vs Qəbələ em 11o (16pts).",
+          "info": "Kəpəz em 10o (22pts) vs Qəbələ em 11o (17pts).",
           "reliability": "8.5"
         }
       },
@@ -130826,8 +130826,8 @@
     {
       "id": 15835254,
       "utcDate": "2026-04-05T10:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 169,
@@ -130845,8 +130845,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 2,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -130872,21 +130872,21 @@
         },
         "standings": {
           "home": {
-            "pos": 12,
-            "pts": 1,
-            "p": 1,
-            "sg": 0
+            "pos": 4,
+            "pts": 4,
+            "p": 2,
+            "sg": 2
           },
           "away": {
-            "pos": 8,
+            "pos": 11,
             "pts": 1,
-            "p": 1,
-            "sg": 0
+            "p": 2,
+            "sg": -2
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Minsk em 12o (1pts) vs Gomel em 8o (1pts).",
+          "info": "Minsk em 4o (4pts) vs Gomel em 11o (1pts).",
           "reliability": "8.5"
         }
       },
@@ -130949,7 +130949,7 @@
         },
         "standings": {
           "home": {
-            "pos": 13,
+            "pos": 10,
             "pts": 1,
             "p": 1,
             "sg": 0
@@ -130963,7 +130963,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "BATE  em 13o (1pts) vs Baranovichi em 15o (0pts).",
+          "info": "BATE  em 10o (1pts) vs Baranovichi em 15o (0pts).",
           "reliability": "8.5"
         }
       },
@@ -131026,7 +131026,7 @@
         },
         "standings": {
           "home": {
-            "pos": 11,
+            "pos": 9,
             "pts": 1,
             "p": 1,
             "sg": 0
@@ -131040,7 +131040,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Dnepr Mogilev em 11o (1pts) vs Slavia em 14o (0pts).",
+          "info": "Dnepr Mogilev em 9o (1pts) vs Slavia em 14o (0pts).",
           "reliability": "8.5"
         }
       },
@@ -132212,8 +132212,8 @@
     {
       "id": 14598745,
       "utcDate": "2026-04-05T11:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 247,
@@ -132231,8 +132231,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -132260,19 +132260,19 @@
           "home": {
             "pos": 6,
             "pts": 43,
-            "p": 27,
-            "sg": 13
+            "p": 28,
+            "sg": 12
           },
           "away": {
-            "pos": 9,
-            "pts": 35,
-            "p": 27,
-            "sg": 2
+            "pos": 8,
+            "pts": 38,
+            "p": 28,
+            "sg": 3
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Cherno More em 6o (43pts) vs Slavia em 9o (35pts).",
+          "info": "Cherno More em 6o (43pts) vs Slavia em 8o (38pts).",
           "reliability": "8.5"
         }
       },
@@ -132495,7 +132495,7 @@
             "sg": -34
           },
           "away": {
-            "pos": 10,
+            "pos": 11,
             "pts": 34,
             "p": 27,
             "sg": -2
@@ -132503,7 +132503,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Septemvri em 15o (21pts) vs Botev Vratsa em 10o (34pts).",
+          "info": "Septemvri em 15o (21pts) vs Botev Vratsa em 11o (34pts).",
           "reliability": "8.5"
         }
       },
@@ -135677,8 +135677,8 @@
     {
       "id": 14108278,
       "utcDate": "2026-04-05T11:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 491,
@@ -135696,8 +135696,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -136062,8 +136062,8 @@
     {
       "id": 15754718,
       "utcDate": "2026-04-05T11:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 42,
@@ -136081,8 +136081,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -140451,8 +140451,8 @@
     {
       "id": 14068728,
       "utcDate": "2026-04-05T11:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 2292,
@@ -140470,8 +140470,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -140760,7 +140760,7 @@
       "id": 15635546,
       "utcDate": "2026-04-05T10:00:00+00:00",
       "status": "IN_PLAY",
-      "minute": "1st half",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 682,
@@ -140778,8 +140778,8 @@
       },
       "score": {
         "fullTime": {
-          "home": 0,
-          "away": 0
+          "home": 1,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -140836,8 +140836,8 @@
     {
       "id": 15635529,
       "utcDate": "2026-04-05T11:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 682,
@@ -140855,8 +140855,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -144687,7 +144687,7 @@
       "id": 15820475,
       "utcDate": "2026-04-05T10:00:00+00:00",
       "status": "IN_PLAY",
-      "minute": "1st half",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 204,
@@ -144706,7 +144706,7 @@
       "score": {
         "fullTime": {
           "home": 0,
-          "away": 0
+          "away": 3
         }
       },
       "inteligencia": {
@@ -144763,8 +144763,8 @@
     {
       "id": 15820484,
       "utcDate": "2026-04-05T11:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "Halftime",
       "venue": "",
       "competition": {
         "id": 204,
@@ -144782,8 +144782,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 2,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -147381,8 +147381,8 @@
     {
       "id": 14090598,
       "utcDate": "2026-04-05T10:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "Halftime",
       "venue": "",
       "competition": {
         "id": 218,
@@ -147400,8 +147400,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -147998,7 +147998,7 @@
       "id": 15485523,
       "utcDate": "2026-04-05T10:00:00+00:00",
       "status": "IN_PLAY",
-      "minute": "1st half",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 626,
@@ -148016,8 +148016,8 @@
       },
       "score": {
         "fullTime": {
-          "home": 0,
-          "away": 0
+          "home": 1,
+          "away": 2
         }
       },
       "inteligencia": {
@@ -148074,8 +148074,8 @@
     {
       "id": 15485529,
       "utcDate": "2026-04-05T11:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 626,
@@ -148093,8 +148093,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -148151,8 +148151,8 @@
     {
       "id": 15485520,
       "utcDate": "2026-04-05T11:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 626,
@@ -148170,8 +148170,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -148228,8 +148228,8 @@
     {
       "id": 15485532,
       "utcDate": "2026-04-05T11:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 626,
@@ -148247,8 +148247,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 2,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -148303,7 +148303,7 @@
       }
     }
   ],
-  "_gerado_em": "2026-04-05T10:07:02.201277Z",
+  "_gerado_em": "2026-04-05T11:50:46.913379Z",
   "_total": 1926,
   "_fonte": "sofascore.com"
 }

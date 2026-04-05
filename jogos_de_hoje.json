@@ -280,7 +280,7 @@
         },
         "standings": {
           "home": {
-            "pos": 13,
+            "pos": 14,
             "pts": 10,
             "p": 9,
             "sg": -1
@@ -294,7 +294,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Santos em 13o (10pts) vs Remo em 20o (6pts).",
+          "info": "Santos em 14o (10pts) vs Remo em 20o (6pts).",
           "reliability": "8.5"
         }
       },
@@ -440,7 +440,7 @@
             "sg": -1
           },
           "away": {
-            "pos": 6,
+            "pos": 7,
             "pts": 14,
             "p": 8,
             "sg": 5
@@ -448,7 +448,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "RB Bragantino em 11o (11pts) vs Flamengo em 6o (14pts).",
+          "info": "RB Bragantino em 11o (11pts) vs Flamengo em 7o (14pts).",
           "reliability": "8.5"
         }
       },
@@ -1743,7 +1743,7 @@
         },
         "standings": {
           "home": {
-            "pos": 9,
+            "pos": 10,
             "pts": 16,
             "p": 13,
             "sg": -1
@@ -1757,7 +1757,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Necaxa em 9o (16pts) vs Mazatlán  em 16o (11pts).",
+          "info": "Necaxa em 10o (16pts) vs Mazatlán  em 16o (11pts).",
           "reliability": "8.5"
         }
       },
@@ -1826,7 +1826,7 @@
             "sg": -1
           },
           "away": {
-            "pos": 7,
+            "pos": 8,
             "pts": 17,
             "p": 13,
             "sg": 3
@@ -1834,7 +1834,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Tijuana em 11o (15pts) vs Tigres em 7o (17pts).",
+          "info": "Tijuana em 11o (15pts) vs Tigres em 8o (17pts).",
           "reliability": "8.5"
         }
       },
@@ -3591,13 +3591,13 @@
         },
         "standings": {
           "home": {
-            "pos": 15,
+            "pos": 16,
             "pts": 1,
             "p": 2,
             "sg": -1
           },
           "away": {
-            "pos": 3,
+            "pos": 4,
             "pts": 6,
             "p": 2,
             "sg": 2
@@ -3605,7 +3605,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "São Bernardo em 15o (1pts) vs Operário-PR em 3o (6pts).",
+          "info": "São Bernardo em 16o (1pts) vs Operário-PR em 4o (6pts).",
           "reliability": "8.5"
         }
       },
@@ -6523,7 +6523,7 @@
             "sg": -1
           },
           "away": {
-            "pos": 3,
+            "pos": 4,
             "pts": 18,
             "p": 10,
             "sg": 4
@@ -6531,7 +6531,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Caracas em 11o (11pts) vs Metropolitanos em 3o (18pts).",
+          "info": "Caracas em 11o (11pts) vs Metropolitanos em 4o (18pts).",
           "reliability": "8.5"
         }
       },
@@ -10989,7 +10989,7 @@
             "sg": -2
           },
           "away": {
-            "pos": 8,
+            "pos": 9,
             "pts": 4,
             "p": 3,
             "sg": 3
@@ -10997,7 +10997,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "NY Cosmos em 7o (6pts) vs Charlotte Independence em 8o (4pts). Charlotte Independence: 60% vitorias recentes.",
+          "info": "NY Cosmos em 7o (6pts) vs Charlotte Independence em 9o (4pts). Charlotte Independence: 60% vitorias recentes.",
           "reliability": "8.5"
         }
       },
@@ -29802,8 +29802,8 @@
     {
       "id": 15235504,
       "utcDate": "2026-04-04T21:30:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 325,
@@ -29821,7 +29821,7 @@
       },
       "score": {
         "fullTime": {
-          "home": 3,
+          "home": 4,
           "away": 1
         }
       },
@@ -29851,13 +29851,13 @@
             "pos": 2,
             "pts": 20,
             "p": 10,
-            "sg": 7
+            "sg": 8
           },
           "away": {
             "pos": 18,
             "pts": 7,
             "p": 10,
-            "sg": -7
+            "sg": -8
           }
         },
         "h2h": [],
@@ -29879,8 +29879,8 @@
     {
       "id": 15235507,
       "utcDate": "2026-04-04T23:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 325,
@@ -29898,8 +29898,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -29925,21 +29925,21 @@
         },
         "standings": {
           "home": {
-            "pos": 7,
-            "pts": 14,
-            "p": 9,
+            "pos": 6,
+            "pts": 15,
+            "p": 10,
             "sg": 1
           },
           "away": {
             "pos": 3,
-            "pts": 19,
-            "p": 9,
+            "pts": 20,
+            "p": 10,
             "sg": 6
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Coritiba em 7o (14pts) vs Fluminense em 3o (19pts).",
+          "info": "Coritiba em 6o (15pts) vs Fluminense em 3o (20pts).",
           "reliability": "8.5"
         }
       },
@@ -29956,8 +29956,8 @@
     {
       "id": 15235514,
       "utcDate": "2026-04-05T00:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 325,
@@ -29975,8 +29975,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -30003,20 +30003,20 @@
         "standings": {
           "home": {
             "pos": 8,
-            "pts": 12,
-            "p": 9,
+            "pts": 13,
+            "p": 10,
             "sg": 0
           },
           "away": {
-            "pos": 15,
-            "pts": 9,
-            "p": 8,
+            "pos": 12,
+            "pts": 10,
+            "p": 9,
             "sg": -4
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Vasco em 8o (12pts) vs Botafogo em 15o (9pts).",
+          "info": "Vasco em 8o (13pts) vs Botafogo em 12o (10pts).",
           "reliability": "8.5"
         }
       },
@@ -32959,8 +32959,8 @@
     {
       "id": 15270058,
       "utcDate": "2026-04-05T00:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 155,
@@ -32978,8 +32978,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -33159,7 +33159,7 @@
         },
         "standings": {
           "home": {
-            "pos": 9,
+            "pos": 10,
             "pts": 16,
             "p": 13,
             "sg": -1
@@ -33173,7 +33173,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Necaxa em 9o (16pts) vs Mazatlán  em 16o (11pts).",
+          "info": "Necaxa em 10o (16pts) vs Mazatlán  em 16o (11pts).",
           "reliability": "8.5"
         }
       },
@@ -33242,7 +33242,7 @@
             "sg": -1
           },
           "away": {
-            "pos": 7,
+            "pos": 8,
             "pts": 17,
             "p": 13,
             "sg": 3
@@ -33250,7 +33250,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Tijuana em 11o (15pts) vs Tigres em 7o (17pts).",
+          "info": "Tijuana em 11o (15pts) vs Tigres em 8o (17pts).",
           "reliability": "8.5"
         }
       },
@@ -33268,7 +33268,7 @@
       "id": 15239006,
       "utcDate": "2026-04-04T23:00:00+00:00",
       "status": "IN_PLAY",
-      "minute": "1st half",
+      "minute": "Halftime",
       "venue": "",
       "competition": {
         "id": 11620,
@@ -33286,7 +33286,7 @@
       },
       "score": {
         "fullTime": {
-          "home": 0,
+          "home": 1,
           "away": 0
         }
       },
@@ -33313,21 +33313,21 @@
         },
         "standings": {
           "home": {
-            "pos": 10,
-            "pts": 15,
+            "pos": 7,
+            "pts": 17,
             "p": 13,
-            "sg": 3
+            "sg": 4
           },
           "away": {
             "pos": 15,
-            "pts": 12,
+            "pts": 11,
             "p": 13,
-            "sg": -3
+            "sg": -4
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Monterrey em 10o (15pts) vs San Luis em 15o (12pts).",
+          "info": "Monterrey em 7o (17pts) vs San Luis em 15o (11pts).",
           "reliability": "8.5"
         }
       },
@@ -33345,7 +33345,7 @@
       "id": 15239010,
       "utcDate": "2026-04-04T23:00:00+00:00",
       "status": "IN_PLAY",
-      "minute": "1st half",
+      "minute": "Halftime",
       "venue": "",
       "competition": {
         "id": 11620,
@@ -33627,7 +33627,7 @@
             "sg": -16
           },
           "away": {
-            "pos": 8,
+            "pos": 9,
             "pts": 17,
             "p": 12,
             "sg": 2
@@ -33635,7 +33635,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Santos em 18o (8pts) vs América em 8o (17pts).",
+          "info": "Santos em 18o (8pts) vs América em 9o (17pts).",
           "reliability": "8.5"
         }
       },
@@ -34576,8 +34576,8 @@
     {
       "id": 15171446,
       "utcDate": "2026-04-04T23:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 242,
@@ -34595,8 +34595,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -34653,8 +34653,8 @@
     {
       "id": 15171453,
       "utcDate": "2026-04-04T23:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 242,
@@ -34672,8 +34672,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -34730,8 +34730,8 @@
     {
       "id": 15171451,
       "utcDate": "2026-04-04T23:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 242,
@@ -34749,8 +34749,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -34805,8 +34805,162 @@
       }
     },
     {
-      "id": 15171441,
+      "id": 15171464,
       "utcDate": "2026-04-04T23:30:00+00:00",
+      "status": "IN_PLAY",
+      "minute": "1st half",
+      "venue": "",
+      "competition": {
+        "id": 242,
+        "name": "MLS"
+      },
+      "homeTeam": {
+        "id": 187643,
+        "name": "New York City FC",
+        "shortName": "NY City"
+      },
+      "awayTeam": {
+        "id": 407803,
+        "name": "St.Louis City",
+        "shortName": "St. Louis"
+      },
+      "score": {
+        "fullTime": {
+          "home": 0,
+          "away": 0
+        }
+      },
+      "inteligencia": {
+        "clubelo": {
+          "home_elo": "N/A",
+          "away_elo": "N/A"
+        },
+        "recent_form": {
+          "home": [
+            "-",
+            "-",
+            "-",
+            "-",
+            "-"
+          ],
+          "away": [
+            "-",
+            "-",
+            "-",
+            "-",
+            "-"
+          ]
+        },
+        "standings": {
+          "home": {
+            "pos": "-",
+            "pts": "-",
+            "p": "-",
+            "sg": "-"
+          },
+          "away": {
+            "pos": "-",
+            "pts": "-",
+            "p": "-",
+            "sg": "-"
+          }
+        },
+        "h2h": [],
+        "stats": {
+          "info": "Pais: USA.",
+          "reliability": "8.0"
+        }
+      },
+      "_sofascore": {
+        "homeTeamId": 187643,
+        "awayTeamId": 407803,
+        "tournamentId": 242,
+        "seasonYear": "2026",
+        "slug": "stlouis-city-new-york-city-fc",
+        "eventId": 15171464,
+        "customId": "TcAbsdgnd"
+      }
+    },
+    {
+      "id": 15171456,
+      "utcDate": "2026-04-04T23:30:00+00:00",
+      "status": "IN_PLAY",
+      "minute": "1st half",
+      "venue": "",
+      "competition": {
+        "id": 242,
+        "name": "MLS"
+      },
+      "homeTeam": {
+        "id": 2506,
+        "name": "New York Red Bulls",
+        "shortName": "NY Red Bulls"
+      },
+      "awayTeam": {
+        "id": 215167,
+        "name": "FC Cincinnati",
+        "shortName": "Cincinnati"
+      },
+      "score": {
+        "fullTime": {
+          "home": 1,
+          "away": 1
+        }
+      },
+      "inteligencia": {
+        "clubelo": {
+          "home_elo": "N/A",
+          "away_elo": "N/A"
+        },
+        "recent_form": {
+          "home": [
+            "-",
+            "-",
+            "-",
+            "-",
+            "-"
+          ],
+          "away": [
+            "-",
+            "-",
+            "-",
+            "-",
+            "-"
+          ]
+        },
+        "standings": {
+          "home": {
+            "pos": "-",
+            "pts": "-",
+            "p": "-",
+            "sg": "-"
+          },
+          "away": {
+            "pos": "-",
+            "pts": "-",
+            "p": "-",
+            "sg": "-"
+          }
+        },
+        "h2h": [],
+        "stats": {
+          "info": "Pais: USA.",
+          "reliability": "8.0"
+        }
+      },
+      "_sofascore": {
+        "homeTeamId": 2506,
+        "awayTeamId": 215167,
+        "tournamentId": 242,
+        "seasonYear": "2026",
+        "slug": "fc-cincinnati-new-york-red-bulls",
+        "eventId": 15171456,
+        "customId": "gabsrdLb"
+      }
+    },
+    {
+      "id": 15171441,
+      "utcDate": "2026-04-04T23:45:00+00:00",
       "status": "SCHEDULED",
       "minute": null,
       "venue": "",
@@ -34879,160 +35033,6 @@
         "slug": "austin-fc-inter-miami-cf",
         "eventId": 15171441,
         "customId": "ccKcsyjbd"
-      }
-    },
-    {
-      "id": 15171464,
-      "utcDate": "2026-04-04T23:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
-      "venue": "",
-      "competition": {
-        "id": 242,
-        "name": "MLS"
-      },
-      "homeTeam": {
-        "id": 187643,
-        "name": "New York City FC",
-        "shortName": "NY City"
-      },
-      "awayTeam": {
-        "id": 407803,
-        "name": "St.Louis City",
-        "shortName": "St. Louis"
-      },
-      "score": {
-        "fullTime": {
-          "home": null,
-          "away": null
-        }
-      },
-      "inteligencia": {
-        "clubelo": {
-          "home_elo": "N/A",
-          "away_elo": "N/A"
-        },
-        "recent_form": {
-          "home": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
-          ],
-          "away": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
-          ]
-        },
-        "standings": {
-          "home": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
-          },
-          "away": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
-          }
-        },
-        "h2h": [],
-        "stats": {
-          "info": "Pais: USA.",
-          "reliability": "8.0"
-        }
-      },
-      "_sofascore": {
-        "homeTeamId": 187643,
-        "awayTeamId": 407803,
-        "tournamentId": 242,
-        "seasonYear": "2026",
-        "slug": "stlouis-city-new-york-city-fc",
-        "eventId": 15171464,
-        "customId": "TcAbsdgnd"
-      }
-    },
-    {
-      "id": 15171456,
-      "utcDate": "2026-04-04T23:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
-      "venue": "",
-      "competition": {
-        "id": 242,
-        "name": "MLS"
-      },
-      "homeTeam": {
-        "id": 2506,
-        "name": "New York Red Bulls",
-        "shortName": "NY Red Bulls"
-      },
-      "awayTeam": {
-        "id": 215167,
-        "name": "FC Cincinnati",
-        "shortName": "Cincinnati"
-      },
-      "score": {
-        "fullTime": {
-          "home": null,
-          "away": null
-        }
-      },
-      "inteligencia": {
-        "clubelo": {
-          "home_elo": "N/A",
-          "away_elo": "N/A"
-        },
-        "recent_form": {
-          "home": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
-          ],
-          "away": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
-          ]
-        },
-        "standings": {
-          "home": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
-          },
-          "away": {
-            "pos": "-",
-            "pts": "-",
-            "p": "-",
-            "sg": "-"
-          }
-        },
-        "h2h": [],
-        "stats": {
-          "info": "Pais: USA.",
-          "reliability": "8.0"
-        }
-      },
-      "_sofascore": {
-        "homeTeamId": 2506,
-        "awayTeamId": 215167,
-        "tournamentId": 242,
-        "seasonYear": "2026",
-        "slug": "fc-cincinnati-new-york-red-bulls",
-        "eventId": 15171456,
-        "customId": "gabsrdLb"
       }
     },
     {
@@ -37548,13 +37548,13 @@
         },
         "standings": {
           "home": {
-            "pos": 13,
+            "pos": 14,
             "pts": 2,
             "p": 3,
             "sg": -2
           },
           "away": {
-            "pos": 5,
+            "pos": 6,
             "pts": 5,
             "p": 3,
             "sg": 2
@@ -37562,7 +37562,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Cuiabá em 13o (2pts) vs Ceará em 5o (5pts). Cuiabá: 0% vitorias recentes.",
+          "info": "Cuiabá em 14o (2pts) vs Ceará em 6o (5pts). Cuiabá: 0% vitorias recentes.",
           "reliability": "8.5"
         }
       },
@@ -37579,8 +37579,8 @@
     {
       "id": 15526012,
       "utcDate": "2026-04-04T21:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 390,
@@ -37625,13 +37625,13 @@
         },
         "standings": {
           "home": {
-            "pos": 4,
+            "pos": 5,
             "pts": 6,
             "p": 3,
             "sg": 1
           },
           "away": {
-            "pos": 16,
+            "pos": 17,
             "pts": 1,
             "p": 3,
             "sg": -2
@@ -37639,7 +37639,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Náutico em 4o (6pts) vs Ponte Preta em 16o (1pts).",
+          "info": "Náutico em 5o (6pts) vs Ponte Preta em 17o (1pts).",
           "reliability": "8.5"
         }
       },
@@ -37657,7 +37657,7 @@
       "id": 15526014,
       "utcDate": "2026-04-04T23:00:00+00:00",
       "status": "IN_PLAY",
-      "minute": "1st half",
+      "minute": "Halftime",
       "venue": "",
       "competition": {
         "id": 390,
@@ -37676,6 +37676,83 @@
       "score": {
         "fullTime": {
           "home": 0,
+          "away": 1
+        }
+      },
+      "inteligencia": {
+        "clubelo": {
+          "home_elo": "N/A",
+          "away_elo": "N/A"
+        },
+        "recent_form": {
+          "home": [
+            "-",
+            "-",
+            "-",
+            "-",
+            "-"
+          ],
+          "away": [
+            "-",
+            "-",
+            "-",
+            "-",
+            "-"
+          ]
+        },
+        "standings": {
+          "home": {
+            "pos": 12,
+            "pts": 2,
+            "p": 3,
+            "sg": -1
+          },
+          "away": {
+            "pos": 11,
+            "pts": 3,
+            "p": 3,
+            "sg": -1
+          }
+        },
+        "h2h": [],
+        "stats": {
+          "info": "Vila Nova em 12o (2pts) vs Atlético-GO em 11o (3pts).",
+          "reliability": "8.5"
+        }
+      },
+      "_sofascore": {
+        "homeTeamId": 2021,
+        "awayTeamId": 7314,
+        "tournamentId": 390,
+        "seasonYear": "2026",
+        "slug": "atletico-goianiense-vila-nova-fc",
+        "eventId": 15526014,
+        "customId": "wPsoWc"
+      }
+    },
+    {
+      "id": 15526008,
+      "utcDate": "2026-04-04T23:30:00+00:00",
+      "status": "IN_PLAY",
+      "minute": "1st half",
+      "venue": "",
+      "competition": {
+        "id": 390,
+        "name": "Brasileirão Série B"
+      },
+      "homeTeam": {
+        "id": 2022,
+        "name": "Londrina",
+        "shortName": "Londrina"
+      },
+      "awayTeam": {
+        "id": 1959,
+        "name": "Sport Recife",
+        "shortName": "Sport"
+      },
+      "score": {
+        "fullTime": {
+          "home": 1,
           "away": 0
         }
       },
@@ -37702,98 +37779,21 @@
         },
         "standings": {
           "home": {
-            "pos": 11,
-            "pts": 3,
+            "pos": 1,
+            "pts": 7,
             "p": 3,
-            "sg": 0
+            "sg": 3
           },
           "away": {
-            "pos": 18,
-            "pts": 1,
-            "p": 3,
-            "sg": -2
-          }
-        },
-        "h2h": [],
-        "stats": {
-          "info": "Vila Nova em 11o (3pts) vs Atlético-GO em 18o (1pts).",
-          "reliability": "8.5"
-        }
-      },
-      "_sofascore": {
-        "homeTeamId": 2021,
-        "awayTeamId": 7314,
-        "tournamentId": 390,
-        "seasonYear": "2026",
-        "slug": "atletico-goianiense-vila-nova-fc",
-        "eventId": 15526014,
-        "customId": "wPsoWc"
-      }
-    },
-    {
-      "id": 15526008,
-      "utcDate": "2026-04-04T23:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
-      "venue": "",
-      "competition": {
-        "id": 390,
-        "name": "Brasileirão Série B"
-      },
-      "homeTeam": {
-        "id": 2022,
-        "name": "Londrina",
-        "shortName": "Londrina"
-      },
-      "awayTeam": {
-        "id": 1959,
-        "name": "Sport Recife",
-        "shortName": "Sport"
-      },
-      "score": {
-        "fullTime": {
-          "home": null,
-          "away": null
-        }
-      },
-      "inteligencia": {
-        "clubelo": {
-          "home_elo": "N/A",
-          "away_elo": "N/A"
-        },
-        "recent_form": {
-          "home": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
-          ],
-          "away": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
-          ]
-        },
-        "standings": {
-          "home": {
-            "pos": 7,
-            "pts": 4,
-            "p": 2,
-            "sg": 2
-          },
-          "away": {
-            "pos": 12,
+            "pos": 13,
             "pts": 2,
-            "p": 2,
-            "sg": 0
+            "p": 3,
+            "sg": -1
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Londrina em 7o (4pts) vs Sport em 12o (2pts).",
+          "info": "Londrina em 1o (7pts) vs Sport em 13o (2pts).",
           "reliability": "8.5"
         }
       },
@@ -41507,7 +41507,7 @@
       "id": 15353004,
       "utcDate": "2026-04-04T23:00:00+00:00",
       "status": "IN_PLAY",
-      "minute": "1st half",
+      "minute": "Halftime",
       "venue": "",
       "competition": {
         "id": 11653,
@@ -41712,7 +41712,7 @@
             "sg": -1
           },
           "away": {
-            "pos": 3,
+            "pos": 4,
             "pts": 18,
             "p": 10,
             "sg": 4
@@ -41720,7 +41720,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Caracas em 11o (11pts) vs Metropolitanos em 3o (18pts).",
+          "info": "Caracas em 11o (11pts) vs Metropolitanos em 4o (18pts).",
           "reliability": "8.5"
         }
       },
@@ -41814,8 +41814,8 @@
     {
       "id": 15362606,
       "utcDate": "2026-04-04T21:30:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 231,
@@ -41891,8 +41891,8 @@
     {
       "id": 15362608,
       "utcDate": "2026-04-04T23:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 231,
@@ -41910,8 +41910,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -41937,21 +41937,21 @@
         },
         "standings": {
           "home": {
-            "pos": 8,
+            "pos": 9,
             "pts": 13,
-            "p": 9,
-            "sg": 4
+            "p": 10,
+            "sg": 3
           },
           "away": {
-            "pos": 4,
-            "pts": 17,
-            "p": 9,
-            "sg": 4
+            "pos": 3,
+            "pts": 20,
+            "p": 10,
+            "sg": 5
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Puerto Cabello em 8o (13pts) vs Dep. Táchira em 4o (17pts).",
+          "info": "Puerto Cabello em 9o (13pts) vs Dep. Táchira em 3o (20pts).",
           "reliability": "8.5"
         }
       },
@@ -45048,8 +45048,8 @@
     {
       "id": 15909175,
       "utcDate": "2026-04-04T21:15:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 16736,
@@ -45094,13 +45094,13 @@
         },
         "standings": {
           "home": {
-            "pos": 6,
+            "pos": 7,
             "pts": 1,
             "p": 1,
             "sg": 0
           },
           "away": {
-            "pos": 5,
+            "pos": 6,
             "pts": 1,
             "p": 1,
             "sg": 0
@@ -45108,7 +45108,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Real Potosí em 6o (1pts) vs Club Aurora em 5o (1pts).",
+          "info": "Real Potosí em 7o (1pts) vs Club Aurora em 6o (1pts).",
           "reliability": "8.5"
         }
       },
@@ -45125,8 +45125,8 @@
     {
       "id": 15909176,
       "utcDate": "2026-04-04T23:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 16736,
@@ -45144,8 +45144,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -45171,21 +45171,21 @@
         },
         "standings": {
           "home": {
-            "pos": 11,
-            "pts": 0,
-            "p": 0,
-            "sg": 0
+            "pos": 5,
+            "pts": 3,
+            "p": 1,
+            "sg": 1
           },
           "away": {
-            "pos": 10,
+            "pos": 12,
             "pts": 0,
-            "p": 0,
-            "sg": 0
+            "p": 1,
+            "sg": -1
           }
         },
         "h2h": [],
         "stats": {
-          "info": "San Antonio em 11o (0pts) vs Oriente em 10o (0pts).",
+          "info": "San Antonio em 5o (3pts) vs Oriente em 12o (0pts).",
           "reliability": "8.5"
         }
       },
@@ -45331,7 +45331,7 @@
             "sg": 7
           },
           "away": {
-            "pos": 13,
+            "pos": 14,
             "pts": 5,
             "p": 7,
             "sg": -4
@@ -45339,7 +45339,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Ind. del Valle em 1o (16pts) vs Orense em 13o (5pts).",
+          "info": "Ind. del Valle em 1o (16pts) vs Orense em 14o (5pts).",
           "reliability": "8.5"
         }
       },
@@ -45356,8 +45356,8 @@
     {
       "id": 15502496,
       "utcDate": "2026-04-04T21:30:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 240,
@@ -45375,7 +45375,7 @@
       },
       "score": {
         "fullTime": {
-          "home": 2,
+          "home": 4,
           "away": 1
         }
       },
@@ -45393,11 +45393,11 @@
             "-"
           ],
           "away": [
+            "D",
             "E",
             "V",
             "E",
-            "D",
-            "E"
+            "D"
           ]
         },
         "standings": {
@@ -45405,13 +45405,13 @@
             "pos": 2,
             "pts": 12,
             "p": 6,
-            "sg": 5
+            "sg": 7
           },
           "away": {
             "pos": 12,
             "pts": 6,
             "p": 7,
-            "sg": -3
+            "sg": -5
           }
         },
         "h2h": [],
@@ -45433,8 +45433,8 @@
     {
       "id": 15502502,
       "utcDate": "2026-04-05T00:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 240,
@@ -45452,8 +45452,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -45479,21 +45479,21 @@
         },
         "standings": {
           "home": {
-            "pos": 14,
-            "pts": 4,
-            "p": 5,
+            "pos": 13,
+            "pts": 5,
+            "p": 6,
             "sg": 0
           },
           "away": {
-            "pos": 8,
-            "pts": 8,
-            "p": 6,
+            "pos": 7,
+            "pts": 9,
+            "p": 7,
             "sg": 0
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Emelec em 14o (4pts) vs Cuenca em 8o (8pts).",
+          "info": "Emelec em 13o (5pts) vs Cuenca em 7o (9pts).",
           "reliability": "8.5"
         }
       },
@@ -48282,8 +48282,8 @@
     {
       "id": 15502791,
       "utcDate": "2026-04-04T23:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "Halftime",
       "venue": "",
       "competition": {
         "id": 13470,
@@ -48301,8 +48301,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -48975,8 +48975,8 @@
     {
       "id": 15285679,
       "utcDate": "2026-04-04T23:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "Halftime",
       "venue": "",
       "competition": {
         "id": 13363,
@@ -48994,8 +48994,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -49052,8 +49052,8 @@
     {
       "id": 15285689,
       "utcDate": "2026-04-04T23:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 13363,
@@ -49071,8 +49071,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -49643,7 +49643,7 @@
             "sg": -2
           },
           "away": {
-            "pos": 8,
+            "pos": 9,
             "pts": 4,
             "p": 3,
             "sg": 3
@@ -49651,7 +49651,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "NY Cosmos em 7o (6pts) vs Charlotte Independence em 8o (4pts). Charlotte Independence: 60% vitorias recentes.",
+          "info": "NY Cosmos em 7o (6pts) vs Charlotte Independence em 9o (4pts). Charlotte Independence: 60% vitorias recentes.",
           "reliability": "8.5"
         }
       },
@@ -49714,7 +49714,7 @@
         },
         "standings": {
           "home": {
-            "pos": 15,
+            "pos": 16,
             "pts": 1,
             "p": 3,
             "sg": -2
@@ -49745,8 +49745,8 @@
     {
       "id": 15285379,
       "utcDate": "2026-04-04T23:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "Halftime",
       "venue": "",
       "competition": {
         "id": 13362,
@@ -49764,8 +49764,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -49792,20 +49792,20 @@
         "standings": {
           "home": {
             "pos": 1,
-            "pts": 7,
-            "p": 4,
-            "sg": 2
+            "pts": 10,
+            "p": 5,
+            "sg": 3
           },
           "away": {
-            "pos": 3,
+            "pos": 4,
             "pts": 6,
-            "p": 3,
-            "sg": 2
+            "p": 4,
+            "sg": 1
           }
         },
         "h2h": [],
         "stats": {
-          "info": "FC Naples em 1o (7pts) vs Greenville Triumph em 3o (6pts).",
+          "info": "FC Naples em 1o (10pts) vs Greenville Triumph em 4o (6pts).",
           "reliability": "8.5"
         }
       },
@@ -49822,8 +49822,8 @@
     {
       "id": 15285384,
       "utcDate": "2026-04-04T23:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "Halftime",
       "venue": "",
       "competition": {
         "id": 13362,
@@ -49841,8 +49841,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 2,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -49868,21 +49868,21 @@
         },
         "standings": {
           "home": {
-            "pos": 16,
-            "pts": 1,
-            "p": 3,
-            "sg": -3
+            "pos": 12,
+            "pts": 4,
+            "p": 4,
+            "sg": -2
           },
           "away": {
-            "pos": 14,
+            "pos": 15,
             "pts": 2,
-            "p": 3,
-            "sg": -1
+            "p": 4,
+            "sg": -2
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Westchester em 16o (1pts) vs Corpus Christi em 14o (2pts).",
+          "info": "Westchester em 12o (4pts) vs Corpus Christi em 15o (2pts).",
           "reliability": "8.5"
         }
       },
@@ -49899,8 +49899,8 @@
     {
       "id": 15285394,
       "utcDate": "2026-04-04T23:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 13362,
@@ -49918,8 +49918,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -49945,21 +49945,21 @@
         },
         "standings": {
           "home": {
-            "pos": 11,
-            "pts": 4,
-            "p": 3,
+            "pos": 8,
+            "pts": 5,
+            "p": 4,
             "sg": 0
           },
           "away": {
             "pos": 2,
-            "pts": 7,
-            "p": 4,
+            "pts": 8,
+            "p": 5,
             "sg": 1
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Sarasota Paradise em 11o (4pts) vs ONE Knoxville em 2o (7pts).",
+          "info": "Sarasota Paradise em 8o (5pts) vs ONE Knoxville em 2o (8pts).",
           "reliability": "8.5"
         }
       },
@@ -50022,7 +50022,7 @@
         },
         "standings": {
           "home": {
-            "pos": 12,
+            "pos": 13,
             "pts": 3,
             "p": 2,
             "sg": 0
@@ -50036,7 +50036,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "AC Boise em 12o (3pts) vs Spokane Velocity em 6o (6pts).",
+          "info": "AC Boise em 13o (3pts) vs Spokane Velocity em 6o (6pts).",
           "reliability": "8.5"
         }
       },
@@ -50099,7 +50099,7 @@
         },
         "standings": {
           "home": {
-            "pos": 13,
+            "pos": 14,
             "pts": 3,
             "p": 3,
             "sg": 0
@@ -50113,7 +50113,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "AV Alta FC em 13o (3pts) vs Union Omaha em 5o (6pts).",
+          "info": "AV Alta FC em 14o (3pts) vs Union Omaha em 5o (6pts).",
           "reliability": "8.5"
         }
       },
@@ -50875,7 +50875,7 @@
             "sg": -4
           },
           "away": {
-            "pos": 11,
+            "pos": 12,
             "pts": 5,
             "p": 5,
             "sg": -2
@@ -50883,7 +50883,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Kansas City em 9o (6pts) vs Gotham em 11o (5pts).",
+          "info": "Kansas City em 9o (6pts) vs Gotham em 12o (5pts).",
           "reliability": "8.5"
         }
       },
@@ -50901,7 +50901,7 @@
       "id": 15388454,
       "utcDate": "2026-04-04T22:30:00+00:00",
       "status": "IN_PLAY",
-      "minute": "1st half",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 1690,
@@ -50919,8 +50919,8 @@
       },
       "score": {
         "fullTime": {
-          "home": 1,
-          "away": 1
+          "home": 2,
+          "away": 2
         }
       },
       "inteligencia": {
@@ -50946,21 +50946,21 @@
         },
         "standings": {
           "home": {
-            "pos": 12,
-            "pts": 4,
+            "pos": 11,
+            "pts": 5,
             "p": 4,
-            "sg": -2
+            "sg": -1
           },
           "away": {
             "pos": 2,
-            "pts": 12,
+            "pts": 10,
             "p": 5,
-            "sg": 4
+            "sg": 3
           }
         },
         "h2h": [],
         "stats": {
-          "info": "NC Courage em 12o (4pts) vs Portland Thorns em 2o (12pts). NC Courage: 60% vitorias recentes.",
+          "info": "NC Courage em 11o (5pts) vs Portland Thorns em 2o (10pts). NC Courage: 60% vitorias recentes.",
           "reliability": "8.5"
         }
       },
@@ -55335,13 +55335,13 @@
         },
         "standings": {
           "home": {
-            "pos": 9,
+            "pos": 8,
             "pts": 9,
             "p": 7,
             "sg": 0
           },
           "away": {
-            "pos": 8,
+            "pos": 7,
             "pts": 9,
             "p": 7,
             "sg": 0
@@ -55349,7 +55349,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "All Boys em 9o (9pts) vs Ferro Carril Oeste em 8o (9pts).",
+          "info": "All Boys em 8o (9pts) vs Ferro Carril Oeste em 7o (9pts).",
           "reliability": "8.5"
         }
       },
@@ -55905,8 +55905,8 @@
     {
       "id": 15275510,
       "utcDate": "2026-04-04T22:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "Halftime",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 703,
@@ -55924,7 +55924,7 @@
       },
       "score": {
         "fullTime": {
-          "home": 2,
+          "home": 3,
           "away": 0
         }
       },
@@ -55954,18 +55954,18 @@
             "pos": 1,
             "pts": 14,
             "p": 7,
-            "sg": 4
+            "sg": 5
           },
           "away": {
-            "pos": 7,
+            "pos": 9,
             "pts": 9,
             "p": 7,
-            "sg": 0
+            "sg": -1
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Colón em 1o (14pts) vs San Miguel em 7o (9pts).",
+          "info": "Colón em 1o (14pts) vs San Miguel em 9o (9pts).",
           "reliability": "8.5"
         }
       },
@@ -58216,7 +58216,7 @@
       "id": 15617569,
       "utcDate": "2026-04-04T22:30:00+00:00",
       "status": "IN_PLAY",
-      "minute": "1st half",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 1281,
@@ -58234,7 +58234,7 @@
       },
       "score": {
         "fullTime": {
-          "home": 0,
+          "home": 1,
           "away": 0
         }
       },
@@ -58293,7 +58293,7 @@
       "id": 15617566,
       "utcDate": "2026-04-04T22:30:00+00:00",
       "status": "IN_PLAY",
-      "minute": "1st half",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 1281,
@@ -58311,8 +58311,8 @@
       },
       "score": {
         "fullTime": {
-          "home": 0,
-          "away": 1
+          "home": 1,
+          "away": 2
         }
       },
       "inteligencia": {
@@ -58601,7 +58601,7 @@
       "id": 15898312,
       "utcDate": "2026-04-04T23:00:00+00:00",
       "status": "IN_PLAY",
-      "minute": "1st half",
+      "minute": "Halftime",
       "venue": "",
       "competition": {
         "id": 10326,
@@ -58620,7 +58620,7 @@
       "score": {
         "fullTime": {
           "home": 0,
-          "away": 0
+          "away": 1
         }
       },
       "inteligencia": {
@@ -58754,8 +58754,8 @@
     {
       "id": 15898309,
       "utcDate": "2026-04-04T21:30:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 10326,
@@ -58773,7 +58773,7 @@
       },
       "score": {
         "fullTime": {
-          "home": 0,
+          "home": 1,
           "away": 2
         }
       },
@@ -73770,7 +73770,7 @@
       "id": 15336420,
       "utcDate": "2026-04-04T23:00:00+00:00",
       "status": "IN_PLAY",
-      "minute": "1st half",
+      "minute": "Halftime",
       "venue": "",
       "competition": {
         "id": 11612,
@@ -73788,8 +73788,8 @@
       },
       "score": {
         "fullTime": {
-          "home": 0,
-          "away": 0
+          "home": 1,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -74616,8 +74616,8 @@
     {
       "id": 15400150,
       "utcDate": "2026-04-04T21:30:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 11540,
@@ -74653,11 +74653,11 @@
             "-"
           ],
           "away": [
+            "D",
             "E",
             "V",
             "E",
-            "D",
-            "V"
+            "D"
           ]
         },
         "standings": {
@@ -74676,7 +74676,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Nacional: 40% vitorias recentes.",
+          "info": "Nacional: 20% vitorias recentes.",
           "reliability": "8.5"
         }
       },
@@ -74693,8 +74693,8 @@
     {
       "id": 15400152,
       "utcDate": "2026-04-04T23:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 11540,
@@ -74712,8 +74712,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -74770,8 +74770,8 @@
     {
       "id": 15400154,
       "utcDate": "2026-04-04T23:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 11540,
@@ -74789,8 +74789,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 2,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -81547,7 +81547,7 @@
       "id": 15853454,
       "utcDate": "2026-04-04T23:00:00+00:00",
       "status": "IN_PLAY",
-      "minute": "1st half",
+      "minute": "Halftime",
       "venue": "",
       "competition": {
         "id": 2041,
@@ -81565,7 +81565,7 @@
       },
       "score": {
         "fullTime": {
-          "home": 0,
+          "home": 4,
           "away": 0
         }
       },
@@ -83625,8 +83625,8 @@
     {
       "id": 14326833,
       "utcDate": "2026-04-04T21:30:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 28384,
@@ -83644,8 +83644,8 @@
       },
       "score": {
         "fullTime": {
-          "home": 2,
-          "away": 0
+          "home": 3,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -84318,8 +84318,8 @@
     {
       "id": 15873048,
       "utcDate": "2026-04-04T22:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "Halftime",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 278,
@@ -87860,8 +87860,8 @@
     {
       "id": 15235504,
       "utcDate": "2026-04-04T21:30:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 325,
@@ -87879,7 +87879,7 @@
       },
       "score": {
         "fullTime": {
-          "home": 3,
+          "home": 4,
           "away": 1
         }
       },
@@ -87909,13 +87909,13 @@
             "pos": 2,
             "pts": 20,
             "p": 10,
-            "sg": 7
+            "sg": 8
           },
           "away": {
             "pos": 18,
             "pts": 7,
             "p": 10,
-            "sg": -7
+            "sg": -8
           }
         },
         "h2h": [],
@@ -87937,8 +87937,8 @@
     {
       "id": 15235507,
       "utcDate": "2026-04-04T23:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 325,
@@ -87956,8 +87956,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -87983,21 +87983,21 @@
         },
         "standings": {
           "home": {
-            "pos": 7,
-            "pts": 14,
-            "p": 9,
+            "pos": 6,
+            "pts": 15,
+            "p": 10,
             "sg": 1
           },
           "away": {
             "pos": 3,
-            "pts": 19,
-            "p": 9,
+            "pts": 20,
+            "p": 10,
             "sg": 6
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Coritiba em 7o (14pts) vs Fluminense em 3o (19pts).",
+          "info": "Coritiba em 6o (15pts) vs Fluminense em 3o (20pts).",
           "reliability": "8.5"
         }
       },
@@ -88014,8 +88014,8 @@
     {
       "id": 15235514,
       "utcDate": "2026-04-05T00:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 325,
@@ -88033,8 +88033,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -88061,20 +88061,20 @@
         "standings": {
           "home": {
             "pos": 8,
-            "pts": 12,
-            "p": 9,
+            "pts": 13,
+            "p": 10,
             "sg": 0
           },
           "away": {
-            "pos": 15,
-            "pts": 9,
-            "p": 8,
+            "pos": 12,
+            "pts": 10,
+            "p": 9,
             "sg": -4
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Vasco em 8o (12pts) vs Botafogo em 15o (9pts).",
+          "info": "Vasco em 8o (13pts) vs Botafogo em 12o (10pts).",
           "reliability": "8.5"
         }
       },
@@ -88143,7 +88143,7 @@
             "sg": -6
           },
           "away": {
-            "pos": 12,
+            "pos": 13,
             "pts": 10,
             "p": 8,
             "sg": -5
@@ -88151,7 +88151,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Chapecoense em 17o (7pts) vs Vitória em 12o (10pts).",
+          "info": "Chapecoense em 17o (7pts) vs Vitória em 13o (10pts).",
           "reliability": "8.5"
         }
       },
@@ -88291,13 +88291,13 @@
         },
         "standings": {
           "home": {
-            "pos": 6,
+            "pos": 7,
             "pts": 14,
             "p": 8,
             "sg": 5
           },
           "away": {
-            "pos": 13,
+            "pos": 14,
             "pts": 10,
             "p": 9,
             "sg": -1
@@ -88305,7 +88305,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Flamengo em 6o (14pts) vs Santos em 13o (10pts).",
+          "info": "Flamengo em 7o (14pts) vs Santos em 14o (10pts).",
           "reliability": "8.5"
         }
       },
@@ -88445,7 +88445,7 @@
         },
         "standings": {
           "home": {
-            "pos": 14,
+            "pos": 15,
             "pts": 10,
             "p": 9,
             "sg": -2
@@ -88459,7 +88459,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Corinthians em 14o (10pts) vs Internacional em 16o (9pts).",
+          "info": "Corinthians em 15o (10pts) vs Internacional em 16o (9pts).",
           "reliability": "8.5"
         }
       },
@@ -91941,8 +91941,8 @@
     {
       "id": 15270058,
       "utcDate": "2026-04-05T00:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 155,
@@ -91960,8 +91960,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -92250,7 +92250,7 @@
       "id": 15239006,
       "utcDate": "2026-04-04T23:00:00+00:00",
       "status": "IN_PLAY",
-      "minute": "1st half",
+      "minute": "Halftime",
       "venue": "",
       "competition": {
         "id": 11620,
@@ -92268,7 +92268,7 @@
       },
       "score": {
         "fullTime": {
-          "home": 0,
+          "home": 1,
           "away": 0
         }
       },
@@ -92295,21 +92295,21 @@
         },
         "standings": {
           "home": {
-            "pos": 10,
-            "pts": 15,
+            "pos": 7,
+            "pts": 17,
             "p": 13,
-            "sg": 3
+            "sg": 4
           },
           "away": {
             "pos": 15,
-            "pts": 12,
+            "pts": 11,
             "p": 13,
-            "sg": -3
+            "sg": -4
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Monterrey em 10o (15pts) vs San Luis em 15o (12pts).",
+          "info": "Monterrey em 7o (17pts) vs San Luis em 15o (11pts).",
           "reliability": "8.5"
         }
       },
@@ -92327,7 +92327,7 @@
       "id": 15239010,
       "utcDate": "2026-04-04T23:00:00+00:00",
       "status": "IN_PLAY",
-      "minute": "1st half",
+      "minute": "Halftime",
       "venue": "",
       "competition": {
         "id": 11620,
@@ -92609,7 +92609,7 @@
             "sg": -16
           },
           "away": {
-            "pos": 8,
+            "pos": 9,
             "pts": 17,
             "p": 12,
             "sg": 2
@@ -92617,7 +92617,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Santos em 18o (8pts) vs América em 8o (17pts).",
+          "info": "Santos em 18o (8pts) vs América em 9o (17pts).",
           "reliability": "8.5"
         }
       },
@@ -93558,8 +93558,8 @@
     {
       "id": 15171446,
       "utcDate": "2026-04-04T23:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 242,
@@ -93577,8 +93577,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -93635,8 +93635,8 @@
     {
       "id": 15171453,
       "utcDate": "2026-04-04T23:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 242,
@@ -93654,8 +93654,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -93712,8 +93712,8 @@
     {
       "id": 15171451,
       "utcDate": "2026-04-04T23:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 242,
@@ -93731,8 +93731,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -93789,8 +93789,8 @@
     {
       "id": 15171464,
       "utcDate": "2026-04-04T23:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 242,
@@ -93808,8 +93808,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -93866,8 +93866,8 @@
     {
       "id": 15171456,
       "utcDate": "2026-04-04T23:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 242,
@@ -93885,8 +93885,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -93942,7 +93942,7 @@
     },
     {
       "id": 15171441,
-      "utcDate": "2026-04-05T00:00:00+00:00",
+      "utcDate": "2026-04-04T23:45:00+00:00",
       "status": "SCHEDULED",
       "minute": null,
       "venue": "",
@@ -96068,13 +96068,13 @@
         },
         "standings": {
           "home": {
-            "pos": 13,
+            "pos": 14,
             "pts": 2,
             "p": 3,
             "sg": -2
           },
           "away": {
-            "pos": 5,
+            "pos": 6,
             "pts": 5,
             "p": 3,
             "sg": 2
@@ -96082,7 +96082,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Cuiabá em 13o (2pts) vs Ceará em 5o (5pts). Cuiabá: 0% vitorias recentes.",
+          "info": "Cuiabá em 14o (2pts) vs Ceará em 6o (5pts). Cuiabá: 0% vitorias recentes.",
           "reliability": "8.5"
         }
       },
@@ -96099,8 +96099,8 @@
     {
       "id": 15526012,
       "utcDate": "2026-04-04T21:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 390,
@@ -96145,13 +96145,13 @@
         },
         "standings": {
           "home": {
-            "pos": 4,
+            "pos": 5,
             "pts": 6,
             "p": 3,
             "sg": 1
           },
           "away": {
-            "pos": 16,
+            "pos": 17,
             "pts": 1,
             "p": 3,
             "sg": -2
@@ -96159,7 +96159,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Náutico em 4o (6pts) vs Ponte Preta em 16o (1pts).",
+          "info": "Náutico em 5o (6pts) vs Ponte Preta em 17o (1pts).",
           "reliability": "8.5"
         }
       },
@@ -96177,7 +96177,7 @@
       "id": 15526014,
       "utcDate": "2026-04-04T23:00:00+00:00",
       "status": "IN_PLAY",
-      "minute": "1st half",
+      "minute": "Halftime",
       "venue": "",
       "competition": {
         "id": 390,
@@ -96196,6 +96196,83 @@
       "score": {
         "fullTime": {
           "home": 0,
+          "away": 1
+        }
+      },
+      "inteligencia": {
+        "clubelo": {
+          "home_elo": "N/A",
+          "away_elo": "N/A"
+        },
+        "recent_form": {
+          "home": [
+            "-",
+            "-",
+            "-",
+            "-",
+            "-"
+          ],
+          "away": [
+            "-",
+            "-",
+            "-",
+            "-",
+            "-"
+          ]
+        },
+        "standings": {
+          "home": {
+            "pos": 12,
+            "pts": 2,
+            "p": 3,
+            "sg": -1
+          },
+          "away": {
+            "pos": 11,
+            "pts": 3,
+            "p": 3,
+            "sg": -1
+          }
+        },
+        "h2h": [],
+        "stats": {
+          "info": "Vila Nova em 12o (2pts) vs Atlético-GO em 11o (3pts).",
+          "reliability": "8.5"
+        }
+      },
+      "_sofascore": {
+        "homeTeamId": 2021,
+        "awayTeamId": 7314,
+        "tournamentId": 390,
+        "seasonYear": "2026",
+        "slug": "atletico-goianiense-vila-nova-fc",
+        "eventId": 15526014,
+        "customId": "wPsoWc"
+      }
+    },
+    {
+      "id": 15526008,
+      "utcDate": "2026-04-04T23:30:00+00:00",
+      "status": "IN_PLAY",
+      "minute": "1st half",
+      "venue": "",
+      "competition": {
+        "id": 390,
+        "name": "Brasileirão Série B"
+      },
+      "homeTeam": {
+        "id": 2022,
+        "name": "Londrina",
+        "shortName": "Londrina"
+      },
+      "awayTeam": {
+        "id": 1959,
+        "name": "Sport Recife",
+        "shortName": "Sport"
+      },
+      "score": {
+        "fullTime": {
+          "home": 1,
           "away": 0
         }
       },
@@ -96222,98 +96299,21 @@
         },
         "standings": {
           "home": {
-            "pos": 11,
-            "pts": 3,
+            "pos": 1,
+            "pts": 7,
             "p": 3,
-            "sg": 0
+            "sg": 3
           },
           "away": {
-            "pos": 18,
-            "pts": 1,
-            "p": 3,
-            "sg": -2
-          }
-        },
-        "h2h": [],
-        "stats": {
-          "info": "Vila Nova em 11o (3pts) vs Atlético-GO em 18o (1pts).",
-          "reliability": "8.5"
-        }
-      },
-      "_sofascore": {
-        "homeTeamId": 2021,
-        "awayTeamId": 7314,
-        "tournamentId": 390,
-        "seasonYear": "2026",
-        "slug": "atletico-goianiense-vila-nova-fc",
-        "eventId": 15526014,
-        "customId": "wPsoWc"
-      }
-    },
-    {
-      "id": 15526008,
-      "utcDate": "2026-04-04T23:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
-      "venue": "",
-      "competition": {
-        "id": 390,
-        "name": "Brasileirão Série B"
-      },
-      "homeTeam": {
-        "id": 2022,
-        "name": "Londrina",
-        "shortName": "Londrina"
-      },
-      "awayTeam": {
-        "id": 1959,
-        "name": "Sport Recife",
-        "shortName": "Sport"
-      },
-      "score": {
-        "fullTime": {
-          "home": null,
-          "away": null
-        }
-      },
-      "inteligencia": {
-        "clubelo": {
-          "home_elo": "N/A",
-          "away_elo": "N/A"
-        },
-        "recent_form": {
-          "home": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
-          ],
-          "away": [
-            "-",
-            "-",
-            "-",
-            "-",
-            "-"
-          ]
-        },
-        "standings": {
-          "home": {
-            "pos": 7,
-            "pts": 4,
-            "p": 2,
-            "sg": 2
-          },
-          "away": {
-            "pos": 12,
+            "pos": 13,
             "pts": 2,
-            "p": 2,
-            "sg": 0
+            "p": 3,
+            "sg": -1
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Londrina em 7o (4pts) vs Sport em 12o (2pts).",
+          "info": "Londrina em 1o (7pts) vs Sport em 13o (2pts).",
           "reliability": "8.5"
         }
       },
@@ -96376,13 +96376,13 @@
         },
         "standings": {
           "home": {
-            "pos": 2,
+            "pos": 3,
             "pts": 6,
             "p": 2,
             "sg": 3
           },
           "away": {
-            "pos": 3,
+            "pos": 4,
             "pts": 6,
             "p": 2,
             "sg": 2
@@ -96390,7 +96390,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Avaí em 2o (6pts) vs Operário-PR em 3o (6pts).",
+          "info": "Avaí em 3o (6pts) vs Operário-PR em 4o (6pts).",
           "reliability": "8.5"
         }
       },
@@ -96453,13 +96453,13 @@
         },
         "standings": {
           "home": {
-            "pos": 17,
+            "pos": 18,
             "pts": 1,
             "p": 2,
             "sg": -2
           },
           "away": {
-            "pos": 14,
+            "pos": 15,
             "pts": 1,
             "p": 2,
             "sg": -1
@@ -96467,7 +96467,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Novorizontino em 17o (1pts) vs CRB em 14o (1pts).",
+          "info": "Novorizontino em 18o (1pts) vs CRB em 15o (1pts).",
           "reliability": "8.5"
         }
       },
@@ -96607,13 +96607,13 @@
         },
         "standings": {
           "home": {
-            "pos": 1,
+            "pos": 2,
             "pts": 6,
             "p": 2,
             "sg": 5
           },
           "away": {
-            "pos": 15,
+            "pos": 16,
             "pts": 1,
             "p": 2,
             "sg": -1
@@ -96621,7 +96621,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Botafogo-SP em 1o (6pts) vs São Bernardo em 15o (1pts).",
+          "info": "Botafogo-SP em 2o (6pts) vs São Bernardo em 16o (1pts).",
           "reliability": "8.5"
         }
       },
@@ -99026,7 +99026,7 @@
       "id": 15353004,
       "utcDate": "2026-04-04T23:00:00+00:00",
       "status": "IN_PLAY",
-      "minute": "1st half",
+      "minute": "Halftime",
       "venue": "",
       "competition": {
         "id": 11653,
@@ -99333,8 +99333,8 @@
     {
       "id": 15362606,
       "utcDate": "2026-04-04T21:30:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 231,
@@ -99410,8 +99410,8 @@
     {
       "id": 15362608,
       "utcDate": "2026-04-04T23:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 231,
@@ -99429,8 +99429,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -99456,21 +99456,21 @@
         },
         "standings": {
           "home": {
-            "pos": 8,
+            "pos": 9,
             "pts": 13,
-            "p": 9,
-            "sg": 4
+            "p": 10,
+            "sg": 3
           },
           "away": {
-            "pos": 4,
-            "pts": 17,
-            "p": 9,
-            "sg": 4
+            "pos": 3,
+            "pts": 20,
+            "p": 10,
+            "sg": 5
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Puerto Cabello em 8o (13pts) vs Dep. Táchira em 4o (17pts).",
+          "info": "Puerto Cabello em 9o (13pts) vs Dep. Táchira em 3o (20pts).",
           "reliability": "8.5"
         }
       },
@@ -99539,7 +99539,7 @@
             "sg": 1
           },
           "away": {
-            "pos": 9,
+            "pos": 8,
             "pts": 13,
             "p": 9,
             "sg": 3
@@ -99547,7 +99547,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Estudiantes de Mérida em 10o (11pts) vs Portuguesa em 9o (13pts).",
+          "info": "Estudiantes de Mérida em 10o (11pts) vs Portuguesa em 8o (13pts).",
           "reliability": "8.5"
         }
       },
@@ -101027,8 +101027,8 @@
     {
       "id": 15909175,
       "utcDate": "2026-04-04T21:15:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 16736,
@@ -101073,13 +101073,13 @@
         },
         "standings": {
           "home": {
-            "pos": 6,
+            "pos": 7,
             "pts": 1,
             "p": 1,
             "sg": 0
           },
           "away": {
-            "pos": 5,
+            "pos": 6,
             "pts": 1,
             "p": 1,
             "sg": 0
@@ -101087,7 +101087,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Real Potosí em 6o (1pts) vs Club Aurora em 5o (1pts).",
+          "info": "Real Potosí em 7o (1pts) vs Club Aurora em 6o (1pts).",
           "reliability": "8.5"
         }
       },
@@ -101104,8 +101104,8 @@
     {
       "id": 15909176,
       "utcDate": "2026-04-04T23:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 16736,
@@ -101123,8 +101123,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -101150,21 +101150,21 @@
         },
         "standings": {
           "home": {
-            "pos": 11,
-            "pts": 0,
-            "p": 0,
-            "sg": 0
+            "pos": 5,
+            "pts": 3,
+            "p": 1,
+            "sg": 1
           },
           "away": {
-            "pos": 10,
+            "pos": 12,
             "pts": 0,
-            "p": 0,
-            "sg": 0
+            "p": 1,
+            "sg": -1
           }
         },
         "h2h": [],
         "stats": {
-          "info": "San Antonio em 11o (0pts) vs Oriente em 10o (0pts).",
+          "info": "San Antonio em 5o (3pts) vs Oriente em 12o (0pts).",
           "reliability": "8.5"
         }
       },
@@ -101227,13 +101227,13 @@
         },
         "standings": {
           "home": {
-            "pos": 9,
+            "pos": 10,
             "pts": 0,
             "p": 0,
             "sg": 0
           },
           "away": {
-            "pos": 7,
+            "pos": 8,
             "pts": 0,
             "p": 0,
             "sg": 0
@@ -101241,7 +101241,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "GV San José em 9o (0pts) vs ABB em 7o (0pts).",
+          "info": "GV San José em 10o (0pts) vs ABB em 8o (0pts).",
           "reliability": "8.5"
         }
       },
@@ -101304,13 +101304,13 @@
         },
         "standings": {
           "home": {
-            "pos": 8,
+            "pos": 9,
             "pts": 0,
             "p": 0,
             "sg": 0
           },
           "away": {
-            "pos": 12,
+            "pos": 11,
             "pts": 0,
             "p": 0,
             "sg": 0
@@ -101318,7 +101318,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Univ. de Vinto em 8o (0pts) vs The Strongest em 12o (0pts).",
+          "info": "Univ. de Vinto em 9o (0pts) vs The Strongest em 11o (0pts).",
           "reliability": "8.5"
         }
       },
@@ -101387,7 +101387,7 @@
             "sg": 7
           },
           "away": {
-            "pos": 13,
+            "pos": 14,
             "pts": 5,
             "p": 7,
             "sg": -4
@@ -101395,7 +101395,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Ind. del Valle em 1o (16pts) vs Orense em 13o (5pts).",
+          "info": "Ind. del Valle em 1o (16pts) vs Orense em 14o (5pts).",
           "reliability": "8.5"
         }
       },
@@ -101412,8 +101412,8 @@
     {
       "id": 15502496,
       "utcDate": "2026-04-04T21:30:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 240,
@@ -101431,7 +101431,7 @@
       },
       "score": {
         "fullTime": {
-          "home": 2,
+          "home": 4,
           "away": 1
         }
       },
@@ -101449,11 +101449,11 @@
             "-"
           ],
           "away": [
+            "D",
             "E",
             "V",
             "E",
-            "D",
-            "E"
+            "D"
           ]
         },
         "standings": {
@@ -101461,13 +101461,13 @@
             "pos": 2,
             "pts": 12,
             "p": 6,
-            "sg": 5
+            "sg": 7
           },
           "away": {
             "pos": 12,
             "pts": 6,
             "p": 7,
-            "sg": -3
+            "sg": -5
           }
         },
         "h2h": [],
@@ -101489,8 +101489,8 @@
     {
       "id": 15502502,
       "utcDate": "2026-04-05T00:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 240,
@@ -101508,8 +101508,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -101535,21 +101535,21 @@
         },
         "standings": {
           "home": {
-            "pos": 14,
-            "pts": 4,
-            "p": 5,
+            "pos": 13,
+            "pts": 5,
+            "p": 6,
             "sg": 0
           },
           "away": {
-            "pos": 8,
-            "pts": 8,
-            "p": 6,
+            "pos": 7,
+            "pts": 9,
+            "p": 7,
             "sg": 0
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Emelec em 14o (4pts) vs Cuenca em 8o (8pts).",
+          "info": "Emelec em 13o (5pts) vs Cuenca em 7o (9pts).",
           "reliability": "8.5"
         }
       },
@@ -101695,7 +101695,7 @@
             "sg": -4
           },
           "away": {
-            "pos": 7,
+            "pos": 8,
             "pts": 8,
             "p": 6,
             "sg": 0
@@ -101703,7 +101703,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Manta em 15o (4pts) vs Técnico em 7o (8pts). Manta: 20% vitorias recentes.",
+          "info": "Manta em 15o (4pts) vs Técnico em 8o (8pts). Manta: 20% vitorias recentes.",
           "reliability": "8.5"
         }
       },
@@ -104492,8 +104492,8 @@
     {
       "id": 15502791,
       "utcDate": "2026-04-04T23:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "Halftime",
       "venue": "",
       "competition": {
         "id": 13470,
@@ -104511,8 +104511,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -105108,8 +105108,8 @@
     {
       "id": 15285679,
       "utcDate": "2026-04-04T23:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "Halftime",
       "venue": "",
       "competition": {
         "id": 13363,
@@ -105127,8 +105127,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -105185,8 +105185,8 @@
     {
       "id": 15285689,
       "utcDate": "2026-04-04T23:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 13363,
@@ -105204,8 +105204,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -105693,7 +105693,7 @@
         },
         "standings": {
           "home": {
-            "pos": 15,
+            "pos": 16,
             "pts": 1,
             "p": 3,
             "sg": -2
@@ -105724,8 +105724,8 @@
     {
       "id": 15285379,
       "utcDate": "2026-04-04T23:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "Halftime",
       "venue": "",
       "competition": {
         "id": 13362,
@@ -105743,8 +105743,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -105771,20 +105771,20 @@
         "standings": {
           "home": {
             "pos": 1,
-            "pts": 7,
-            "p": 4,
-            "sg": 2
+            "pts": 10,
+            "p": 5,
+            "sg": 3
           },
           "away": {
-            "pos": 3,
+            "pos": 4,
             "pts": 6,
-            "p": 3,
-            "sg": 2
+            "p": 4,
+            "sg": 1
           }
         },
         "h2h": [],
         "stats": {
-          "info": "FC Naples em 1o (7pts) vs Greenville Triumph em 3o (6pts).",
+          "info": "FC Naples em 1o (10pts) vs Greenville Triumph em 4o (6pts).",
           "reliability": "8.5"
         }
       },
@@ -105801,8 +105801,8 @@
     {
       "id": 15285384,
       "utcDate": "2026-04-04T23:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "Halftime",
       "venue": "",
       "competition": {
         "id": 13362,
@@ -105820,8 +105820,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 2,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -105847,21 +105847,21 @@
         },
         "standings": {
           "home": {
-            "pos": 16,
-            "pts": 1,
-            "p": 3,
-            "sg": -3
+            "pos": 12,
+            "pts": 4,
+            "p": 4,
+            "sg": -2
           },
           "away": {
-            "pos": 14,
+            "pos": 15,
             "pts": 2,
-            "p": 3,
-            "sg": -1
+            "p": 4,
+            "sg": -2
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Westchester em 16o (1pts) vs Corpus Christi em 14o (2pts).",
+          "info": "Westchester em 12o (4pts) vs Corpus Christi em 15o (2pts).",
           "reliability": "8.5"
         }
       },
@@ -105878,8 +105878,8 @@
     {
       "id": 15285394,
       "utcDate": "2026-04-04T23:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 13362,
@@ -105897,8 +105897,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -105924,21 +105924,21 @@
         },
         "standings": {
           "home": {
-            "pos": 11,
-            "pts": 4,
-            "p": 3,
+            "pos": 8,
+            "pts": 5,
+            "p": 4,
             "sg": 0
           },
           "away": {
             "pos": 2,
-            "pts": 7,
-            "p": 4,
+            "pts": 8,
+            "p": 5,
             "sg": 1
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Sarasota Paradise em 11o (4pts) vs ONE Knoxville em 2o (7pts).",
+          "info": "Sarasota Paradise em 8o (5pts) vs ONE Knoxville em 2o (8pts).",
           "reliability": "8.5"
         }
       },
@@ -106001,7 +106001,7 @@
         },
         "standings": {
           "home": {
-            "pos": 12,
+            "pos": 13,
             "pts": 3,
             "p": 2,
             "sg": 0
@@ -106015,7 +106015,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "AC Boise em 12o (3pts) vs Spokane Velocity em 6o (6pts).",
+          "info": "AC Boise em 13o (3pts) vs Spokane Velocity em 6o (6pts).",
           "reliability": "8.5"
         }
       },
@@ -106078,7 +106078,7 @@
         },
         "standings": {
           "home": {
-            "pos": 13,
+            "pos": 14,
             "pts": 3,
             "p": 3,
             "sg": 0
@@ -106092,7 +106092,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "AV Alta FC em 13o (3pts) vs Union Omaha em 5o (6pts).",
+          "info": "AV Alta FC em 14o (3pts) vs Union Omaha em 5o (6pts).",
           "reliability": "8.5"
         }
       },
@@ -106700,7 +106700,7 @@
             "sg": -4
           },
           "away": {
-            "pos": 11,
+            "pos": 12,
             "pts": 5,
             "p": 5,
             "sg": -2
@@ -106708,7 +106708,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Kansas City em 9o (6pts) vs Gotham em 11o (5pts).",
+          "info": "Kansas City em 9o (6pts) vs Gotham em 12o (5pts).",
           "reliability": "8.5"
         }
       },
@@ -106726,7 +106726,7 @@
       "id": 15388454,
       "utcDate": "2026-04-04T22:30:00+00:00",
       "status": "IN_PLAY",
-      "minute": "1st half",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 1690,
@@ -106744,8 +106744,8 @@
       },
       "score": {
         "fullTime": {
-          "home": 1,
-          "away": 1
+          "home": 2,
+          "away": 2
         }
       },
       "inteligencia": {
@@ -106771,21 +106771,21 @@
         },
         "standings": {
           "home": {
-            "pos": 12,
-            "pts": 4,
+            "pos": 11,
+            "pts": 5,
             "p": 4,
-            "sg": -2
+            "sg": -1
           },
           "away": {
             "pos": 2,
-            "pts": 12,
+            "pts": 10,
             "p": 5,
-            "sg": 4
+            "sg": 3
           }
         },
         "h2h": [],
         "stats": {
-          "info": "NC Courage em 12o (4pts) vs Portland Thorns em 2o (12pts). NC Courage: 60% vitorias recentes.",
+          "info": "NC Courage em 11o (5pts) vs Portland Thorns em 2o (10pts). NC Courage: 60% vitorias recentes.",
           "reliability": "8.5"
         }
       },
@@ -110929,13 +110929,13 @@
         },
         "standings": {
           "home": {
-            "pos": 9,
+            "pos": 8,
             "pts": 9,
             "p": 7,
             "sg": 0
           },
           "away": {
-            "pos": 8,
+            "pos": 7,
             "pts": 9,
             "p": 7,
             "sg": 0
@@ -110943,7 +110943,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "All Boys em 9o (9pts) vs Ferro Carril Oeste em 8o (9pts).",
+          "info": "All Boys em 8o (9pts) vs Ferro Carril Oeste em 7o (9pts).",
           "reliability": "8.5"
         }
       },
@@ -111499,8 +111499,8 @@
     {
       "id": 15275510,
       "utcDate": "2026-04-04T22:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "Halftime",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 703,
@@ -111518,7 +111518,7 @@
       },
       "score": {
         "fullTime": {
-          "home": 2,
+          "home": 3,
           "away": 0
         }
       },
@@ -111548,18 +111548,18 @@
             "pos": 1,
             "pts": 14,
             "p": 7,
-            "sg": 4
+            "sg": 5
           },
           "away": {
-            "pos": 7,
+            "pos": 9,
             "pts": 9,
             "p": 7,
-            "sg": 0
+            "sg": -1
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Colón em 1o (14pts) vs San Miguel em 7o (9pts).",
+          "info": "Colón em 1o (14pts) vs San Miguel em 9o (9pts).",
           "reliability": "8.5"
         }
       },
@@ -113733,7 +113733,7 @@
       "id": 15617569,
       "utcDate": "2026-04-04T22:30:00+00:00",
       "status": "IN_PLAY",
-      "minute": "1st half",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 1281,
@@ -113751,7 +113751,7 @@
       },
       "score": {
         "fullTime": {
-          "home": 0,
+          "home": 1,
           "away": 0
         }
       },
@@ -113810,7 +113810,7 @@
       "id": 15617566,
       "utcDate": "2026-04-04T22:30:00+00:00",
       "status": "IN_PLAY",
-      "minute": "1st half",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 1281,
@@ -113828,8 +113828,8 @@
       },
       "score": {
         "fullTime": {
-          "home": 0,
-          "away": 1
+          "home": 1,
+          "away": 2
         }
       },
       "inteligencia": {
@@ -114503,7 +114503,7 @@
       "id": 15898312,
       "utcDate": "2026-04-04T23:00:00+00:00",
       "status": "IN_PLAY",
-      "minute": "1st half",
+      "minute": "Halftime",
       "venue": "",
       "competition": {
         "id": 10326,
@@ -114522,7 +114522,7 @@
       "score": {
         "fullTime": {
           "home": 0,
-          "away": 0
+          "away": 1
         }
       },
       "inteligencia": {
@@ -114733,8 +114733,8 @@
     {
       "id": 15898309,
       "utcDate": "2026-04-04T21:30:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 10326,
@@ -114752,7 +114752,7 @@
       },
       "score": {
         "fullTime": {
-          "home": 0,
+          "home": 1,
           "away": 2
         }
       },
@@ -127516,7 +127516,7 @@
       "id": 15336420,
       "utcDate": "2026-04-04T23:00:00+00:00",
       "status": "IN_PLAY",
-      "minute": "1st half",
+      "minute": "Halftime",
       "venue": "",
       "competition": {
         "id": 11612,
@@ -127534,8 +127534,8 @@
       },
       "score": {
         "fullTime": {
-          "home": 0,
-          "away": 0
+          "home": 1,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -128901,8 +128901,8 @@
     {
       "id": 15400150,
       "utcDate": "2026-04-04T21:30:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 11540,
@@ -128938,11 +128938,11 @@
             "-"
           ],
           "away": [
+            "D",
             "E",
             "V",
             "E",
-            "D",
-            "V"
+            "D"
           ]
         },
         "standings": {
@@ -128961,7 +128961,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Nacional: 40% vitorias recentes.",
+          "info": "Nacional: 20% vitorias recentes.",
           "reliability": "8.5"
         }
       },
@@ -128978,8 +128978,8 @@
     {
       "id": 15400152,
       "utcDate": "2026-04-04T23:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 11540,
@@ -128997,8 +128997,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -129055,8 +129055,8 @@
     {
       "id": 15400154,
       "utcDate": "2026-04-04T23:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 11540,
@@ -129074,8 +129074,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 2,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -135909,7 +135909,7 @@
       "id": 15853454,
       "utcDate": "2026-04-04T23:00:00+00:00",
       "status": "IN_PLAY",
-      "minute": "1st half",
+      "minute": "Halftime",
       "venue": "",
       "competition": {
         "id": 2041,
@@ -135927,7 +135927,7 @@
       },
       "score": {
         "fullTime": {
-          "home": 0,
+          "home": 4,
           "away": 0
         }
       },
@@ -137833,8 +137833,8 @@
     {
       "id": 14326833,
       "utcDate": "2026-04-04T21:30:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 28384,
@@ -137852,8 +137852,8 @@
       },
       "score": {
         "fullTime": {
-          "home": 2,
-          "away": 0
+          "home": 3,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -138603,8 +138603,8 @@
     {
       "id": 15873048,
       "utcDate": "2026-04-04T22:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "Halftime",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 278,
@@ -139448,7 +139448,7 @@
       }
     }
   ],
-  "_gerado_em": "2026-04-04T23:07:46.724679Z",
+  "_gerado_em": "2026-04-05T00:06:03.468336Z",
   "_total": 1811,
   "_fonte": "sofascore.com"
 }

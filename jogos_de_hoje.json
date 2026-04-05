@@ -12375,7 +12375,7 @@
             "sg": 9
           },
           "away": {
-            "pos": 8,
+            "pos": 7,
             "pts": 3,
             "p": 4,
             "sg": -8
@@ -12383,7 +12383,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Chengdu em 1o (10pts) vs Qingdao  em 8o (3pts). Chengdu: 60% vitorias recentes.",
+          "info": "Chengdu em 1o (10pts) vs Qingdao  em 7o (3pts). Chengdu: 60% vitorias recentes.",
           "reliability": "8.5"
         }
       },
@@ -12683,7 +12683,7 @@
             "sg": 2
           },
           "away": {
-            "pos": 2,
+            "pos": 3,
             "pts": 6,
             "p": 4,
             "sg": 4
@@ -12691,7 +12691,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Port em 9o (1pts) vs Yukun em 2o (6pts). Port: 40% vitorias recentes.",
+          "info": "Port em 9o (1pts) vs Yukun em 3o (6pts). Port: 40% vitorias recentes.",
           "reliability": "8.5"
         }
       },
@@ -12708,8 +12708,8 @@
     {
       "id": 15552481,
       "utcDate": "2026-04-05T07:30:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "1st half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 649,
@@ -12728,7 +12728,7 @@
       "score": {
         "fullTime": {
           "home": 0,
-          "away": 0
+          "away": 1
         }
       },
       "inteligencia": {
@@ -12754,21 +12754,21 @@
         },
         "standings": {
           "home": {
-            "pos": 6,
-            "pts": 3,
+            "pos": 8,
+            "pts": 2,
             "p": 4,
-            "sg": 5
+            "sg": 4
           },
           "away": {
-            "pos": 3,
-            "pts": 6,
+            "pos": 2,
+            "pts": 8,
             "p": 4,
-            "sg": 1
+            "sg": 2
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Zhejiang em 6o (3pts) vs Tongliang Long em 3o (6pts).",
+          "info": "Zhejiang em 8o (2pts) vs Tongliang Long em 2o (8pts).",
           "reliability": "8.5"
         }
       },
@@ -12831,7 +12831,7 @@
         },
         "standings": {
           "home": {
-            "pos": 7,
+            "pos": 6,
             "pts": 3,
             "p": 3,
             "sg": -4
@@ -12845,7 +12845,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Shenzhen em 7o (3pts) vs Three Towns em 12o (-1pts). Three Towns: 20% vitorias recentes.",
+          "info": "Shenzhen em 6o (3pts) vs Three Towns em 12o (-1pts). Three Towns: 20% vitorias recentes.",
           "reliability": "8.5"
         }
       },
@@ -23103,8 +23103,8 @@
     {
       "id": 15372945,
       "utcDate": "2026-04-05T07:30:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "1st half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 410,
@@ -23122,8 +23122,8 @@
       },
       "score": {
         "fullTime": {
-          "home": 1,
-          "away": 0
+          "home": 2,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -23540,7 +23540,7 @@
             "sg": 0
           },
           "away": {
-            "pos": 7,
+            "pos": 9,
             "pts": 8,
             "p": 5,
             "sg": 2
@@ -23548,7 +23548,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Daegu FC em 5o (10pts) vs Gimpo FC em 7o (8pts).",
+          "info": "Daegu FC em 5o (10pts) vs Gimpo FC em 9o (8pts).",
           "reliability": "8.5"
         }
       },
@@ -23642,8 +23642,8 @@
     {
       "id": 15403828,
       "utcDate": "2026-04-05T07:30:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "1st half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 777,
@@ -23661,8 +23661,8 @@
       },
       "score": {
         "fullTime": {
-          "home": 1,
-          "away": 0
+          "home": 2,
+          "away": 3
         }
       },
       "inteligencia": {
@@ -23688,21 +23688,21 @@
         },
         "standings": {
           "home": {
-            "pos": 8,
-            "pts": 8,
+            "pos": 11,
+            "pts": 5,
             "p": 6,
-            "sg": 1
+            "sg": -2
           },
           "away": {
-            "pos": 11,
-            "pts": 6,
+            "pos": 7,
+            "pts": 9,
             "p": 5,
-            "sg": -1
+            "sg": 2
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Ansan Greeners FC em 8o (8pts) vs Chungnam Asan em 11o (6pts).",
+          "info": "Ansan Greeners FC em 11o (5pts) vs Chungnam Asan em 7o (9pts).",
           "reliability": "8.5"
         }
       },
@@ -23719,8 +23719,8 @@
     {
       "id": 15403827,
       "utcDate": "2026-04-05T07:30:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "1st half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 777,
@@ -23738,8 +23738,8 @@
       },
       "score": {
         "fullTime": {
-          "home": 0,
-          "away": 0
+          "home": 3,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -23760,26 +23760,26 @@
             "D",
             "D",
             "D",
-            "V"
+            "D"
           ]
         },
         "standings": {
           "home": {
-            "pos": 9,
-            "pts": 7,
+            "pos": 8,
+            "pts": 9,
             "p": 6,
-            "sg": 0
+            "sg": 2
           },
           "away": {
             "pos": 17,
-            "pts": 1,
+            "pts": 0,
             "p": 5,
-            "sg": -9
+            "sg": -11
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Paju Frontier FC em 9o (7pts) vs Gimhae City em 17o (1pts). Gimhae City: 20% vitorias recentes.",
+          "info": "Paju Frontier FC em 8o (9pts) vs Gimhae City em 17o (0pts). Gimhae City: 0% vitorias recentes.",
           "reliability": "8.5"
         }
       },
@@ -26152,7 +26152,7 @@
         },
         "standings": {
           "home": {
-            "pos": 15,
+            "pos": 16,
             "pts": 9,
             "p": 25,
             "sg": -52
@@ -26166,7 +26166,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Alhama CF em 15o (9pts) vs R. Sociedad em 3o (54pts).",
+          "info": "Alhama CF em 16o (9pts) vs R. Sociedad em 3o (54pts).",
           "reliability": "8.5"
         }
       },
@@ -26337,8 +26337,8 @@
     {
       "id": 14605949,
       "utcDate": "2026-04-05T10:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 1127,
@@ -26356,8 +26356,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -26384,20 +26384,20 @@
         "standings": {
           "home": {
             "pos": 5,
-            "pts": 41,
-            "p": 24,
-            "sg": 19
+            "pts": 44,
+            "p": 25,
+            "sg": 20
           },
           "away": {
             "pos": 12,
             "pts": 26,
-            "p": 24,
-            "sg": -16
+            "p": 25,
+            "sg": -17
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Atlético de Madrid em 5o (41pts) vs Deportivo em 12o (26pts). Deportivo: 40% vitorias recentes.",
+          "info": "Atlético de Madrid em 5o (44pts) vs Deportivo em 12o (26pts). Deportivo: 40% vitorias recentes.",
           "reliability": "8.5"
         }
       },
@@ -26414,8 +26414,8 @@
     {
       "id": 14605953,
       "utcDate": "2026-04-05T10:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 1127,
@@ -26433,8 +26433,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -26460,21 +26460,21 @@
         },
         "standings": {
           "home": {
-            "pos": 16,
-            "pts": 8,
-            "p": 24,
+            "pos": 15,
+            "pts": 9,
+            "p": 25,
             "sg": -33
           },
           "away": {
             "pos": 9,
-            "pts": 32,
-            "p": 24,
+            "pts": 33,
+            "p": 25,
             "sg": -14
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Levante UD em 16o (8pts) vs Athletic Club em 9o (32pts).",
+          "info": "Levante UD em 15o (9pts) vs Athletic Club em 9o (33pts).",
           "reliability": "8.5"
         }
       },
@@ -27800,8 +27800,8 @@
     {
       "id": 15038440,
       "utcDate": "2026-04-05T09:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "Halftime",
       "venue": "",
       "competition": {
         "id": 21791,
@@ -27819,8 +27819,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 2
         }
       },
       "inteligencia": {
@@ -27848,19 +27848,19 @@
           "home": {
             "pos": 4,
             "pts": 0,
-            "p": 1,
-            "sg": -8
+            "p": 2,
+            "sg": -10
           },
           "away": {
-            "pos": 2,
-            "pts": 3,
-            "p": 1,
-            "sg": 2
+            "pos": 1,
+            "pts": 6,
+            "p": 2,
+            "sg": 4
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Jordan U20 em 4o (0pts) vs South Korea U20 em 2o (3pts). Jordan U20: 20% vitorias recentes.",
+          "info": "Jordan U20 em 4o (0pts) vs South Korea U20 em 1o (6pts). Jordan U20: 20% vitorias recentes.",
           "reliability": "8.5"
         }
       },
@@ -27877,8 +27877,8 @@
     {
       "id": 15038441,
       "utcDate": "2026-04-05T09:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "Halftime",
       "venue": "",
       "competition": {
         "id": 21791,
@@ -27896,8 +27896,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 2
         }
       },
       "inteligencia": {
@@ -27925,19 +27925,19 @@
           "home": {
             "pos": 4,
             "pts": 0,
-            "p": 1,
-            "sg": -6
+            "p": 2,
+            "sg": -8
           },
           "away": {
-            "pos": 2,
-            "pts": 3,
-            "p": 1,
-            "sg": 5
+            "pos": 1,
+            "pts": 6,
+            "p": 2,
+            "sg": 7
           }
         },
         "h2h": [],
         "stats": {
-          "info": "India U20 em 4o (0pts) vs Australia U20 em 2o (3pts).",
+          "info": "India U20 em 4o (0pts) vs Australia U20 em 1o (6pts).",
           "reliability": "8.5"
         }
       },
@@ -31881,8 +31881,8 @@
     {
       "id": 15657779,
       "utcDate": "2026-04-05T07:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 782,
@@ -31900,7 +31900,7 @@
       },
       "score": {
         "fullTime": {
-          "home": 0,
+          "home": 1,
           "away": 0
         }
       },
@@ -31927,21 +31927,21 @@
         },
         "standings": {
           "home": {
-            "pos": 12,
-            "pts": 1,
+            "pos": 10,
+            "pts": 3,
             "p": 2,
-            "sg": -1
+            "sg": 0
           },
           "away": {
-            "pos": 10,
-            "pts": 4,
+            "pos": 11,
+            "pts": 3,
             "p": 3,
-            "sg": 0
+            "sg": -1
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Shaanxi Union em 12o (1pts) vs SJZ Gongfu em 10o (4pts).",
+          "info": "Shaanxi Union em 10o (3pts) vs SJZ Gongfu em 11o (3pts).",
           "reliability": "8.5"
         }
       },
@@ -31958,8 +31958,8 @@
     {
       "id": 15657780,
       "utcDate": "2026-04-05T07:30:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "1st half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 782,
@@ -31977,7 +31977,7 @@
       },
       "score": {
         "fullTime": {
-          "home": 0,
+          "home": 1,
           "away": 0
         }
       },
@@ -31995,30 +31995,30 @@
             "-"
           ],
           "away": [
+            "D",
             "V",
             "D",
             "V",
-            "E",
-            "V"
+            "E"
           ]
         },
         "standings": {
           "home": {
             "pos": 15,
-            "pts": -3,
+            "pts": -1,
             "p": 3,
-            "sg": -2
+            "sg": -1
           },
           "away": {
-            "pos": 11,
-            "pts": 1,
+            "pos": 12,
+            "pts": 0,
             "p": 3,
-            "sg": 0
+            "sg": -1
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Yatai em 15o (-3pts) vs Dongwu em 11o (1pts). Dongwu: 60% vitorias recentes.",
+          "info": "Yatai em 15o (-1pts) vs Dongwu em 12o (0pts). Dongwu: 40% vitorias recentes.",
           "reliability": "8.5"
         }
       },
@@ -32035,8 +32035,8 @@
     {
       "id": 15657781,
       "utcDate": "2026-04-05T07:30:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "1st half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 782,
@@ -32055,7 +32055,7 @@
       "score": {
         "fullTime": {
           "home": 0,
-          "away": 0
+          "away": 1
         }
       },
       "inteligencia": {
@@ -32068,8 +32068,8 @@
             "D",
             "D",
             "D",
-            "E",
-            "V"
+            "D",
+            "E"
           ],
           "away": [
             "-",
@@ -32081,21 +32081,21 @@
         },
         "standings": {
           "home": {
-            "pos": 13,
-            "pts": 1,
-            "p": 3,
-            "sg": -3
-          },
-          "away": {
             "pos": 14,
-            "pts": -2,
+            "pts": 0,
             "p": 3,
             "sg": -4
+          },
+          "away": {
+            "pos": 13,
+            "pts": 0,
+            "p": 3,
+            "sg": -3
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Nanshi em 13o (1pts) vs Hakka em 14o (-2pts). Nanshi: 20% vitorias recentes.",
+          "info": "Nanshi em 14o (0pts) vs Hakka em 13o (0pts). Nanshi: 0% vitorias recentes.",
           "reliability": "8.5"
         }
       },
@@ -32466,7 +32466,7 @@
         },
         "standings": {
           "home": {
-            "pos": 9,
+            "pos": 11,
             "pts": 26,
             "p": 21,
             "sg": 4
@@ -32480,7 +32480,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Sellier &amp; Bellot Vlašim em 9o (26pts) vs Opava em 3o (38pts).",
+          "info": "Sellier &amp; Bellot Vlašim em 11o (26pts) vs Opava em 3o (38pts).",
           "reliability": "8.5"
         }
       },
@@ -32805,8 +32805,8 @@
     {
       "id": 14225241,
       "utcDate": "2026-04-05T08:15:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 205,
@@ -32824,8 +32824,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 2,
+          "away": 2
         }
       },
       "inteligencia": {
@@ -32852,20 +32852,20 @@
         "standings": {
           "home": {
             "pos": 10,
-            "pts": 25,
-            "p": 20,
+            "pts": 26,
+            "p": 21,
             "sg": 6
           },
           "away": {
             "pos": 6,
-            "pts": 33,
-            "p": 20,
+            "pts": 34,
+            "p": 21,
             "sg": -3
           }
         },
         "h2h": [],
         "stats": {
-          "info": "SK Slavia Praha B em 10o (25pts) vs Viktoria Žižkov em 6o (33pts).",
+          "info": "SK Slavia Praha B em 10o (26pts) vs Viktoria Žižkov em 6o (34pts).",
           "reliability": "8.5"
         }
       },
@@ -32882,8 +32882,8 @@
     {
       "id": 14225247,
       "utcDate": "2026-04-05T08:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 205,
@@ -32901,8 +32901,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -32930,19 +32930,19 @@
           "home": {
             "pos": 16,
             "pts": 16,
-            "p": 20,
-            "sg": -26
+            "p": 21,
+            "sg": -27
           },
           "away": {
-            "pos": 11,
-            "pts": 24,
-            "p": 20,
-            "sg": -8
+            "pos": 9,
+            "pts": 27,
+            "p": 21,
+            "sg": -7
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Sparta Praha B em 16o (16pts) vs Dynamo Č.B. em 11o (24pts).",
+          "info": "Sparta Praha B em 16o (16pts) vs Dynamo Č.B. em 9o (27pts).",
           "reliability": "8.5"
         }
       },
@@ -39427,8 +39427,8 @@
     {
       "id": 14215006,
       "utcDate": "2026-04-05T08:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 1015,
@@ -39446,8 +39446,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 2
         }
       },
       "inteligencia": {
@@ -41737,8 +41737,8 @@
     {
       "id": 14068723,
       "utcDate": "2026-04-05T09:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 2292,
@@ -41756,8 +41756,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -42122,8 +42122,8 @@
     {
       "id": 15345922,
       "utcDate": "2026-04-05T06:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "Penalties",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 196,
@@ -42142,7 +42142,7 @@
       "score": {
         "fullTime": {
           "home": 2,
-          "away": 3
+          "away": 4
         }
       },
       "inteligencia": {
@@ -42199,8 +42199,8 @@
     {
       "id": 15345925,
       "utcDate": "2026-04-05T07:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "Halftime",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 196,
@@ -42218,8 +42218,8 @@
       },
       "score": {
         "fullTime": {
-          "home": 1,
-          "away": 1
+          "home": 3,
+          "away": 2
         }
       },
       "inteligencia": {
@@ -44509,8 +44509,8 @@
     {
       "id": 15635546,
       "utcDate": "2026-04-05T10:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 682,
@@ -44528,8 +44528,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -50361,8 +50361,8 @@
     {
       "id": 15820475,
       "utcDate": "2026-04-05T10:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 204,
@@ -50380,8 +50380,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -55674,8 +55674,8 @@
     {
       "id": 14090598,
       "utcDate": "2026-04-05T10:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 218,
@@ -55693,8 +55693,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -56367,8 +56367,8 @@
     {
       "id": 15485523,
       "utcDate": "2026-04-05T10:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 626,
@@ -56386,8 +56386,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -70433,7 +70433,7 @@
             "sg": 2
           },
           "away": {
-            "pos": 2,
+            "pos": 3,
             "pts": 6,
             "p": 4,
             "sg": 4
@@ -70441,7 +70441,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Port em 9o (1pts) vs Yukun em 2o (6pts). Port: 40% vitorias recentes.",
+          "info": "Port em 9o (1pts) vs Yukun em 3o (6pts). Port: 40% vitorias recentes.",
           "reliability": "8.5"
         }
       },
@@ -70458,8 +70458,8 @@
     {
       "id": 15552481,
       "utcDate": "2026-04-05T07:30:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "1st half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 649,
@@ -70478,7 +70478,7 @@
       "score": {
         "fullTime": {
           "home": 0,
-          "away": 0
+          "away": 1
         }
       },
       "inteligencia": {
@@ -70504,21 +70504,21 @@
         },
         "standings": {
           "home": {
-            "pos": 6,
-            "pts": 3,
+            "pos": 8,
+            "pts": 2,
             "p": 4,
-            "sg": 5
+            "sg": 4
           },
           "away": {
-            "pos": 3,
-            "pts": 6,
+            "pos": 2,
+            "pts": 8,
             "p": 4,
-            "sg": 1
+            "sg": 2
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Zhejiang em 6o (3pts) vs Tongliang Long em 3o (6pts).",
+          "info": "Zhejiang em 8o (2pts) vs Tongliang Long em 2o (8pts).",
           "reliability": "8.5"
         }
       },
@@ -70581,7 +70581,7 @@
         },
         "standings": {
           "home": {
-            "pos": 7,
+            "pos": 6,
             "pts": 3,
             "p": 3,
             "sg": -4
@@ -70595,7 +70595,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Shenzhen em 7o (3pts) vs Three Towns em 12o (-1pts). Three Towns: 20% vitorias recentes.",
+          "info": "Shenzhen em 6o (3pts) vs Three Towns em 12o (-1pts). Three Towns: 20% vitorias recentes.",
           "reliability": "8.5"
         }
       },
@@ -78774,8 +78774,8 @@
     {
       "id": 15372945,
       "utcDate": "2026-04-05T07:30:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "1st half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 410,
@@ -78793,8 +78793,8 @@
       },
       "score": {
         "fullTime": {
-          "home": 1,
-          "away": 0
+          "home": 2,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -78903,7 +78903,7 @@
             "sg": 0
           },
           "away": {
-            "pos": 7,
+            "pos": 9,
             "pts": 8,
             "p": 5,
             "sg": 2
@@ -78911,7 +78911,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Daegu FC em 5o (10pts) vs Gimpo FC em 7o (8pts).",
+          "info": "Daegu FC em 5o (10pts) vs Gimpo FC em 9o (8pts).",
           "reliability": "8.5"
         }
       },
@@ -79005,8 +79005,8 @@
     {
       "id": 15403828,
       "utcDate": "2026-04-05T07:30:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "1st half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 777,
@@ -79024,8 +79024,8 @@
       },
       "score": {
         "fullTime": {
-          "home": 1,
-          "away": 0
+          "home": 2,
+          "away": 3
         }
       },
       "inteligencia": {
@@ -79051,21 +79051,21 @@
         },
         "standings": {
           "home": {
-            "pos": 8,
-            "pts": 8,
+            "pos": 11,
+            "pts": 5,
             "p": 6,
-            "sg": 1
+            "sg": -2
           },
           "away": {
-            "pos": 11,
-            "pts": 6,
+            "pos": 7,
+            "pts": 9,
             "p": 5,
-            "sg": -1
+            "sg": 2
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Ansan Greeners FC em 8o (8pts) vs Chungnam Asan em 11o (6pts).",
+          "info": "Ansan Greeners FC em 11o (5pts) vs Chungnam Asan em 7o (9pts).",
           "reliability": "8.5"
         }
       },
@@ -79082,8 +79082,8 @@
     {
       "id": 15403827,
       "utcDate": "2026-04-05T07:30:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "1st half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 777,
@@ -79101,8 +79101,8 @@
       },
       "score": {
         "fullTime": {
-          "home": 0,
-          "away": 0
+          "home": 3,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -79123,26 +79123,26 @@
             "D",
             "D",
             "D",
-            "V"
+            "D"
           ]
         },
         "standings": {
           "home": {
-            "pos": 9,
-            "pts": 7,
+            "pos": 8,
+            "pts": 9,
             "p": 6,
-            "sg": 0
+            "sg": 2
           },
           "away": {
             "pos": 17,
-            "pts": 1,
+            "pts": 0,
             "p": 5,
-            "sg": -9
+            "sg": -11
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Paju Frontier FC em 9o (7pts) vs Gimhae City em 17o (1pts). Gimhae City: 20% vitorias recentes.",
+          "info": "Paju Frontier FC em 8o (9pts) vs Gimhae City em 17o (0pts). Gimhae City: 0% vitorias recentes.",
           "reliability": "8.5"
         }
       },
@@ -81284,7 +81284,7 @@
         },
         "standings": {
           "home": {
-            "pos": 15,
+            "pos": 16,
             "pts": 9,
             "p": 25,
             "sg": -52
@@ -81298,7 +81298,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Alhama CF em 15o (9pts) vs R. Sociedad em 3o (54pts).",
+          "info": "Alhama CF em 16o (9pts) vs R. Sociedad em 3o (54pts).",
           "reliability": "8.5"
         }
       },
@@ -81469,8 +81469,8 @@
     {
       "id": 14605949,
       "utcDate": "2026-04-05T10:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 1127,
@@ -81488,8 +81488,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -81516,20 +81516,20 @@
         "standings": {
           "home": {
             "pos": 5,
-            "pts": 41,
-            "p": 24,
-            "sg": 19
+            "pts": 44,
+            "p": 25,
+            "sg": 20
           },
           "away": {
             "pos": 12,
             "pts": 26,
-            "p": 24,
-            "sg": -16
+            "p": 25,
+            "sg": -17
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Atlético de Madrid em 5o (41pts) vs Deportivo em 12o (26pts). Deportivo: 40% vitorias recentes.",
+          "info": "Atlético de Madrid em 5o (44pts) vs Deportivo em 12o (26pts). Deportivo: 40% vitorias recentes.",
           "reliability": "8.5"
         }
       },
@@ -81546,8 +81546,8 @@
     {
       "id": 14605953,
       "utcDate": "2026-04-05T10:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 1127,
@@ -81565,8 +81565,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -81592,21 +81592,21 @@
         },
         "standings": {
           "home": {
-            "pos": 16,
-            "pts": 8,
-            "p": 24,
+            "pos": 15,
+            "pts": 9,
+            "p": 25,
             "sg": -33
           },
           "away": {
             "pos": 9,
-            "pts": 32,
-            "p": 24,
+            "pts": 33,
+            "p": 25,
             "sg": -14
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Levante UD em 16o (8pts) vs Athletic Club em 9o (32pts).",
+          "info": "Levante UD em 15o (9pts) vs Athletic Club em 9o (33pts).",
           "reliability": "8.5"
         }
       },
@@ -84010,8 +84010,8 @@
     {
       "id": 15038440,
       "utcDate": "2026-04-05T09:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "Halftime",
       "venue": "",
       "competition": {
         "id": 21791,
@@ -84029,8 +84029,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 2
         }
       },
       "inteligencia": {
@@ -84058,19 +84058,19 @@
           "home": {
             "pos": 4,
             "pts": 0,
-            "p": 1,
-            "sg": -8
+            "p": 2,
+            "sg": -10
           },
           "away": {
-            "pos": 2,
-            "pts": 3,
-            "p": 1,
-            "sg": 2
+            "pos": 1,
+            "pts": 6,
+            "p": 2,
+            "sg": 4
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Jordan U20 em 4o (0pts) vs South Korea U20 em 2o (3pts). Jordan U20: 20% vitorias recentes.",
+          "info": "Jordan U20 em 4o (0pts) vs South Korea U20 em 1o (6pts). Jordan U20: 20% vitorias recentes.",
           "reliability": "8.5"
         }
       },
@@ -84139,7 +84139,7 @@
             "sg": -2
           },
           "away": {
-            "pos": 1,
+            "pos": 2,
             "pts": 3,
             "p": 1,
             "sg": 8
@@ -84147,7 +84147,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Uzbekistan U20 em 3o (0pts) vs North Korea U20 em 1o (3pts).",
+          "info": "Uzbekistan U20 em 3o (0pts) vs North Korea U20 em 2o (3pts).",
           "reliability": "8.5"
         }
       },
@@ -84164,8 +84164,8 @@
     {
       "id": 15038441,
       "utcDate": "2026-04-05T09:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "Halftime",
       "venue": "",
       "competition": {
         "id": 21791,
@@ -84183,8 +84183,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 2
         }
       },
       "inteligencia": {
@@ -84212,19 +84212,19 @@
           "home": {
             "pos": 4,
             "pts": 0,
-            "p": 1,
-            "sg": -6
+            "p": 2,
+            "sg": -8
           },
           "away": {
-            "pos": 2,
-            "pts": 3,
-            "p": 1,
-            "sg": 5
+            "pos": 1,
+            "pts": 6,
+            "p": 2,
+            "sg": 7
           }
         },
         "h2h": [],
         "stats": {
-          "info": "India U20 em 4o (0pts) vs Australia U20 em 2o (3pts).",
+          "info": "India U20 em 4o (0pts) vs Australia U20 em 1o (6pts).",
           "reliability": "8.5"
         }
       },
@@ -84293,7 +84293,7 @@
             "sg": -5
           },
           "away": {
-            "pos": 1,
+            "pos": 2,
             "pts": 3,
             "p": 1,
             "sg": 6
@@ -84301,7 +84301,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Chinese Taipei U20 em 3o (0pts) vs Japan U20 em 1o (3pts).",
+          "info": "Chinese Taipei U20 em 3o (0pts) vs Japan U20 em 2o (3pts).",
           "reliability": "8.5"
         }
       },
@@ -88322,8 +88322,8 @@
     {
       "id": 15657779,
       "utcDate": "2026-04-05T07:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "2nd half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 782,
@@ -88341,7 +88341,7 @@
       },
       "score": {
         "fullTime": {
-          "home": 0,
+          "home": 1,
           "away": 0
         }
       },
@@ -88368,21 +88368,21 @@
         },
         "standings": {
           "home": {
-            "pos": 12,
-            "pts": 1,
+            "pos": 10,
+            "pts": 3,
             "p": 2,
-            "sg": -1
+            "sg": 0
           },
           "away": {
-            "pos": 10,
-            "pts": 4,
+            "pos": 11,
+            "pts": 3,
             "p": 3,
-            "sg": 0
+            "sg": -1
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Shaanxi Union em 12o (1pts) vs SJZ Gongfu em 10o (4pts).",
+          "info": "Shaanxi Union em 10o (3pts) vs SJZ Gongfu em 11o (3pts).",
           "reliability": "8.5"
         }
       },
@@ -88399,8 +88399,8 @@
     {
       "id": 15657780,
       "utcDate": "2026-04-05T07:30:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "1st half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 782,
@@ -88418,7 +88418,7 @@
       },
       "score": {
         "fullTime": {
-          "home": 0,
+          "home": 1,
           "away": 0
         }
       },
@@ -88436,30 +88436,30 @@
             "-"
           ],
           "away": [
+            "D",
             "V",
             "D",
             "V",
-            "E",
-            "V"
+            "E"
           ]
         },
         "standings": {
           "home": {
             "pos": 15,
-            "pts": -3,
+            "pts": -1,
             "p": 3,
-            "sg": -2
+            "sg": -1
           },
           "away": {
-            "pos": 11,
-            "pts": 1,
+            "pos": 12,
+            "pts": 0,
             "p": 3,
-            "sg": 0
+            "sg": -1
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Yatai em 15o (-3pts) vs Dongwu em 11o (1pts). Dongwu: 60% vitorias recentes.",
+          "info": "Yatai em 15o (-1pts) vs Dongwu em 12o (0pts). Dongwu: 40% vitorias recentes.",
           "reliability": "8.5"
         }
       },
@@ -88476,8 +88476,8 @@
     {
       "id": 15657781,
       "utcDate": "2026-04-05T07:30:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "1st half",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 782,
@@ -88496,7 +88496,7 @@
       "score": {
         "fullTime": {
           "home": 0,
-          "away": 0
+          "away": 1
         }
       },
       "inteligencia": {
@@ -88509,8 +88509,8 @@
             "D",
             "D",
             "D",
-            "E",
-            "V"
+            "D",
+            "E"
           ],
           "away": [
             "-",
@@ -88522,21 +88522,21 @@
         },
         "standings": {
           "home": {
-            "pos": 13,
-            "pts": 1,
-            "p": 3,
-            "sg": -3
-          },
-          "away": {
             "pos": 14,
-            "pts": -2,
+            "pts": 0,
             "p": 3,
             "sg": -4
+          },
+          "away": {
+            "pos": 13,
+            "pts": 0,
+            "p": 3,
+            "sg": -3
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Nanshi em 13o (1pts) vs Hakka em 14o (-2pts). Nanshi: 20% vitorias recentes.",
+          "info": "Nanshi em 14o (0pts) vs Hakka em 13o (0pts). Nanshi: 0% vitorias recentes.",
           "reliability": "8.5"
         }
       },
@@ -89477,8 +89477,8 @@
     {
       "id": 14225241,
       "utcDate": "2026-04-05T08:15:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 205,
@@ -89496,8 +89496,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 2,
+          "away": 2
         }
       },
       "inteligencia": {
@@ -89524,20 +89524,20 @@
         "standings": {
           "home": {
             "pos": 10,
-            "pts": 25,
-            "p": 20,
+            "pts": 26,
+            "p": 21,
             "sg": 6
           },
           "away": {
             "pos": 6,
-            "pts": 33,
-            "p": 20,
+            "pts": 34,
+            "p": 21,
             "sg": -3
           }
         },
         "h2h": [],
         "stats": {
-          "info": "SK Slavia Praha B em 10o (25pts) vs Viktoria Žižkov em 6o (33pts).",
+          "info": "SK Slavia Praha B em 10o (26pts) vs Viktoria Žižkov em 6o (34pts).",
           "reliability": "8.5"
         }
       },
@@ -89554,8 +89554,8 @@
     {
       "id": 14225247,
       "utcDate": "2026-04-05T08:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 205,
@@ -89573,8 +89573,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -89602,19 +89602,19 @@
           "home": {
             "pos": 16,
             "pts": 16,
-            "p": 20,
-            "sg": -26
+            "p": 21,
+            "sg": -27
           },
           "away": {
-            "pos": 11,
-            "pts": 24,
-            "p": 20,
-            "sg": -8
+            "pos": 9,
+            "pts": 27,
+            "p": 21,
+            "sg": -7
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Sparta Praha B em 16o (16pts) vs Dynamo Č.B. em 11o (24pts).",
+          "info": "Sparta Praha B em 16o (16pts) vs Dynamo Č.B. em 9o (27pts).",
           "reliability": "8.5"
         }
       },
@@ -94944,8 +94944,8 @@
     {
       "id": 14215006,
       "utcDate": "2026-04-05T08:30:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 1015,
@@ -94963,8 +94963,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 2
         }
       },
       "inteligencia": {
@@ -96638,8 +96638,8 @@
     {
       "id": 14068723,
       "utcDate": "2026-04-05T09:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "2nd half",
       "venue": "",
       "competition": {
         "id": 2292,
@@ -96657,8 +96657,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 1
         }
       },
       "inteligencia": {
@@ -96946,8 +96946,8 @@
     {
       "id": 15345922,
       "utcDate": "2026-04-05T06:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "Penalties",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 196,
@@ -96965,8 +96965,8 @@
       },
       "score": {
         "fullTime": {
-          "home": 1,
-          "away": 3
+          "home": 2,
+          "away": 4
         }
       },
       "inteligencia": {
@@ -97023,8 +97023,8 @@
     {
       "id": 15345925,
       "utcDate": "2026-04-05T07:00:00+00:00",
-      "status": "IN_PLAY",
-      "minute": "Halftime",
+      "status": "FINISHED",
+      "minute": null,
       "venue": "",
       "competition": {
         "id": 196,
@@ -97042,8 +97042,8 @@
       },
       "score": {
         "fullTime": {
-          "home": 1,
-          "away": 1
+          "home": 3,
+          "away": 2
         }
       },
       "inteligencia": {
@@ -98409,8 +98409,8 @@
     {
       "id": 15635546,
       "utcDate": "2026-04-05T10:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 682,
@@ -98428,8 +98428,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -104569,8 +104569,8 @@
     {
       "id": 15820475,
       "utcDate": "2026-04-05T10:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 204,
@@ -104588,8 +104588,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -109882,8 +109882,8 @@
     {
       "id": 14090598,
       "utcDate": "2026-04-05T10:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 218,
@@ -109901,8 +109901,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -110883,8 +110883,8 @@
     {
       "id": 15485523,
       "utcDate": "2026-04-05T10:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 626,
@@ -110902,8 +110902,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -120015,7 +120015,7 @@
         },
         "standings": {
           "home": {
-            "pos": 7,
+            "pos": 6,
             "pts": 3,
             "p": 3,
             "sg": -4
@@ -120029,7 +120029,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Shenzhen em 7o (3pts) vs Three Towns em 12o (-1pts). Three Towns: 20% vitorias recentes.",
+          "info": "Shenzhen em 6o (3pts) vs Three Towns em 12o (-1pts). Three Towns: 20% vitorias recentes.",
           "reliability": "8.5"
         }
       },
@@ -128054,8 +128054,8 @@
     {
       "id": 14605949,
       "utcDate": "2026-04-05T10:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 1127,
@@ -128073,8 +128073,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -128101,20 +128101,20 @@
         "standings": {
           "home": {
             "pos": 5,
-            "pts": 41,
-            "p": 24,
-            "sg": 19
+            "pts": 44,
+            "p": 25,
+            "sg": 20
           },
           "away": {
             "pos": 12,
             "pts": 26,
-            "p": 24,
-            "sg": -16
+            "p": 25,
+            "sg": -17
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Atlético de Madrid em 5o (41pts) vs Deportivo em 12o (26pts). Deportivo: 40% vitorias recentes.",
+          "info": "Atlético de Madrid em 5o (44pts) vs Deportivo em 12o (26pts). Deportivo: 40% vitorias recentes.",
           "reliability": "8.5"
         }
       },
@@ -128131,8 +128131,8 @@
     {
       "id": 14605953,
       "utcDate": "2026-04-05T10:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 1127,
@@ -128150,8 +128150,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -128177,21 +128177,21 @@
         },
         "standings": {
           "home": {
-            "pos": 16,
-            "pts": 8,
-            "p": 24,
+            "pos": 15,
+            "pts": 9,
+            "p": 25,
             "sg": -33
           },
           "away": {
             "pos": 9,
-            "pts": 32,
-            "p": 24,
+            "pts": 33,
+            "p": 25,
             "sg": -14
           }
         },
         "h2h": [],
         "stats": {
-          "info": "Levante UD em 16o (8pts) vs Athletic Club em 9o (32pts).",
+          "info": "Levante UD em 15o (9pts) vs Athletic Club em 9o (33pts).",
           "reliability": "8.5"
         }
       },
@@ -129877,7 +129877,7 @@
             "sg": -2
           },
           "away": {
-            "pos": 1,
+            "pos": 2,
             "pts": 3,
             "p": 1,
             "sg": 8
@@ -129885,7 +129885,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Uzbekistan U20 em 3o (0pts) vs North Korea U20 em 1o (3pts).",
+          "info": "Uzbekistan U20 em 3o (0pts) vs North Korea U20 em 2o (3pts).",
           "reliability": "8.5"
         }
       },
@@ -129954,7 +129954,7 @@
             "sg": -5
           },
           "away": {
-            "pos": 1,
+            "pos": 2,
             "pts": 3,
             "p": 1,
             "sg": 6
@@ -129962,7 +129962,7 @@
         },
         "h2h": [],
         "stats": {
-          "info": "Chinese Taipei U20 em 3o (0pts) vs Japan U20 em 1o (3pts).",
+          "info": "Chinese Taipei U20 em 3o (0pts) vs Japan U20 em 2o (3pts).",
           "reliability": "8.5"
         }
       },
@@ -140759,8 +140759,8 @@
     {
       "id": 15635546,
       "utcDate": "2026-04-05T10:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 682,
@@ -140778,8 +140778,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -144686,8 +144686,8 @@
     {
       "id": 15820475,
       "utcDate": "2026-04-05T10:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 204,
@@ -144705,8 +144705,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -147997,8 +147997,8 @@
     {
       "id": 15485523,
       "utcDate": "2026-04-05T10:00:00+00:00",
-      "status": "SCHEDULED",
-      "minute": null,
+      "status": "IN_PLAY",
+      "minute": "1st half",
       "venue": "",
       "competition": {
         "id": 626,
@@ -148016,8 +148016,8 @@
       },
       "score": {
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "inteligencia": {
@@ -148303,7 +148303,7 @@
       }
     }
   ],
-  "_gerado_em": "2026-04-05T08:08:38.197210Z",
+  "_gerado_em": "2026-04-05T10:07:02.201277Z",
   "_total": 1926,
   "_fonte": "sofascore.com"
 }
